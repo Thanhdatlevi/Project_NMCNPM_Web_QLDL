@@ -1,5 +1,5 @@
 {
-    "voucher": "Voucher",
-    "vou_res": "Voucher Hotel",
-    "vou_tour": "Voucher tour"
+    "tour": "Tour",
+    "place": "Place",
+    "hotel": "Hotel"
 }
