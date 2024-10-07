@@ -2,4 +2,9 @@
     "voucher": "Voucher",
     "vou_res": "Voucher Hotel",
     "vou_tour": "Voucher tour"
+    "description":"ITISE's first product",
+    "contact": "Contact",
+    "address": "127 Nguyen Van Cu, District 5, HCMC",
+    "phone": "0123456789",
+    "email": "itise@gmail.com"
 }
