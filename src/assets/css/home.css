@@ -21,47 +21,31 @@ a{
     position: relative;
 }
 
-#nav > li{
+#nav li{
     display: inline-block;
+    position: relative;
     line-height: 50px;
     padding: 0 15px;
-    transition: color 0.25s;
 }
-
-#nav > li:hover{
-    cursor: pointer;
-    
-}
-
-#nav > li > a{
-    color: #000;
-    position: relative;
-    transition: color 0.25s;
-    cursor: pointer;
-}
-
-#nav > li::after > a{
-    color: #000;
-    position: absolute;
-    inset: 0;
-    background: #000;
-    scale: 1 0;
-    z-index: -1;
-    transition: 0.45;
-    border-radius: 10px;
-}
-
-#nav > li:hover > a{
-    color: #fff;
-}
-
-#nav > li:hover::after > a{
-    scale: 1 1;
-}
-
 
 #nav li:hover{
     background-color: #ccc;
+    border-radius: 10px;
+    height: 100%;
+}
+
+#nav > li:hover #footer{
+    display: block;
+}
+
+#footer{
+    background-color: #fb5800;
+    height: 3px;
+    text-align: center;
+    top: -15px;
+    position: relative;
+    width: 100%;
+    display: none;
 }
 
 #nav li:hover .subnav{
