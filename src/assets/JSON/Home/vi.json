@@ -1,4 +1,7 @@
 {
+    "tour": "Tour",
+    "place": "Địa điểm du lịch",
+    "hotel": "Khách sạn"
     "voucher": "Voucher",
     "vou_res": "Voucher nhà hàng",
     "vou_tour": "Voucher tour"
