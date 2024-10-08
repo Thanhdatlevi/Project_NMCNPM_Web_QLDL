@@ -292,7 +292,7 @@ footer{
     background: linear-gradient(to right, #0c34a2 5%, #fb800c 95%);
 
     align-items: center;
-    width: 662px;
+    width: 666px;
     height: 150px;
     
     border: 2px solid rgb(201, 109, 4);
@@ -305,7 +305,7 @@ footer{
     font-weight: 600;
     line-height: 40px;
 
-    width: 80px;
+    width: 150px;
     padding: 16px;
 }
 
@@ -314,11 +314,12 @@ footer{
     justify-content: space-between;
     align-items: center;
 
-    width: 550px;
+    width: 510px;
 }
 
 .vou_entity{
-    width: 170px;
+
+    width: 160px;
     height: 220px;
     line-height: 30px;
     background-color: #fff;
@@ -350,6 +351,13 @@ footer{
 
 #voucher .list_vou .inf{
     margin-left:10px;
+}
+#voucher .list_vou p{
+    display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* Giới hạn số dòng (ở đây là 3 dòng) */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #voucher a{
