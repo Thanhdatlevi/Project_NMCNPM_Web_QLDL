@@ -68,8 +68,34 @@ a{
 }
 
 #search{
-    position: absolute;
-    right: 15px;
+    position: relative;
     display: inline-block;
-    top: 15px;
+    margin-left: 350px;
+}
+
+#login_register{
+    position: relative;
+    display: inline-block;
+    margin-left: 100px;
+}
+
+#login, #register{
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    margin-left: 50px;
+}
+
+#login{
+    line-height: 50px;
+    background-color: #78b8b8;
+    color: black;
+    border-radius: 15px;
+}
+
+#register:hover{
+    line-height: 50px;
+    background-color: #cfcfcf;
+    color: white;
+    border-radius: 15px;
 }
