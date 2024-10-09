@@ -270,6 +270,9 @@ footer{
 #voucher{
     background-color: rgb(228, 245, 246);
     padding: 50px 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 #voucher h2{
@@ -363,4 +366,61 @@ footer{
 #voucher a{
     text-decoration: none;
     color: #000;
+}
+
+@media (max-width: 768px) {
+    #vou {
+        flex-direction: column;
+        align-items: center;
+        gap: 70px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .vou_detail {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .list_vou {
+        width: 90%;
+    }
+
+    .vou_entity {
+        max-width: 100%;
+
+    }
+
+    .vou_entity:hover{
+        width: 185px;
+    }
+}
+
+/* Responsive cho màn hình nhỏ hơn 480px */
+@media (max-width: 640px) {
+    #vou {
+        flex-direction: column;
+        align-items: center;
+        gap: 70px;
+        width: 100vw;
+    }
+
+    .vou_detail {
+        width: 98%;
+        margin-bottom: 20px;
+    }
+
+    .list_vou {
+        width: 100%;
+    }
+
+    .vou_entity {
+        max-width: 90%;
+
+    }
+
+    .vou_entity:hover{
+        width: 175px;
+    }
 }
