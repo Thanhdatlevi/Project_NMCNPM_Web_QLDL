@@ -7,6 +7,9 @@ body{
 
 #main_nav{
     background-color: white;
+    height: 50px;
+    display: flex; 
+    justify-content: space-between;
 }
 
 a{
@@ -68,19 +71,15 @@ a{
 }
 
 #search{
-    position: relative;
     display: inline-block;
-    margin-left: 350px;
 }
 
 #login_register{
-    position: relative;
     display: inline-block;
-    margin-left: 100px;
+    margin-right: 40px;
 }
 
 #login, #register{
-    position: relative;
     display: inline-block;
     padding: 0 10px;
     margin-left: 50px;
