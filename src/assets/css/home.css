@@ -11,44 +11,69 @@ body{
     box-sizing: border-box;
 }
 /* nav bar */
-#main_nav{
-    background-color: white;
-    height: 50px;
-    display: flex; 
-    justify-content: space-between;
-}
 
-a{
+.container{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #000000;
+    position: sticky;
+}
+#main_nav {
+    background: linear-gradient(0deg, rgba(71,135,215,1) 0%, rgba(0,212,255,1) 100%);
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+a {
     text-decoration: none;
     color: #000;
+    padding: 10px 10px;
+    
+    white-space: nowrap;
 }
-
-#nav{
+#nav_button{
+    padding: 10px 10px;
+    font-size: 17px;
+}
+#nav_button:hover {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+#nav {
     color: #000;
-    height: 50px;
-    margin-left: 75px;
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
+    width: 12%;
 }
-
-#nav li{
+#nav li {
     display: inline-block;
     position: relative;
     line-height: 50px;
     padding: 0 15px;
 }
-
-#nav li:hover{
+#nav li:hover {
     background-color: #ccc;
     border-radius: 10px;
     height: 100%;
 }
 
-#nav > li:hover #footer{
-    display: block;
+#lang_button{
+    background-color: rgba(red, green, blue, 0);
 }
 
-#footer{
+#login_register {
+    display: flex;
+    justify-content: space-between;
+    width: 12%;
+}
+
+#nav>li:hover #footer {
+    display: block;
+}
+#footer {
     background-color: #fb5800;
     height: 3px;
     text-align: center;
@@ -57,52 +82,22 @@ a{
     width: 100%;
     display: none;
 }
-
-#nav li:hover .subnav{
+#nav li:hover .subnav {
     display: block;
 }
 
-#nav .subnav{
-    display: none;
-    margin-left: -15px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
-    position: absolute;
+
+#login,
+#register {
+    padding: 10px 10px;
 }
 
-#nav .subnav li{
-    display: block;
-    padding: 0 10px;
-    
-}
-
-#search{
-    display: inline-block;
-}
-
-#login_register{
-    display: inline-block;
-    margin-right: 40px;
-}
-
-#login, #register{
-    display: inline-block;
-    padding: 0 10px;
-    margin-left: 50px;
-}
-
-#login{
-    line-height: 50px;
-    background-color: #78b8b8;
-    color: black;
+#nav_button #login {
+    color: #fff;
     border-radius: 15px;
 }
-#register:hover{
-    line-height: 50px;
-    background-color: #cfcfcf;
-    color: white;
-    border-radius: 15px;
-}
+
+
 footer{
     display: flex;
 }
