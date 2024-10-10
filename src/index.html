@@ -10,116 +10,53 @@
 
 <body>
   <!-- Header -->
-    <div class="container">
-        <nav id="main_nav">
-<<<<<<< HEAD
-            <div style="margin-left: 40px;">
-                <img src="./assets/image/logo.png" alt="logo"
-                style="width: 30px; height: 30px; left: 10px; top: 10px; display: inline-block; position: relative;">
-            
-            
-                <ul id="nav" >
-                    <li>
-                        <a href="">Tour</a>
-                        <ul class="subnav">
-                            <li><a href="">Tour_01</a></li>
-                            <li><a href="">Tour_02</a></li>
-                            <li><a href="">Tour_03</a></li>
-                            <li><a href="">Tour_04</a></li>
-                            <li><a href="">Tour_05</a></li>
-                        </ul>
-                        <div id="footer">
-
-                        </div>
-                    </li>
-=======
+  <div class="container">
+    <nav id="main_nav">
+        
+        <a href="#!">
             <img src="./assets/image/logo.png" alt="logo"
-            style="width: 30px; height: 30px; left: 10px; top: 10px; display: inline-block; position: relative;">
-            <ul id="nav">
-                <li>
-                    <a href="">Tour</a>
-                    <ul class="subnav">
-                        <li><a href="">Tour_01</a></li>
-                        <li><a href="">Tour_02</a></li>
-                        <li><a href="">Tour_03</a></li>
-                        <li><a href="">Tour_04</a></li>
-                        <li><a href="">Tour_05</a></li>
-                    </ul>
-                </li>
->>>>>>> 5d4d2405aafbc4ac76c6bb76573c5b00168b0cf1
+            style=" width: 30px; height: 30px; 
+                    left: 10px; top: 10px;
+                    justify-self: flex-start;"/>
+        </a>
 
-                    <li>
-                        <a href="">Địa điểm du lịch</a>
-
-<<<<<<< HEAD
-                        <ul class="subnav">
-                            <li><a href="">Place_01</a></li>
-                            <li><a href="">Place_02</a></li>
-                            <li><a href="">Place_03</a></li>
-                            <li><a href="">Place_04</a></li>
-                            <li><a href="">Place_05</a></li>
-                        </ul>
-                        <div id="footer">
-                            
-                        </div>
-                    </li>
-
-                    <li>
-                        <a href="">Khách sạn</a>
-                        <ul class="subnav">
-                            <li><a href="">Hotel_01</a></li>
-                            <li><a href="">Hotel_02</a></li>
-                            <li><a href="">Hotel_03</a></li>
-                            <li><a href="">Hotel_04</a></li>
-                            <li><a href="">Hotel_05</a></li>
-                        </ul>
-                        <div id="footer">
-                            
-                        </div>
-                    </li>
-=======
-                    <ul class="subnav">
-                        <li><a href="">Place_01</a></li>
-                        <li><a href="">Place_02</a></li>
-                        <li><a href="">Place_03</a></li>
-                        <li><a href="">Place_04</a></li>
-                        <li><a href="">Place_05</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="">Khách sạn</a>
-                    <ul class="subnav">
-                        <li><a href="">Hotel_01</a></li>
-                        <li><a href="">Hotel_02</a></li>
-                        <li><a href="">Hotel_03</a></li>
-                        <li><a href="">Hotel_04</a></li>
-                        <li><a href="">Hotel_05</a></li>
-                    </ul>
-                </li>
->>>>>>> 5d4d2405aafbc4ac76c6bb76573c5b00168b0cf1
-
-                </ul>
+        <div style="display: flex;">
+            <div style="display: flex;">
+                <p id="nav_button">
+                    <a href="#!" data-i18n="place">Địa điểm du lịch</a>
+                </p>
+                <div id="nav">
+                    <div id="nav_button">
+                        <a href="#!" data-i18n="tour">Tour</a>
+                    </div>
+                    <div id="nav_button">
+                        <a href="#!" data-i18n="hotel">Khách sạn</a>
+                    </div>
+                </div>
             </div>
-<<<<<<< HEAD
             
-
-            <div>
-                <div id="search">
-                    <input type="text" placeholder="Search..">
-                    <button type="submit">Search</button>
+            <div id="login_register">
+    
+                <div style="display: flex; white-space: nowrap;">
+                    <button id="lang_button" onclick="setLanguage('en')">English</button>
+                    <button id="lang_button" onclick="setLanguage('vi')">Tiếng Việt</button>
                 </div>
     
-                <div id="login_register">
+                <p id="nav_button">
                     <a href="register.html" id="register">Register</a>
+                </p>
+                
+                <p id="nav_button" 
+                style=" background-color: #000;
+                        color: #fff;
+                        border-radius: 15px;">
                     <a href="login.html" id="login">Login</a>
-                </div>    
+                </p>
             </div>
-            
-=======
->>>>>>> 5d4d2405aafbc4ac76c6bb76573c5b00168b0cf1
-        </nav>
-    </div>
+        </div>
+        
+    </nav>
+</div>
   
 <!-- Voucher -->
   
@@ -257,9 +194,7 @@
         </div>
     </footer>
 
-    <button onclick="setLanguage('en')">English</button>
-    <button onclick="setLanguage('vi')">Tiếng Việt</button>
-
+    
     <script src="./assets/javascript/index.js"></script>
 </body>
 </div>
