@@ -97,6 +97,7 @@ a {
     border-radius: 15px;
 }
 
+/* footer */
 
 footer{
     display: flex;
@@ -262,6 +263,8 @@ footer{
     margin: 10px;
     transition: 0.3s;
 }
+
+/* Voucher */
 #voucher{
     background-color: rgb(228, 245, 246);
     padding: 50px 0px;
@@ -278,8 +281,8 @@ footer{
 
 #vou{
     display: flex;
-    justify-content: space-around;
-
+    gap: 150px;
+    flex-direction: column;
     margin-top: 80px;
 }
 .vou_detail{
@@ -289,8 +292,9 @@ footer{
     background: -webkit-linear-gradient(to right, #6ee9f2 5%, #fb800c 95%);
     background: linear-gradient(to right, #0c34a2 5%, #fb800c 95%);
 
+    margin: 0px auto;
     align-items: center;
-    width: 666px;
+    width: 70%;
     height: 150px;
     
     border: 2px solid rgb(201, 109, 4);
@@ -302,9 +306,10 @@ footer{
     font-size: 20px;
     font-weight: 600;
     line-height: 40px;
+    text-align: center;
 
-    width: 150px;
-    padding: 16px;
+    width: 230px;
+    padding: 16px 60px;
 }
 
 .list_vou{
@@ -312,12 +317,12 @@ footer{
     justify-content: space-between;
     align-items: center;
 
-    width: 510px;
+    width: 75%;
 }
 
 .vou_entity{
 
-    width: 160px;
+    width: 190px;
     height: 220px;
     line-height: 30px;
     background-color: #fff;
@@ -330,7 +335,7 @@ footer{
 }
 
 .vou_entity:hover{
-    width: 185px;
+    width: 200px;
 }
 
 
