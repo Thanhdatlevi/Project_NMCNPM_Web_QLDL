@@ -1,5 +1,10 @@
 {
-   
+    "tour": "Tour",
+    "place": "Địa điểm du lịch",
+    "hotel": "Khách sạn",
+    "voucher": "Voucher",
+    "vou_res": "Voucher nhà hàng",
+    "vou_tour": "Voucher tour",
     "description": "Sản phẩm đầu tiên của ITISE",
     "contact": "Liên hệ",
     "address": "127 Nguyễn Văn Cừ, Quận 5, TP.HCM",
