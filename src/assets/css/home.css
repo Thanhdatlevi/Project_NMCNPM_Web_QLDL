@@ -271,6 +271,7 @@ footer{
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    margin-bottom : 20px;
 }
 
 #voucher h2{
@@ -316,14 +317,18 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    gap: 2px;
     width: 75%;
+}
+
+.list_vou a{
+    width: 35%;
 }
 
 .vou_entity{
 
     width: 190px;
-    height: 220px;
+    height: 240px;
     line-height: 30px;
     background-color: #fff;
 
@@ -358,7 +363,7 @@ footer{
 #voucher .list_vou p{
     display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1; /* Giới hạn số dòng (ở đây là 3 dòng) */
+  -webkit-line-clamp: 1; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -372,28 +377,36 @@ footer{
     #vou {
         flex-direction: column;
         align-items: center;
-        gap: 70px;
+        gap: 100px;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
-
+    #vou h3{
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 40px;
+    
+        width: 150px;
+        padding: 16px;
+    }
     .vou_detail {
         width: 90%;
         margin-bottom: 20px;
     }
 
     .list_vou {
-        width: 90%;
+        width: 80%;
     }
 
     .vou_entity {
-        max-width: 100%;
+        max-width: 30%;
 
     }
 
     .vou_entity:hover{
-        width: 185px;
+        max-width: 32%;
     }
   .footer {
         display: flex;
@@ -426,25 +439,32 @@ footer{
     #vou {
         flex-direction: column;
         align-items: center;
-        gap: 70px;
+        gap: 100px;
         width: 100vw;
     }
-
+    #vou h3{
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 40px;
+    
+        width: 170px;
+        padding: 16px;
+    }
     .vou_detail {
         width: 98%;
         margin-bottom: 20px;
     }
 
     .list_vou {
-        width: 100%;
+        width: 80%;
     }
-
     .vou_entity {
-        max-width: 90%;
+        max-width: 30%;
 
     }
 
     .vou_entity:hover{
-        width: 175px;
+        max-width: 35%;
     }
 }
