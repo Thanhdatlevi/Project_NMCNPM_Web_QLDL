@@ -448,3 +448,26 @@ footer{
         width: 175px;
     }
 }
+
+/* danh sach dia diem noi tieng */
+
+.listVistedPlace{
+    padding: 10px;
+    margin-top: 30px;
+    width : 100%;
+    border: #964B00 2px solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.framePlace{ // chứa các khung hình ảnh
+    margin-top: 30px;
+    margin: 20px;
+    border: #000000 2px solid;
+    border-radius: 5px; /* Bo góc cho khung nhỏ */
+}
+
+
+
