@@ -26,7 +26,7 @@ body{
     position: sticky;
 }
 #main_nav {
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(0,212,255,1) 100%);
     height: auto;
     display: flex;
     justify-content: space-around;
