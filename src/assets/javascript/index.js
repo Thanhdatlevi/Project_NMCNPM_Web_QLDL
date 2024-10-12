@@ -1,4 +1,5 @@
-function setLanguage(language) {
+function setLanguage() {
+  const language = document.getElementById("language").value;
   fetch(`./assets/JSON/Home/${language}.json`)
     .then(response => response.json())
     .then(translations => {
