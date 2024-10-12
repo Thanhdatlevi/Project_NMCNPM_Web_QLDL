@@ -3,6 +3,8 @@ body{
     display: block;
     width: 100%;
     height: 100%;
+    overflow-x: hidden; /* Ngăn cuộn ngang toàn bộ trang */
+
 }
 *{
     margin : 0;
@@ -10,6 +12,12 @@ body{
     font-family: 'popins', sans-serif;
     box-sizing: border-box;
 }
+
+#container {
+    background-color: rgb(228, 245, 246);
+    height: 100%;
+}
+
 /* nav bar */
 
 .container{
@@ -271,6 +279,7 @@ footer{
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    margin-bottom : 20px;
 }
 
 #voucher h2{
@@ -316,14 +325,18 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    gap: 2px;
     width: 75%;
+}
+
+.list_vou a{
+    width: 35%;
 }
 
 .vou_entity{
 
     width: 190px;
-    height: 220px;
+    height: 240px;
     line-height: 30px;
     background-color: #fff;
 
@@ -358,7 +371,7 @@ footer{
 #voucher .list_vou p{
     display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1; /* Giới hạn số dòng (ở đây là 3 dòng) */
+  -webkit-line-clamp: 1; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -368,32 +381,125 @@ footer{
     color: #000;
 }
 
+.swiper-container {
+    background-color: rgba(0, 0, 0);
+    width: 100%;
+    height: 100%;
+    padding: 48px 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.swiper-container h3 {
+    color: white;
+    font-family: "Garamond", Serif;
+    font-size: 48px;
+    text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 16px 64px;
+    gap: 8px;
+    margin: 0 auto; /* Căn giữa nếu cần */
+
+}
+
+.grid-item {
+    text-align: center;
+    width: 100%; /* Chiều rộng bằng 1/4 của phần tử cha */
+    aspect-ratio: 16 / 9;
+    box-sizing: border-box;
+}
+
+.grid-item img {
+    width: 100%; 
+    height: 100%; /* Đảm bảo tỉ lệ hình ảnh không bị biến dạng */
+    border-radius: 8px; /* Bo góc cho hình ảnh */
+    object-fit: cover; 
+    margin: 0;
+    box-shadow: 4px 4px 10px 0 rgba(255, 255, 255, 0.7);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #ffffff !important;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    padding: 4px !important; /* Giảm padding để nút nhỏ hơn */
+    display: block !important; /* Đảm bảo hiển thị */
+    border-radius: 50% !important; /* Đảm bảo nút có hình tròn */
+    --swiper-navigation-size: 24px;
+    margin: 0px; /* Khoảng cách giữa các nút */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease; /* Thêm hiệu ứng chuyển đổi cho transform */
+
+}
+
+/* Đổi màu pagination sang trắng */
+.swiper-pagination-bullet {
+    background-color: white !important; /* Đổi màu các bullet */
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: rgba(221, 221, 221, 0.7) !important; /* Đổi màu nền khi hover */
+    box-shadow: 0 6px 15px rgba(221, 221, 221, 0.7); /* Bóng mạnh hơn khi hover */
+    transform: scale(1.1); /* Tăng kích thước nút khi hover */
+}
+/* Danh sách địa điểm */
+.listVistedPlace{
+    padding: 10px;
+    margin-top: 30px;
+    width : 100%;
+    border: #964B00 2px solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.framePlace{ // chứa các khung hình ảnh
+    margin-top: 30px;
+    margin: 20px;
+    border: #000000 2px solid;
+    border-radius: 5px; /* Bo góc cho khung nhỏ */
+}
 @media (max-width: 768px) {
     #vou {
         flex-direction: column;
         align-items: center;
-        gap: 70px;
+        gap: 100px;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
-
+    #vou h3{
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 40px;
+    
+        width: 150px;
+        padding: 16px;
+    }
     .vou_detail {
         width: 90%;
         margin-bottom: 20px;
     }
 
     .list_vou {
-        width: 90%;
+        width: 80%;
     }
 
     .vou_entity {
-        max-width: 100%;
+        max-width: 30%;
 
     }
 
     .vou_entity:hover{
-        width: 185px;
+        max-width: 32%;
     }
   .footer {
         display: flex;
@@ -419,6 +525,16 @@ footer{
         justify-content: center;
         gap: 10px;
     }
+  .swiper-container {
+        aspect-ratio: 3 / 4;
+    }
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cột cho màn hình nhỏ hơn */
+        padding: 16px 16px;
+    }
+    .swiper-container h3 {
+        font-size: 36px; /* Thay đổi kích thước chữ cho h3 */
+    }
 }
 
 /* Responsive cho màn hình nhỏ hơn 480px */
@@ -426,48 +542,35 @@ footer{
     #vou {
         flex-direction: column;
         align-items: center;
-        gap: 70px;
+        gap: 100px;
         width: 100vw;
     }
-
+    #vou h3{
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 40px;
+    
+        width: 170px;
+        padding: 16px;
+    }
     .vou_detail {
         width: 98%;
         margin-bottom: 20px;
     }
 
     .list_vou {
-        width: 100%;
+        width: 80%;
     }
-
     .vou_entity {
-        max-width: 90%;
+        max-width: 30%;
 
     }
 
     .vou_entity:hover{
-        width: 175px;
+        max-width: 35%;
     }
 }
-
-/* danh sach dia diem noi tieng */
-
-.listVistedPlace{
-    padding: 10px;
-    margin-top: 30px;
-    width : 100%;
-    border: #964B00 2px solid;
-    display: flex;
-    justify-content: space-between;
-}
-
-
-
-.framePlace{ // chứa các khung hình ảnh
-    margin-top: 30px;
-    margin: 20px;
-    border: #000000 2px solid;
-    border-radius: 5px; /* Bo góc cho khung nhỏ */
-}
-
-
-
+@media (max-width: 480px) {
+    .swiper-container h3 {
+        font-size: 24px; /* Thay đổi kích thước chữ cho h3 */

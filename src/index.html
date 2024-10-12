@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0, user-scalable=yes">
     <title>Du lịch uy tín - không đa cấp</title>
     <link rel="stylesheet" href="./assets/css/home.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
 </head>
 <body>
   <!-- Header -->
@@ -52,12 +53,23 @@
                     <a href="login.html" id="login">Login</a>
                 </p>
             </div>
-        </div>
-        
-    </nav>
-</div>
+      </div>
+      </nav>
+    </div>
 
-<!-- list most visited place -->
+    <!-- Slider -->
+    <section class="swiper-container">
+        <div class="swiper-wrapper" id="slides">
+
+        </div>
+        <div class="swiper-pagination"></div> 
+        <div class="swiper-buttons">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+        </div>
+    </section>
+  <!-- list most visited place -->
   
 <div class="listVistedPlace" style="display:flex; flex-direction: column;">
     <div style="font-size: 20; padding-top: 50; text-align: center; position: sticky;">
@@ -147,13 +159,8 @@
                 </div>
             </div>
     
-    </div>
-
-    
-    
-
+      </div>
 </div>
-
 <!-- Voucher -->
   
     <div id="voucher">
@@ -166,7 +173,6 @@
                     Voucher nhà hàng
                 </h3>
                 <div class="list_vou">
-                    <a href="#!">
                         <div class="vou_entity">
                             <img src="./assets/image/voucher_res1.jpg" alt="">
                             <p class="expire_vou">Deal tháng 10</p>
@@ -175,8 +181,6 @@
                                 <p>Giảm: 5%</p>
                             </div>
                         </div>
-                    </a>
-                    <a href="#!">
                         <div class="vou_entity">
                             <img src="./assets/image/voucher_res2.jpg" alt="">
                             <p class="expire_vou">Deal tháng 10</p>
@@ -185,8 +189,6 @@
                                 <p>Giảm: 5%</p>
                             </div>
                         </div>
-                    </a>
-                    <a href="#!">
                         <div class="vou_entity">
                             <img src="./assets/image/voucher_res3.jpg" alt="">
                             <p class="expire_vou">Deal tháng 10</p>
@@ -195,7 +197,6 @@
                                 <p>Giảm: 5%</p>
                             </div>
                         </div>
-                    </a>
                 </div>
             </div>
 
@@ -204,7 +205,6 @@
                     Voucher tour
                 </h3>
                 <div class="list_vou">
-                    <a href="#!">
                         <div class="vou_entity">
                             <img src="./assets/image/voucher_tour1.jpg" alt="">
                             <p class="expire_vou">Deal tháng 10</p>
@@ -213,8 +213,6 @@
                                 <p>Giảm: 5%</p>
                             </div>
                         </div>
-                    </a>
-                    <a href="#!">
                         <div class="vou_entity">
                             <img src="./assets/image/voucher_tour2.jpg" alt="">
                             <p class="expire_vou">Deal tháng 10</p>
@@ -223,8 +221,6 @@
                                 <p>Giảm: 5%</p>
                             </div>
                         </div>
-                    </a>
-                    <a href="#!">
                         <div class="vou_entity">
                             <img src="./assets/image/voucher_tour3.jpg" alt="">
                             <p class="expire_vou">Deal tháng 10</p>
@@ -233,7 +229,6 @@
                                 <p>Giảm: 5%</p>
                             </div>
                         </div>
-                    </a>
                 </div>
             </div>
         </div>
@@ -291,5 +286,7 @@
 
     
     <script src="./assets/javascript/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/javascript/home.js"></script> 
 </body>
 </div>

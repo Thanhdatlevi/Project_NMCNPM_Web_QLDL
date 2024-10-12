@@ -9,3 +9,5 @@ function setLanguage(language) {
     })
     .catch(error => console.error('Error loading translations:', error));
 }
+
+
