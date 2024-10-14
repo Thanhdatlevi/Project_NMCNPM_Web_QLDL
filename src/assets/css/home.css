@@ -1,30 +1,35 @@
+
 body{
     display: block;
     width: 100%;
     height: 100%;
     overflow-x: hidden; /* Ngăn cuộn ngang toàn bộ trang */
 }
-*{
-    margin : 0;
-    padding : 0;
-    font-family: 'popins', sans-serif;
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica" sans-serif;
     box-sizing: border-box;
 }
 
-section{
+section {
     margin: 150px 0px;
 }
 
 /* nav bar */
-.container{
+.header-container {
     display: flex;
     flex-direction: column;
     /* border-bottom: 1px solid #000000; */
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
+    z-index: 10;
+    /* Đảm bảo thanh điều hướng nằm trên các phần tử khác */
 }
+
 #main_nav {
     background: linear-gradient(rgb(255, 255, 255), rgb(154, 219, 233));
     width: auto;
@@ -41,7 +46,7 @@ section{
 
     font-size: 12px;
     font-weight: 700;
-    
+
     white-space: nowrap;
 }
 #nav_button {
@@ -67,7 +72,8 @@ section{
     justify-content: space-between;
     width: 12%;
 }
-#lang_button{
+
+#lang_button {
     background-color: rgba(red, green, blue, 0);
 }
 
@@ -91,6 +97,7 @@ section{
     width: 100%;
     display: none;
 }
+
 #nav li:hover .subnav {
     display: block;
 }
@@ -108,12 +115,12 @@ section{
 
 /* footer */
 
-footer{
+footer {
     display: flex;
 }
 
-.footer{
-    margin-top : auto;
+.footer {
+    margin-top: auto;
     width: 100%;
     padding: 32px 0;
     background: #000000;
@@ -122,7 +129,7 @@ footer{
     position: relative;
 }
 
-.footer div h3{
+.footer div h3 {
     color: #ffffff;
     font-size: 1.5rem;
     font-weight: 600;
@@ -131,7 +138,7 @@ footer{
     z-index: 2;
 }
 
-.blank{
+.blank {
     flex: 1;
     text-align: left;
     flex-basis: 15%;
@@ -140,18 +147,20 @@ footer{
     justify-content: top;
     align-items: center;
 }
-.blank .footer-home{
+
+.blank .footer-home {
     display: flex;
     margin-top: 16px;
     margin-bottom: 16px;
     justify-items: center;
 }
-.blank .footer-home a{
+
+.blank .footer-home a {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 80px;
-    height:80px;
+    height: 80px;
     font-size: 40px;
     border-radius: 50%;
     background: transparent;
@@ -160,34 +169,37 @@ footer{
     margin: 0 0.4rem;
     transition: .6s;
 }
-.blank .footer-home a:hover{
+
+.blank .footer-home a:hover {
     color: #969696;
     background: #dad7d7;
 
 }
 
-.col-1{
+.col-1 {
     flex: 1;
     text-align: left;
     flex-basis: 25%;
 
 }
 
-.col-1 p{
+.col-1 p {
     text-align: bottom;
     font-size: 1.1rem;
-    
+
 }
+
 .col-1 h3 {
-    display : inline-block;
-    border-bottom: 2px solid #ffffff; 
-    padding-bottom: 10px; 
+    display: inline-block;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 10px;
     margin-bottom: 20px;
     font-family: 'raleway', sans-serif;
     font-style: italic;
     letter-spacing: 2.5px;
 }
-.col-1 .footer-search input{
+
+.col-1 .footer-search input {
     margin-top: 20px;
     margin-bottom: 20px;
     width: 60%;
@@ -196,46 +208,50 @@ footer{
     border: 2px solid #bad1db;
     outline: none;
     margin-right: 16px;
-    color:#ffffff;
+    color: #ffffff;
     background-color: transparent;
-    
+
 }
-.col-1 .footer-search ::placeholder{
+
+.col-1 .footer-search ::placeholder {
     color: #ffffff;
 }
 
 .col-2 h3 {
-    display : inline-block;
-    border-bottom: 2px solid #ffffff; 
-    padding-bottom: 10px; 
-    margin-bottom: 20px; 
+    display: inline-block;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.col-2{
-    flex:1;
+.col-2 {
+    flex: 1;
     text-align: left;
     flex-basis: 25%;
 }
 
-.col-2 a{
+.col-2 a {
     text-decoration: none;
     color: #efefef;
     display: block;
     margin-bottom: 10px;
-    
+
 }
-.col-2 span{
+
+.col-2 span {
     line-height: 2;
     font-size: 1.1rem;
 }
-.col-2 .social-icons{
+
+.col-2 .social-icons {
     display: flex;
     margin-top: 16px;
     justify-content: left;
     align-items: center;
-    
+
 }
-.col-2 .social-icons a{
+
+.col-2 .social-icons a {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -248,25 +264,29 @@ footer{
     color: #b7b7b7;
     margin: 0 0.4rem;
     transition: .6s;
-    
+
 }
-.col-2 .social-icons a:hover{
+
+.col-2 .social-icons a:hover {
     color: #969696;
     background: #dad7d7;
 }
-.col-3{
+
+.col-3 {
     flex: 1;
     text-align: left;
     flex-basis: 35%;
 }
-.col-3 .gallery{
+
+.col-3 .gallery {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-.col-3 .gallery img{
-    width: calc( 100% / 3 - 20px);
-    height:96px;
+
+.col-3 .gallery img {
+    width: calc(100% / 3 - 20px);
+    height: 96px;
     object-fit: cover;
     border-radius: 10px;
     margin: 10px;
@@ -274,7 +294,7 @@ footer{
 }
 
 /* Voucher */
-#voucher{
+#voucher {
     /* background-color: rgb(228, 245, 246); */
     padding: 50px 0px;
     margin-left: auto;
@@ -282,19 +302,20 @@ footer{
     width: 100%;
 }
 
-#voucher h2{
+#voucher h2 {
     text-align: center;
     font-size: 50px;
     font-weight: 800;
 }
 
-#vou{
+#vou {
     display: flex;
     gap: 150px;
     flex-direction: column;
     margin-top: 80px;
 }
-.vou_detail{
+
+.vou_detail {
     display: flex;
     justify-content: space-between;
     background: #c0c0aa;
@@ -305,12 +326,12 @@ footer{
     align-items: center;
     width: 70%;
     height: 150px;
-    
+
     border: 2px solid rgb(201, 109, 4);
     border-radius: 8px;
 }
 
-#vou h3{
+#vou h3 {
     color: #fff;
     font-size: 20px;
     font-weight: 600;
@@ -321,7 +342,7 @@ footer{
     padding: 16px 60px;
 }
 
-.list_vou{
+.list_vou {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -329,11 +350,11 @@ footer{
     width: 75%;
 }
 
-.list_vou a{
+.list_vou a {
     width: 35%;
 }
 
-.vou_entity{
+.vou_entity {
 
     width: 190px;
     height: 240px;
@@ -347,44 +368,46 @@ footer{
     cursor: pointer;
 }
 
-.vou_entity:hover{
+.vou_entity:hover {
     width: 200px;
 }
 
 
-#voucher .list_vou img{
+#voucher .list_vou img {
     width: 100%;
     height: 114px;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
 }
 
-#voucher .list_vou .expire_vou{
+#voucher .list_vou .expire_vou {
     background-color: #0a8bb2;
     text-align: center;
 }
 
 
-#voucher .list_vou .inf{
-    margin-left:10px;
-}
-#voucher .list_vou p{
-    display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1; 
-  overflow: hidden;
-  text-overflow: ellipsis;
+#voucher .list_vou .inf {
+    margin-left: 10px;
 }
 
-#voucher a{
+#voucher .list_vou p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#voucher a {
     text-decoration: none;
     color: #000;
 }
 
 .swiper-container {
-    background-color: rgba(0, 0, 0);
+    background-color: rgba(160, 215, 236, 0.815);
     width: 100%;
     height: 100%;
+    margin: 0;
     padding: 48px 16px;
     display: flex;
     flex-direction: column;
@@ -392,78 +415,91 @@ footer{
 }
 
 .swiper-container h3 {
-    color: white;
-    font-family: "Garamond", Serif;
+    color: rgb(0, 0, 0);
     font-size: 48px;
     text-align: center;
 }
 
-.grid-container {
+.swiper-container .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding: 16px 64px;
     gap: 8px;
-    margin: 0 auto; /* Căn giữa nếu cần */
+    margin: 0 auto;
+    /* Căn giữa nếu cần */
 
 }
 
-.grid-item {
+.swiper-container .grid-item {
     text-align: center;
-    width: 100%; /* Chiều rộng bằng 1/4 của phần tử cha */
+    width: 100%;
+    /* Chiều rộng bằng 1/4 của phần tử cha */
     aspect-ratio: 16 / 9;
     box-sizing: border-box;
 }
 
-.grid-item img {
-    width: 100%; 
-    height: 100%; /* Đảm bảo tỉ lệ hình ảnh không bị biến dạng */
-    border-radius: 8px; /* Bo góc cho hình ảnh */
-    object-fit: cover; 
+.swiper-container .grid-item img {
+    width: 100%;
+    height: 100%;
+    /* Đảm bảo tỉ lệ hình ảnh không bị biến dạng */
+    border-radius: 8px;
+    /* Bo góc cho hình ảnh */
+    object-fit: cover;
     margin: 0;
-    box-shadow: 4px 4px 10px 0 rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 0px 20px rgba(48, 86, 143, 0.76);
+    border-radius: 8px;
 }
+
 
 .swiper-button-next,
 .swiper-button-prev {
-    color: #ffffff !important;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    padding: 4px !important; /* Giảm padding để nút nhỏ hơn */
-    display: block !important; /* Đảm bảo hiển thị */
-    border-radius: 50% !important; /* Đảm bảo nút có hình tròn */
-    --swiper-navigation-size: 24px;
-    margin: 0px; /* Khoảng cách giữa các nút */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease; /* Thêm hiệu ứng chuyển đổi cho transform */
-
+    position: absolute;
+    top: 50%;
+    width: calc(var(--swiper-navigation-size)/ 44 * 27);
+    height: var(--swiper-navigation-size);
+    margin-top: calc(0px - (var(--swiper-navigation-size)/ 2));
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    --swiper-navigation-color: rgb(0, 0, 0);
 }
 
 /* Đổi màu pagination sang trắng */
-.swiper-pagination-bullet {
-    background-color: white !important; /* Đổi màu các bullet */
+.swiper-container .swiper-pagination-bullet {
+    background-color: rgb(0, 0, 0) !important;
+    /* Đổi màu các bullet */
 }
-.swiper-button-next:hover,
+
+.swiper-container .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    background-color: rgba(221, 221, 221, 0.7) !important; /* Đổi màu nền khi hover */
-    box-shadow: 0 6px 15px rgba(221, 221, 221, 0.7); /* Bóng mạnh hơn khi hover */
-    transform: scale(1.1); /* Tăng kích thước nút khi hover */
+    background-color: rgba(221, 221, 221, 0.7) !important;
+    /* Đổi màu nền khi hover */
+    box-shadow: 0 6px 15px rgba(221, 221, 221, 0.7);
+    /* Bóng mạnh hơn khi hover */
+    transform: scale(1.1);
+    /* Tăng kích thước nút khi hover */
 }
+
 /* Danh sách địa điểm */
-.listVistedPlace{
+.listVistedPlace {
     padding: 10px;
     margin-top: 30px;
-    width : 100%;
+    width: 100%;
     border: #964B00 2px solid;
     display: flex;
     justify-content: space-between;
 }
 
-.framePlace{
+.framePlace {
     margin-top: 30px;
     margin: 20px;
     border: #000000 2px solid;
-    border-radius: 5px; /* Bo góc cho khung nhỏ */
+    border-radius: 5px;
+    /* Bo góc cho khung nhỏ */
 }
+
 @media (max-width: 768px) {
     #main_nav {
         display: flex;
@@ -493,15 +529,17 @@ footer{
         margin-left: auto;
         margin-right: auto;
     }
-    #vou h3{
+
+    #vou h3 {
         color: #fff;
         font-size: 20px;
         font-weight: 600;
         line-height: 40px;
-    
+
         width: 150px;
         padding: 16px;
     }
+
     .vou_detail {
         width: 90%;
         margin-bottom: 20px;
@@ -516,18 +554,23 @@ footer{
 
     }
 
-    .vou_entity:hover{
+    .vou_entity:hover {
         max-width: 32%;
     }
-  .footer {
+
+    .footer {
         display: flex;
         flex-direction: column;
     }
-    .footer .col-1, .footer .col-2, .footer .col-3 {
+
+    .footer .col-1,
+    .footer .col-2,
+    .footer .col-3 {
         width: 100%;
         margin-bottom: 20px;
         text-align: center;
     }
+
     .footer .footer-home a {
         width: 80px;
         height: 80px;
@@ -543,15 +586,20 @@ footer{
         justify-content: center;
         gap: 10px;
     }
-  .swiper-container {
+
+    .swiper-container {
         aspect-ratio: 3 / 4;
     }
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 cột cho màn hình nhỏ hơn */
+
+    .swiper-container .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 cột cho màn hình nhỏ hơn */
         padding: 16px 16px;
     }
+
     .swiper-container h3 {
-        font-size: 36px; /* Thay đổi kích thước chữ cho h3 */
+        font-size: 36px;
+        /* Thay đổi kích thước chữ cho h3 */
     }
 }
 
@@ -578,15 +626,17 @@ footer{
         gap: 100px;
         width: 100vw;
     }
-    #vou h3{
+
+    #vou h3 {
         color: #fff;
         font-size: 16px;
         font-weight: 600;
         line-height: 40px;
-    
+
         width: 170px;
         padding: 16px;
     }
+
     .vou_detail {
         width: 98%;
         margin-bottom: 20px;
@@ -595,15 +645,17 @@ footer{
     .list_vou {
         width: 80%;
     }
+
     .vou_entity {
         max-width: 30%;
 
     }
 
-    .vou_entity:hover{
+    .vou_entity:hover {
         max-width: 35%;
     }
 }
+
 @media (max-width: 480px) {
     #main_nav {
         display: flex;
@@ -622,6 +674,6 @@ footer{
     }
     
     .swiper-container h3 {
-        font-size: 24px; 
+        font-size: 24px;
     }
 }

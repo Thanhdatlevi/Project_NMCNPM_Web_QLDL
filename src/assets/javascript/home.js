@@ -68,6 +68,10 @@ document.addEventListener("DOMContentLoaded", function() {
         slidesPerView: 1,
         spaceBetween: 10,
         loop: true,
+        effect: 'coverflow', // Có thể thay bằng 'slide', 'cube', 'coverflow', hoặc 'flip'
+        fadeEffect: {
+            crossFade: true // Chuyển đổi mượt mà giữa các slide
+        },
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
@@ -82,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
+
     function isElementInViewport(el) {
         const rect = el.getBoundingClientRect();
         return (
