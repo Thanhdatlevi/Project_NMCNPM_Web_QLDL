@@ -1,10 +1,9 @@
-body {
+
+body{
     display: block;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
-    /* Ngăn cuộn ngang toàn bộ trang */
-
+    overflow-x: hidden; /* Ngăn cuộn ngang toàn bộ trang */
 }
 
 * {
@@ -33,32 +32,37 @@ section {
 
 #main_nav {
     background: linear-gradient(rgb(255, 255, 255), rgb(154, 219, 233));
-    height: auto;
+    width: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px;
+    padding: 5px;
 }
 
-#main_nav a {
+#main_nav a{
     text-decoration: none;
     color: #000;
     padding: 10px 10px;
 
-    font-size: 20px;
+    font-size: 12px;
     font-weight: 700;
 
     white-space: nowrap;
 }
-
 #nav_button {
     padding: 10px 10px;
-    font-size: 17px;
 }
 
 #nav_button:hover {
     background-color: #c2c0c0;
-    border-radius: 5px;
+    border-radius: 30px;
+}
+
+#language{
+    border-radius: 30px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    padding: 5px 5px;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 #nav {
@@ -76,7 +80,6 @@ section {
 #login_register {
     display: flex;
     justify-content: space-between;
-
     gap: 10px;
 }
 
@@ -498,6 +501,26 @@ footer {
 }
 
 @media (max-width: 768px) {
+    #main_nav {
+        display: flex;
+        align-items: start;
+        gap: 0px;
+    }
+    #main_nav #login_register{
+        align-self: end;
+    }
+    #main_nav #login_register #language{
+        width: 70px;
+    }
+    #main_nav a {
+        color: #000;
+        padding: 5px 5px;
+    
+        font-size: 10px;
+        font-weight: bold;
+        
+        white-space: nowrap;
+    }
     #vou {
         flex-direction: column;
         align-items: center;
@@ -582,6 +605,21 @@ footer {
 
 /* Responsive cho màn hình nhỏ hơn 480px */
 @media (max-width: 640px) {
+    #main_nav {
+        display: flex;
+        align-items: start;
+        gap: 0px;
+    }
+    
+    #main_nav a {
+        color: #000;
+        padding: 5px 5px;
+    
+        font-size: 8.15px;
+        font-weight: bold;
+        
+        white-space: nowrap;
+    }
     #vou {
         flex-direction: column;
         align-items: center;
@@ -619,6 +657,22 @@ footer {
 }
 
 @media (max-width: 480px) {
+    #main_nav {
+        display: flex;
+        align-items: start;
+        gap: 0px;
+    }
+
+    #main_nav a {
+        color: #000;
+        padding: 5px 5px;
+    
+        font-size: 8.15px;
+        font-weight: bold;
+        
+        white-space: nowrap;
+    }
+    
     .swiper-container h3 {
         font-size: 24px;
     }
