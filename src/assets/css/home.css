@@ -324,7 +324,7 @@ footer {
 
     margin: 0px auto;
     align-items: center;
-    width: 70%;
+    width: 60%;
     height: 150px;
 
     border: 2px solid rgb(201, 109, 4);
@@ -370,6 +370,7 @@ footer {
 
 .vou_entity:hover {
     width: 200px;
+    transition: width 0.5s ease 0.0001s;
 }
 
 
@@ -487,7 +488,6 @@ footer {
     padding: 10px;
     margin-top: 30px;
     width: 100%;
-    //background: #FFFFD8;
     background: #B2DEF0;
     display: flex;
     flex-direction: column;
@@ -517,7 +517,7 @@ footer {
 .listVistedPlace .scroll-container .framePlace {
     margin-top: 30px;
     margin: 20px;
-    //border: #000000 2px solid;
+    /* border: #000000 2px solid; */
     border-radius: 5px;
     background: #FFFFFF;
     /* Bo góc cho khung nhỏ */
