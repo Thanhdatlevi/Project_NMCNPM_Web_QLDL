@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0, user-scalable=yes">
+    <title>Du lịch uy tín - không đa cấp</title>
+    <link rel="stylesheet" href="../css/form.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+</head>
+
+<body>
+    <div id="main_div">
+        <!-- header -->
+        <header class="header-container">
+            <input id="tour_name" placeholder="Enter your tour's name"></input>
+            <div id="tour-name-container">
+                <select id="city" onchange="setCity()">
+                    <option value="" disabled selected>City</option>
+                    <option value="Hanoi">Ha Noi</option>
+                    <option value="HCM">Ho Chi Minh</option>
+                    <option value="DaNang">Da Nang</option>
+                    <option value="Hue">Hue</option>
+                </select>
+            </div>
+        </header>
+        <!-- add place -->
+        <div id="add-place">
+            <p id="travel-place-text" data-i18n="travel-place">
+                Travel place
+            </p>
+            <button id="add-place-button" onclick="addPlace()">Add</button>
+        </div>
+
+        <!-- display place -->
+        <div id="display-place">
+            <p id="notice-place" >
+                 
+            </p>
+            <div id="place-item">
+                <div id="place-header-container">
+                    <input id="time-place" type="date" onchange="set_date()">
+                    <button id="delete-place-button" onclick="deletePlace(this)">Delete</button>
+                </div>
+                
+                <div id="place-information">
+                    <select id="place-list" onchange="show_infor(this)">
+                        <option value="" disabled selected>Select a place</option>
+                    </select>
+                    <div id="place-infor">
+                        <p id="place-description">
+                            Place's description here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="../javascript/form.js"></script>
+
+</html>
