@@ -1,0 +1,102 @@
+[
+    {
+        "city": "Hanoi",
+        "place": [
+            {
+                "name": "Hồ Hoàn Kiếm",
+                "description": "Hồ Hoàn Kiếm là một hồ nước ngọt tự nhiên nằm ở trung tâm thành phố Hà Nội, Việt Nam. Hồ Hoàn Kiếm còn có tên gọi khác là hồ Gươm, là một trong những hồ nước tự nhiên duy nhất còn lại ở trung tâm Hà Nội.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Hoan_Kiem_Lake.jpg"
+            },
+            {
+                "name": "Chùa Một Cột",
+                "description": "Chùa Một Cột hay chùa Diên Hựu, tên chính thức là Diên Hựu tự, tên gọi phổ biến là chùa Một Cột, là một công trình kiến trúc nổi tiếng của Việt Nam, nằm ở Hà Nội.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Chua_Mot_Cot.jpg"
+            },
+            {
+                "name": "Lăng Chủ tịch Hồ Chí Minh",
+                "description": "Lăng Chủ tịch Hồ Chí Minh là một công trình kiến trúc lớn ở Hà Nội, nơi lưu giữ thi hài của Chủ tịch Hồ Chí Minh.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Lang_Chu_tich_Ho_Chi_Minh.jpg"
+            },
+            {
+                "name": "Chùa Trấn Quốc",
+                "description": "Chùa Trấn Quốc, tên chính thức là Khánh Anh tự, là một ngôi chùa cổ nằm ở phía Đông Hồ Tây, quận Tây Hồ, Hà Nội.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Ch%C3%B9a_Tr%E1%BA%A5n_Qu%E1%BB%91c%2C_H%C3%A0_N%E1%BB%99i.jpg/450px-Ch%C3%B9a_Tr%E1%BA%A5n_Qu%E1%BB%91c%2C_H%C3%A0_N%E1%BB%99i.jpg"
+            }
+        ]
+    },
+    {
+        "city": "HCM",
+        "place": [
+            {
+                "name": "Nhà thờ Đức Bà",
+                "description": "Nhà thờ Đức Bà Sài Gòn, tên chính thức là Nhà thờ Chính tòa Đức Bà Sài Gòn, là một nhà thờ Công giáo Rôma nằm ở quận 1, thành phố Hồ Chí Minh, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Nha_Tho_Duc_Ba.jpg"
+            },
+            {
+                "name": "Chợ Bến Thành",
+                "description": "Chợ Bến Thành là một trong những chợ lớn nhất ở thành phố Hồ Chí Minh, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Cho_Ben_Thanh.jpg"
+            },
+            {
+                "name": "Dinh Thống Nhất",
+                "description": "Dinh Thống Nhất là một công trình kiến trúc lớn ở thành phố Hồ Chí Minh, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Dinh_Thong_Nhat.jpg"
+            },
+            {
+                "name": "Chùa Vĩnh Nghiêm",
+                "description": "Chùa Vĩnh Nghiêm là một ngôi chùa nằm ở quận 3, thành phố Hồ Chí Minh, Việt Nam.",
+                "image": "https://vi.wikipedia.org/wiki/Ch%C3%B9a_V%C4%A9nh_Nghi%C3%AAm_(Th%C3%A0nh_ph%E1%BB%91_H%E1%BB%93_Ch%C3%AD_Minh)#/media/T%E1%BA%ADp_tin:C%E1%BB%95ng_ch%C3%B9a_V%C4%A9nh_Nghi%C3%AAm.jpg"
+            }
+        ]
+    },
+    {
+        "city": "DaNang",
+        "place":[
+            {
+                "name": "Bà Nà Hills",
+                "description": "Bà Nà Hills là một khu du lịch núi cao cách thành phố Đà Nẵng khoảng 25 km về phía Tây Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Ba_Na_Hills.jpg"
+            },
+            {
+                "name": "Bãi biển Mỹ Khê",
+                "description": "Bãi biển Mỹ Khê là một bãi biển nằm ở thành phố Đà Nẵng, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Bai_Bien_My_Khe.jpg"
+            },
+            {
+                "name": "Cầu Rồng",
+                "description": "Cầu Rồng là một cầu cảng nổi tiếng ở thành phố Đà Nẵng, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Cau_Rong.jpg"
+            },
+            {
+                "name": "Chùa Linh Ứng",
+                "description": "Chùa Linh Ứng là một ngôi chùa nằm ở thành phố Đà Nẵng, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Chua_Linh_Ung.jpg"
+            }
+        ]
+    },
+    {
+        "city": "Hue",
+        "place":[
+            {
+                "name": "Cố đô Huế",
+                "description": "Cố đô Huế là một khu vực lịch sử nằm ở thành phố Huế, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Co_Do_Hue.jpg"
+            },
+            {
+                "name": "Chùa Thiên Mụ",
+                "description": "Chùa Thiên Mụ là một ngôi chùa nằm ở thành phố Huế, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Chua_Thien_Mu.jpg"
+            },
+            {
+                "name": "Lăng Tự Đức",
+                "description": "Lăng Tự Đức là một công trình kiến trúc lớn ở thành phố Huế, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Lang_Tu_Duc.jpg"
+            },
+            {
+                "name": "Cầu Trường Tiền",
+                "description": "Cầu Trường Tiền là một cầu cảng nổi tiếng ở thành phố Huế, Việt Nam.",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Cau_Truong_Tien.jpg"
+            }
+        ]
+    }
+]
