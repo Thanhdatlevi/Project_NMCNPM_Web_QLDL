@@ -1,46 +1,52 @@
 let city = "";
-let cur_data;
+let data = [];
+const originalPlace = document.getElementById('display-place').innerHTML;
+const originalRes = document.getElementById('display-res').innerHTML;
+const originalHol = document.getElementById('display-hol').innerHTML;
+
 async function setCity() {
-    const places = document.getElementById('display-place');
-    const numOfPlace = countChildElement(places);
-    if(numOfPlace > 2){
-        const notice = document.getElementById('notice-place');
-        notice.innerHTML = "You must delete all added places before changing the city.";
-        return;
-    }
-    else{
-        const notice = document.getElementById('notice-place');
-        notice.innerHTML = "";
-    }
+    document.getElementById('display-place').innerHTML=originalPlace;
+    document.getElementById('display-res').innerHTML=originalRes;
+    document.getElementById('display-hol').innerHTML=originalHol;
     city = document.getElementById('city').value;
-    populateSelect(cur_data);
+    populateSelect(data);
 }
 
 
 // load data from file JSON
-async function loadJSON() {
+async function loadJSON1() {
     const response = await fetch('../JSON/data/places.json');
-    const data = await response.json();
-    return data;
+    const data1 = await response.json();
+    return data1;
 }
 
+async function loadJSON2() {
+    const response = await fetch('../JSON/data/hotel.json');
+    const data2 = await response.json();
+    return data2;
+}
+
+async function loadJSON3() {
+    const response = await fetch('../JSON/data/hotel.json');
+    const data3 = await response.json();
+    return data3;
+}
 // add option into <select>
 function populateSelect(data) {
-    const select = document.getElementById('place-list');
-    clearSelect(select);
-    data.forEach(element => {
-        if(element.city == city){
-            element.place.forEach(item => {
-                const option = document.createElement('option');
-                //option.value = item.name;
-                option.textContent = item.name;
-                select.appendChild(option);
-            });
-        }
-    });
-    select.selectedIndex = 0;
-    const infor = document.getElementById('place-description');
-    infor.innerHTML = "Place's description here.";
+    const selects = Array.from(document.getElementsByClassName('list'));
+    selects.forEach((select,index)=>{
+        clearSelect(select);
+        data[index].forEach(element => {
+            if(element.city == city){
+                element.place.forEach(item => {
+                    const option = document.createElement('option');
+                    option.textContent = item.name;
+                    select.appendChild(option);
+                });
+            }
+        });
+        select.selectedIndex = 0;
+    })
 }
 
 function clearSelect(select){
@@ -49,55 +55,62 @@ function clearSelect(select){
     }
 }
 
-function show_infor(selectedElement){
-    const parent = selectedElement.parentNode;
-    const infor = parent.querySelector('#place-description');
-    const place = parent.querySelector('#place-list').value;
-    cur_data.forEach(element => {
-        if(element.city == city){
-            element.place.forEach(item => {
-                if(item.name == place){
-                    infor.innerHTML = item.description;
-                    return;
-                }
-            });
-        }
-    });
-}
+// function show_img(selectedElement,type){
+//     const parent = selectedElement.parentNode;
+//     const infors = parent.querySelector(`#${type}_img`);
+//     // const place = parent.querySelector('#place-list').value;
+//     const place = selectedElement.value;
+//     let index = type=='place' ? 0 : type == 'res' ? 1 : 2;
+//     data[index].forEach(element => {
+//         if(element.city == city){
+//             element.place.forEach(item => {
+//                 if(item.name == place){
+//                     console.log(item.image)
+//                     infors.setAttribute("src", `${item.image}`);
+//                     return;
+//                 }
+//             });
+//         }
+//     });
+// }
 
-function addPlace(){
+function addElement(e){
     const cur_city = document.getElementById('city').value;
     if(cur_city == ""){
-        const notice = document.getElementById('notice-place');
+        const notice = document.getElementById(`notice-${e.target.value}`);
         notice.innerHTML = "Please choose the city first.";
         return;
     }
     else{
-        const notice = document.getElementById('notice-place');
+        const notice = document.getElementById(`notice-${e.target.value}`);
         notice.innerHTML = "";
     }
-    const item = document.getElementById('place-item');
-    const object = document.getElementById('display-place');
+    const item = document.getElementById(`${e.target.value}-item`);
+    const object = document.getElementById(`display-${e.target.value}`);
     const clone = item.cloneNode(true);
+
+    const hrElement = document.createElement('hr');
+    object.appendChild(hrElement);
+    
     object.appendChild(clone);
     const newsetChild = object.lastElementChild;
+    if(e.target.value!='place') return;
     newsetChild.querySelector('#time-place').value = new Date().toISOString().split('T')[0];
-    newsetChild.querySelector('#place-description').innerHTML = "Place's description here.";
 }
 
 function countChildElement(parent){
     return parent.childElementCount;
 }
 
-function deletePlace(selectedElement){
+function deleteElement(selectedElement,type){
     const parent = selectedElement.parentNode.parentNode;
     if (countChildElement(parent.parentNode) == 2){
-        const notice = document.getElementById('notice-place');
+        const notice = document.getElementById(`notice-${type}`);
         notice.innerHTML = "You can't delete the last place.";
         return;
     }
     else{
-        const notice = document.getElementById('notice-place');
+        const notice = document.getElementById(`notice-${type}`);
         notice.innerHTML = "";
     }
     parent.remove();
@@ -119,7 +132,7 @@ function set_date(){
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-    cur_data = await loadJSON();
+    data = await Promise.all([loadJSON1(), loadJSON2(), loadJSON3()]);
     const date = document.getElementById('time-place');
     date.value = new Date().toISOString().split('T')[0];
 });
