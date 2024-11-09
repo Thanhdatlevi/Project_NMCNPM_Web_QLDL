@@ -43,7 +43,7 @@ const HotelController = {
     //     }
     // }
 
-    getPopularRestaurants: async (req, res) => {
+    getPopularHotels: async (req, res) => {
         try {
             const popularHotels = await HotelModel.getPopularHotels();
             res.json(popularHotels); // Trả về 3 khách sạn có rating cao nhất
