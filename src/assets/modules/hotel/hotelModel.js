@@ -30,9 +30,11 @@ const HotelModel = {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
             const query = `
-            SELECT r.hotel_id, f.facility_name, f.deal
+            SELECT r.hotel_id, f.facility_name, f.deal, i.img_url
             FROM hotels r
             JOIN facilities f ON r.facility_id = f.facility_id
+            LEFT JOIN facility_images i ON f.facility_id = i.facility_id
+            WHERE i.img_id = 1
             ORDER BY f.rating DESC
             LIMIT 3;
         `;

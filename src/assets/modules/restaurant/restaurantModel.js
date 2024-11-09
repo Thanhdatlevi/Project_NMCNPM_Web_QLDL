@@ -36,6 +36,8 @@ const RestaurantModel = {
             SELECT r.restaurant_id, f.facility_name, f.deal
             FROM restaurants r
             JOIN facilities f ON r.facility_id = f.facility_id
+            LEFT JOIN facility_images i ON f.facility_id = i.facility_id
+            WHERE i.img_id = 1
             ORDER BY f.rating DESC
             LIMIT 3;
         `;
