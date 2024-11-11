@@ -1,0 +1,369 @@
+
+
+.footer {
+    margin-top: auto;
+    width: 100%;
+    padding: 32px 0;
+    background: #000000;
+    color: #efefef;
+    display: flex;
+    position: relative;
+    bottom : 0;
+}
+
+.footer div h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.blank {
+    flex: 1;
+    text-align: left;
+    flex-basis: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+}
+
+.blank .footer-home {
+    display: flex;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    justify-items: center;
+}
+
+.blank .footer-home a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+    border-radius: 50%;
+    background: transparent;
+    border: #ffffff 4px solid;
+    color: #b7b7b7;
+    margin: 0 0.4rem;
+    transition: .6s;
+}
+
+.blank .footer-home a:hover {
+    color: #969696;
+    background: #dad7d7;
+
+}
+
+.col-1 {
+    flex: 1;
+    text-align: left;
+    flex-basis: 25%;
+
+}
+
+.col-1 p {
+    text-align: bottom;
+    font-size: 1.1rem;
+
+}
+
+.col-1 h3 {
+    display: inline-block;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-family: 'raleway', sans-serif;
+    font-style: italic;
+    letter-spacing: 2.5px;
+}
+
+.col-1 .footer-search input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 60%;
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 2px solid #bad1db;
+    outline: none;
+    margin-right: 16px;
+    color: #ffffff;
+    background-color: transparent;
+
+}
+
+.col-1 .footer-search ::placeholder {
+    color: #ffffff;
+}
+
+.col-2 h3 {
+    display: inline-block;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.col-2 {
+    flex: 1;
+    text-align: left;
+    flex-basis: 25%;
+}
+
+.col-2 a {
+    text-decoration: none;
+    color: #efefef;
+    display: block;
+    margin-bottom: 10px;
+
+}
+
+.col-2 span {
+    line-height: 2;
+    font-size: 1.1rem;
+}
+
+.col-2 .social-icons {
+    display: flex;
+    margin-top: 16px;
+    justify-content: left;
+    align-items: center;
+
+}
+
+.col-2 .social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.3rem;
+    border-radius: 50%;
+    background: transparent;
+    border: #ffffff 2px solid;
+    color: #b7b7b7;
+    margin: 0 0.4rem;
+    transition: .6s;
+
+}
+
+.col-2 .social-icons a:hover {
+    color: #969696;
+    background: #dad7d7;
+}
+
+.col-3 {
+    flex: 1;
+    text-align: left;
+    flex-basis: 35%;
+}
+
+.col-3 .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.col-3 .gallery img {
+    width: calc(100% / 3 - 20px);
+    height: 96px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    #main_nav {
+        display: flex;
+        align-items: start;
+        gap: 0px;
+    }
+    #main_nav #login_register{
+        align-self: end;
+    }
+    #main_nav #login_register #language{
+        width: 70px;
+    }
+    #main_nav a {
+        color: #000;
+        padding: 5px 5px;
+    
+        font-size: 10px;
+        font-weight: bold;
+        
+        white-space: nowrap;
+    }
+    #vou {
+        flex-direction: column;
+        align-items: center;
+        gap: 100px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #vou h3 {
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 40px;
+
+        width: 150px;
+        padding: 16px;
+    }
+
+    .vou_detail {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .list_vou {
+        width: 80%;
+    }
+
+    .vou_entity {
+        max-width: 30%;
+
+    }
+
+    .vou_entity:hover {
+        max-width: 32%;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer .col-1,
+    .footer .col-2,
+    .footer .col-3 {
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .footer .footer-home a {
+        width: 80px;
+        height: 80px;
+        font-size: 40px;
+    }
+
+    .footer .footer-search input {
+        width: 50%;
+    }
+
+    .footer .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .swiper-container {
+        aspect-ratio: 3 / 4;
+    }
+
+    .swiper-container .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 cột cho màn hình nhỏ hơn */
+        padding: 16px 16px;
+    }
+
+    .swiper-container h3 {
+        font-size: 36px;
+        /* Thay đổi kích thước chữ cho h3 */
+    }
+}
+
+/* Responsive cho màn hình nhỏ hơn 480px */
+@media (max-width: 640px) {
+    #main_nav {
+        display: flex;
+        align-items: start;
+        gap: 0px;
+    }
+    
+    #main_nav a {
+        color: #000;
+        padding: 5px 5px;
+    
+        font-size: 8.15px;
+        font-weight: bold;
+        
+        white-space: nowrap;
+    }
+    #vou {
+        flex-direction: column;
+        align-items: center;
+        gap: 100px;
+        width: 100vw;
+    }
+
+    #vou h3 {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 40px;
+
+        width: 170px;
+        padding: 16px;
+    }
+
+    .vou_detail {
+        width: 98%;
+        margin-bottom: 20px;
+    }
+
+    .list_vou {
+        width: 80%;
+    }
+
+    .vou_entity {
+        max-width: 30%;
+
+    }
+
+    .vou_entity:hover {
+        max-width: 35%;
+    }
+}
+
+@media (max-width: 480px) {
+    #main_nav {
+        display: flex;
+        align-items: start;
+        gap: 0px;
+    }
+
+    #main_nav a {
+        color: #000;
+        padding: 5px 5px;
+    
+        font-size: 8.15px;
+        font-weight: bold;
+        
+        white-space: nowrap;
+    }
+    
+    .swiper-container h3 {
+        font-size: 24px;
+    }
+     .footer {
+        padding: 16px 0;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer div h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .footer div {
+        width: 100%;
+    }
+}
