@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0">
+    <title>Profile</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+    <link rel="stylesheet" href="../Styles/Profile.css">
+
+
+</head>
+
+
+<body>
+    <main id="MyProfile">
+        <section id="titleProfile">
+            <h3>
+                My profile
+            </h3>
+            <p>
+                <a href="#">Home</a> /
+                <a href="profile.html">My profile</a>
+            </p>
+        </section>
+        <section id="viewProfile">
+
+            <div id="selectProfile">
+                <div class="over-profile">
+                    <div class="profile-image-container">
+                        <img src="./img_profile/PTD.jpg" alt="Profile Picture" class="profile-image">
+                        <img src="./img_profile/pencil.png" alt="Edit Icon" class="edit-icon">
+                    </div>
+                    <p>Phạm Thanh Duy</p>
+                    <div class="location-birthday">
+                        <img src="./img_profile/Vector.jpg" />
+                        <p>Hồ Chí Minh</p>
+                        <p> | </p>
+                        <img src="./img_profile/fe_birthday-cake.jpg" />
+                        <p>Ngày 1 tháng 1</p>
+
+                    </div>
+                </div>
+                <div class="list-select">
+                    <div class="list-select-content" tabindex="0" onclick="showContent('profile')">Chỉnh sửa thông
+                        tin
+                    </div>
+                    <div class="list-select-content" tabindex="0" onclick="showContent('booking')">Lịch sử đặt hàng
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div id="contentProfile"></div>
+        </section>
+    </main>
+    <script src="./js_profile/script.js"></script>o
+</body>
+
+</html>
