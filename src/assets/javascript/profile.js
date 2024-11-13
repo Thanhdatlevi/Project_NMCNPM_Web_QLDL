@@ -6,7 +6,7 @@ function showContent(contentType) {
     if (contentType === 'profile') {
         filePath = './detailProfile.html';
     } else if (contentType === 'booking') {
-        filePath = './bookingHistory.html';
+        filePath = './bookingHis.html';
     }
 
     // Sử dụng fetch để lấy nội dung HTML và hiển thị vào #contentProfile
