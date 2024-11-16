@@ -394,3 +394,20 @@ section{
     cursor: pointer;
     background: #a6a5a5;
 }
+
+#submit{
+    display: flex;
+    justify-content: right;
+}
+
+#submit-button{
+    border-radius: 10px;
+    font-size: 20px;
+    border: 2px solid #000;
+    height: 75%;
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #FFDA32;
+}

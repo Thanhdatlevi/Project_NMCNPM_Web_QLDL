@@ -34,7 +34,7 @@ a{
 }
 
 #main_nav {
-    background: linear-gradient(rgb(255, 255, 255), rgb(154, 219, 233));
+    background: rgba(255, 255, 255, 0);
     width: auto;
     display: flex;
     justify-content: space-between;
@@ -112,7 +112,7 @@ a{
 }
 
 #nav_button #login {
-    color: #fff;
+    color: #000;
     border-radius: 15px;
 }
 
