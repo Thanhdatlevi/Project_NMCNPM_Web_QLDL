@@ -1,0 +1,309 @@
+.TRR-body{
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    align-items: center;
+}
+
+.TRR-container{
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 500px;
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+
+.TRR-title a{
+    text-decoration: none;
+    font-size: 20px;
+    color: #000;
+    font-weight: bold;
+}
+
+.TRR-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    height: 90%;
+    padding: 10px;
+}
+
+.TRR-content #header{
+    display: flex;
+    padding: 10px;
+    background-color: #E4E5F0;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+    border-bottom: #000 1px solid;
+}
+
+.TRR-content-left{
+    display: grid;
+    grid-template-rows: 1fr 2.5fr 6.5fr;
+    width: 67%;
+    height: 100%;
+    row-gap: 10px;
+}
+
+.TRR-content-left,.TRR-content-right p,a:hover{
+    cursor: default;
+}
+
+.TRR-content-left .Tour-infor{
+    border: #000 1px solid;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    background-color: #E4E5F0;
+}
+
+.TRR-content-left .Tour-infor #ReceiptId-CustomerInfor{
+    flex-grow: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+
+}
+
+#ReceiptId-CustomerInfor #ReceiptId p{
+    font-size: 15px;
+    font-weight: bold;    
+}
+
+#ReceiptId-CustomerInfor #ReceiptId a{
+    text-decoration: none;
+    font-size: 15px;
+    color: #1473CC;
+}
+
+.TRR-content-left .Tour-infor #ReceiptStatus{
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#ReceiptStatus a{
+    text-decoration: none;
+    font-size: 15px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #e2220d;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.TRR-content-left .Tourist-infor{
+    border: #000 1px solid;
+    border-radius: 5px;
+}
+
+.TRR-content-left .Tourist-infor #information{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.TRR-content-left .Tourist-infor #information #customer-name{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.TRR-content-left .Tourist-infor #information #customer-name a{
+    text-decoration: none;
+    color: #000;
+    font-weight: normal;
+}
+
+.TRR-content-left .Tourist-infor #information #customer-phone{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.TRR-content-left .Tourist-infor #information #customer-phone a{
+    text-decoration: none;
+    color: #000;
+    font-weight: normal;
+}
+
+.TRR-content-left .Tour-detail{
+    border: #000 1px solid;
+    border-radius: 5px;
+}
+
+.TRR-content-left .Tour-detail div{
+    display: grid;
+    grid-template-columns: 7fr 1fr 1fr 1fr; 
+}
+
+.TRR-content-left .Tour-detail div p{
+    padding: 7px;
+}
+
+.TRR-content-left .Tour-detail #service-container{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 200px;
+}
+
+.TRR-content-left .Tour-detail #service-container::-webkit-scrollbar {
+    width: 7px; /* Độ rộng của thanh cuộn */
+}
+
+.TRR-content-left .Tour-detail #service-container::-webkit-scrollbar-thumb:hover{
+    background: #888; /* Màu nền của track khi hover */
+}
+
+.TRR-content-left .Tour-detail #service-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Màu nền của track */
+}
+
+.TRR-content-left .Tour-detail #service-container::-webkit-scrollbar-thumb {
+    background: #c9c8c8; /* Màu của thanh cuộn */
+    border-radius: 6px; /* Bo góc cho thanh cuộn */
+}
+
+.TRR-content-left .Tour-detail #header{
+    display: grid;
+    grid-template-columns: 7fr 1fr 1fr 1fr;
+}
+
+.TRR-content-left .Tour-detail #service-detail{
+    border-bottom: #000 0.5px solid;
+    padding: 0 10px;
+}
+
+.TRR-content-left .Tour-detail #service-detail #service-quantity,#service-price,#service-total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.TRR-content-right{
+    display: grid;
+    grid-template-rows: 2fr 6fr 1fr 1fr;
+    width: 27%;
+    height: 100%;
+    row-gap: 10px;
+}
+
+.TRR-content-right .Payment-method{
+    border: #000 1px solid;
+    border-radius: 5px;
+}
+
+.TRR-content-right .Payment-method #method-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.TRR-content-right .Payment-method #method-container p{
+    color: #000;
+    font-size: 15px;
+}
+
+.TRR-content-right .Receipt-detail{
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
+    border: #000 1px solid;
+    border-radius: 5px;
+}
+
+.TRR-content-right .Receipt-detail #Receipt-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.TRR-content-right .Receipt-detail #Receipt-container p{
+    color: #000;
+    font-size: 15px;
+}
+
+.TRR-content-right #editable{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TRR-content-right #Must-pay-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-top: #000 1px solid;
+    padding: 0 10px;
+}
+
+.TRR-content-right #Must-pay-container #must-pay-money{
+    color: red;
+    font-size: 30px;
+}
+
+.TRR-content-right .Option_buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.TRR-content-right .Option_buttons a{
+    text-decoration: none;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: #FFDA32;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.TRR-content-right .Option_buttons #edit-tour-button{
+    padding: 0;
+    border-radius: 10px;
+}
+
+
+.TRR-content-right .Option_buttons #cancel-tour-button{
+    color: #e2220d;
+    border: 2px solid #000;
+}
+
+.TRR-content-right .Option_buttons a:hover{
+    background-color: #FFD700;
+    cursor: pointer;
+}
+
+.TRR-content-right .Confirm-button{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.TRR-content-right .Confirm-button #Confirm-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFDA32;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.TRR-content-right .Confirm-button #Confirm-button, #Confirm-button a:hover{
+    background-color: #FFD700;
+    cursor: pointer;
+}
