@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="./assets/css/home.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body>
   <!-- Header -->
@@ -319,10 +319,7 @@
             <div class="col-1">
                 <h3>ITISE</h3>
                 <p data-i18n="description">Sản phẩm đầu tiên của ITISE.</p>
-
-                <div class="footer-search">
-                    <input type="text" placeholder="Search"/>
-                </div>
+                <div id="map"></div>
             </div>
             <div class=" col-2">
                 <h3 data-i18n="contact">Contact</h3>
@@ -339,10 +336,10 @@
                     <span data-i18n="email">itise@gmail.com</span>
                 </div>
                 <div class="social-icons">
-                    <a href = "#"><i class='bx bxl-facebook'></i></a>
-                    <a href = "#"><i class='bx bxl-instagram' ></i></a>
-                    <a href = "#"><i class='bx bxl-linkedin' ></i></a>
-                    <a href = "#"><i class='bx bxl-gmail' ></i></a>
+                    <a href = "#" class="facebook-icon"><i class='bx bxl-facebook'></i></a>
+                    <a href = "#" class="ins-icon"><i class='bx bxl-instagram' ></i></a>
+                    <a href = "#" class="linkedin-icon"><i class='bx bxl-linkedin' ></i></a>
+                    <a href = "#" class="gmail-icon"><i class='bx bxl-gmail' ></i></a>
                 </div>
             </div>
             <div class="col-3">
@@ -360,5 +357,6 @@
     <script src="./assets/javascript/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="assets/javascript/home.js"></script> 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </div>
