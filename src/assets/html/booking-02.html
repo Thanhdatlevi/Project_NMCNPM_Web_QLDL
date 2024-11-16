@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Information</title>
+    <link rel="stylesheet" href="../css/booking-02.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="booking-container">
+        <div class="booking-header">
+            <img src="../image/logoITISE.png" alt="ITISE Logo">
+        </div>
+
+        
+        <div class="progress-indicator">
+            <span class="completed-step">✓</span>
+            <div class="progress-line completed"></div>
+            <span class="completed-step">✓</span>
+            <div class="progress-line"></div>
+            <span class="inactive-step">3</span>
+        </div>
+      
+
+        <div class="booking-info">
+            <div class="booking-content">
+                <h2>Payment</h2>
+                <p>Kindly follow the instructions below</p>
+            </div>
+            <div class="booking-details">
+                <div class="blank0"></div>
+                <div class="info-section">
+                    <div class ="title-section">
+                        <h3>Transfer ITISE:</h3>
+                    </div>
+                    <div class="location-section">
+                        <h3>2 Days at Blue Origin Fams,
+                            Galle, Sri Lanka</h3>
+                    </div>
+                    <div class="total-section">
+                        <h3>Total: <strong>$400 USD</strong></h3>
+                    </div>
+                    <div class ="initial-section">
+                        <h3>Initial Payment: <strong>$200</strong></h3>
+                    </div>
+                </div>
+                <div class="blank"></div>
+                <div class="divider"></div> <!-- Add this line -->
+                <div class="blank"></div>
+                <div class="form-section">
+                    <label for="phone-number">Card Number</label>
+                    <div class="phone-section">
+                        <input class="phone-input" placeholder="Payment card number"> </input>
+                    </div>
+
+                    <label for="bank">Bank</label>
+                    <div class="phone-section">
+                        <input class="bank-input" placeholder="Select bank"> </input>
+                    </div>
+
+                    <label for="exp-date">Exp Date</label>
+                    <div class="exp-section">
+                        <input class="exp-input" placeholder="Validation date"> </input>
+                    </div>
+                    <label for="cvv">CVV</label>
+                    <div class="cvv-section">
+                        <input class="cvv-input" placeholder="Beside the card"> </input>
+                    </div>
+                </div>
+                <div class="blank0"></div>
+            </div>
+        </div>
+        <div class="action-section">
+            <button class="pay-now">Pay Now</button>
+            <button class="cancel">Cancel</button>
+        </div>
+    </div>
+</body>
+<script src="../javascript/booking.js"></script>
+</html>

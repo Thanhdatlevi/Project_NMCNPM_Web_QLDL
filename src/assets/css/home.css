@@ -34,7 +34,7 @@ a{
 }
 
 #main_nav {
-    background: linear-gradient(rgb(255, 255, 255), rgb(154, 219, 233));
+    background: rgba(255, 255, 255, 0);
     width: auto;
     display: flex;
     justify-content: space-between;
@@ -112,7 +112,7 @@ a{
 }
 
 #nav_button #login {
-    color: #fff;
+    color: #000;
     border-radius: 15px;
 }
 
@@ -445,6 +445,83 @@ footer {
     /* Bóng mạnh hơn khi hover */
     transform: scale(1.1);
     /* Tăng kích thước nút khi hover */
+}
+
+.hero {
+    postion: relative;
+    text-align: center;
+    //color: white;
+}
+
+.hero-image{
+    width: 80%;
+    height: auto;
+}
+
+.hero-content{
+    position: absolute;
+    top: 1500;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 30px;
+    space: 30px;
+}
+
+.hero-content h1{
+    font-size: 3rem;
+    margin-bottom: 10px;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.hero-content p{
+    margin-bottom: 20px;
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    grid-row: span 2;
+}
+
+.tag {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.tag.public {
+    background-color: #e9d8fd;
+    color: #6b46c1;
+}
+
+.tag.nature {
+    background-color: #c6f6d5;
+    color: #2f855a;
+}
+
+.tag.private {
+    background-color: #fed7d7;
+    color: #c53030;
+}
+
+.tag.business {
+    background-color: #fff5f5;
+    color: #dd6b20;
+}
+
+.tag.local {
+    background-color: #bee3f8;
+    color: #2b6cb0;
 }
 
 /* Danh sách địa điểm */
