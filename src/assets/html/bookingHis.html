@@ -1,2 +1,91 @@
-<h2>Booking History</h2>
-<p>Lịch sử đặt phòng...</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="bookingHistory" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0">
+    <title>Profile</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Volkhov' rel='stylesheet'>
+    <link rel="stylesheet" href="../Styles/Profile.css">
+
+</head>
+<body>
+
+    <main id="history">
+
+        <section class="tabs">
+            <button> Restaurant Booking </button>
+            <button class="active"> Hotel Booking </button>
+            <button> Tour Booking </button>
+        </section>
+
+        <section class="booking-list-history">
+
+            <div class="type-booking">
+                <h2> Hotel </h2>
+                <select>
+                    <option> Lastest Booking </option>
+                </select>
+            </div>
+
+            <div class="booking-information-container">
+
+                <div class="booking-card">
+                    <img src="../image/img_profile/hotels_history/muongthanh.jpg" alt="Hotel Image">
+                    <div class="booking-info">
+                        <h3> Mường Thanh </h3>
+                        <p><span>📍</span> Hồ Chí Minh, Việt Nam</p>
+                        <div class="check-info">
+                            <div>
+                                <p>CHECK IN</p>
+                                <p><strong>Fri 18 Aug 2024</strong></p>
+                            </div>
+                            <div>
+                                <p>CHECK OUT</p>
+                                <p><strong>Sun 20 Aug 2024</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-card">
+                    <img src="../image/img_profile/hotels_history/tinhyeu.jpg" alt="Hotel Image">
+                    <div class="booking-info">
+                        <h3> Khách sạn tình yêu </h3>
+                        <p><span>📍</span> KonTum, Việt Nam </p>
+                        <div class="check-info">
+                            <div>
+                                <p>CHECK IN</p>
+                                <p><strong>Wed 16 Aug 2024</strong></p>
+                            </div>
+                            <div>
+                                <p>CHECK OUT</p>
+                                <p><strong>Thu 17 Aug 2024</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-card">
+                    <img src="../image/img_profile/hotels_history/tinh1dem.jpg" alt="Hotel Image">
+                    <div class="booking-info">
+                        <h3> Tình 1 đêm </h3>
+                        <p><span>📍</span> Gia Lai, Việt Nam </p>
+                        <div class="check-info">
+                            <div>
+                                <p>CHECK IN</p>
+                                <p><strong>Tue 15 Aug 2024</strong></p>
+                            </div>
+                            <div>
+                                <p>CHECK OUT</p>
+                                <p><strong>Tue 15 Aug 2024</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+    </main>
+    <script src="./js_profile/containerBookingInformation.js"></script>
+</body>

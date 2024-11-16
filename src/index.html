@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0, user-scalable=yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0, user-scalable=yes">
     <title>Du lịch uy tín - không đa cấp</title>
     <link rel="stylesheet" href="./assets/css/home.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
-  <!-- Header -->
+    <!-- Header -->
     <header class="header-container">
         <nav id="main_nav">
 
             <div style="display: flex; justify-content: space-evenly; align-items: center;">
                 <a href="#!">
-                    <img src="./assets/image/logo.png" alt="logo"
-                    style=" width: 30px; height: 30px; 
+                    <img src="./assets/image/logo.png" alt="logo" style=" width: 30px; height: 30px; 
                             left: 10px; top: 10px;
-                            justify-self: flex-start;"/>
+                            justify-self: flex-start;" />
                 </a>
 
                 
@@ -35,13 +38,13 @@
                             <a href="./assets/html/form_travel_place.html" data-i18n="tour">Tour</a>
                         </div>
                         <div id="nav_button">
-                            <a href="#!" data-i18n="hotel">Khách sạn</a>
+                            <a href="./assets/html/searchService.html" data-i18n="hotel">Tra cứu dịch vụ</a>
                         </div>
                         <div id="nav_button">
                             <a href="#!" data-i18n="contact">Liên lạc</a>
                         </div>
-                        <div id="nav_button">
-                            <a href="#!" data-i18n="about_us">About us</a>
+                        <div id="nav_button" style="border-left: #000 solid 1px;">
+                            <a href="./assets/html/profile.html" data-i18n="about_us">About us</a>
                         </div>
                     </div>
                 </div>
@@ -54,11 +57,10 @@
                 <p id="nav_button">
                     <a href="#!" id="register">Register</a>
                 </p>
-                
-                <p id="nav_button" 
-                style=" background-color: #FFDA32;
-                        color: #000;
-                        border-radius: 5px;">
+
+                <p id="nav_button" style=" background-color: #313030;
+                        color: #fff;
+                        border-radius: 30px;">
                     <a href="#!" id="login">Login</a>
                 </p>
             </div>
@@ -71,7 +73,7 @@
             <div class="swiper-wrapper" id="slides">
 
             </div>
-            <div class="swiper-pagination"></div> 
+            <div class="swiper-pagination"></div>
             <div class="swiper-buttons">
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
@@ -79,9 +81,25 @@
         </section>
 
         <!-- list most visited place -->
+        <section class="hero">
+            <img src="../src/assets/duc/task1_tour_img/datlatnangsom.jpg" alt="dalat" class="hero-image">
+            <div class="hero-content flex">
+                <h1>Dalat</h1>
+                <p>Chào mừng các streamer đã đến với trải nghiệm bị con gái đì.</p>
+                <div class="tags">
+                    <span class="tag public"> Public Transportation </span>
+                    <span class="tag nature"> Nature & Adventure </span>
+                    <span class="tag private"> Private Transportation </span>
+                    <span class="tag business"> Business Tours </span>
+                    <span class="tag local"> Local Visit </span>
+                </div>
+            </div>
+        </section>
         <section class="listVistedPlace">
+
             <div style="font-size: 20; padding-top: 50; text-align: center;">
-                <h2 data-i18n="list most visited place" style="font-size: 30px; font-weight: 800; text-align: center; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; text-align: left; margin-left: 20px;">
+                <h2 data-i18n="list most visited place"
+                    style="font-size: 30px; font-weight: 800; text-align: center; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; text-align: left; margin-left: 20px;">
                     Best choice for travellers
                 </h2>
             </div>
@@ -93,7 +111,8 @@
                     <div class="framePlace">
                         <div>
                             <div style="display: flex; flex-direction: column; align-content: center; padding: 10px;">
-                                <img src="/src/assets/duc/task1_tour_img/task4.img1_halong.jpg" alt="tour_ha_long" width="220" height="200" object-fit: cover;/>
+                                <img src="/src/assets/duc/task1_tour_img/task4.img1_halong.jpg" alt="tour_ha_long"
+                                    width="220" height="200" object-fit: cover; />
                             </div>
                             <div class="place_content">
                                 <h4>
@@ -104,7 +123,7 @@
                                     <span class="tagView"> Most beautiful </span>
                                 </p>
                                 <p style="margin-top: 5px; color: #757575; ">
-                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.8 </span> 
+                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.8 </span>
                                     <span> (65,546) </span>
                                     <span> • 3M+ booked </span>
                                 </p>
@@ -114,23 +133,24 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!--Cao Bằng-->
                     <div class="framePlace">
                         <div>
                             <div style="display: flex; flex-direction: column; align-content: center; padding: 10px;">
-                                <img src="/src/assets/duc/task1_tour_img/task4.img2_caobang.jpg" alt="tour_cao_bang" width="220"  height="200"  object-fit: cover;/>
+                                <img src="/src/assets/duc/task1_tour_img/task4.img2_caobang.jpg" alt="tour_cao_bang"
+                                    width="220" height="200" object-fit: cover; />
                             </div>
                             <div class="place_content">
                                 <h4>
                                     Cao Bang
                                 </h4>
                                 <p style="margin-top: 10px;">
-                                    <span class="tagView"> Sale-off </span> ,     
+                                    <span class="tagView"> Sale-off </span> ,
                                     <span class="tagView"> Best-seller </span>
                                 </p>
                                 <p style="margin-top: 5px; color: #757575;">
-                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.7 </span> 
+                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.7 </span>
                                     <span> (17,899) </span>
                                     <span> • 500K+ booked </span>
                                 </p>
@@ -140,23 +160,24 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!--Phú Quốc-->
                     <div class="framePlace">
                         <div>
                             <div style="display: flex; flex-direction: column; align-content: center; padding: 10px;">
-                                <img src="/src/assets/duc/task1_tour_img/task4.img3_phuquoc.jpg" alt="tour_phu_quoc" width="220"  height="200" object-fit: cover;/>
+                                <img src="/src/assets/duc/task1_tour_img/task4.img3_phuquoc.jpg" alt="tour_phu_quoc"
+                                    width="220" height="200" object-fit: cover; />
                             </div>
                             <div class="place_content">
                                 <h4>
                                     Phu Quoc
                                 </h4>
-                                <p style="margin-top: 10px;">  
+                                <p style="margin-top: 10px;">
                                     <span class="tagView"> Best-seller </span>,
                                     <span class="tagView"> All in one </span>
                                 </p>
                                 <p style="margin-top: 5px; color: #757575;">
-                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.8 </span> 
+                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.8 </span>
                                     <span> (169,892) </span>
                                     <span> • 5M+ booked </span>
                                 </p>
@@ -166,23 +187,24 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!--Hội An-->
                     <div class="framePlace">
                         <div>
                             <div style="display: flex; flex-direction: column; align-content: center; padding: 10px;">
-                                <img src="/src/assets/duc/task1_tour_img/task4.img4_hoian.jpg" alt="tour_hoi_an" width="220"  height="200" object-fit: cover;/>
+                                <img src="/src/assets/duc/task1_tour_img/task4.img4_hoian.jpg" alt="tour_hoi_an"
+                                    width="220" height="200" object-fit: cover; />
                             </div>
                             <div class="place_content">
                                 <h4>
                                     Hoi An
                                 </h4>
                                 <p style="margin-top: 10px;">
-                                    <span class="tagView"> Best-seller </span> ,     
+                                    <span class="tagView"> Best-seller </span> ,
                                     <span class="tagView"> Old cuture </span>
                                 </p>
                                 <p style="margin-top: 5px; color: #757575;">
-                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.3 </span> 
+                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.3 </span>
                                     <span> (3,047) </span>
                                     <span> • 60K+ booked </span>
                                 </p>
@@ -192,23 +214,24 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!--Đà Lạt-->
                     <div class="framePlace">
                         <div>
                             <div style="display: flex; flex-direction: column; align-content: center; padding: 10px;">
-                                <img src="/src/assets/duc/task1_tour_img/task4.img5_dalat.jpg" alt="tour_da_lat" width="220"  height="200" object-fit: cover;/>
+                                <img src="/src/assets/duc/task1_tour_img/task4.img5_dalat.jpg" alt="tour_da_lat"
+                                    width="220" height="200" object-fit: cover; />
                             </div>
                             <div class="place_content">
                                 <h4>
                                     Da Lat
                                 </h4>
                                 <p style="margin-top: 10px;">
-                                    <span class="tagView"> Best-seller </span> ,     
+                                    <span class="tagView"> Best-seller </span> ,
                                     <span class="tagView"> Chill night vibes </span>
                                 </p>
                                 <p style="margin-top: 5px; color: #757575;">
-                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.9 </span> 
+                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.9 </span>
                                     <span> (60,614) </span>
                                     <span> • 1M+ booked </span>
                                 </p>
@@ -218,23 +241,24 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!--Hà Giang-->
                     <div class="framePlace">
                         <div>
                             <div style="display: flex; flex-direction: column; align-content: center; padding: 10px;">
-                                <img src="/src/assets/duc/task1_tour_img/task4.img6_hagiang.jpg" alt="tour_ha_giang" width="220"  height="200" object-fit: cover;/>
+                                <img src="/src/assets/duc/task1_tour_img/task4.img6_hagiang.jpg" alt="tour_ha_giang"
+                                    width="220" height="200" object-fit: cover; />
                             </div>
                             <div class="place_content">
                                 <h4>
                                     Ha Giang
                                 </h4>
                                 <p style="margin-top: 10px;">
-                                    <span class="tagView"> Sale-off </span> ,     
+                                    <span class="tagView"> Sale-off </span> ,
                                     <span class="tagView"> Keep it real </span>
                                 </p>
                                 <p style="margin-top: 5px; color: #757575;">
-                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.8 </span> 
+                                    <span style="color: #f09b0a; font-weight: bold;"> ★ 4.8 </span>
                                     <span> (1.557) </span>
                                     <span> • 20K+ booked </span>
                                 </p>
@@ -247,117 +271,97 @@
                 </div>
             </div>
         </section>
-
-
-        <!-- Voucher -->
     
-        <section id="voucher">
-            <h2 data-i18n="voucher">
-                Voucher
-            </h2>
-            <div id="vou">
-                <div class="vou_detail">
-                    <h3 data-i18n="vou_res">
-                        Voucher nhà hàng
-                    </h3>
-                    <div class="list_vou">
-                            <div class="vou_entity">
-                                <img src="./assets/image/voucher_res1.jpg" alt="">
-                                <p class="expire_vou">Deal tháng 10</p>
-                                <div class="inf">
-                                    <p><b>Đà Lạt-Sài Gònhotel</b></p>
-                                    <p>Giảm: 5%</p>
-                                </div>
+        <section id="aboutUs">
+            <div class="container">
+                <img src="./assets/image/Hà Nội/image7.jpg" alt="" id="img1">
+                <img src="./assets/image/Đà Nẵng - Huế - Hội An/image5.jpg" alt="" id="img2">
+                <div class="content">
+                    <h2 class="main_title">About us</h2>
+                    <p class="main_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum illo necessitatibus rem adipisci iste accusamus, fugit quae sit? Placeat tempora, accusamus ipsam praesentium deserunt quod quis hic inventore tempore sed.</p>
+                    <div class="list_benifit">
+                        <div>
+                            <div>
+                                <i class="fa-solid fa-circle-right"></i>
+                                <span>Personalized Service</span>
                             </div>
-                            <div class="vou_entity">
-                                <img src="./assets/image/voucher_res2.jpg" alt="">
-                                <p class="expire_vou">Deal tháng 10</p>
-                                <div class="inf">
-                                    <p><b>Sam hotel</b></p>
-                                    <p>Giảm: 5%</p>
-                                </div>
+                            <div>
+                                <i class="fa-solid fa-circle-right"></i>
+                                <span>Best price</span>
                             </div>
-                            <div class="vou_entity">
-                                <img src="./assets/image/voucher_res3.jpg" alt="">
-                                <p class="expire_vou">Deal tháng 10</p>
-                                <div class="inf">
-                                    <p><b>TTC hotel</b></p>
-                                    <p>Giảm: 5%</p>
-                                </div>
+                        </div>
+                        <div>
+                            <div>
+                                <i class="fa-solid fa-circle-right"></i>
+                                <span>24x7 Support</span>
                             </div>
+                            <div>
+                                <i class="fa-solid fa-circle-right"></i>
+                                <span>Trusted company</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="vou_detail">
-                    <h3 data-i18n="vou_tour">
-                        Voucher tour
-                    </h3>
-                    <div class="list_vou">
-                            <div class="vou_entity">
-                                <img src="./assets/image/voucher_tour1.jpg" alt="">
-                                <p class="expire_vou">Deal tháng 10</p>
-                                <div class="inf">
-                                    <p><b>Đà Lạt-Sài Gòn hotel</b></p>
-                                    <p>Giảm: 5%</p>
-                                </div>
-                            </div>
-                            <div class="vou_entity">
-                                <img src="./assets/image/voucher_tour2.jpg" alt="">
-                                <p class="expire_vou">Deal tháng 10</p>
-                                <div class="inf">
-                                    <p><b>Sam hotel</b></p>
-                                    <p>Giảm: 5%</p>
-                                </div>
-                            </div>
-                            <div class="vou_entity">
-                                <img src="./assets/image/voucher_tour3.jpg" alt="">
-                                <p class="expire_vou">Deal tháng 10</p>
-                                <div class="inf">
-                                    <p><b>TTC hotel</b></p>
-                                    <p>Giảm: 5%</p>
-                                </div>
-                            </div>
-                    </div>
+                    <a href="#!">Explore now</a>
                 </div>
             </div>
         </section>
+        <section id="featureFacility">
+            <h2>Feature Booking Facility</h2>
+            <div class="container">
+                <a href="#!" class="bookRes ele">
+                    <div>
+                        <h3>Book Restaurant</h3>
+                        <p>123+ Restaurant</p>
+                    </div>
+                </a>
+                <a href="#!" class="bookHol ele">
+                    <div>
+                        <h3>Book Hotel</h3>
+                        <p>123+ Hotel</p>
+                    </div>
+                </a>
+                <a href="" class="bookTic ele">
+                    <div>
+                        <h3>Book ticket</h3>
+                        <p>123+ Attraction</p>
+                    </div>
+                </a>
+            </div>
+        </section>
     </main>
-  
+
     <!--  Footer  -->
     <footer>
         <div class="footer">
-            <div class ="blank">
+            <div class="blank">
                 <div class="footer-home">
-                    <a href = "#"><i class='bx bx-home' ></i> </a>
+                    <a href="#"><i class='bx bx-home'></i> </a>
                 </div>
             </div>
             <div class="col-1">
                 <h3>ITISE</h3>
                 <p data-i18n="description">Sản phẩm đầu tiên của ITISE.</p>
-
-                <div class="footer-search">
-                    <input type="text" placeholder="Search"/>
-                </div>
+                <div id="map"></div>
             </div>
             <div class=" col-2">
                 <h3 data-i18n="contact">Contact</h3>
-                <div class = "footer-address">
+                <div class="footer-address">
                     <i class='bx bxs-map'></i>
                     <span data-i18n="address">127 Nguyen Van Cu, District 5, HCMC</span>
                 </div>
-                <div class = "footer-phone">
+                <div class="footer-phone">
                     <i class='bx bxs-phone'></i>
                     <span data-i18n="phone">0123456789</span>
                 </div>
-                <div class = "footer-email">
+                <div class="footer-email">
                     <i class='bx bxs-envelope'></i>
                     <span data-i18n="email">itise@gmail.com</span>
                 </div>
                 <div class="social-icons">
-                    <a href = "#"><i class='bx bxl-facebook'></i></a>
-                    <a href = "#"><i class='bx bxl-instagram' ></i></a>
-                    <a href = "#"><i class='bx bxl-linkedin' ></i></a>
-                    <a href = "#"><i class='bx bxl-gmail' ></i></a>
+                    <a href = "#" class="facebook-icon"><i class='bx bxl-facebook'></i></a>
+                    <a href = "#" class="ins-icon"><i class='bx bxl-instagram' ></i></a>
+                    <a href = "#" class="linkedin-icon"><i class='bx bxl-linkedin' ></i></a>
+                    <a href = "#" class="gmail-icon"><i class='bx bxl-gmail' ></i></a>
                 </div>
             </div>
             <div class="col-3">
@@ -375,5 +379,6 @@
     <script src="./assets/javascript/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="assets/javascript/home.js"></script> 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </div>
