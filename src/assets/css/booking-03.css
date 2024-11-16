@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+    font-family:popins, sans-serif;
+   
+}
+
+body {
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+.blank0{
+    flex-basis: 25%;
+}
+.blank{
+    flex-basis: 10%;
+}
+.booking-container {
+    width: 1440px;
+    height: 900px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.booking-header img {
+    margin-top: 21px;
+    margin-bottom: 30px;
+    width: 112px;
+    height: 40px;
+}
+.booking-header{
+    border-bottom: #E5E5E5;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+.booking-info .booking-content h2 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #152C5B;
+}
+
+.booking-info .booking-content p {
+    font-size: 18px;
+    color: #B0B0B0;
+    font-weight: 300;
+}
+.progress-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 51px;    
+}
+.progress-line {
+    width: 50px;
+    height: 3px;
+    background-color: #e0e0e0;
+  }
+.progress-line.completed {
+    background-color: #1ABC9C;
+  }
+.progress-indicator .completed-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1ABC9C;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 32px;
+}
+
+.progress-indicator .inactive-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    color: #666;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: 300;
+}
+.booking-info .image-status img {
+    width: 362px;
+    height: 330px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+.booking-info .message p {
+    font-size: 18px;
+    color: #3252DF;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+.action-section{
+    margin-top: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.action-section .back-dashboard {
+    color: #B0B0B0;
+    background-color: #ffffff;
+    font-weight: 500;
+    font-size: 16px;
+}
+.action-section button{
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 16px;
+
+}
+.action-section button:hover{
+    border-color: #B3CDE0;
+    box-shadow: 0 0 10px #B3CDE0;
+}

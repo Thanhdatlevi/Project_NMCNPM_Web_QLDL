@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="./assets/css/home.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -32,13 +33,13 @@
                             <a href="./assets/html/form_travel_place.html" data-i18n="tour">Tour</a>
                         </div>
                         <div id="nav_button">
-                            <a href="#!" data-i18n="hotel">Khách sạn</a>
+                            <a href="./assets/html/searchService.html" data-i18n="hotel">Tra cứu dịch vụ</a>
                         </div>
                         <div id="nav_button" style="border-left: #000 solid 1px;">
                             <a href="#!" data-i18n="contact">Liên lạc</a>
                         </div>
                         <div id="nav_button" style="border-left: #000 solid 1px;">
-                            <a href="#!" data-i18n="about_us">About us</a>
+                            <a href="./assets/html/profile.html" data-i18n="about_us">About us</a>
                         </div>
                     </div>
                 </div>
@@ -268,78 +269,61 @@
                 </div>
             </div>
         </section>
-
-
-        <!-- Voucher -->
-
-        <section id="voucher">
-            <h2 data-i18n="voucher">
-                Voucher
-            </h2>
-            <div id="vou">
-                <div class="vou_detail">
-                    <h3 data-i18n="vou_res">
-                        Voucher nhà hàng
-                    </h3>
-                    <div class="list_vou">
-                        <div class="vou_entity">
-                            <img src="./assets/image/voucher_res1.jpg" alt="">
-                            <p class="expire_vou">Deal tháng 10</p>
-                            <div class="inf">
-                                <p><b>Đà Lạt-Sài Gònhotel</b></p>
-                                <p>Giảm: 5%</p>
+    
+        <section id="aboutUs">
+            <div class="container">
+                <img src="./assets/image/Hà Nội/image7.jpg" alt="" id="img1">
+                <img src="./assets/image/Đà Nẵng - Huế - Hội An/image5.jpg" alt="" id="img2">
+                <div class="content">
+                    <h2 class="main_title">About us</h2>
+                    <p class="main_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum illo necessitatibus rem adipisci iste accusamus, fugit quae sit? Placeat tempora, accusamus ipsam praesentium deserunt quod quis hic inventore tempore sed.</p>
+                    <div class="list_benifit">
+                        <div>
+                            <div>
+                                <i class="fa-solid fa-circle-right"></i>
+                                <span>Personalized Service</span>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-circle-right"></i>
+                                <span>Best price</span>
                             </div>
                         </div>
-                        <div class="vou_entity">
-                            <img src="./assets/image/voucher_res2.jpg" alt="">
-                            <p class="expire_vou">Deal tháng 10</p>
-                            <div class="inf">
-                                <p><b>Sam hotel</b></p>
-                                <p>Giảm: 5%</p>
+                        <div>
+                            <div>
+                                <i class="fa-solid fa-circle-right"></i>
+                                <span>24x7 Support</span>
                             </div>
-                        </div>
-                        <div class="vou_entity">
-                            <img src="./assets/image/voucher_res3.jpg" alt="">
-                            <p class="expire_vou">Deal tháng 10</p>
-                            <div class="inf">
-                                <p><b>TTC hotel</b></p>
-                                <p>Giảm: 5%</p>
+                            <div>
+                                <i class="fa-solid fa-circle-right"></i>
+                                <span>Trusted company</span>
                             </div>
                         </div>
                     </div>
+                    <a href="#!">Explore now</a>
                 </div>
-
-                <div class="vou_detail">
-                    <h3 data-i18n="vou_tour">
-                        Voucher tour
-                    </h3>
-                    <div class="list_vou">
-                        <div class="vou_entity">
-                            <img src="./assets/image/voucher_tour1.jpg" alt="">
-                            <p class="expire_vou">Deal tháng 10</p>
-                            <div class="inf">
-                                <p><b>Đà Lạt-Sài Gòn hotel</b></p>
-                                <p>Giảm: 5%</p>
-                            </div>
-                        </div>
-                        <div class="vou_entity">
-                            <img src="./assets/image/voucher_tour2.jpg" alt="">
-                            <p class="expire_vou">Deal tháng 10</p>
-                            <div class="inf">
-                                <p><b>Sam hotel</b></p>
-                                <p>Giảm: 5%</p>
-                            </div>
-                        </div>
-                        <div class="vou_entity">
-                            <img src="./assets/image/voucher_tour3.jpg" alt="">
-                            <p class="expire_vou">Deal tháng 10</p>
-                            <div class="inf">
-                                <p><b>TTC hotel</b></p>
-                                <p>Giảm: 5%</p>
-                            </div>
-                        </div>
+            </div>
+        </section>
+        <section id="featureFacility">
+            <h2>Feature Booking Facility</h2>
+            <div class="container">
+                <a href="#!" class="bookRes ele">
+                    <div>
+                        <h3>Book Restaurant</h3>
+                        <p>123+ Restaurant</p>
                     </div>
-                </div>
+                </a>
+                <a href="#!" class="bookHol ele">
+                    <div>
+                        <h3>Book Hotel</h3>
+                        <p>123+ Hotel</p>
+                    </div>
+                </a>
+                <a href="" class="bookTic ele">
+                    <div>
+                        <h3>Book ticket</h3>
+                        <p>123+ Attraction</p>
+                    </div>
+                </a>
             </div>
         </section>
     </main>
@@ -355,10 +339,7 @@
             <div class="col-1">
                 <h3>ITISE</h3>
                 <p data-i18n="description">Sản phẩm đầu tiên của ITISE.</p>
-
-                <div class="footer-search">
-                    <input type="text" placeholder="Search" />
-                </div>
+                <div id="map"></div>
             </div>
             <div class=" col-2">
                 <h3 data-i18n="contact">Contact</h3>
@@ -375,10 +356,10 @@
                     <span data-i18n="email">itise@gmail.com</span>
                 </div>
                 <div class="social-icons">
-                    <a href="#"><i class='bx bxl-facebook'></i></a>
-                    <a href="#"><i class='bx bxl-instagram'></i></a>
-                    <a href="#"><i class='bx bxl-linkedin'></i></a>
-                    <a href="#"><i class='bx bxl-gmail'></i></a>
+                    <a href = "#" class="facebook-icon"><i class='bx bxl-facebook'></i></a>
+                    <a href = "#" class="ins-icon"><i class='bx bxl-instagram' ></i></a>
+                    <a href = "#" class="linkedin-icon"><i class='bx bxl-linkedin' ></i></a>
+                    <a href = "#" class="gmail-icon"><i class='bx bxl-gmail' ></i></a>
                 </div>
             </div>
             <div class="col-3">
@@ -395,6 +376,7 @@
     </footer>
     <script src="./assets/javascript/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="assets/javascript/home.js"></script>
+    <script src="assets/javascript/home.js"></script> 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </div>
