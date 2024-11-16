@@ -16,7 +16,10 @@ body{
 section {
     margin: 150px 0px;
 }
-
+a{
+    text-decoration: none;
+    color: #fff;
+}
 /* nav bar */
 .header-container {
     display: flex;
@@ -293,117 +296,91 @@ footer {
     transition: 0.3s;
 }
 
-/* Voucher */
-#voucher {
-    /* background-color: rgb(228, 245, 246); */
-    padding: 50px 0px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+/* About Us */
+#aboutUs{
+    margin: 200px 0;
 }
-
-#voucher h2 {
-    text-align: center;
-    font-size: 50px;
-    font-weight: 800;
-}
-
-#vou {
+#aboutUs .container{
     display: flex;
-    gap: 150px;
-    flex-direction: column;
-    margin-top: 80px;
-}
-
-.vou_detail {
-    display: flex;
-    justify-content: space-between;
-    background: #c0c0aa;
-    background: -webkit-linear-gradient(to right, #6ee9f2 5%, #fb800c 95%);
-    background: linear-gradient(to right, #0c34a2 5%, #fb800c 95%);
-
-    margin: 0px auto;
+    width: 85vw;
+    margin: auto;
+    gap: 40px;
+    padding: 0 85px;
     align-items: center;
-    width: 60%;
-    height: 150px;
-
-    border: 2px solid rgb(201, 109, 4);
-    border-radius: 8px;
-}
-
-#vou h3 {
+    background-color: #6497b1;
+    height: 45vh;
+    border-radius: 40px;
     color: #fff;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 40px;
-    text-align: center;
-
-    width: 230px;
-    padding: 16px 60px;
 }
-
-.list_vou {
+#aboutUs .container .main_title{
+    font-size: 40px;
+}
+#aboutUs .container p,span{
+    line-height: 25px;
+}
+#aboutUs .container .content{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    gap: 2px;
-    width: 75%;
+    height: 100%;
+    padding: 2% 0;
+}
+#aboutUs .container #img1{
+    width: 34%;
+    height: 65vh;
+    border: #fff 10px solid;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px #ccc;
+}
+#aboutUs .container #img2{
+    width: 22%;
+    height: 56vh;
+    border: #fff 9px solid;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px #ccc;
+}
+#aboutUs .container .list_benifit{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.list_vou a {
-    width: 35%;
-}
-
-.vou_entity {
-
-    width: 190px;
-    height: 240px;
-    line-height: 30px;
+#aboutUs .container a{
+    padding: 10px 10px;
     background-color: #fff;
-
-    border: 2px solid rgb(60, 60, 70);
-    border-radius: 5px;
-
-    box-shadow: 5px 5px #424242;
-    cursor: pointer;
+    color: #000;
+    display: inline;
+    text-align: center;
+    width: 40%;
 }
-
-.vou_entity:hover {
-    width: 200px;
-    transition: width 0.5s ease 0.0001s;
+#featureFacility{
+    width: 85vw;
+    margin: 200px auto;
 }
-
-
-#voucher .list_vou img {
-    width: 100%;
-    height: 114px;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+#featureFacility h2{
+    font-size: 40px;
+    margin-bottom: 20px;
 }
-
-#voucher .list_vou .expire_vou {
-    background-color: #0a8bb2;
+#featureFacility .container{
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    height: 50vh;
+}
+#featureFacility .container .ele{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+    background: url(../image/TP_HCM/image8.jpg) no-repeat;
+    color: #fff;
+    border-radius: 20px;
+    border: 10px solid #aaa;
+    line-height: 30px;
     text-align: center;
 }
-
-
-#voucher .list_vou .inf {
-    margin-left: 10px;
-}
-
-#voucher .list_vou p {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-#voucher a {
-    text-decoration: none;
-    color: #000;
-}
-
 .swiper-container {
     background-color: rgba(160, 215, 236, 0.815);
     width: 100%;
@@ -556,42 +533,6 @@ footer {
         
         white-space: nowrap;
     }
-    #vou {
-        flex-direction: column;
-        align-items: center;
-        gap: 100px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    #vou h3 {
-        color: #fff;
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 40px;
-
-        width: 150px;
-        padding: 16px;
-    }
-
-    .vou_detail {
-        width: 90%;
-        margin-bottom: 20px;
-    }
-
-    .list_vou {
-        width: 80%;
-    }
-
-    .vou_entity {
-        max-width: 30%;
-
-    }
-
-    .vou_entity:hover {
-        max-width: 32%;
-    }
 
     .footer {
         display: flex;
@@ -654,40 +595,6 @@ footer {
         font-weight: bold;
         
         white-space: nowrap;
-    }
-    #vou {
-        flex-direction: column;
-        align-items: center;
-        gap: 100px;
-        width: 100vw;
-    }
-
-    #vou h3 {
-        color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 40px;
-
-        width: 170px;
-        padding: 16px;
-    }
-
-    .vou_detail {
-        width: 98%;
-        margin-bottom: 20px;
-    }
-
-    .list_vou {
-        width: 80%;
-    }
-
-    .vou_entity {
-        max-width: 30%;
-
-    }
-
-    .vou_entity:hover {
-        max-width: 35%;
     }
 }
 
