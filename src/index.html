@@ -5,96 +5,60 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0, user-scalable=yes">
     <title>Du lịch uy tín - không đa cấp</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/home.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-    <!-- Header -->
+
     <header class="header-container">
-        <nav id="main_nav">
-
-            <div style="display: flex; justify-content: space-evenly; align-items: center;">
-                <a href="#!">
-                    <img src="./assets/image/logo.png" alt="logo" style=" width: 30px; height: 30px; 
-                            left: 10px; top: 10px;
-                            justify-self: flex-start;" />
+        <nav id="nav">
+            <div class="logo-container">
+                <a href="./index.html" class="logo-link">
+                    <img src="./assets/image/logoITISE.png" class="logo-image" alt="logITISE">
                 </a>
-
-                
-
             </div>
 
-            <div id="login_register">
-                <div style="display: flex;">
-                    <p id="nav_button">
-                        <a href="#!" data-i18n="place">Địa điểm du lịch</a>
-                    </p>
-                    <div id="nav">
-                        <div id="nav_button">
-                            <a href="./assets/html/form_travel_place.html" data-i18n="tour">Tour</a>
-                        </div>
-                        <div id="nav_button">
-                            <a href="./assets/html/searchService.html" data-i18n="hotel">Tra cứu dịch vụ</a>
-                        </div>
-                        <div id="nav_button">
-                            <a href="#!" data-i18n="contact">Liên lạc</a>
-                        </div>
-                        <div id="nav_button" style="border-left: #000 solid 1px;">
-                            <a href="./assets/html/profile.html" data-i18n="about_us">About us</a>
-                        </div>
-                    </div>
+            <!-- Nút menu cho màn hình nhỏ -->
+            <!-- Nút menu cho màn hình nhỏ -->
+            <button id="menu-toggle" class="menu-button" aria-label="Toggle Menu">
+                <img src="./assets/image/list-button.png" alt="Menu" class="menu-icon">
+            </button>
+
+            <ul class="nav-list">
+                <li><a href="#" class="nav-item">Home</a></li>
+                <li><a href="#" class="nav-item">Địa điểm du lịch</a></li>
+                <li><a href="./assets/html/form_travel_place.html" class="nav-item">Tours</a></li>
+                <li><a href="./assets/html/searchService.html" class="nav-item">Cơ sở dịch vụ</a></li>
+                <li><a href="./assets/html/profile.html" class="nav-item">Giới thiệu</a></li>
+                <li><a href="#" class="nav-item">Liên lạc</a></li>
+            </ul>
+
+            <div class="nav-button-list">
+                <div class="switch">
+                    <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox"
+                        onchange="setLanguage()">
+                    <label for="language-toggle"></label>
+                    <span class="on">VI</span>
+                    <span class="off">EN</span>
                 </div>
-
-                <select id="language" name="language" onchange="setLanguage()" style="width: 70px;">
-                    <option value="" disabled selected>Lang</option>
-                    <option value="vi">Vi</option>
-                    <option value="en">En</option>
-                </select>
-                <p id="nav_button">
-                    <a href="#!" id="register">Register</a>
-                </p>
-
-                <p id="nav_button" style=" background-color: #313030;
-                        color: #fff;
-                        border-radius: 30px;">
-                    <a href="#!" id="login">Login</a>
-                </p>
+                <a href="./assets/html/login.html" class="button bg-user-icon">
+                    <span class="sr-only">User</span>
+                </a>
             </div>
+
         </nav>
     </header>
 
     <main>
         <!-- Slider -->
-        <section class="swiper-container">
-            <div class="swiper-wrapper" id="slides">
+        <div class="slider-bg">
+            <h1 class="slider-title">Welcome</h1>
+        </div>
 
-            </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-buttons">
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        </section>
-
-        <!-- list most visited place -->
-        <section class="hero">
-            <img src="../src/assets/duc/task1_tour_img/datlatnangsom.jpg" alt="dalat" class="hero-image">
-            <div class="hero-content flex">
-                <h1>Dalat</h1>
-                <p>Chào mừng các streamer đã đến với trải nghiệm bị con gái đì.</p>
-                <div class="tags">
-                    <span class="tag public"> Public Transportation </span>
-                    <span class="tag nature"> Nature & Adventure </span>
-                    <span class="tag private"> Private Transportation </span>
-                    <span class="tag business"> Business Tours </span>
-                    <span class="tag local"> Local Visit </span>
-                </div>
-            </div>
-        </section>
         <section class="listVistedPlace">
 
             <div style="font-size: 20; padding-top: 50; text-align: center;">
@@ -271,14 +235,16 @@
                 </div>
             </div>
         </section>
-    
+
         <section id="aboutUs">
             <div class="container">
-                <img src="./assets/image/Hà Nội/image7.jpg" alt="" id="img1">
-                <img src="./assets/image/Đà Nẵng - Huế - Hội An/image5.jpg" alt="" id="img2">
+                <img src="./assets/image/girl1_aboutUs.jpg" alt="" id="img1">
+                <img src="./assets/image/man1_aboutUs.jpg" alt="" id="img2">
                 <div class="content">
                     <h2 class="main_title">About us</h2>
-                    <p class="main_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum illo necessitatibus rem adipisci iste accusamus, fugit quae sit? Placeat tempora, accusamus ipsam praesentium deserunt quod quis hic inventore tempore sed.</p>
+                    <p class="main_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum illo
+                        necessitatibus rem adipisci iste accusamus, fugit quae sit? Placeat tempora, accusamus ipsam
+                        praesentium deserunt quod quis hic inventore tempore sed.</p>
                     <div class="list_benifit">
                         <div>
                             <div>
@@ -305,6 +271,7 @@
                 </div>
             </div>
         </section>
+
         <section id="featureFacility">
             <h2>Feature Booking Facility</h2>
             <div class="container">
@@ -338,6 +305,7 @@
                     <a href="#"><i class='bx bx-home'></i> </a>
                 </div>
             </div>
+
             <div class="col-1">
                 <h3>ITISE</h3>
                 <p data-i18n="description">Sản phẩm đầu tiên của ITISE.</p>
@@ -358,10 +326,10 @@
                     <span data-i18n="email">itise@gmail.com</span>
                 </div>
                 <div class="social-icons">
-                    <a href = "#" class="facebook-icon"><i class='bx bxl-facebook'></i></a>
-                    <a href = "#" class="ins-icon"><i class='bx bxl-instagram' ></i></a>
-                    <a href = "#" class="linkedin-icon"><i class='bx bxl-linkedin' ></i></a>
-                    <a href = "#" class="gmail-icon"><i class='bx bxl-gmail' ></i></a>
+                    <a href="#" class="facebook-icon"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="ins-icon"><i class='bx bxl-instagram'></i></a>
+                    <a href="#" class="linkedin-icon"><i class='bx bxl-linkedin'></i></a>
+                    <a href="#" class="gmail-icon"><i class='bx bxl-gmail'></i></a>
                 </div>
             </div>
             <div class="col-3">
@@ -376,9 +344,10 @@
             </div>
         </div>
     </footer>
-    <script src="./assets/javascript/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="assets/javascript/home.js"></script> 
+    <!-- <script src="./assets/javascript/index.js"></script> -->
+    <script src="assets/javascript/home.js"></script>
+    <script src="assets/javascript/nav.js"></script>
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </div>
