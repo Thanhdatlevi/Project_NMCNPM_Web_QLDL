@@ -117,153 +117,86 @@ section {
 
 footer {
     display: flex;
+    background: #2d3e52;
+    font-family: poppins;
 }
-
 .footer {
     margin-top: auto;
     width: 100%;
     padding: 32px 0;
-    background: #13253F;
-    color: #efefef;
+    color: #ffffff;
     display: flex;
     position: relative;
+    justify-content: space-between;
+    gap: 20px;
 }
-
-.footer div h3 {
-    color: #ffffff;
-    font-size: 1.5rem;
+.footer h3 {
+    display: inline-block;
+    font-size: 22px;
     font-weight: 600;
-    margin-bottom: 16px;
-    position: relative;
-    z-index: 2;
+    color: white;
+}
+.footer p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: white;
+    margin-bottom: 20px;
+}
+.footer ul{
+    list-style: none;
+    padding: 0;
+}
+.footer ul li {
+    margin-bottom: 10px;
+}
+.footer ul li a {
+    color: white;
+    text-decoration:none;
+    font-size: 14px;
 }
 
 .blank {
     flex: 1;
-    text-align: left;
     flex-basis: 15%;
     display: flex;
     flex-direction: column;
-    justify-content: top;
-    align-items: center;
 }
 
-.blank .footer-home {
-    display: flex;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    justify-items: center;
-}
-
-.blank .footer-home a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 80px;
-    font-size: 40px;
-    border-radius: 50%;
-    background: transparent;
-    border: #ffffff 4px solid;
-    color: #b7b7b7;
-    margin: 0 0.4rem;
-    transition: .6s;
-}
-
-.blank .footer-home a:hover {
-    color: #969696;
-    background: #dad7d7;
-
-}
-
-.col-1 {
+.footer .about-us {
     flex: 1;
     text-align: left;
-    flex-basis: 25%;
+    flex-basis: 17.5%;
 
 }
-
-.col-1 p {
-    text-align: bottom;
-    font-size: 1.1rem;
-
-}
-
-.col-1 h3 {
-    display: inline-block;
-    border-bottom: 2px solid #ffffff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    font-family: 'raleway', sans-serif;
-    font-style: italic;
-    letter-spacing: 2.5px;
-}
-
-.col-1 .footer-search input {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 60%;
-    padding: 8px 16px;
-    border-radius: 12px;
-    border: 2px solid #bad1db;
-    outline: none;
-    margin-right: 16px;
-    color: #ffffff;
-    background-color: transparent;
-
-}
-
-.col-1 .footer-search ::placeholder {
-    color: #ffffff;
-}
-
-.col-2 h3 {
-    display: inline-block;
-    border-bottom: 2px solid #ffffff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-.col-2 {
-    flex: 1;
-    text-align: left;
-    flex-basis: 25%;
-}
-
-.col-2 a {
-    text-decoration: none;
-    color: #efefef;
-    display: block;
-    margin-bottom: 10px;
-
-}
-
-.col-2 span {
-    line-height: 2;
-    font-size: 1.1rem;
-}
-
-.col-2 .social-icons {
+.underline {
+    width: 30%;
+    height: 2px; 
+    background-color: #ffffff; 
+    border: none; 
+    font-weight: 700;
+    margin: 16px 0 16px 0; 
+  }
+.footer .about-us .social-icons {
     display: flex;
     margin-top: 16px;
     justify-content: left;
     align-items: center;
-
 }
-.col-2 .social-icons .facebook-icon{
+.footer .about-us .social-icons .facebook-icon{
     background-color: #3b5998;
 }
-.col-2 .social-icons .ins-icon{
+.footer .about-us .social-icons .ins-icon{
     background-color: #C23772;
 }
-.col-2 .social-icons .linkedin-icon {
+.footer .about-us .social-icons .linkedin-icon {
     background-color: #0077B5; 
 }
-.col-2 .social-icons .gmail-icon {
+.footer .about-us .social-icons .gmail-icon {
     background-color: #D14836; 
 }
-.col-2 .social-icons a {
+.footer .about-us .social-icons a {
     display: inline-flex;
+    text-decoration: none;
     justify-content: center;
     align-items: center;
     width: 2.5rem;
@@ -277,32 +210,68 @@ footer {
 
 }
 
-.col-2 .social-icons a:hover {
+.footer .about-us .social-icons a:hover {
     color: #969696;
     background: #dad7d7;
 }
 
-.col-3 {
+
+.footer .quick-links {
     flex: 1;
     text-align: left;
-    flex-basis: 35%;
+    flex-basis: 17.5%;
+}
+.footer .quick-links li::before {
+    content: "— ";
+    color: #ffffff;
+    margin-right: 5px;
 }
 
-.col-3 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.instagram {
+    flex: 1;
+    text-align: left;
+    flex-basis: 17.5%;
+}
+.footer .instagram .instagram-gallery {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 4px;
 }
 
-.col-3 .gallery img {
-    width: calc(100% / 3 - 20px);
-    height: 96px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin: 10px;
-    transition: 0.3s;
+.footer .instagram .instagram-gallery img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
 }
-
+.footer .newsletter{
+    flex: 1;
+    text-align: left;
+    flex-basis: 17.5%;
+}
+.footer .newsletter form{
+    margin-top: 10px;
+}
+.footer .newsletter input{
+    padding: 10px;
+    width: 70%;
+    border: none;
+    border-radius: 16px;
+    margin-right: 10px;
+}
+.footer .newsletter button{
+    margin-top: 12px;
+    padding: 14px 20px;
+    border: none;
+    background-color:white;
+    border-color:#00A9FF 2px solid;
+    color: #03acd2;
+    border-radius: 32px;
+    cursor: pointer;
+}
+.footer .newsletter button:hover {
+    background-color: #00A9FF;
+    color: white;
+}
 /* Voucher */
 #voucher {
     /* background-color: rgb(228, 245, 246); */
@@ -607,26 +576,19 @@ footer {
         display: flex;
         flex-direction: column;
     }
-
-    .footer .col-1,
-    .footer .col-2,
-    .footer .col-3 {
+    .footer .about-us,
+    .footer .quick-links,
+    .footer .instagram,
+    .footer .newsletter {
         width: 100%;
         margin-bottom: 20px;
         text-align: center;
     }
-
-    .footer .footer-home a {
-        width: 80px;
-        height: 80px;
-        font-size: 40px;
+    .footer .underline{
+        width: 30%;
+        margin: 16px auto;
     }
-
-    .footer .footer-search input {
-        width: 50%;
-    }
-
-    .footer .social-icons {
+    .footer .about-us .social-icons {
         display: flex;
         justify-content: center;
         gap: 10px;
@@ -721,10 +683,4 @@ footer {
     .swiper-container h3 {
         font-size: 24px;
     }
-}
-#map{
-    margin-top: 10px;
-    height: 60%;
-    width: 60%;
-    border-radius: 6px;
 }
