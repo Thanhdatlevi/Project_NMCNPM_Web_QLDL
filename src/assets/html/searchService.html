@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0, user-scalable=yes">
+    <title>Du lịch uy tín - không đa cấp</title>
+    <link rel="stylesheet" href="../css/searchService.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <section id="searchService">
+        <div id="main_search">
+            <div id="search-zone">
+                <div class="search1">
+                    <div class="searchContainer">
+                        <label for="searchInf" class="search-label">Thông tin</label>
+                        <i class="fa-solid fa-taxi"></i>
+                        <input type="text" id="searchInf" class="search-input" placeholder="Search...">
+                    </div>
+                </div>
+                <div class="search2">
+                    <div class="searchContainer">
+                        <label for="searchInf" class="search-label">Thành phố</label>
+                        <i class="fa-solid fa-city"></i>
+                        <select id="searchInf" name="place-type" >
+                            <option value="" selected disabled>Lựa chọn</option>
+                            <option value="TPHCM">TPHCM</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="Huế">Huế</option>
+                            <option value="Đà Lạt">Đà Lạt</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="search3">
+                    <div class="searchContainer">
+                        <label for="searchInf" class="search-label">Dịch vụ</label>
+                        <i class="fa-solid fa-shop"></i>
+                        <select id="searchInf" name="place-type">
+                            <option value="" selected disabled>Lựa chọn</option>
+                            <option value="restaurant">Nhà hàng</option>
+                            <option value="hotel">Khách sạn</option>
+                            <option value="place">Địa điểm</option>
+                        </select>
+                    </div>
+                </div>
+                <a href="" id="btnSearch">Search</a>
+            </div>
+            <div id="map">
+                <div>
+                    <p>
+                        <a href="../../index.html">Home</a> /
+                        <a href="searchService.html">Service</a>
+                    </p>
+                </div>
+                <div ></div>
+            </div>
+            <h1>Search Service</h1>
+        </div>
+
+        <div id="mainContent">
+            <div id="filter">
+                <div class="guests opt">
+                    <h3>Number of guests</h3>
+                    <label>
+                        <input type="radio" name="guest" value="1">
+                        1 - 5
+                    </label>
+                    <label>
+                        <input type="radio" name="guest" value="2">
+                        6 - 10
+                    </label>
+                    <label>
+                        <input type="radio" name="guest" value="3">
+                        11 - 15
+                    </label>
+                </div>
+                <div class="price opt">
+                    <h3>Price of Service</h3>
+                    <label>
+                        <input type="radio" name="price" value="1">
+                        $001 - $100
+                    </label>
+                    <label>
+                        <input type="radio" name="price" value="2">
+                        $101 - $200
+                    </label>
+                    <label>
+                        <input type="radio" name="price" value="3">
+                        $201 - $300
+                    </label>
+                    <label>
+                        <input type="radio" name="price" value="4">
+                        $301 - $400
+                    </label>
+                </div>
+                <div class="rate opt">
+                    <h3>Rate of Service</h3>
+                    <label>
+                        <input type="radio" name="rate" value="1">
+                        1 Star
+                    </label>
+                    <label>
+                        <input type="radio" name="rate" value="2">
+                        2 Star
+                    </label>
+                    <label>
+                        <input type="radio" name="rate" value="3">
+                        3 Star
+                    </label>
+                    <label>
+                        <input type="radio" name="rate" value="4">
+                        4 Star
+                    </label>
+                    <label>
+                        <input type="radio" name="rate" value="5">
+                        5 Star
+                    </label>
+                </div>
+            </div>
+            <div id="list">
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="service">
+                    <a href=""><img src="../image/Hà Nội/image1.jpg" alt=""></a>
+                    <div class="content">
+                        <div class="inf">
+                            <h2>Nhà hàng TPHCM</h2>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Địa chỉ: TPHCM</p>
+                            <p><i class="fa-solid fa-star"></i> 3 Star</p>
+                            <p>Địa chỉ: 23/2 ha hong, tphcm</p>
+                        </div>
+                        <div class="bookZone">
+                            <p class="detailPrice">$300 per night</p>
+                            <p>excl.tax</p>
+                            <a href="" class="btnDetail">Veiw Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pagination">
+                    <button onclick="prevPage()">Previous</button>
+                    <div id="pageNumbers"></div> <!-- Container for page number buttons -->
+                    <button onclick="nextPage()">Next</button>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <script src="../javascript/searchService.js"></script>
+</body>
+
+</html>
