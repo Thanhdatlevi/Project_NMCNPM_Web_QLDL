@@ -1,52 +1,59 @@
 import React from 'react';
 import '../Styles/Header.css';
-import setLanguage from '../Scripts/Header.js';
-
-import { Routes, Route, Link } from 'react-router-dom'
 
 const Header = () => {
+    // document.getElementById("menu-toggle").addEventListener("click", function () {
+    //     const navList = document.querySelector(".nav-list");
+    //     const menuIcon = document.querySelector(".menu-icon");
+    
+    //     // Toggle hiển thị danh sách
+    //     navList.classList.toggle("show");
+    
+    //     // Đổi icon giữa list-button và exit-button
+    //     if (navList.classList.contains("show")) {
+    //         menuIcon.src = "/Images/exit-button.png"; // Đổi sang icon exit
+    //     } else {
+    //         menuIcon.src = "/Images/list-button.png"; // Đổi về icon list
+    //     }
+    // });
+    
     return (
-        <header className="header-container">
-            <nav id="main_nav">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Link to = "/home">
-                        <img src={'/Images/logo.png'} alt="logo" style={{ width: '30px', height: '30px', left: '10px', top: '10px', justifySelf: 'flex-start' }} />
-                    </Link>
-                    <div style={{ display: 'flex' }}>
-                        <p id="nav_button">
-                            <a href="#!" data-i18n="place">Địa điểm du lịch</a>
-                        </p>
-                        <div id="nav">
-                            <div id="nav_button" style={{ borderRight: '#000 solid 1px', borderLeft: '#000 solid 1px' }}>
-                                <Link to ="/HomePlace" data-i18n="tour">Tour</Link>
-                            </div>
-                            <div id="nav_button">
-                                <a href="#!" data-i18n="hotel">Khách sạn</a>
-                            </div>
-                            <div id="nav_button" style={{ borderLeft: '#000 solid 1px' }}>
-                                <a href="#!" data-i18n="contact">Liên lạc</a>
-                            </div>
-                            <div id="nav_button" style={{ borderLeft: '#000 solid 1px' }}>
-                                <a href="#!" data-i18n="about_us">About us</a>
-                            </div>
-                        </div>
-                    </div>
+        <header class="header-container">
+        <nav id="nav">
+            <div class="logo-container">
+                <a href="./index.html" class="logo-link">
+                    <img src="/Images/logoITISE.png" class="logo-image" alt="logITISE"/>
+                </a>
+            </div>
+
+            <button id="menu-toggle" class="menu-button" aria-label="Toggle Menu">
+                <img src="/Images/list-button.png" alt="Menu" class="menu-icon"/>
+            </button>
+
+            <ul class="nav-list">
+                <li><a href="#!" class="nav-item">Home</a></li>
+                <li><a href="#!" class="nav-item">Địa điểm du lịch</a></li>
+                <li><a href="./assets/html/form_travel_place.html" class="nav-item">Tours</a></li>
+                <li><a href="./assets/html/searchService.html" class="nav-item">Cơ sở dịch vụ</a></li>
+                <li><a href="./assets/html/profile.html" class="nav-item">Giới thiệu</a></li>
+                <li><a href="#!" class="nav-item">Liên lạc</a></li>
+            </ul>
+
+            <div class="nav-button-list">
+                <div class="switch">
+                    <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox"
+                        onchange="setLanguage()"/>
+                    <label for="language-toggle"></label>
+                    <span class="on">VI</span>
+                    <span class="off">EN</span>
                 </div>
-                <div id="login_register">
-                    <select id="language" name="language" onChange={setLanguage} style={{ width: '70px' }} defaultValue="default">
-                        <option value="default">Lang</option>
-                        <option value="vi">Vi</option>
-                        <option value="en">En</option>
-                    </select>
-                    <p id="nav_button">
-                        <a href="#!" id="register">Register</a>
-                    </p>
-                    <p id="nav_button" style={{ backgroundColor: '#313030', color: '#fff', borderRadius: '30px' }}>
-                        <a href="#!" id="login">Login</a>
-                    </p>
-                </div>
-            </nav>
-        </header>
+                <a href="/home" class="button bg-user-icon">
+                    {/* <span class="sr-only">User</span> */}
+                </a>
+            </div>
+
+        </nav>
+    </header>
     );
 };
 

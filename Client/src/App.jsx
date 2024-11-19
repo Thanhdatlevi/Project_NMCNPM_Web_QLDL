@@ -4,7 +4,7 @@ import './App.css';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Content from './Components/Content';
-import { BrowserRouter, Routes, Route, Router, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 //import Form from './Components/Form';
 import HomePlace from './Components/HomePlace';
 import ServicePage from './Components/ServicePage';

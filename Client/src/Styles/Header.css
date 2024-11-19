@@ -14,268 +14,251 @@ body{
 }
 
 /* nav bar */
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    /* Ngăn cuộn ngang toàn bộ trang */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica" sans-serif;
+    box-sizing: border-box;
+}
+
+
 .header-container {
-    display: flex;
-    flex-direction: column;
-    /* border-bottom: 1px solid #000000; */
     position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 10;
-    /* Đảm bảo thanh điều hướng nằm trên các phần tử khác */
-}
-
-#main_nav {
-    background: linear-gradient(rgb(255, 255, 255), rgb(154, 219, 233));
-    width: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-}
-
-#main_nav a{
-    text-decoration: none;
-    color: #000;
-    padding: 10px 10px;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    white-space: nowrap;
-}
-#nav_button {
-    padding: 10px 10px;
-}
-
-#nav_button:hover {
-    background-color: #c2c0c0;
-    border-radius: 30px;
-}
-
-#language{
-    border-radius: 30px;
-    border: 2px solid rgba(0, 0, 0, 0);
-    padding: 5px 5px;
-    background-color: rgba(0, 0, 0, 0);
 }
 
 #nav {
-    color: #000;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Đảm bảo phủ toàn bộ chiều rộng màn hình */
+    /* Tương ứng với 128 x 0.25rem */
+    padding-left: 1rem;
+    /* Tương ứng với px-4 */
+    padding-right: 1rem;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: rgba(245, 245, 245, 0.8);
+    /* Xanh đen sáng hơn */
+    backdrop-filter: blur(12px);
+    /* Tương ứng với backdrop-blur-md */
+    box-sizing: border-box;
+    /* Đảm bảo padding không làm tăng chiều rộng */
+}
+
+#nav .logo-container {
+    width: 6rem;
+    /* Tương ứng với w-24 (24 x 0.25rem) */
+    margin-right: 0;
+    /* Tương ứng với mr-0 */
+    display: block;
+    /* Tương ứng với block */
+    padding: 0px;
+}
+
+#nav .logo-link {
+    width: 100%;
+    /* Tương ứng với w-full */
+    height: auto;
+    /* Tương ứng với h-auto */
+    display: inline-block;
+    /* Bảo đảm tính inline nếu cần */
+}
+
+#nav .logo-image {
+    width: 100%;
+    /* Tương ứng với w-full */
+    height: auto;
+    /* Tương ứng với h-auto */
+}
+
+#nav .nav-list {
+    display: flex;
+    padding-left: 0;
+    padding-right: 0;
+    /* Xóa margin mặc định của ul */
+    list-style-type: none;
+    font-size: 20px;
+    /* Tương ứng với text-xs */
+    gap: 0.75rem;
+    /* Tương ứng với space-x-3 */
+}
+
+#nav .nav-item {
+    margin-left: 16px;
+    text-decoration: none;
+    /* Loại bỏ gạch chân mặc định */
+    transition: transform 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
+    color: #03396c;
+}
+
+#nav .nav-item:hover {
+    transform: scale(1.1);
+    /* Tương ứng với hover:scale-110 */
+    font-weight: bold;
+    /* Tương ứng với hover:font-bold */
+    color: #005b96;
+    /* Tương ứng với hover:text-green-700 */
+}
+
+
+#nav .nav-button-list {
+    display: flex;
+    /* Dùng Flexbox để sắp xếp các phần tử li ngang */
+    margin-left: auto;
+    /* Đẩy phần tử sang bên phải */
+    padding: 0;
+    /* Xóa padding mặc định của ul */
+    list-style-type: none;
+    /* Xóa dấu chấm đầu dòng */
+    gap: 1rem;
+}
+
+#nav .button {
+    display: flex;
+    /* Dùng Flexbox để căn giữa các phần tử */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    width: 32px;
+    /* Tương ứng với w-3 */
+    height: 32px;
+    /* Tương ứng với h-3 */
+    background-size: cover;
+    /* Đảm bảo hình ảnh lấp đầy nút */
+    background-position: center;
+    /* Đặt hình ảnh ở giữa */
+}
+
+#nav .button.bg-user-icon {
+    background-image: url(../../public/Images/user-icon.png);
+    /* Đường dẫn đến hình ảnh người dùng */
+    background-size: cover;
+    background-position: center;
+}
+
+#nav .button.bg-user-icon:hover {
+    background-image: url(../../public/Images/user-icon-hover.png);
+    /* Đổi hình ảnh khi hover */
+}
+
+#nav .menu-button {
+    display: none;
+}
+
+.switch {
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    width: 12%;
+    display: inline-block;
+    margin: 0 5px;
 }
 
-#lang_button {
-    background-color: rgba(red, green, blue, 0);
+.switch>span {
+    position: absolute;
+    top: 14px;
+    pointer-events: none;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+    width: 50%;
+    text-align: center;
 }
 
-#login_register {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+input.check-toggle-round-flat:checked~.off {
+    color: #005b96;
 }
 
-
-#nav>li:hover #footer {
-    display: block;
-}
-
-
-#nav li:hover .subnav {
-    display: block;
-}
-
-
-#login,
-#register {
-    padding: 10px 10px;
-}
-
-#nav_button #login {
+input.check-toggle-round-flat:checked~.on {
     color: #fff;
-    border-radius: 15px;
 }
 
-
-
-@media (max-width: 768px) {
-    #main_nav {
-        display: flex;
-        align-items: start;
-        gap: 0px;
-    }
-    #main_nav #login_register{
-        align-self: end;
-    }
-    #main_nav #login_register #language{
-        width: 70px;
-    }
-    #main_nav a {
-        color: #000;
-        padding: 5px 5px;
-    
-        font-size: 10px;
-        font-weight: bold;
-        
-        white-space: nowrap;
-    }
-    #vou {
-        flex-direction: column;
-        align-items: center;
-        gap: 100px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    #vou h3 {
-        color: #fff;
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 40px;
-
-        width: 150px;
-        padding: 16px;
-    }
-
-    .vou_detail {
-        width: 90%;
-        margin-bottom: 20px;
-    }
-
-    .list_vou {
-        width: 80%;
-    }
-
-    .vou_entity {
-        max-width: 30%;
-
-    }
-
-    .vou_entity:hover {
-        max-width: 32%;
-    }
-
-    .footer {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .footer .col-1,
-    .footer .col-2,
-    .footer .col-3 {
-        width: 100%;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    .footer .footer-home a {
-        width: 80px;
-        height: 80px;
-        font-size: 40px;
-    }
-
-    .footer .footer-search input {
-        width: 50%;
-    }
-
-    .footer .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .swiper-container {
-        aspect-ratio: 3 / 4;
-    }
-
-    .swiper-container .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-        /* 2 cột cho màn hình nhỏ hơn */
-        padding: 16px 16px;
-    }
-
-    .swiper-container h3 {
-        font-size: 36px;
-        /* Thay đổi kích thước chữ cho h3 */
-    }
+.switch>span.on,
+.switch>span.off {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+    width: 50%;
+    text-align: center;
 }
 
-/* Responsive cho màn hình nhỏ hơn 480px */
-@media (max-width: 640px) {
-    #main_nav {
-        display: flex;
-        align-items: start;
-        gap: 0px;
-    }
-    
-    #main_nav a {
-        color: #000;
-        padding: 5px 5px;
-    
-        font-size: 8.15px;
-        font-weight: bold;
-        
-        white-space: nowrap;
-    }
-    #vou {
-        flex-direction: column;
-        align-items: center;
-        gap: 100px;
-        width: 100vw;
-    }
-
-    #vou h3 {
-        color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 40px;
-
-        width: 170px;
-        padding: 16px;
-    }
-
-    .vou_detail {
-        width: 98%;
-        margin-bottom: 20px;
-    }
-
-    .list_vou {
-        width: 80%;
-    }
-
-    .vou_entity {
-        max-width: 30%;
-
-    }
-
-    .vou_entity:hover {
-        max-width: 35%;
-    }
+.switch>span.on {
+    left: 0;
+    padding-left: 2px;
+    color: #005b96;
 }
 
-@media (max-width: 480px) {
-    #main_nav {
-        display: flex;
-        align-items: start;
-        gap: 0px;
-    }
+.switch>span.off {
+    right: 0;
+    padding-right: 4px;
+    color: #fff;
+}
 
-    #main_nav a {
-        color: #000;
-        padding: 5px 5px;
-    
-        font-size: 8.15px;
-        font-weight: bold;
-        
-        white-space: nowrap;
-    }
-    
-    .swiper-container h3 {
-        font-size: 24px;
-    }
+.check-toggle {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+}
+
+.check-toggle+label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input.check-toggle-round-flat+label {
+    padding: 2px;
+    width: 97px;
+    height: 32px;
+    background-color: #005b96;
+    border-radius: 60px;
+}
+
+input.check-toggle-round-flat+label:before,
+input.check-toggle-round-flat+label:after {
+    display: block;
+    position: absolute;
+    content: "";
+}
+
+input.check-toggle-round-flat+label:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: #005b96;
+    border-radius: 60px;
+}
+
+input.check-toggle-round-flat+label:after {
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    width: 48px;
+    background-color: #fff;
+    border-radius: 52px;
+    transition: margin 0.2s;
+}
+
+input.check-toggle-round-flat:checked+label:after {
+    margin-left: 44px;
 }
