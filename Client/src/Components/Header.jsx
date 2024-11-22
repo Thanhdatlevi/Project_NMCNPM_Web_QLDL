@@ -31,9 +31,9 @@ const Header = () => {
             </button>
 
             <ul class="nav-list">
-                <li><a href="#!" class="nav-item">Home</a></li>
-                <li><a href="#!" class="nav-item">Địa điểm du lịch</a></li>
-                <li><a href="./assets/html/form_travel_place.html" class="nav-item">Tours</a></li>
+                <li><a href="/home" class="nav-item">Home</a></li>
+                <li><a href="" class="nav-item">Địa điểm du lịch</a></li>
+                <li><a href="/HomePlace" class="nav-item">Tạo lịch trình</a></li>
                 <li><a href="./assets/html/searchService.html" class="nav-item">Cơ sở dịch vụ</a></li>
                 <li><a href="./assets/html/profile.html" class="nav-item">Giới thiệu</a></li>
                 <li><a href="#!" class="nav-item">Liên lạc</a></li>

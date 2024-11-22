@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import '../Styles/HomePlace.css';
-
+import { Link } from "react-router-dom";
 
 function HomePlace() {
     const [city, setCity] = useState("");

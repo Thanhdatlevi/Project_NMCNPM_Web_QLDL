@@ -6,7 +6,7 @@ const AttractionModel = {
         try {
             // Truy vấn tất cả dữ liệu từ bảng facilities
             const query = `
-                SELECT a.attraction_id, a.attraction_name, a.rating, a.img_url FROM attractions a
+                SELECT a.attraction_id, a.attraction_name, a.rating, a.img_url, a.description, a.opening_hours FROM attractions a
                 where a.rating >= 4.5
                 ORDER BY rating DESC
                 LIMIT 10;
