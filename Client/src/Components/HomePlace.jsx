@@ -157,7 +157,9 @@ function HomePlace() {
                                 <select className="list" value="place">
                                     <option value="" disabled selected>Select a place</option>
                                 </select>
+                                <Link to = "/servicepage">
                                 <button className="detail-button">Detail</button>
+                                </Link>
                                 <button id="delete-place-button" class="deletebtn" value="place" onClick={(event) => deleteElement(event, 'place')}>Delete</button>
                             </div>
                         </div>
