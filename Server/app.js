@@ -8,6 +8,10 @@ const PORT = process.env.PORT || 3000;
 const holRoutes = require('./src/routes/holRoutes'); // Điều hướng view
 const resRoutes = require('./src/routes/resRoutes');  // Điều hướng tour
 const attractionRoutes = require('./src/routes/attractionRoutes') // Điều hướng đến user
+const userRoutes = require('./src/routes/userRoutes') // Điều hướng đến user
+const locRoutes = require('./src/routes/locationRoutes') // Điều hướng đến user
+
+
 
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
@@ -23,12 +27,15 @@ const attractionRoutes = require('./src/routes/attractionRoutes') // Điều hư
 
 app.use(express.static(path.join(__dirname, 'src', 'public')));
 
-app.use('/', resRoutes);
+app.use('/res', resRoutes);
 
-app.use('/', attractionRoutes);
+app.use('/attraction/', attractionRoutes);
 
-app.use('/', holRoutes);
+app.use('/hotel', holRoutes);
 
+app.use('/user', userRoutes);
+
+app.use('/location', locRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
