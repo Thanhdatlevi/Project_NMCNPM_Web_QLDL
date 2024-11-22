@@ -2,13 +2,14 @@ const db = require('../config/db');
 
 const AttractionModel = {
     // Phương thức để lấy tất cả các facility
-    getPopularAttractions: async () => {
+    get_10_PopularAttractions: async () => {
         try {
             // Truy vấn tất cả dữ liệu từ bảng facilities
             const query = `
-                SELECT * FROM attractions
+                SELECT a.attraction_id, a.attraction_name, a.rating, a.img_url FROM attractions a
+                where a.rating >= 4.5
                 ORDER BY rating DESC
-                LIMIT 6;
+                LIMIT 10;
             `;
             const res = await db.query(query);  // Thực thi câu truy vấn
             return res.rows;  // Trả về tất cả các hàng dữ liệu

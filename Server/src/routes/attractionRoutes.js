@@ -4,6 +4,6 @@ const router = express.Router();
 const AttractionController = require('../attraction/attractionController');
 
 // Route đăng ký người dùng
-router.get('/attraction', AttractionController.getPopularAttractions);
+router.get('/attraction', AttractionController.get_10_PopularAttractions);
 
 module.exports = router;

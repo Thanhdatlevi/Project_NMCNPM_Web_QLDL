@@ -123,10 +123,36 @@ function HomePlace() {
         }
     }
 
+    const [canNavigate, setCanNavigate] = useState(false);
+
+    function submitBtnHandle(){
+        const selected = document.querySelectorAll('.list');
+        const selections = {};
+        const hasUnselected = Array.from(selected).some(element => {
+            if (element.selectedIndex === 0) {
+                alert("Please select all the options");
+                return true;
+            }
+            selections[element.value] = element.value;
+            return false;
+        });
+    
+        if (hasUnselected) {
+            return;
+        }
+        else {
+            var jsonSelections = JSON.stringify(selections);
+            localStorage.setItem('selections', jsonSelections);
+            localStorage.setItem('city', city);
+            setCanNavigate(true);
+            submitBtnHandle();
+        }
+    }
+
     return (
         <main id="main_content">
             <div id="itinar">
-                <section className="header-contain">
+                <section className="form-header-container">
                     <input id="tour_name" placeholder="Enter your tour's name" />
                     <div id="tour-name-container">
                         <select id="city" onChange={handleCityChange}>
@@ -211,6 +237,9 @@ function HomePlace() {
                             </div>
                         </div>
                     </section>
+                </div>
+                <div id="submit">
+                    <Link to={canNavigate && "/tourReservationResult"} id='submit-btn' onClick={submitBtnHandle}> Submit </Link>
                 </div>
             </div>
         </main>

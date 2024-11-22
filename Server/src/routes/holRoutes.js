@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const HotelController = require('../hol/holController');
+const hotelController = require('../hol/holController');
 
-// router.get('/tours/:location_name', tourController.getToursByLocation);
-router.get('/hol', HotelController.getPopularHotels);
-// router.get('/tour_detail/:tour_id', tourController.getTourByID);
+router.get('/holel/3-PopularHol', hotelController.get_3_PopularHotels);
+
+router.get('/:holtelID', hotelController.getHotelByID)
+
+router.get('/hotel/:locationId', hotelController.getHotelsByLocationID);
+
 
 module.exports = router;

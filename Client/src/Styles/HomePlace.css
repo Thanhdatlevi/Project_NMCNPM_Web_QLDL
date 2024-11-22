@@ -19,7 +19,7 @@ body{
     border-bottom: 2px dotted #000;
     padding-bottom: 50px;
 }
-.header-container-form{
+.form-header-container{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -391,4 +391,29 @@ body{
 #display-hol- #book-hol-button:hover{
     cursor: pointer;
     background: #a6a5a5;
+}
+
+#itinar #submit{
+    display: flex;
+    justify-content: end;
+}
+
+#itinar #submit #submit-btn{
+    border-radius: 100px;
+    width: 100px;
+    font-size: 20px;
+    padding: 5px;
+    border: 2px solid #000;
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #005b96;
+    color: #fff;
+}
+
+#itinar #submit #submit-btn:hover{
+    cursor: pointer;
+    background: #6497b1;
 }
