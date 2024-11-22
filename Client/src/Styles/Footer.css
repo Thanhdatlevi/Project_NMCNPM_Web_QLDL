@@ -123,6 +123,7 @@
 .col-2 span {
     line-height: 2;
     font-size: 1.1rem;
+    text-decoration: none;
 }
 
 .col-2 .social-icons {
