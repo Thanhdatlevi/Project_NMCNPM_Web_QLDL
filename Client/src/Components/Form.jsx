@@ -1,6 +1,6 @@
 import React from "react";
 import '../Styles/Form.css';
-//import { setCity, addElement, set_date, show_img, show_infor, deleteElement } from '../Scripts/Form.js';
+import { Link } from "react-router-dom";
 
 const Form = () => {
     let city = "";
@@ -147,7 +147,7 @@ const Form = () => {
     return (
         <main id="main_content">
             <div id="itinar">
-                <section class="header-container">
+                <section className="header-container_form">
                     <input id="tour_name" placeholder="Enter your tour's name"></input>
                     <div id="tour-name-container">
                         <select id="city" onchange={() => setCity()}>
@@ -162,7 +162,7 @@ const Form = () => {
 
                 <section id="form_place">
 
-                    <div class="add">
+                    <div className="add">
                         <p id="title-text" data-i18n="travel-place">
                             Travel place
                         </p>
@@ -180,10 +180,10 @@ const Form = () => {
                             </div>
 
                             <div id="place-information">
-                                <select class="list" onchange={() => show_img(this, 'place')} value="place">
+                                <select className="list" onchange={() => show_img(this, 'place')} value="place">
                                     <option value="" disabled selected>Select a place</option>
                                 </select>
-                                <button class="detail-button">Detail</button>
+                                <button className="detail-button">Detail</button>
                                 <button id="delete-place-button" onclick={() => deleteElement(this, 'place')}>Delete</button>
                             </div>
                         </div>
@@ -192,11 +192,11 @@ const Form = () => {
                 <div id="service">
                     <section id="form_res">
 
-                        <div class="add">
-                            <p class="service-text" data-i18n="travel-place">
+                        <div className="add">
+                            <p className="service-text" data-i18n="travel-place">
                                 Restaurant
                             </p>
-                            <button class="add-res-hol" value="res" onclick={(event) => addElement(event)}>Add</button>
+                            <button className="add-res-hol" value="res" onclick={(event) => addElement(event)}>Add</button>
                         </div>
 
 
@@ -206,10 +206,10 @@ const Form = () => {
                             </p>
                             <div id="res-item">
                                 <div id="res-information">
-                                    <select class="list" onchange={() => show_infor(this, 'res')} value="res">
+                                    <select className="list" onchange={() => show_infor(this, 'res')} value="res">
                                         <option value="" disabled selected>Select a restaurant</option>
                                     </select>
-                                    <button class="detail-button">Detail</button>
+                                    <button className="detail-button">Detail</button>
                                 </div>
 
                                 <div id="res-feature">
@@ -223,11 +223,11 @@ const Form = () => {
 
                     <section id="form_hol">
 
-                        <div class="add">
-                            <p class="service-text" data-i18n="travel-place">
+                        <div className="add">
+                            <p className="service-text" data-i18n="travel-place">
                                 Hotel
                             </p>
-                            <button class="add-res-hol" value="hol" onclick={(event) => addElement(event)}>Add</button>
+                            <button className="add-res-hol" value="hol" onclick={(event) => addElement(event)}>Add</button>
                         </div>
 
 
@@ -236,10 +236,10 @@ const Form = () => {
                             </p>
                             <div id="hol-item">
                                 <div id="hol-information">
-                                    <select class="list" onchange={() => show_infor(this, 'hol')} value="hol">
+                                    <select className="list" onchange={() => show_infor(this, 'hol')} value="hol">
                                         <option value="" disabled selected>Select a Hotel</option>
                                     </select>
-                                    <button class="detail-button">Detail</button>
+                                    <button className="detail-button">Detail</button>
                                 </div>
 
                                 <div id="hol-feature">
@@ -249,6 +249,9 @@ const Form = () => {
                             </div>
                         </div>
                     </section>
+                </div>
+                <div id="submit">
+                    <Link to="/tourReservationResult"> Submit </Link>
                 </div>
             </div>
         </main>

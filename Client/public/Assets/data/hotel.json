@@ -1,3 +1,4 @@
+
 [
     {
         "city": "Hanoi",
@@ -5,17 +6,20 @@
             {
                 "name": "JW Marriott Hotel Hanoi",
                 "description": "Tọa lạc tại trung tâm thương mại mới của Hà Nội cách sân bay Nội Bài 27km, vị trí của khách sạn tạo điều kiện thuận lợi cho việc đi lại của khách hàng trong và ngoài nước. Khách sạn JW Marriott Hanoi là địa điểm lý tưởng phục vụ cho các sự kiện hội nghị, hội thảo và triển lãm với 17 phòng họp, trong đó bao gồm 2 phòng hội thảo lớn cùng 450 phòng nghỉ với thiết kế sang trọng.",
-                "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/15/f6/a4/imag9960-largejpg.jpg?w=1200&h=-1&s=1"
+                "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/15/f6/a4/imag9960-largejpg.jpg?w=1200&h=-1&s=1",
+                "price": 3000000
             },
             {
                 "name": "La Siesta Classic Ma May Hotel",
                 "description": "Bạn sẽ tận hưởng căn phòng với tv màn hình phẳng, quầy bar mini và tủ lạnh, và bạn chắc chắn sẽ được kết nối internet trong thời gian này bởi Hanoi La Siesta Hotel & Spa cung cấp cho du khách wifi miễn phí.",
-                "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/59/4c/d3/hanoi-la-siesta-hotel.jpg?w=1200&h=-1&s=1"
+                "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/59/4c/d3/hanoi-la-siesta-hotel.jpg?w=1200&h=-1&s=1",
+                "price": 1500000
             },
             {
                 "name": "Bespoke Trendy Hotel Hanoi",
                 "description": "Chào mừng bạn đến với Bespoke Trendy Hotel Hanoi, một lựa chọn tuyệt vời cho mọi du khách tại Hà Nội. Với vị trí trung tâm, Bespoke Trendy Hotel Hanoi sẽ đáp ứng mọi nhu cầu của bạn, từ tham quan các công trình kiến trúc, địa điểm nổi tiếng của như Nhà Thờ Lớn, Hoàng Thành Thăng Long, hồ Hoàn Kiếm cho đến mua sắm hay thưởng thức ẩm thực Hà Nội.",
-                "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/96/e9/f9/la-siesta-suite-4.jpg?w=1200&h=-1&s=1"
+                "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/96/e9/f9/la-siesta-suite-4.jpg?w=1200&h=-1&s=1",
+                "price": 1200000
             }
         ]
     },
@@ -25,17 +29,20 @@
             {
                 "name": "Cochin Zen Hotel",
                 "description": "Hãy để chuyến đi của quý khách có một khởi đầu tuyệt vời khi ở lại khách sạn này, nơi có Wi-Fi miễn phí trong tất cả các phòng. Nằm ở vị trí chiến lược tại Quận 1, cho phép quý khách lui tới và gần với các điểm thu hút và tham quan địa phương. Đừng rời đi trước khi ghé thăm Bảo tàng Chứng tích chiến tranh nổi tiếng.",
-                "image": "https://pix8.agoda.net/hotelImages/159186/-1/1e4534b0938d7b0a17f20ee55dcdea6d.png?ce=0&s=1024x"
+                "image": "https://pix8.agoda.net/hotelImages/159186/-1/1e4534b0938d7b0a17f20ee55dcdea6d.png?ce=0&s=1024x",
+                "price": 1000000
             },
             {
                 "name": "A&Em Art Hotel",
                 "description": "A&Em Art Hotel, một khách sạn 4.0 sao tọa lạc tại trung tâm thành phố Hồ Chí Minh, Việt Nam, là một điểm đến lý tưởng cho những ai muốn khám phá nghệ thuật và tận hưởng không gian thoải mái.",
-                "image": "https://pix8.agoda.net/hotelImages/2801837/-1/7dcea1b1fe7793f27d8744f5e4c09d6e.jpg?ca=6&ce=1&s=1024x"
+                "image": "https://pix8.agoda.net/hotelImages/2801837/-1/7dcea1b1fe7793f27d8744f5e4c09d6e.jpg?ca=6&ce=1&s=1024x",
+                "price": 1300000
             },
             {
                 "name": "Roseland Centa Hotel",
                 "description": "Khách sạn Roseland Centa, một khách sạn 4.0 sao nằm tại trung tâm thành phố Hồ Chí Minh, Việt Nam, là một điểm đến lý tưởng cho những ai đang tìm kiếm một trải nghiệm lưu trú đẳng cấp.",
-                "image": "https://pix8.agoda.net/hotelImages/1766398/-1/a84921369abcff91d44eab723402a789.jpg?ca=8&ce=1&s=1024x"
+                "image": "https://pix8.agoda.net/hotelImages/1766398/-1/a84921369abcff91d44eab723402a789.jpg?ca=8&ce=1&s=1024x",
+                "price": 1400000
             }
         ]
     },
@@ -45,17 +52,20 @@
             {
                 "name": "SUNVIEW Beach Hotel",
                 "description": "Tận dụng tối đa thời gian của quý khách ở Đà Nẵng thật dễ dàng khi lưu trú tại Khách sạn bãi biển Sunview Đà Nẵng có vị trí dễ tiếp cận. Những dịch vụ và cơ sở vật chất cao cấp được Khách sạn bãi biển Sunview Đà Nẵng cung cấp sẽ tạo nên một kỳ nghỉ đáng nhớ.",
-                "image": "https://pix8.agoda.net/hotelImages/24112682/-1/4a3b93d22ec33b6807a40bbddb5df22f.jpg?ce=0&s=1024x"
+                "image": "https://pix8.agoda.net/hotelImages/24112682/-1/4a3b93d22ec33b6807a40bbddb5df22f.jpg?ce=0&s=1024x",
+                "price": 900000
             },
             {
                 "name": "Crystal Hotel",
                 "description": "Tham quan nhiều hơn ở những vùng lân cận nổi tiếng của Đà Nẵng khi ở lại Crystal Hotel. Hương vị và văn hóa bản địa đích thực của Đà Nẵng dành cho quý khách khi ở lại Crystal Hotel",
-                "image": "https://pix8.agoda.net/hotelImages/47262040/756064013/40ec6c64c78b243393a8d71d9a0fdc3e.jpg?ce=0&s=1024x"
+                "image": "https://pix8.agoda.net/hotelImages/47262040/756064013/40ec6c64c78b243393a8d71d9a0fdc3e.jpg?ce=0&s=1024x",
+                "price": 800000
             },
             {
                 "name": "Sunset Sea Hotel",
                 "description": "Tận hưởng tất cả những gì Đà Nẵng có khi ở lại Sunset Sea Hotel. Với vị trí thuận tiện, khách sạn giúp dễ dàng tiếp cận các địa điểm 'nhất định phải nhìn ngắm' của thành phố.",
-                "image": "https://pix8.agoda.net/hotelImages/48029813/-1/e3faaf798ec6bb01e4696e51b6fe32e7.jpg?ce=0&s=1024x"
+                "image": "https://pix8.agoda.net/hotelImages/48029813/-1/e3faaf798ec6bb01e4696e51b6fe32e7.jpg?ce=0&s=1024x",
+                "price": 850000
             }
         ]
     },
@@ -65,17 +75,20 @@
             {
                 "name": "Dk House Hue",
                 "description": "Xem tất cả các lựa chọn tham quan khi quý khách ở Huế khi ở lại Dk House Hue, nơi đặt quý khách gần với tất cả các địa danh nổi tiếng. Vượt ra ngoài hoạt động du lịch và đi sâu hơn vào những điều Huế mang đến khi ở lại Dk House Hue, nằm cách Cố đô Huế chỉ 2,2 km.",
-                "image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/490521595.jpg?k=5532c24b5adff09b3ef25b91edbbe51189b2c592fd0bfaf769a6d55428857129&o=&s=1024x"
+                "image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/490521595.jpg?k=5532c24b5adff09b3ef25b91edbbe51189b2c592fd0bfaf769a6d55428857129&o=&s=1024x",
+                "price": 700000
             },
             {
                 "name": "Robin House",
                 "description": "Robin House là một khách sạn đẹp nằm tại trung tâm thành phố Huế, Việt Nam. Với vị trí thuận lợi và tiện nghi hiện đại, đây là một điểm dừng chân lý tưởng cho du khách muốn khám phá vẻ đẹp lịch sử và văn hóa của thành phố cố đô.",
-                "image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/274742275.jpg?k=ec3ff96fe3501fd1063f791e32fcb6a07a4f4f5f32b0e9f19b6f16fad1fcf13d&o=&s=1024x"
+                "image": "https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/274742275.jpg?k=ec3ff96fe3501fd1063f791e32fcb6a07a4f4f5f32b0e9f19b6f16fad1fcf13d&o=&s=1024x",
+                "price": 750000
             },
             {
                 "name": "LaLa Homestay",
                 "description": "LaLa Homestay là nơi hoàn hảo để trải nghiệm Huế và khu vực xung quanh. Từ đây, du khách có thể dễ dàng tiếp cận tất cả các địa danh nổi tiếng của thành phố sôi động này.",
-                "image": "https://pix8.agoda.net/hotelImages/42170620/692364020/f44aba6187a34c08fb709eafbb4f27ab.jpg?ce=0&s=1024x"
+                "image": "https://pix8.agoda.net/hotelImages/42170620/692364020/f44aba6187a34c08fb709eafbb4f27ab.jpg?ce=0&s=1024x",
+                "price": 600000
             }
         ]
     }

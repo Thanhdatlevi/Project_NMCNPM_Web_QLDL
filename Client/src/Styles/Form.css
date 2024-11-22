@@ -21,7 +21,7 @@ section{
     border-bottom: 2px dotted #000;
     padding-bottom: 50px;
 }
-.header-container_f{
+.header-container{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
