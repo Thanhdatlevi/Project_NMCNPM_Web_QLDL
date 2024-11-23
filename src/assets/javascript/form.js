@@ -77,24 +77,24 @@ function clearSelect(select){
 function addElement(e){
     const cur_city = document.getElementById('city').value;
     if(cur_city == ""){
-        const notice = document.getElementById(`notice-${e.target.value}`);
+        const notice = document.getElementById(`notice-${e}`);
         notice.innerHTML = "Please choose the city first.";
         return;
     }
     else{
-        const notice = document.getElementById(`notice-${e.target.value}`);
+        const notice = document.getElementById(`notice-${e}`);
         notice.innerHTML = "";
     }
-    const item = document.getElementById(`${e.target.value}-item`);
-    const object = document.getElementById(`display-${e.target.value}`);
+    const item = document.getElementById(`${e}-item`);
+    const object = document.getElementById(`display-${e}`);
     const clone = item.cloneNode(true);
 
-    const hrElement = document.createElement('hr');
-    object.appendChild(hrElement);
+    // const hrElement = document.createElement('hr');
+    // object.appendChild(hrElement);
     
     object.appendChild(clone);
     const newsetChild = object.lastElementChild;
-    if(e.target.value!='place') return;
+    if(e!='place') return;
     newsetChild.querySelector('#time-place').value = new Date().toISOString().split('T')[0];
 }
 
@@ -103,7 +103,7 @@ function countChildElement(parent){
 }
 
 function deleteElement(selectedElement,type){
-    const parent = selectedElement.parentNode.parentNode;
+    const parent = selectedElement.parentNode.parentNode.parentNode;
     if (countChildElement(parent.parentNode) == 2){
         const notice = document.getElementById(`notice-${type}`);
         notice.innerHTML = "You can't delete the last place.";
@@ -131,8 +131,27 @@ function set_date(){
     }
 }
 
+function View_change(event){
+    const place = document.getElementById('form_place');
+    const res = document.getElementById('form_res');
+    const hol = document.getElementById('form_hol');
+
+    place.style.display = "none";
+    res.style.display = "none";
+    hol.style.display = "none";
+
+    if(event == 'place') place.style.display = "block";
+    else if(event == 'res') res.style.display = "block";
+    else hol.style.display = "block";
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     data = await Promise.all([loadJSON1(), loadJSON2(), loadJSON3()]);
     const date = document.getElementById('time-place');
     date.value = new Date().toISOString().split('T')[0];
+    const res = document.getElementById('form_res');
+    const hol = document.getElementById('form_hol');
+
+    res.style.display = "none";
+    hol.style.display = "none";
 });
