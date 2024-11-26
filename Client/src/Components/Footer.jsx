@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import '../Styles/Footer.css';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
+import { Link } from 'react-router-dom';
 function Footer () {
     useEffect(() => {
         // Khởi tạo bản đồ
@@ -25,7 +25,9 @@ function Footer () {
         <div class="footer">
             <div class="blank">
                 <div class="footer-home">
-                    <a href="#!"><i class='bx bx-home'></i> </a>
+                    <Link to = "/">
+                    <i class='bx bx-home'></i>
+                    </Link>
                 </div>
             </div>
 

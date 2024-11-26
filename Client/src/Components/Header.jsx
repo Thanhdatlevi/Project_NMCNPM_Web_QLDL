@@ -1,6 +1,6 @@
 import React from 'react';
 import '../Styles/Header.css';
-
+import { Link } from 'react-router-dom';
 const Header = () => {
     // document.getElementById("menu-toggle").addEventListener("click", function () {
     //     const navList = document.querySelector(".nav-list");
@@ -47,9 +47,7 @@ const Header = () => {
                     <span class="on">VI</span>
                     <span class="off">EN</span>
                 </div>
-                <a href="/home" class="button bg-user-icon">
-                    {/* <span class="sr-only">User</span> */}
-                </a>
+                <Link to="/profile" class="button bg-user-icon"></Link>
             </div>
 
         </nav>

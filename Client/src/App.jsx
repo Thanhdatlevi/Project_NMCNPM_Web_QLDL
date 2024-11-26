@@ -7,9 +7,11 @@ import Content from './Components/Content';
 import TourReservationResult from './Components/TourReservationResult';
 import Profile from './Components/Profile';
 import { BrowserRouter, Routes, Route, Router, Navigate } from 'react-router-dom';
-//import Form from './Components/Form';
+import BookingContainer from './Components/BookingContainer';
 import HomePlace from './Components/HomePlace';
 import ServicePage from './Components/ServicePage';
+import Booking01 from './Components/Booking-01';
+import Booking02 from './Components/Booking-02';
 function App() {
   return (
     <div className="App">
@@ -21,10 +23,10 @@ function App() {
           <Route path="/servicepage" element={<ServicePage />} />
           <Route path="/tourReservationResult" element={<TourReservationResult />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/*" element={<BookingContainer />} />
       </Routes>
       <Footer />
     </div>
-    
   );
 }
 

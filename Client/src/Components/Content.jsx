@@ -1,4 +1,5 @@
 import '../Styles/Home_Content.css';
+import { Link } from 'react-router-dom';
 // Import các styles của Swiper
 
 import React, { useEffect, useState } from 'react';
@@ -9,7 +10,9 @@ const Content = () => {
   useEffect(()=>{
     fetch('/attraction/_10PopularAttraction')
         .then((response) => response.json())
-        .then((data) => setAttractions(data))
+        .then((data) => {
+          setAttractions(data)
+        })
         .catch((error) => console.error('Error:', error));
   },[]);
 
@@ -21,45 +24,6 @@ const Content = () => {
             <h1 class="slider-title">Welcome</h1>
         </div>
        
-        {/* List most visited place */}
-        <section className="listVistedPlace">
-          <div style={{ fontSize: '20px', paddingTop: '50px', textAlign: 'center' }}>
-            <h2 data-i18n="list most visited place" style={{ fontSize: '30px', fontWeight: '800', fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif', textAlign: 'left', marginLeft: '20px' }}>
-              Best choice for travellers
-            </h2>
-          </div>
-          <div className="scroll-container">
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              {attractions.map((attr,index)=>{
-                return (
-                  
-                    <div  className="framePlace">
-                      <div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center', padding: '10px' }}>
-                          <img src={attr.img_url} alt="tour_ha_long" width="220" height="200" style={{ objectFit: 'cover' }} />
-                        </div>
-                        <div className="place_content">
-                          <h4>{attr.attraction_name}</h4>
-                          <p style={{ marginTop: '10px' }}>
-                            <span className="tagView text-clamp">{attr.description}</span>
-                          </p>
-                          <p style={{ marginTop: '5px', color: '#757575'}}>
-                            <span style={{ color: '#f09b0a', fontWeight: 'bold', marginRight: '10px' }}>★ {attr.rating}</span>
-                            <span>Mở cửa: {attr.opening_hours} </span>
-                            {/* <span> • 3M+ booked </span> */}
-                          </p>
-                          <p style={{ marginTop: '20px' }}>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  
-                )
-              })}
-              </div>
-          </div>
-        </section>
-
         {/* List most visited place */}
         <section className="listVistedPlace">
           <div style={{ fontSize: '20px', paddingTop: '50px', textAlign: 'center' }}>
@@ -140,7 +104,9 @@ const Content = () => {
             <div class="container">
                 <a href="#!" class="bookRes ele">
                     <div>
+                        <Link to="/servicepage">
                         <h3>Book Restaurant</h3>
+                        </Link>
                         <p>123+ Restaurant</p>
                     </div>
                 </a>
