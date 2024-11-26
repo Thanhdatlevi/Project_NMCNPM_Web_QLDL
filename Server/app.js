@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'src', 'public')));
 
 app.use('/res', resRoutes);
 
-app.use('/attraction/', attractionRoutes);
+app.use('/attraction', attractionRoutes);
 
 app.use('/hotel', holRoutes);
 

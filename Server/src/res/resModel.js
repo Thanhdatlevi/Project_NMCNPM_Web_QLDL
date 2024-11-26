@@ -1,7 +1,42 @@
 const db = require('../config/db');
 
 const RestaurantModel = {
+    getAllRes: async () => {
+        try {
+            // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
+            const query = `
+            SELECT * FROM public.restaurants
+            ORDER BY restaurant_id ASC 
+        `;
 
+            const res = await db.query(query);
+
+            return res.rows;  // Trả về kết quả chi tiết của nhà hàng
+        } catch (error) {
+            console.error('Error fetching popular restaurants:', error);
+            throw error; // Ném lỗi nếu có lỗi xảy ra
+        }
+    },
+    getFilterRes: async (rate,location,input) => {
+        try {
+            // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
+            const query = `
+            SELECT *, f.facility_name FROM public.restaurants r
+            join facilities f on f.facility_id = r.facility_id
+            join locations l on l.location_id = f.location_id
+            join facility_images fi on fi.facility_id = f.facility_id and fi.img_id = 1
+            WHERE (($1 = -1) OR (f.rating >= $1 AND f.rating <= $1+1))
+            and (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
+            and (($3 = 'default') OR (f.facility_name LIKE '%' || $3 || '%') OR (f.description LIKE '%' || $3 || '%'))
+        `;
+        const values = [rate, location,input];
+        const res = await db.query(query, values);  // Truyền tham số hotelID vào câu truy vấn
+        return res.rows;  // Trả về kết quả chi tiết của khách sạn
+        } catch (error) {
+            console.error('Error fetching hotel details:', error);
+            throw error;
+        }
+    },
     get_3_PopularRestaurants: async () => {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất

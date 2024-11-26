@@ -1,7 +1,29 @@
 const RestaurantModel = require('./resModel');
 
 const RestaurantController = {
-
+    getAllRes: async (req, res) => {
+        try {
+            const AllRestaurants = await RestaurantModel.getAllRes();
+            res.json(AllRestaurants); // Trả về 3 nhà hàng có rating cao nhất
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving popular restaurants' });
+        }
+    },
+    getFilterRes: async (req, res) => {
+        try {
+            const result = {
+                rate: req.query.rate || -1,
+                location: req.query.location || 'default',
+                input: req.query.input || 'default',
+            };
+            const filterRes = await RestaurantModel.getFilterRes(result.rate, result.location, result.input); 
+             // Gọi model để lấy danh sách khách sạn
+            res.json(filterRes);  // Trả về kết quả dưới dạng JSON
+        } catch (error) {
+            console.error('Error retrieving ress by location:', error);
+            res.status(500).json({ message: 'Error retrieving ress' });
+        }
+    },
     get_3_PopularRestaurants: async (req, res) => {
         try {
             const popularRestaurants = await RestaurantModel.get_3_PopularRestaurants();

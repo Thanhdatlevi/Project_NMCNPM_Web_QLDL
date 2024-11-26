@@ -12,6 +12,7 @@ import HomePlace from './Components/HomePlace';
 import ServicePage from './Components/ServicePage';
 import Booking01 from './Components/Booking-01';
 import Booking02 from './Components/Booking-02';
+import SearchService from './Components/SearchService';
 function App() {
   return (
     <div className="App">
@@ -20,10 +21,11 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Content />} />
           <Route path="/HomePlace" element={<HomePlace />} />
-          <Route path="/servicepage" element={<ServicePage />} />
+          <Route path="/servicepage/:idService" element={<ServicePage />} />
           <Route path="/tourReservationResult" element={<TourReservationResult />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/*" element={<BookingContainer />} />
+          <Route path="/searchService" element={<SearchService />} />
       </Routes>
       <Footer />
     </div>
