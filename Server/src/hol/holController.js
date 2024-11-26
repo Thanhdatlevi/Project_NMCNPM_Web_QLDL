@@ -34,6 +34,34 @@ const HotelController = {
             res.status(500).json({ message: 'Error retrieving hotels' });
         }
     },
+
+    getAllHotel: async (req, res) => {
+        try {
+
+            const hotels = await hotelModel.getAllHotel(); 
+             // Gọi model để lấy danh sách khách sạn
+            res.json(hotels);  // Trả về kết quả dưới dạng JSON
+        } catch (error) {
+            console.error('Error retrieving hotels by location:', error);
+            res.status(500).json({ message: 'Error retrieving hotels' });
+        }
+    },
+
+    getFilterHotel: async (req, res) => {
+        try {
+            const result = {
+                rate: req.query.rate || -1,
+                location: req.query.location || 'default',
+                input: req.query.input || 'default',
+            };
+            const hotels = await hotelModel.getFilterHotel(result.rate, result.location, result.input); 
+             // Gọi model để lấy danh sách khách sạn
+            res.json(hotels);  // Trả về kết quả dưới dạng JSON
+        } catch (error) {
+            console.error('Error retrieving hotels by location:', error);
+            res.status(500).json({ message: 'Error retrieving hotels' });
+        }
+    },
 };
 
 

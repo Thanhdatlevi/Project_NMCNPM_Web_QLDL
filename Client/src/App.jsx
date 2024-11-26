@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route, Router, Navigate } from 'react-router-dom
 //import Form from './Components/Form';
 import HomePlace from './Components/HomePlace';
 import ServicePage from './Components/ServicePage';
+import SearchService from './Components/SearchService';
 function App() {
   return (
     <div className="App">
@@ -18,9 +19,10 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Content />} />
           <Route path="/HomePlace" element={<HomePlace />} />
-          <Route path="/servicepage" element={<ServicePage />} />
+          <Route path="/servicepage/:idService" element={<ServicePage />} />
           <Route path="/tourReservationResult" element={<TourReservationResult />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/searchService" element={<SearchService />} />
       </Routes>
       <Footer />
     </div>
