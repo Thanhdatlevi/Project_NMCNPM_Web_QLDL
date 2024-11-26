@@ -17,7 +17,30 @@ const Profile = () => {
             return <BookingHis />;
         }
     };
-
+    const [user, setUser] = useState([]);
+    useEffect(() => {
+        const userId = "u001"; // Thay thế bằng userId thực tế
+        fetch(`/user/u001`) 
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setUser(data);
+                console.log('Fetch successful:', data); // Thêm console log để kiểm tra kết quả fetch
+                 // Thêm thông báo để kiểm tra kết quả fetch
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                 // Thêm thông báo để kiểm tra lỗi fetch
+            });
+    }, []); 
+    const formatDate = (dateString) => {
+        const options = { month: 'long',day: 'numeric'};
+        return new Date(dateString).toLocaleDateString('vi-VN', options);
+    };
     return (
         <body id="Profile">
             <main id="MyProfile">
@@ -33,21 +56,23 @@ const Profile = () => {
                 <section id="viewProfile">
 
                     <div id="selectProfile">
+                        {user.map((item) => (
                         <div className="over-profile">
                             <div className="profile-image-container">
                                 <img src="/Images/img_profile/PTD.jpg" alt="Profile Picture" className="profile-image" />
                                 <img src="/Images/img_profile/pencil.png" alt="Edit Icon" className="edit-icon" />
                             </div>
-                            <p>Phạm Thanh Duy</p>
+                            <p>{item.full_name}</p>
                             <div className="location-birthday">
                                 <img src="/Images/img_profile/Vector.jpg" />
-                                <p>Hồ Chí Minh</p>
+                                <p>{item.user_address}</p>
                                 <p> | </p>
                                 <img src="/Images/img_profile/fe_birthday-cake.jpg" />
-                                <p>Ngày 1 tháng 1</p>
+                                <p>{formatDate(item.user_birthday)}</p>
 
                             </div>
                         </div>
+                        ))}
                         <div className="list-select">
                             <div className="list-select-content" tabIndex="0" onClick={() => setContentType('profile')}>Chỉnh sửa thông
                                 tin
