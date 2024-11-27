@@ -48,6 +48,60 @@ const AttractionModel = {
             throw new Error('Error fetching tours by location: ' + err.message);
         }
     },
+    getAttractionByID: async (attractionID) => {
+        try {
+            const query = `
+                SELECT
+                    a.attraction_name AS name,
+                    a.description AS description,
+                    a.rating AS rating,
+                    a.contact AS contact,
+                    a.opening_hours AS opening_hours,
+                    a.img_url AS attractionimage,
+                    l.location_name AS location
+                FROM attractions a
+                JOIN locations l ON l.location_id = a.location_id
+                WHERE a.attraction_ID = $1
+                GROUP BY
+                    a.attraction_name,
+                    a.description,
+                    a.rating,
+                    a.contact,
+                    a.img_url,
+                    a.opening_hours,
+                    l.location_name
+
+            `;
+            const res = await db.query(query, [attractionID]);
+            return res.rows;
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    },
+    getRelatedAttraction: async (attractionID) => {
+        try {
+            const query = `
+                    SELECT
+                    a.attraction_id AS id,
+                    a.attraction_name AS name,
+                    a.description AS description,
+                    a.rating AS rating,
+                    a.img_url AS images,
+                    l.location_name AS location
+                FROM attractions a
+                JOIN locations l ON l.location_id = a.location_id
+                JOIN attractions re ON re.attraction_id = $1 and re.location_id = l.location_id
+                WHERE a.attraction_id != re.attraction_id
+                LIMIT 3
+            `;
+            const res = await db.query(query, [attractionID]);
+            return res.rows;
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    },
 };
 
 

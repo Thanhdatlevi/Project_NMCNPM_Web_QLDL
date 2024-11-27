@@ -67,15 +67,15 @@ const HotelModel = {
         try {
             const query = `
             SELECT
-                f.facility_name AS hotel_name,
-                f.description AS hotel_description,
-                f.rating AS hotel_rating,
-                f.contact AS hotel_contact,
-                f.deal AS hotel_deal,
-                array_agg(f_i.img_url) AS hotel_images,  -- Gom các URL ảnh vào một mảng
-                h.number_of_rooms AS hotel_total_rooms,
-                h.available_rooms AS hotel_available_rooms,
-                l.location_name AS hotel_location
+                f.facility_name AS name,
+                f.description AS description,
+                f.rating AS rating,
+                f.contact AS contact,
+                f.deal AS  deal,
+                array_agg(f_i.img_url) AS images,  -- Gom các URL ảnh vào một mảng
+                h.number_of_rooms AS total_rooms,
+                h.available_rooms AS available_rooms,
+                l.location_name AS location
             FROM hotels h
             JOIN facilities f ON h.facility_id = f.facility_id
             JOIN facility_images f_i ON f.facility_id = f_i.facility_id
@@ -90,6 +90,47 @@ const HotelModel = {
                 h.number_of_rooms,
                 h.available_rooms,
                 l.location_name
+            `;
+            const res = await db.query(query, [hotelID]);  // Truyền tham số hotelID vào câu truy vấn
+            return res.rows;  // Trả về kết quả chi tiết của khách sạn
+        } catch (error) {
+            console.error('Error fetching hotel details:', error);
+            throw error;
+        }
+    },
+
+    getRelatedHotel: async (hotelID) => {
+        try {
+            const query = `
+            SELECT
+                h.hotel_id AS id,
+                f.facility_name AS name,
+                f.description AS description,
+                f.rating AS rating,
+                f.contact AS contact,
+                f.deal AS  deal,
+                array_agg(f_i.img_url) AS images,
+                h.number_of_rooms AS total_rooms,
+                h.available_rooms AS available_rooms,
+                l.location_name AS location
+            FROM hotels h
+            JOIN facilities f ON h.facility_id = f.facility_id
+            JOIN facility_images f_i ON f.facility_id = f_i.facility_id
+            JOIN locations l ON l.location_id = f.location_id
+            JOIN hotels h1 ON h1.hotel_id=$1
+            JOIN facilities f1 ON h1.facility_id = f1.facility_id and l.location_id = f1.location_id
+            WHERE h.hotel_id != h1.hotel_id
+            GROUP BY
+                h.hotel_id,
+                f.facility_name,
+                f.description,
+                f.rating,
+                f.contact,
+                f.deal,
+                h.number_of_rooms,
+                h.available_rooms,
+                l.location_name
+            LIMIT 3
             `;
             const res = await db.query(query, [hotelID]);  // Truyền tham số hotelID vào câu truy vấn
             return res.rows;  // Trả về kết quả chi tiết của khách sạn

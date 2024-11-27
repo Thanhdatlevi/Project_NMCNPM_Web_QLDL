@@ -172,46 +172,6 @@ const SearchService = () => {
                             </label>
                         )
                     })}
-                    {/* <label>
-                        <input type="radio" name="location" value="Hà Nội" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Hà Nội
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Hồ Chí Minh" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Hồ Chí Minh
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Phan Thiết" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Phan Thiết
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Quảng Ninh" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Quảng Ninh
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Đà Nẵng" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Đà Nẵng
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Quảng Nam" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Quảng Nam
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Kiên Giang" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Kiên Giang
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Cao Bằng" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Cao Bằng
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Hà Giang" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Hà Giang
-                    </label>
-                    <label>
-                        <input type="radio" name="location" value="Lâm Đồng" onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                        Lâm Đồng
-                    </label> */}
                 </div>
                 <div class="rate opt">
                     <h3>Rate of Service</h3>

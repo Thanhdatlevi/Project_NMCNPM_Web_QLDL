@@ -68,15 +68,15 @@ const RestaurantModel = {
         try {
             const query = `
                 SELECT
-                    f.facility_name AS restaurant_name,
-                    f.description AS restaurant_description,
-                    f.rating AS restaurant_rating,
-                    f.contact AS restaurant_contact,
-                    f.deal AS restaurant_deal,
-                    array_agg(f_i.img_url) AS res_images,  -- Gom các URL ảnh vào một mảng
-                    r.cuisine_type AS restaurant_cuisine_type,
-                    r.opening_hours AS restaurant_opening_hours,
-                    l.location_name AS restaurant_location
+                    f.facility_name AS name,
+                    f.description AS description,
+                    f.rating AS rating,
+                    f.contact AS contact,
+                    f.deal AS deal,
+                    array_agg(f_i.img_url) AS images,  -- Gom các URL ảnh vào một mảng
+                    r.cuisine_type AS cuisine_type,
+                    r.opening_hours AS opening_hours,
+                    l.location_name AS location
                 FROM restaurants r
                 JOIN facilities f ON r.facility_id = f.facility_id
                 JOIN facility_images f_i ON f.facility_id = f_i.facility_id
@@ -101,6 +101,47 @@ const RestaurantModel = {
         }
     },
 
+    getRelatedRes: async (resID) => {
+        try {
+            const query = `
+                SELECT
+                    r.restaurant_id AS id,
+                    f.facility_name AS name,
+                    f.description AS description,
+                    f.rating AS rating,
+                    f.contact AS contact,
+                    f.deal AS deal,
+                    array_agg(f_i.img_url) AS images,  -- Gom các URL ảnh vào một mảng
+                    r.cuisine_type AS cuisine_type,
+                    r.opening_hours AS opening_hours,
+                    l.location_name AS location
+                FROM restaurants r
+                JOIN facilities f ON r.facility_id = f.facility_id
+                JOIN facility_images f_i ON f.facility_id = f_i.facility_id
+                JOIN locations l ON l.location_id = f.location_id
+                JOIN restaurants r1 ON r1.restaurant_id=$1
+                JOIN facilities f1 ON r1.facility_id = f1.facility_id and l.location_id = f1.location_id
+                WHERE r.restaurant_id != r1.restaurant_id
+                GROUP BY
+                    r.restaurant_id,
+                    f.facility_name,
+                    f.description,
+                    f.rating,
+                    f.contact,
+                    f.deal,
+                    r.cuisine_type ,
+                    r.opening_hours,
+                    l.location_name
+                LIMIT 3
+            `;
+            const res = await db.query(query, [resID]);  // Truyền tham số resID vào câu truy vấn
+            console.log(res)
+            return res.rows;  // Trả về kết quả chi tiết của nhà hàng
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    },
 
     getRestaurantsByLocation: async (locationId) => {
         try {

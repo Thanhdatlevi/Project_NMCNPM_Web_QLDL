@@ -1,4 +1,7 @@
-
+a{
+    text-decoration: none;
+    color:#000;
+}
 .detail-container{
     padding: 40px 120px;
 }
@@ -238,3 +241,55 @@
     border-radius: 12px;
     margin-bottom: 20px;
 }   
+
+.detail-container #related{
+    padding: 40px 0px;
+}
+
+
+
+.detail-container #related{
+    border-bottom: 2px solid #e2e2e2;
+}
+
+.detail-container #related h2{
+    font-size: 30px;
+    padding: 0px 20px
+}
+.detail-container #related #related_container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.detail-container #related .related_item{
+    width: 25%;
+    height: 45vh;
+    border: 4px #000 solid;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.detail-container #related .box_item{
+    height: 100%;
+}
+.detail-container #related .related_item img{
+    width: 100%;
+    height: 60%;
+    border-radius: 2px;
+}
+
+.detail-container #related .related_item .content{
+    padding: 10px;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.detail-container #related .related_item .desc {
+    display: -webkit-box; /* Bật chế độ Flexbox chỉ cho văn bản */
+    -webkit-box-orient: vertical; /* Đặt hướng khung thành dọc */
+    overflow: hidden; /* Ẩn phần dư thừa */
+    text-overflow: ellipsis; /* Thêm dấu ba chấm */
+    -webkit-line-clamp: 2; /* Giới hạn số dòng */
+  }
