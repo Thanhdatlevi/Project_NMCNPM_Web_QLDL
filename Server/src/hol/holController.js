@@ -75,6 +75,19 @@ const HotelController = {
             res.status(500).json({ message: 'Error retrieving attraction details' });
         }
     },
+
+    getHotelByProviderid: async (req, res) => {
+        try {
+            const { providerID } = req.params;
+            const hotelProvider = await hotelModel.getHotelByProviderid(providerID);
+            if (!hotelProvider) {
+                return res.status(404).json({ message: 'Attraction not found' }); 
+            }
+            res.json(hotelProvider); 
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
+        }
+    },
 };
 
 

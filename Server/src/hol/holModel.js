@@ -155,5 +155,37 @@ const HotelModel = {
             throw error;  // Ném lỗi nếu có vấn đề với truy vấn
         }
     },
+    
+    getHotelByProviderid: async (providerID) => {
+        try {
+            const query = `
+                SELECT
+                    h.hotel_id AS id,
+                    f.facility_name AS name,
+                    f.description AS description,
+                    l.location_name AS location,
+                    f.deal AS deal,
+                    f.rating AS rating,
+                    array_agg(f_i.img_url) AS images
+                FROM hotels h
+                JOIN facilities f ON h.facility_id = f.facility_id
+                JOIN locations l ON l.location_id = f.location_id
+                JOIN facility_images f_i ON f.facility_id = f_i.facility_id
+                WHERE f.provider_id = $1
+                GROUP BY
+                    h.hotel_id,
+                    f.facility_name,
+                    f.description,
+                    l.location_name,
+                    f.rating,
+                    f.deal
+            `;
+            const result = await db.query(query, [providerID]);  // Truyền locationId vào câu truy vấn
+            return result.rows;  // Trả về danh sách nhà hàng
+        } catch (error) {
+            console.error('Error fetching restaurants by location:', error);
+            throw error;  // Ném lỗi nếu có sự cố trong quá trình truy vấn
+        }
+    },
 };
 module.exports = HotelModel;

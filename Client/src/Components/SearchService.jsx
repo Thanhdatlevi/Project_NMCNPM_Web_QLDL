@@ -201,7 +201,7 @@ const SearchService = () => {
                 {paginateData().map((item, index)=>{
                     return(
                         <div key={index} class="service">
-                            <a href="#!"><img src={item.img_url} alt=""/></a>
+                            <a href={`/servicepage/${item.attraction_id||item.restaurant_id||item.hotel_id}`}><img src={item.img_url} alt=""/></a>
                             <div class="content">
                                 <div class="inf">
                                     <h2>{item.attraction_name||item.facility_name}</h2>

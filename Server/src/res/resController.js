@@ -59,6 +59,19 @@ const RestaurantController = {
         }
     },
 
+    getresByProviderid: async (req, res) => {
+        try {
+            const { providerID } = req.params;
+            const resProvider = await RestaurantModel.getresByProviderid(providerID);
+            if (!resProvider) {
+                return res.status(404).json({ message: 'Attraction not found' }); 
+            }
+            res.json(resProvider); 
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
+        }
+    },
+
     getRestaurantsByLocationID: async (req, res) => {
         try {
             const { locationId } = req.params;  // Lấy locationId từ tham số URL

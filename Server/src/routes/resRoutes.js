@@ -10,8 +10,11 @@ router.get('/3-PopularRes', restaurantController.get_3_PopularRestaurants);
 
 router.get('/getRelatedres/:resID', restaurantController.getRelatedRes);
 
-router.get('/:resID', restaurantController.getRestaurantByID)
+router.get('/getresByProviderid/:providerID', restaurantController.getresByProviderid);
 
 router.get('/by-location/:locationId', restaurantController.getRestaurantsByLocationID)
+
+router.get('/:resID', restaurantController.getRestaurantByID)
+
 
 module.exports = router;

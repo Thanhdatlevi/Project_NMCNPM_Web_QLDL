@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import DetailProfile from "./DetailProfile";
 import BookingHis from "./BookingHis";
+import MyFacility from "./MyFacility";
 
 import "../Styles/Profile.css";
 
@@ -13,9 +14,9 @@ const Profile = () => {
         if (contentType === 'profile') {
             return <DetailProfile />;
         }
-        else {
+        else if(contentType === 'booking'){
             return <BookingHis />;
-        }
+        }else return <MyFacility />;
     };
     const [user, setUser] = useState([]);
     useEffect(() => {
@@ -78,6 +79,8 @@ const Profile = () => {
                                 tin
                             </div>
                             <div className="list-select-content" tabIndex="0" onClick={() => setContentType('booking')}>Lịch sử đặt hàng
+                            </div>
+                            <div className="list-select-content" tabIndex="0" onClick={() => setContentType('service')}>Lịch sử đăng dịch vụ
                             </div>
                         </div>
                     </div>
