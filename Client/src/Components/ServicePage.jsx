@@ -8,8 +8,8 @@ const ServicePage = () => {
     const handleFetch = async () => {
         const typeService = idService.charAt(0);
         let type;
-        if(typeService=='h') type="hotel"
-        else if(typeService=='r') type="res"
+        if(typeService==='h') type="hotel"
+        else if(typeService==='r') type="res"
         else type="attraction"
         try {
             const response = await fetch(`/${type}/${idService}`);

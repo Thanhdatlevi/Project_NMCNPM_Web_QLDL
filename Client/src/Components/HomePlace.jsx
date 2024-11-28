@@ -1,30 +1,60 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import '../Styles/HomePlace.css';
 import { Link } from "react-router-dom";
 
 function HomePlace() {
     const [city, setCity] = useState("");
     const [data, setData] = useState([]);
-    const [originalContent, setOriginalContent] = useState({ place: "", res: "", hol: "" });
+    const [cityList, setCityList] = useState([]);
+    const [originalContent, setOriginalContent] = useState({ place: "", res: "", hol: "" , city: "<option value=\"\" disabled selected>City</option>"});
     
     const displayPlaceRef = useRef(null);
     const displayResRef = useRef(null);
     const displayHolRef = useRef(null);
+    const displayCity = useRef(null);
+
+    const fetchCity = useCallback(async () => {
+        try {
+            const response = await fetch('http://localhost:3000/location/allLocation');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setCityList(data);
+        } catch (error) {
+            console.error('Error loading cities:', error);
+        }
+    }, []);
 
     useEffect(() => {
         setOriginalContent({
             place: displayPlaceRef.current.innerHTML,
             res: displayResRef.current.innerHTML,
             hol: displayHolRef.current.innerHTML,
+            city: displayCity.current.innerHTML
         });
 
         // Load JSON data on initial render
         const fetchData = async () => {
-            const [places, hotels] = await Promise.all([loadJSON1(), loadJSON2()]);
-            setData([places, hotels, hotels]);
+            const [places, hotels, res] = await Promise.all([loadJSON1(), loadJSON2(), loadJSON3()]);
+            setData([places, hotels, res]);
         };
+
         fetchData();
-    }, []);
+        fetchCity();
+    }, [fetchCity]);
+
+    useEffect(() => {
+        if (displayCity.current) {
+            displayCity.current.innerHTML = originalContent.city;
+            cityList.forEach((element) => {
+                const option = document.createElement('option');
+                option.textContent = element.location_name;
+                option.value = element.location_id;
+                displayCity.current.appendChild(option);
+            });
+        }
+    }, [cityList, originalContent]);
 
     function setDelete(){
         const deleteButton = document.querySelectorAll(`.deletebtn`);
@@ -35,12 +65,18 @@ function HomePlace() {
     }
 
     async function loadJSON1() {
-        const response = await fetch('/Assets/data/places.json');
+        const response = await fetch('http://localhost:3000/attraction/getfilterattraction');
         const data1 = await response.json();
         return data1;
     }
     async function loadJSON2() {
-        const response = await fetch('/Assets/data/hotel.json');
+        const response = await fetch('http://localhost:3000/hotel/getfilterhotel');
+        const data2 = await response.json();
+        return data2;
+    }
+
+    async function loadJSON3() {
+        const response = await fetch('http://localhost:3000/res/getFilterres');
         const data2 = await response.json();
         return data2;
     }
@@ -60,12 +96,12 @@ function HomePlace() {
         selects.forEach((select, index) => {
             clearSelect(select);
             data[index].forEach(element => {
-                if (element.city === selectedCity) {
-                    element.place.forEach(item => {
-                        const option = document.createElement('option');
-                        option.textContent = item.name;
-                        select.appendChild(option);
-                    });
+                if (element.location_id === selectedCity) {
+                    const option = document.createElement('option');
+                    option.textContent = element.attraction_name ? element.attraction_name 
+                                        : element.facility_name;
+                    option.value = element.attraction_name ? element.attraction_name : element.facility_name;
+                    select.appendChild(option);
                 }
             });
             select.selectedIndex = 0;
@@ -155,12 +191,8 @@ function HomePlace() {
                 <section className="form-header-container">
                     <input id="tour_name" placeholder="Enter your tour's name" />
                     <div id="tour-name-container">
-                        <select id="city" onChange={handleCityChange}>
+                        <select id="city" onChange={handleCityChange} ref={displayCity}>
                             <option value="" disabled selected>City</option>
-                            <option value="Hanoi">Ha Noi</option>
-                            <option value="HCM">Ho Chi Minh</option>
-                            <option value="DaNang">Da Nang</option>
-                            <option value="Hue">Hue</option>
                         </select>
                     </div>
                 </section>

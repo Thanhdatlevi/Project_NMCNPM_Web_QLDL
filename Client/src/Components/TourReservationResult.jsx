@@ -13,14 +13,14 @@ const TourReservationResult = () => {
 
     const loadPlaces = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('/Assets/data/places.json');
+            const response = await fetch('http://localhost:3000/attraction/getfilterattraction');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenPlaces = data.filter(element => element.city === city)
-                .flatMap(element => element.place.filter(item => selections[item.name]));
-            setPlacesChosen(chosenPlaces);
+            const chosenPlaces = data.filter(element => element.location_id === city)
+            const places = chosenPlaces.filter(element => element.attraction_name === selections[element.attraction_name]);
+            setPlacesChosen(places);
         } catch (error) {
             console.error('Error loading places:', error);
         }
@@ -28,14 +28,14 @@ const TourReservationResult = () => {
 
     const loadHotels = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('/Assets/data/hotel.json');
+            const response = await fetch('http://localhost:3000/hotel/getfilterhotel');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenHotels = data.filter(element => element.city === city)
-                .flatMap(element => element.place.filter(item => selections[item.name]));
-            setHotelChosen(chosenHotels);
+            const chosenHotels = data.filter(element => element.location_id === city)
+            const hotels = chosenHotels.filter(element => element.facility_name === selections[element.facility_name]);    
+            setHotelChosen(hotels);
         } catch (error) {
             console.error('Error loading hotels:', error);
         }
@@ -43,27 +43,27 @@ const TourReservationResult = () => {
 
     const loadRestaurants = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('/Assets/data/restaurant.json');
+            const response = await fetch('http://localhost:3000/res/getFilterres');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenRestaurants = data.filter(element => element.city === city)
-                .flatMap(element => element.place.filter(item => selections[item.name]));
-            setRestaurantChosen(chosenRestaurants);
+            const chosenRestaurants = data.filter(element => element.location_id === city)
+            const restaurants = chosenRestaurants.filter(element => element.facility_name === selections[element.facility_name]);
+            setRestaurantChosen(restaurants);
         } catch (error) {
             console.error('Error loading restaurants:', error);
         }
     }, []);
 
-    const displayItems = useCallback(() => {
+    const displayItems = () => {
         const allItems = [...placesChosen, ...hotelChosen, ...restaurantChosen];
         return allItems.map(item => generateItem(item));
-    }, [placesChosen, hotelChosen, restaurantChosen]);
+    };
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + item.price, 0);
+            .reduce((acc, item) => acc + 100, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -80,8 +80,6 @@ const TourReservationResult = () => {
             try {
                 const selections = JSON.parse(localStorage.getItem('selections'));
                 const city = localStorage.getItem('city');
-                setSelections(selections);
-                setCity(city);
                 await loadPlaces(city, selections);
                 await loadHotels(city, selections);
                 await loadRestaurants(city, selections);
@@ -93,24 +91,24 @@ const TourReservationResult = () => {
             }
         }
         fetchData();
-    }, [loadPlaces, loadHotels, loadRestaurants, displayItems, displayTotal, finalTotal]);
+    }, [loadPlaces, loadHotels, loadRestaurants, displayTotal, finalTotal]);
 
     function editTourButton() {
-        window.location.href = "./form_travel_place.html";
+        window.location.href = "/HomePlace";
     }
 
     function confirmButton() {
         alert("Your reservation has been confirmed.");
-        window.location.href = "../../index.html";
+        window.location.href = "/";
     }
 
     function generateItem(item) {
         return (
-            <div id="service-detail" key={item.name}>
-                <p id="service-name">{item.name}</p>
+            <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
+                <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
                 <p id="service-quantity">1</p>
-                <p id="service-price">{item.price}</p>
-                <p id="service-total-price">{item.price}</p>
+                <p id="service-price">{100}</p>
+                <p id="service-total-price">{100}</p>
             </div>
         );
     }
