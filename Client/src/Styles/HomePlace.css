@@ -1,73 +1,96 @@
-html{
-    font-size: 16px;
-}
-body{
-    overflow-x: hidden;
-}
-
-#main_content{
+#main_content_homePlaces{
     margin: 50px 150px;
     border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #6497b1;
 }
-#itinar{
+
+#main_content_homePlaces #itinar{
     margin: 30px 50px;
 }
 
-
-/* header css */
-#form_place{
-    border-bottom: 2px dotted #000;
-    padding-bottom: 50px;
-}
-.form-header-container{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background: linear-gradient(rgb(140, 140, 140), rgb(154, 219, 233));
+#main_content_homePlaces #itinar #view-container{
+    border-radius: 10px;
     border: 2px solid #000;
+    background-color: #b3cde0;
+    width: 100%;
+    margin:0 10px;
 }
 
-#tour-name-container{
+#main_content_homePlaces section{
+    margin: 0px 0px 15px 0px;
+}
+/* header css */
+#main_content_homePlaces .header-container-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+    border-radius: 10px;
+    width: 75%;
+    margin: 10px auto;
+}
+
+#main_content_homePlaces .header-container-form button{
+    border-radius: 100px;
+    height: 3rem;
+    border: 2px solid #000;
+    background-color:#b3cde0;
+    font-size: 20px;
+}
+
+#main_content_homePlaces .header-container-form button:hover{
+    cursor: pointer;
+    background: #005b96;
+}
+
+#main_content_homePlaces #tour-name-container{
     margin: 10px 0;
     border-radius: 4px;
 }
 
-#tour_name{
+#main_content_homePlaces #tour_name{
     border: 2px solid #000;
     border-radius: 10px;
     height: 30px;
-    width: 50%;
+    
 }
 
-#city{
+#main_content_homePlaces #city{
     border: 2px solid #000;
-    border-radius: 10px;
-    height: 30px;
+    border-radius: 100px;
+    height: 3rem;
     width: 100%;
     font-size: 20px;
+    background-color: #b3cde0;
+    text-align: center;
 }
 
-#city:hover{
+#main_content_homePlaces #city:hover{
     cursor: pointer;
 }
 
 /* add place css */
 
-.add{
+#main_content_homePlaces .add{
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
     border-bottom: 2px solid #000;
+    border-radius: 10px 10px 0 0;
     gap: 10px;
+    background-color: #FFDA32;
 }
 
-#title-text{
+#main_content_homePlaces #title-text{
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin: 10px 0;
     border-radius: 4px;
+    width: 100%;
     height: 100%;
     white-space: nowrap;
     font-size: 40px;
@@ -76,40 +99,40 @@ body{
     text-align: center;
 }
 
-#add-place-button{
+#main_content_homePlaces #add-place-button{
     border-radius: 100px;
-    width: 6rem;
     font-size: 30px;
-    border: 4px solid #000;
+    border: 2px solid #000;
+    margin-right: 50px;
 }
 
-#add-place-button:hover{
+#main_content_homePlaces #add-place-button:hover{
     cursor: pointer;
     background: #a6a5a5;
 }
 
 /* display place css */
 
-#display-place{
+#main_content_homePlaces #display-place{
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin: 10px 5px;
+    gap: 10px;
+    margin: 5px 5px;
 }
 
-#display-place #notice-place{
+#main_content_homePlaces #display-place #notice-place{
     color: red;
     font-size: 15px;
 }
 
-#display-place #place-item{
+#main_content_homePlaces #display-place #place-item{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 2px dotted #000;
+    padding: 10px 0;
 }
-#settime{
+#main_content_homePlaces #settime{
     margin-left: 55px;
 }
 /* #display-place #place-header-container{
@@ -119,44 +142,39 @@ body{
     align-items: center;
 } */
 
-#place-information #delete-place-button{
+#main_content_homePlaces #place-information #delete-place-button{
     border-radius: 100px;
-    width: 100px;
     font-size: 20px;
-    border: 4px solid #000;
+    border: 2px solid #000;
     height: 75%;
 }
 
-#place-information #delete-place-button:hover{
+#main_content_homePlaces #place-information #delete-place-button:hover{
     cursor: pointer;
     background: #a6a5a5;
 }
 
-.detail-button{
+#main_content_homePlaces .detail-button{
     border-radius: 100px;
-    width: 100px;
     font-size: 20px;
-    border: 4px solid #000;
+    border: 2px solid #000;
     height: 75%;
 }
 
-.detail-button:hover{
+#main_content_homePlaces .detail-button:hover{
     cursor: pointer;
     background: #a6a5a5;
 }
 
-#display-place #time-place{
-    max-width: 30%;
-    height: 75%px;
+#main_content_homePlaces #display-place #time-place{
     font-size: 17px;
     border: #000 solid 2px;
-    margin: 10px;
     border: none;          /* Loại bỏ khung mặc định */
     border-bottom: 1px dashed #000;
     outline: none;
 }
 
-#display-place #place-information{
+#main_content_homePlaces #display-place #place-information{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -165,31 +183,31 @@ body{
     gap: 20px;
 }
 
-#display-place #place-information .list{
+#main_content_homePlaces #display-place #place-information .list{
     font-size: 30px;
     font-weight: bold;
     max-width: 50%;
     width: 50%;
-    border-radius: 2px;
+    border-radius: 10px;
     border: none;          /* Loại bỏ khung mặc định */
     border-bottom: 1px solid #000;
     outline: none;
 }
 
-#display-place #place-information #place-infor{
+#main_content_homePlaces #display-place #place-information #place-infor{
     font-size: 20px;
     font-weight: bold;
     max-width: 50%;
     width: 40%;
     margin: 10px 0;
 }
-#service{
+#main_content_homePlaces #service{
     display: flex;
     /* justify-content: space-between; */
     gap: 10%;
     padding-top: 50px;
 }
-.service-text{
+#main_content_homePlaces .service-text{
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -204,31 +222,31 @@ body{
     text-align: center;
 }
 
-.add-res-hol{
+#main_content_homePlaces .add-res-hol{
     border-radius: 100px;
-    width: 7rem;
     font-size: 30px;
-    border: 4px solid #000;
+    border: 2px solid #000;
+    margin-right: 50px;
 }
 
-.add-res-hol:hover{
+#main_content_homePlaces .add-res-hol:hover{
     cursor: pointer;
     background: #a6a5a5;
 }
 
-#display-res{
+#main_content_homePlaces #display-res{
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin: 10px 5px;
 }
 
-#display-res #notice-res{
+#main_content_homePlaces #display-res #notice-res{
     color: red;
     font-size: 15px;
 }
 
-#display-res #res-item{
+#main_content_homePlaces #display-res #res-item{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -236,14 +254,14 @@ body{
     height: 100%;
 }
 
-#display-res #res-header-container{
+#main_content_homePlaces #display-res #res-header-container{
     display: flex;
     justify-content: space-around;
     flex-direction: row;
     align-items: center;
 }
 
-#display-res #res-information{
+#main_content_homePlaces #display-res #res-information{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -252,14 +270,14 @@ body{
     gap: 20px;
 }
 
-#display-res #res-information .list{
+#main_content_homePlaces #display-res #res-information .list{
     font-size: 30px;
     font-weight: bold;
     width: 60%;
     border-radius: 15px;
 }
 
-#display-res #res-information #res-infor{
+#main_content_homePlaces #display-res #res-information #res-infor{
     font-size: 20px;
     font-weight: bold;
     max-width: 50%;
@@ -267,7 +285,7 @@ body{
     margin: 10px 0;
 }
 
-#display-res #res-feature{
+#main_content_homePlaces #display-res #res-feature{
     display: flex;
     justify-content: space-around;
     flex-direction: row;
@@ -275,52 +293,50 @@ body{
     margin-top: 15px;
 }
 
-#display-res #res-feature #delete-res-button{
+#main_content_homePlaces #display-res #delete-res-button{
     border-radius: 100px;
-    width: 100px;
     font-size: 20px;
-    border: 4px solid #000;
+    border: 2px solid #000;
     height: 75%;
 }
 
-#display-res #res-feature #delete-res-button:hover{
+#main_content_homePlaces #display-res #delete-res-button:hover{
     cursor: pointer;
     background: #a6a5a5;
 }
 
-#display-res #book-res-button{
+#main_content_homePlaces #display-res #book-res-button{
     border-radius: 100px;
-    width: 100px;
     font-size: 20px;
-    border: 4px solid #000;
+    border: 2px solid #000;
     height: 75%;
 }
 
-#display-res #book-res-button:hover{
+#main_content_homePlaces #display-res #book-res-button:hover{
     cursor: pointer;
     background: #a6a5a5;
 }
 
-#form_res{
-    width: 45%;
+#main_content_homePlaces #form_res{
+    width: 100%;
 }
-#form_hol{
-    width: 45%;
+#main_content_homePlaces #form_hol{
+    width: 100%;
 }
 
-#display-hol{
+#main_content_homePlaces #display-hol{
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin: 10px 5px;
 }
 
-#display-hol #notice-hol{
+#main_content_homePlaces #display-hol #notice-hol{
     color: red;
     font-size: 15px;
 }
 
-#display-hol #hol-item{
+#main_content_homePlaces #display-hol #hol-item{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -328,14 +344,14 @@ body{
     height: 100%;
 }
 
-#display-hol #hol-header-container{
+#main_content_homePlaces #display-hol #hol-header-container{
     display: flex;
     justify-content: space-around;
     flex-direction: row;
     align-items: center;
 }
 
-#display-hol #hol-information{
+#main_content_homePlaces #display-hol #hol-information{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -344,14 +360,14 @@ body{
     gap: 20px;
 }
 
-#display-hol #hol-information .list{
+#main_content_homePlaces #display-hol #hol-information .list{
     font-size: 30px;
     font-weight: bold;
-    width: 50%;
+    width: 60%;
     border-radius: 15px;
 }
 
-#display-hol #hol-information #hol-infor{
+#main_content_homePlaces #display-hol #hol-information #hol-infor{
     font-size: 20px;
     font-weight: bold;
     max-width: 50%;
@@ -359,7 +375,7 @@ body{
     margin: 10px 0;
 }
 
-#display-hol #hol-feature{
+#main_content_homePlaces #display-hol #hol-feature{
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
@@ -367,53 +383,92 @@ body{
     margin-top: 15px;
 }
 
-#display-hol #hol-feature #delete-hol-button{
+#main_content_homePlaces #display-hol #delete-hol-button{
     border-radius: 100px;
-    width: 100px;
     font-size: 20px;
-    border: 4px solid #000;
-    height: 75%;
-}
-
-#display-hol #hol-feature #delete-hol-button:hover{
-    cursor: pointer;
-    background: #a6a5a5;
-}
-
-#display-hol #book-hol-button{
-    border-radius: 100px;
-    width: 100px;
-    font-size: 20px;
-    border: 4px solid #000;
-    height: 75%;
-}
-
-#display-hol- #book-hol-button:hover{
-    cursor: pointer;
-    background: #a6a5a5;
-}
-
-#itinar #submit{
-    display: flex;
-    justify-content: end;
-}
-
-#itinar #submit #submit-btn{
-    border-radius: 100px;
-    width: 100px;
-    font-size: 20px;
-    padding: 5px;
     border: 2px solid #000;
     height: 75%;
-    display: flex;
-    justify-content: center;
-    text-decoration: none;
-    font-weight: bold;
-    background-color: #005b96;
-    color: #fff;
 }
 
-#itinar #submit #submit-btn:hover{
+#main_content_homePlaces #display-hol #delete-hol-button:hover{
     cursor: pointer;
-    background: #6497b1;
+    background: #a6a5a5;
+}
+
+#main_content_homePlaces #display-hol #book-hol-button{
+    border-radius: 100px;
+    font-size: 20px;
+    border: 2px solid #000;
+    height: 75%;
+}
+
+#main_content_homePlaces #display-hol #book-hol-button:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+#main_content_homePlaces #submit{
+    display: flex;
+    justify-content: right;
+}
+
+#main_content_homePlaces #submit-btn{
+    border-radius: 10px;
+    font-size: 20px;
+    border: 2px solid #000;
+    height: 75%;
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #FFDA32;
+}
+
+#main_content_homePlaces #tour-note {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 20%;
+    height: 200px;
+    border:2px solid #000;
+    border-radius: 10px;
+}
+
+#main_content_homePlaces #tour-note #note-header{
+    font-size: 40px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    background-color: #FFDA32;
+    text-align: center;
+    border-bottom: 1px solid #000;
+}
+
+#main_content_homePlaces #tour-note #note{
+    font-size: 15px;
+    flex-grow: 1;
+    border-radius: 0 0 10px 10px;
+    resize: none;
+}
+
+#main_content_homePlaces #tour-note #note::-webkit-scrollbar {
+    width: 5px;
+}
+
+#main_content_homePlaces #tour-note #note::-webkit-scrollbar {
+    width: 10px; /* Độ rộng của thanh cuộn */
+}
+
+#main_content_homePlaces #tour-note #note::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Màu nền của rãnh thanh cuộn */
+    border-radius: 10px; /* Bo góc rãnh */
+}
+
+#main_content_homePlaces #tour-note #note::-webkit-scrollbar-thumb {
+    background: #888; /* Màu của thanh kéo */
+    border-radius: 10px; /* Bo góc thanh kéo */
+}
+
+#main_content_homePlaces #tour-note #note::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Màu khi hover vào thanh kéo */
 }

@@ -17,10 +17,9 @@ const Form = () => {
         populateSelect(data);
     }
 
-
     // load data from file JSON
     async function loadJSON1() {
-        const response = await fetch('../JSON/data/places.json');
+        const response = await fetch('');
         const data1 = await response.json();
         return data1;
     }
@@ -62,25 +61,6 @@ const Form = () => {
             select.remove(1);
         }
     }
-
-    // function show_img(selectedElement,type){
-    //     const parent = selectedElement.parentNode;
-    //     const infors = parent.querySelector(`#${type}_img`);
-    //     // const place = parent.querySelector('#place-list').value;
-    //     const place = selectedElement.value;
-    //     let index = type=='place' ? 0 : type == 'res' ? 1 : 2;
-    //     data[index].forEach(element => {
-    //         if(element.city == city){
-    //             element.place.forEach(item => {
-    //                 if(item.name == place){
-    //                     console.log(item.image)
-    //                     infors.setAttribute("src", `${item.image}`);
-    //                     return;
-    //                 }
-    //             });
-    //         }
-    //     });
-    // }
 
     function addElement(e) {
         const cur_city = document.getElementById('city').value;
@@ -144,6 +124,7 @@ const Form = () => {
         const date = document.getElementById('time-place');
         date.value = new Date().toISOString().split('T')[0];
     });
+
     return (
         <main id="main_content">
             <div id="itinar">
