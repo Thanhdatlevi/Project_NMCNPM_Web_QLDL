@@ -1,16 +1,38 @@
-import React, { useState, useEffect,useHistory } from "react";
+import React, { useState, useEffect } from "react";
 import "../Styles/Booking-01.css"; // Adjust this path according to your CSS file location
 import { Link, useNavigate } from 'react-router-dom';
 
-const Booking01 = ({ setBookingData }) => {
-    const [hot,setHol] = useState([]);  
+const Booking01 = ({ setBookingData }) => { 
+    const [fac,setFac] = useState({});
+    const type = localStorage.getItem('type');
     useEffect(()=>{
-        fetch('/hotel/h001')
+        console.log(type);
+        if(type === 'hol'){
+            fetch('/hotel/getfilterhotel')
             .then((response) => response.json())
             .then((data) => {
-                setHol(data)
+                console.log(data);
+                for(let i = 0; i < data.length; i++){
+                    if(data[i].facility_id === localStorage.getItem('selected')){
+                        setFac(data[i]);
+                    }
+                }
             })
             .catch((error) => console.error('Error:', error));
+        }
+        else if(type === 'res'){
+            fetch('/res/getFilterres')
+            .then((response) => response.json())
+            .then((data) => {
+                for(let i = 0; i < data.length; i++){
+                    if(data[i].facility_id === localStorage.getItem('selected')){
+                        setFac(data[i]);
+                    }
+                }
+            })
+            .catch((error) => console.error('Error:', error));
+        }
+
     },[]);
     const [duration, setDuration] = useState(2); // Initial duration in days
 
@@ -22,15 +44,17 @@ const Booking01 = ({ setBookingData }) => {
         setDuration(duration + 1);
     };
     const handleBooking = () => {
-        if (hot.length > 0) {
+        if (fac) {
             const data = {
                 duration: duration,
-                name: hot[0].hotel_name,
-                location: hot[0].hotel_location,
+                name: fac.facility_name,
+                location: fac.location_name,
                 total: 200 * duration,
                 price: 200,
+                imgPath: fac.img_url,
             };
-            setBookingData(data);
+            localStorage.setItem('bookingData', JSON.stringify(data));
+            //setBookingData(data);
         }
     };
     let navigate = useNavigate();
@@ -48,7 +72,7 @@ const Booking01 = ({ setBookingData }) => {
                 <div className="progress-line"></div>
                 <span className="inactive-step">3</span>
             </div>
-            {hot.map((item) => (
+
             <div className="booking01-info">
             
                 <div className="booking-content">
@@ -60,11 +84,11 @@ const Booking01 = ({ setBookingData }) => {
                     
                     <div className="info-section">
                         <div className="image-section">
-                            <img src="/Images/voucher_res1.jpg" alt="Blue Origin Farms" />
+                            <img src={fac.img_url} alt="Blue Origin Farms" />
                         </div>
                         <div className="location-section">
-                            <h3>{item.hotel_name}</h3>
-                            <p>{item.hotel_location}</p>
+                            <h3>{fac.facility_name}</h3>
+                            <p>{fac.location_name}</p>
                         </div>
                     </div>
                     
@@ -72,12 +96,12 @@ const Booking01 = ({ setBookingData }) => {
                     <div className="divider"></div>
                     <div className="blank"></div>
                     <div className="form-section">
-                        <label htmlFor="duration">How long you will stay?</label>
+                        <label htmlFor="duration">{type === 'hol' ? 'How long you will stay?' : 'How many tables you want to book?'}</label>
                         <div className="duration-control">
                             <button id="decrease" onClick={decreaseDuration}>
                                 -
                             </button>
-                            <span id="duration">{duration} Days</span>
+                            <span id="duration">{duration} {type === 'hol' ? 'Days' : 'Tables'}</span>
                             <button id="increase" onClick={increaseDuration}>
                                 +
                             </button>
@@ -92,19 +116,19 @@ const Booking01 = ({ setBookingData }) => {
                         </div>
                         <div className="price-info">
                             <p>
-                                You will pay <strong> 200$ USD</strong>
+                                You will pay <strong> {duration*200}$ USD</strong>
                             </p>
-                            <p>per <strong>{duration} Days</strong></p>
+                            <p>per <strong>{duration} {type === 'hol' ? 'Days' : 'Tables'}</strong></p>
                         </div>
                     </div>
                     <div className="blank0"></div>
                 </div>
                 
             </div>
-            ))}
+
             <div className="action-section">
-                <Link to="/booking02">
-                <button onClick={handleBooking} className="book-now">Book Now</button>
+                <Link to="/HomePlace">
+                    <button onClick={handleBooking} className="book-now">Book Now</button>
                 </Link>
                 <button className="cancel" onClick={() => {navigate(-1);}}
                 >Cancel</button>

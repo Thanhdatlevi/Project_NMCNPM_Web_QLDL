@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import '../Styles/HomePlace.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function HomePlace() {
 
@@ -27,7 +27,7 @@ function HomePlace() {
             console.error('Error loading cities:', error);
         }
     }, []);
-
+    
     useEffect(() => {
         setOriginalContent({
             place: displayPlaceRef.current.innerHTML,
@@ -38,7 +38,7 @@ function HomePlace() {
 
         // Load JSON data on initial render
         const fetchData = async () => {
-            const [places, hotels, res] = await Promise.all([loadJSON1(), loadJSON2(), loadJSON3()]);
+            const [places, hotels, res] = await Promise.all([loadJSON1(), loadJSON3(), loadJSON2()]);
             setData([places, hotels, res]);
         };
 
@@ -62,6 +62,26 @@ function HomePlace() {
         const deleteButton = document.querySelectorAll(`.deletebtn`);
         for (let i = 0; i < deleteButton.length; i++) {
             deleteButton[i].onclick = (event) => deleteElement(event, `${deleteButton[i].value}`);
+        }
+    }
+
+    function setBook() {
+        const deleteButton = document.querySelectorAll(`.bookbtn`);
+        for (let i = 0; i < deleteButton.length; i++) {
+            deleteButton[i].onclick = (event) => bookBtn(event, `${deleteButton[i].value}`);
+        }
+    }
+
+    let navigate = useNavigate();
+    function bookBtn(event, type) {
+        const parent = event.target.parentNode.parentNode.parentNode.parentNode;
+        if(type === 'res' || type === 'hol') 
+        {
+            const selected = parent.querySelector('.list').value;
+            localStorage.setItem('selected', selected);
+            localStorage.setItem('type', type);
+            window.location.href = '/booking01';
+            navigate('/booking01');
         }
     }
 
@@ -90,6 +110,7 @@ function HomePlace() {
         let selectedCity = event.target.value;
         setCity(event.target.value);
         setDelete();
+        setBook();
         populateSelect(selectedCity);
     }
 
@@ -102,7 +123,7 @@ function HomePlace() {
                     const option = document.createElement('option');
                     option.textContent = element.attraction_name ? element.attraction_name
                         : element.facility_name;
-                    option.value = element.attraction_name ? element.attraction_name : element.facility_name;
+                    option.value = element.attraction_id ? element.attraction_id : element.facility_id;
                     select.appendChild(option);
                 }
             });
@@ -128,6 +149,7 @@ function HomePlace() {
         const clone = item.cloneNode(true);
         object.appendChild(clone);
         setDelete();
+        setBook();
         const newChild = object.lastElementChild;
         if (e === 'place') {
             newChild.querySelector('#time-place').value = new Date().toISOString().split('T')[0];
@@ -193,98 +215,6 @@ function HomePlace() {
     }
 
     return (
-        // <main id="main_content">
-        //     <div id="itinar">
-        //         <section className="form-header-container">
-        //             <input id="tour_name" placeholder="Enter your tour's name" />
-        //             <div id="tour-name-container">
-        //                 <select id="city" onChange={handleCityChange} ref={displayCity}>
-        //                     <option value="" disabled selected>City</option>
-        //                 </select>
-        //             </div>
-        //         </section>
-
-        //         <section id="form_place">
-        //             <div className="add">
-        //                 <p id="title-text" data-i18n="travel-place">Travel place</p>
-        //                 <button id="add-place-button" value="place" onClick={addElement}>Add</button>
-        //             </div>
-
-        //             <div id="display-place" ref={displayPlaceRef}>
-        //                 <p id="notice-place"></p>
-        //                 <div id="place-item" className ="item">
-        //                     <div id="settime">
-        //                         <input type="time" />
-        //                         <input id="time-place" type="date" onChange={handleDateChange} />
-        //                     </div>
-        //                     <div id="place-information">
-        //                         <select className="list" value="place">
-        //                             <option value="" disabled selected>Select a place</option>
-        //                         </select>
-        //                         <Link to = "/servicepage">
-        //                         <button className="detail-button">Detail</button>
-        //                         </Link>
-        //                         <button id="delete-place-button" className="deletebtn" value="place" onClick={(event) => deleteElement(event, 'place')}>Delete</button>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </section>
-
-        //         <div id="service">
-        //             <section id="form_res">
-        //                 <div className="add">
-        //                     <p className="service-text" data-i18n="travel-place">Restaurant</p>
-        //                     <button className="add-res-hol" value="res" onClick={addElement}>Add</button>
-        //                 </div>
-
-        //                 <div id="display-res" ref={displayResRef}>
-        //                     <p id="notice-res"></p>
-        //                     <div id="res-item" className ="item">
-        //                         <div id="res-information">
-        //                             <select className="list" value="res">
-        //                                 <option value="" disabled selected>Select a restaurant</option>
-        //                             </select>
-        //                             <button className="detail-button">Detail</button>
-        //                         </div>
-
-        //                         <div id="res-feature">
-        //                             <button id="book-res-button">Book</button>
-        //                             <button id="delete-res-button" className="deletebtn" value="res" onClick={() => deleteElement(this, 'res')}>Delete</button>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </section>
-
-        //             <section id="form_hol">
-        //                 <div className="add">
-        //                     <p className="service-text" data-i18n="travel-place">Hotel</p>
-        //                     <button className="add-res-hol" value="hol" onClick={addElement}>Add</button>
-        //                 </div>
-
-        //                 <div id="display-hol" ref={displayHolRef}>
-        //                     <p id="notice-hol"></p>
-        //                     <div id="hol-item" className ="item">
-        //                         <div id="hol-information">
-        //                             <select className="list" value="hol">
-        //                                 <option value="" disabled selected>Select a Hotel</option>
-        //                             </select>
-        //                             <button className="detail-button">Detail</button>
-        //                         </div>
-
-        //                         <div id="hol-feature">
-        //                             <button id="book-hol-button">Book</button>
-        //                             <button id="delete-hol-button" className="deletebtn" value="hol" onClick={() => deleteElement(this, 'hol')}>Delete</button>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </section>
-        //         </div>
-        //         <div id="submit">
-        //             <Link to={canNavigate && "/tourReservationResult"} id='submit-btn' onClick={submitBtnHandle}> Submit </Link>
-        //         </div>
-        //     </div>
-        // </main>
-
         <main id="main_content_homePlaces">
             <div id="itinar">
                 <section className="header-container-form">
@@ -355,7 +285,7 @@ function HomePlace() {
                                         </select>
                                         <div>
                                             <button className="detail-button"><img src="/Images/detail.png" /></button>
-                                            <button id="book-res-button" onClick="window.location.href='service_place.html'"><img src="/Images/book.png" /></button>
+                                            <button id="book-res-button" value='res' className='bookbtn' onClick={(event)=>bookBtn(event, 'res')}><img src="/Images/book.png" /></button>
                                             <button id="delete-res-button" className="deletebtn" value="res" onClick={(event) => deleteElement(event, 'res')}><img src='/Images/delete.png'/></button>
                                         </div>
 
@@ -386,7 +316,7 @@ function HomePlace() {
                                         </select>
                                         <div>
                                             <button className="detail-button"><img src="/Images/detail.png" /></button>
-                                            <button id="book-hol-button"><img src="/Images/book.png" /></button>
+                                            <button id="book-hol-button" value='hol' className='bookbtn' onClick={(event)=>bookBtn(event, 'hol')}><img src="/Images/book.png" /></button>
                                             <button id="delete-hol-button" className="deletebtn" value="hol" onClick={(event) => deleteElement(event, 'hol')}><img src='/Images/delete.png'/></button>
                                           </div>
                                     </div>
