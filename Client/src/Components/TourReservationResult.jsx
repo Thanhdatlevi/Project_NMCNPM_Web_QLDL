@@ -83,15 +83,24 @@ const TourReservationResult = () => {
                 await loadPlaces(city, selections);
                 await loadHotels(city, selections);
                 await loadRestaurants(city, selections);
-                displayItems();
-                displayTotal();
-                finalTotal();
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         }
         fetchData();
-    }, [loadPlaces, loadHotels, loadRestaurants, displayTotal, finalTotal]);
+    }, [loadPlaces, loadHotels, loadRestaurants, displayTotal]);
+
+    useEffect(() => {
+        displayTotal();
+    }, [displayTotal]);
+
+    useEffect(() => {
+        finalTotal();
+    }, [finalTotal]);
+
+    useEffect(() => {
+        displayItems();
+    }, [displayItems]);
 
     function editTourButton() {
         window.location.href = "/HomePlace";
