@@ -3,10 +3,12 @@ import '../Styles/HomePlace.css';
 import { Link } from "react-router-dom";
 
 function HomePlace() {
+
     const [city, setCity] = useState("");
     const [data, setData] = useState([]);
     const [cityList, setCityList] = useState([]);
-    const [originalContent, setOriginalContent] = useState({ place: "", res: "", hol: "", city: "<option value=\"\" disabled selected>City</option>" });
+    const [originalContent, setOriginalContent] = useState({ place: '', res: "", hol: "", 
+        city: "<option value=\"\" disabled selected>City</option>" });
 
     const displayPlaceRef = useRef(null);
     const displayResRef = useRef(null);
@@ -42,7 +44,7 @@ function HomePlace() {
 
         fetchData();
         fetchCity();
-    }, [fetchCity]);
+    }, [fetchCity, setOriginalContent]);
 
     useEffect(() => {
         if (displayCity.current) {
@@ -58,10 +60,9 @@ function HomePlace() {
 
     function setDelete() {
         const deleteButton = document.querySelectorAll(`.deletebtn`);
-        deleteButton.forEach((element) => {
-            console.log(element.value);
-            element.onClick = (event) => deleteElement(event, `${element.value}`);
-        })
+        for (let i = 0; i < deleteButton.length; i++) {
+            deleteButton[i].onclick = (event) => deleteElement(event, `${deleteButton[i].value}`);
+        }
     }
 
     async function loadJSON1() {
@@ -88,6 +89,7 @@ function HomePlace() {
 
         let selectedCity = event.target.value;
         setCity(event.target.value);
+        setDelete();
         populateSelect(selectedCity);
     }
 
@@ -125,16 +127,15 @@ function HomePlace() {
         const object = document.getElementById(`display-${e}`);
         const clone = item.cloneNode(true);
         object.appendChild(clone);
-        setDelete()
+        setDelete();
         const newChild = object.lastElementChild;
-        if (e.target.value === 'place') {
+        if (e === 'place') {
             newChild.querySelector('#time-place').value = new Date().toISOString().split('T')[0];
         }
     }
 
-    function deleteElement(event, type) {
-        console.log(event.target);
-        const parent = event.target.parentNode.parentNode.parentNode;
+    const deleteElement = (event, type) => {
+        const parent = event.target.parentNode.parentNode.parentNode.parentNode;
         const container = document.getElementById(`display-${type}`);
         const notice = document.getElementById(`notice-${type}`);
 
@@ -144,7 +145,6 @@ function HomePlace() {
             return;
         }
         notice.innerHTML = "";
-
         parent.remove();
     }
 
@@ -165,19 +165,19 @@ function HomePlace() {
     function submitBtnHandle() {
         const selected = document.querySelectorAll('.list');
         const selections = {};
-        const hasUnselected = Array.from(selected).some(element => {
-            if (element.selectedIndex === 0) {
-                alert("Please select all the options");
-                return true;
+        let count_selected = 0;
+        Array.from(selected).some(element => {
+            if (element.selectedIndex !== 0) {
+                selections[element.value] = element.value;
+                count_selected++;
             }
-            selections[element.value] = element.value;
-            return false;
         });
 
-        if (hasUnselected) {
+        if(count_selected === 0) {
+            alert("At least one field must be selected.");
             return;
-        }
-        else {
+        } else {
+            // Handle the case where at least one field is selected
             var jsonSelections = JSON.stringify(selections);
             localStorage.setItem('selections', jsonSelections);
             localStorage.setItem('city', city);
@@ -212,7 +212,7 @@ function HomePlace() {
 
         //             <div id="display-place" ref={displayPlaceRef}>
         //                 <p id="notice-place"></p>
-        //                 <div id="place-item" class ="item">
+        //                 <div id="place-item" className ="item">
         //                     <div id="settime">
         //                         <input type="time" />
         //                         <input id="time-place" type="date" onChange={handleDateChange} />
@@ -224,7 +224,7 @@ function HomePlace() {
         //                         <Link to = "/servicepage">
         //                         <button className="detail-button">Detail</button>
         //                         </Link>
-        //                         <button id="delete-place-button" class="deletebtn" value="place" onClick={(event) => deleteElement(event, 'place')}>Delete</button>
+        //                         <button id="delete-place-button" className="deletebtn" value="place" onClick={(event) => deleteElement(event, 'place')}>Delete</button>
         //                     </div>
         //                 </div>
         //             </div>
@@ -239,7 +239,7 @@ function HomePlace() {
 
         //                 <div id="display-res" ref={displayResRef}>
         //                     <p id="notice-res"></p>
-        //                     <div id="res-item" class ="item">
+        //                     <div id="res-item" className ="item">
         //                         <div id="res-information">
         //                             <select className="list" value="res">
         //                                 <option value="" disabled selected>Select a restaurant</option>
@@ -249,7 +249,7 @@ function HomePlace() {
 
         //                         <div id="res-feature">
         //                             <button id="book-res-button">Book</button>
-        //                             <button id="delete-res-button" class="deletebtn" value="res" onClick={() => deleteElement(this, 'res')}>Delete</button>
+        //                             <button id="delete-res-button" className="deletebtn" value="res" onClick={() => deleteElement(this, 'res')}>Delete</button>
         //                         </div>
         //                     </div>
         //                 </div>
@@ -263,7 +263,7 @@ function HomePlace() {
 
         //                 <div id="display-hol" ref={displayHolRef}>
         //                     <p id="notice-hol"></p>
-        //                     <div id="hol-item" class ="item">
+        //                     <div id="hol-item" className ="item">
         //                         <div id="hol-information">
         //                             <select className="list" value="hol">
         //                                 <option value="" disabled selected>Select a Hotel</option>
@@ -273,7 +273,7 @@ function HomePlace() {
 
         //                         <div id="hol-feature">
         //                             <button id="book-hol-button">Book</button>
-        //                             <button id="delete-hol-button" class="deletebtn" value="hol" onClick={() => deleteElement(this, 'hol')}>Delete</button>
+        //                             <button id="delete-hol-button" className="deletebtn" value="hol" onClick={() => deleteElement(this, 'hol')}>Delete</button>
         //                         </div>
         //                     </div>
         //                 </div>
@@ -287,7 +287,7 @@ function HomePlace() {
 
         <main id="main_content_homePlaces">
             <div id="itinar">
-                <section class="header-container-form">
+                <section className="header-container-form">
                     <div id="tour-name-container">
                         <select id="city" onChange={handleCityChange} ref={displayCity}>
                             <option value="" disabled selected>City</option>
@@ -303,11 +303,11 @@ function HomePlace() {
                         {/* <!-- Place --> */}
                         <section id="form_place" style={{ display: visibleSection === 'place' ? 'block' : 'none' }}>
                             {/* <!-- add place --> */}
-                            <div class="add">
+                            <div className="add">
                                 <p id="title-text" data-i18n="travel-place">
                                     Travel place
                                 </p>
-                                <button id="add-place-button" value="place" onClick={()=>addElement('place')}><img src="/Images/add.png" /></button>
+                                <button id="add-place-button" value="place" onClick={()=>addElement('place')}><img src='/Images/add.png'/></button>
                             </div>
 
                             {/* <!-- display place --> */}
@@ -322,12 +322,12 @@ function HomePlace() {
                                     </div>
 
                                     <div id="place-information">
-                                        <select class="list" onchange="show_img(this,'place')" value="place">
+                                        <select className="list" value="place">
                                             <option value="" disabled selected>Select a place</option>
                                         </select>
                                         <div>
-                                            <button class="detail-button"><img src="/Images/detail.png" /></button>
-                                            <button id="delete-place-button" onClick={() => deleteElement(this, 'hol')}><img src="/Images/delete.png" /></button>
+                                            <button className="detail-button"><img src="/Images/detail.png" /></button>
+                                            <button id="delete-place-button" className="deletebtn" value="place" onClick={(event) => deleteElement(event, 'place')}><img src='/Images/delete.png'/></button>
                                         </div>
                                     </div>
 
@@ -336,11 +336,11 @@ function HomePlace() {
                         </section>
                         <section id="form_res" style={{ display: visibleSection === 'res' ? 'block' : 'none' }}>
                             {/* <!-- add place --> */}
-                            <div class="add">
-                                <p class="service-text" data-i18n="travel-place">
+                            <div className="add">
+                                <p className="service-text" data-i18n="travel-place">
                                     Restaurant
                                 </p>
-                                <button class="add-res-hol" value="res" onClick={()=>addElement('res')}><img src="/Images/add.png" /></button>
+                                <button className="add-res-hol" value="res" onClick={()=>addElement('res')}><img src="/Images/add.png" /></button>
                             </div>
 
                             {/* <!-- display place --> */}
@@ -350,13 +350,13 @@ function HomePlace() {
                                 </p>
                                 <div id="res-item">
                                     <div id="res-information">
-                                        <select class="list" onchange="show_infor(this,'res')" value="res">
+                                        <select className="list" value="res">
                                             <option value="" disabled selected>Select a restaurant</option>
                                         </select>
                                         <div>
-                                            <button class="detail-button"><img src="/Images/detail.png" /></button>
+                                            <button className="detail-button"><img src="/Images/detail.png" /></button>
                                             <button id="book-res-button" onClick="window.location.href='service_place.html'"><img src="/Images/book.png" /></button>
-                                            <button id="delete-res-button" onClick={() => deleteElement(this, 'hol')}><img src="/Images/delete.png" /></button>
+                                            <button id="delete-res-button" className="deletebtn" value="res" onClick={(event) => deleteElement(event, 'res')}><img src='/Images/delete.png'/></button>
                                         </div>
 
                                     </div>
@@ -367,11 +367,11 @@ function HomePlace() {
                         {/* <!-- Hotel --> */}
                         <section id="form_hol" style={{ display: visibleSection === 'hol' ? 'block' : 'none' }}>
                             {/* <!-- add place --> */}
-                            <div class="add">
-                                <p class="service-text" data-i18n="travel-place">
+                            <div className="add">
+                                <p className="service-text" data-i18n="travel-place">
                                     Hotel
                                 </p>
-                                <button class="add-res-hol" value="hol" onClick={()=>addElement('hol')}><img src="/Images/add.png" /></button>
+                                <button className="add-res-hol" value="hol" onClick={()=>addElement('hol')}><img src="/Images/add.png" /></button>
                             </div>
 
                             {/* <!-- display place --> */}
@@ -381,14 +381,14 @@ function HomePlace() {
                                 </p>
                                 <div id="hol-item">
                                     <div id="hol-information">
-                                        <select class="list" onchange="show_infor(this,'hol')" value="hol">
+                                        <select className="list" onChange="show_infor(this,'hol')" value="hol">
                                             <option value="" disabled selected>Select a Hotel</option>
                                         </select>
                                         <div>
-                                            <button class="detail-button"><img src="/Images/detail.png" /></button>
+                                            <button className="detail-button"><img src="/Images/detail.png" /></button>
                                             <button id="book-hol-button"><img src="/Images/book.png" /></button>
-                                            <button id="delete-hol-button" onClick={() => deleteElement(this, 'hol')}><img src="/Images/delete.png" /></button>
-                                        </div>
+                                            <button id="delete-hol-button" className="deletebtn" value="hol" onClick={(event) => deleteElement(event, 'hol')}><img src='/Images/delete.png'/></button>
+                                          </div>
                                     </div>
 
                                 </div>

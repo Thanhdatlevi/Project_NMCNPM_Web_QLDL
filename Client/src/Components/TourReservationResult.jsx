@@ -91,7 +91,7 @@ const TourReservationResult = () => {
             }
         }
         fetchData();
-    }, [loadPlaces, loadHotels, loadRestaurants, displayTotal, finalTotal]);
+    }, [loadPlaces, loadHotels, loadRestaurants, displayTotal]);
 
     function editTourButton() {
         window.location.href = "/HomePlace";
