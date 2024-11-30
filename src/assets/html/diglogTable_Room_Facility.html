@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/dialog_table_room_facility.css">
+    <title>Room Information Dialog</title>
+</head>
+
+<body>
+
+    <!-- Button to open the dialog -->
+    <button id="openDialogBtn">View Room Info</button>
+
+    <main id="roomDialog">
+        <!-- Dialog -->
+        <div id="roomDialog" class="dialog">
+            <div class="dialog-content">
+                <span id="closeDialogBtn" class="close">&times;</span>
+                <h2>Room Information</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Number</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="roomTableBody">
+                        <!-- Room data will be inserted here dynamically -->
+                    </tbody>
+                </table>
+                <!-- Button to add new room -->
+                <button id="addRoomBtn">Add Room</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../javascript/dialog_table_room_facility.js"></script>
+</body>
+
+</html>
