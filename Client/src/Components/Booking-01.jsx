@@ -48,7 +48,7 @@ const Booking01 = ({ setBookingData }) => {
                 <div className="progress-line"></div>
                 <span className="inactive-step">3</span>
             </div>
-            {hot.map((item) => (
+            { Array.isArray(hot) && hot.map((item) => (
             <div className="booking01-info">
             
                 <div className="booking-content">

@@ -13,6 +13,7 @@ import ServicePage from './Components/ServicePage';
 import Booking01 from './Components/Booking-01';
 import Booking02 from './Components/Booking-02';
 import SearchService from './Components/SearchService';
+import FacilityForm from './Components/FacilityForm';
 function App() {
   return (
     <div className="App">
@@ -26,6 +27,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/*" element={<BookingContainer />} />
           <Route path="/searchService" element={<SearchService />} />
+          <Route path="/facilityForm" element={<FacilityForm />} />
       </Routes>
       <Footer />
     </div>

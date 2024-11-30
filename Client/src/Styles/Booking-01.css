@@ -4,11 +4,10 @@
    
 }
 
-.body {
+.body{
     background-color: #f7f7f7;
     display: flex;
     justify-content: center;
-    min-height: 100vh;
 }
 .blank0{
     flex-basis: 25%;
@@ -17,8 +16,8 @@
     flex-basis: 10%;
 }
 .booking-container {
-    width: 1440px;
-    height: 1025px;
+    width: 880px;
+    height: 600px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

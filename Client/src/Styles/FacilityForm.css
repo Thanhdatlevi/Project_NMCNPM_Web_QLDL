@@ -1,0 +1,87 @@
+.facility-form{
+    width: 800px;
+    height: auto;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f5f6   ;
+    border-radius: 8px;
+    border: 2px solid #000;
+}
+.facility-form-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px;
+}
+.facility-form-content h2{
+    color: #007ae7;
+    margin-bottom: 10px;
+}
+.facility-form-details{
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+    flex: 1;
+}
+.image-preview img{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+.image-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.facility-form-body {
+    display: flex;
+}
+#facility_name, #facility_location, #facility_price, #facility_type, #facility_description{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #000;
+    background: none;
+    outline: none;
+}
+#facility_type, #facility_price{
+    width: auto;
+    padding: 10px;
+    margin: 10px 0;
+}
+.facility-form-item-inline{
+    display: flex;
+    justify-content: space-between;
+}
+#facility_description{
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    margin: 10px 0;
+}
+#facility_image{
+    display: none;  
+}
+
+#facility_img { 
+    width: 100%;
+    padding: 30px;
+    margin: 10px 0;
+    border: dashed;
+    border-radius: 4px;
+}
+#facility_action{
+    padding: 10px;
+    width: 100%;
+    font-weight: 700;
+    color: white;
+    background-color: #00a8e8;
+    border-radius: 8px;
+}

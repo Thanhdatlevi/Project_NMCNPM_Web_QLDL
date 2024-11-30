@@ -1,7 +1,18 @@
 import React, {useEffect,useState} from 'react';
 import '../Styles/ServicePage.css';
 import { Link, useParams} from 'react-router-dom';
+import Booking01 from './Booking-01';
+import Modal from 'react-modal'
 const ServicePage = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
     const { idService } = useParams();
     const [service, setService] = useState([]);
     const [related_ser, setRelated_ser] = useState([]);
@@ -75,9 +86,19 @@ const ServicePage = () => {
                         <span className= "icon">
                             <i className='bx bx-share-alt'></i>
                         </span>
-                        <Link to ="/booking01">
-                        <button className="book-now">Book Now</button>
-                        </Link>
+                        <div>
+                            <button className="book-now" onClick={openModal}>Book Now</button>
+                            <Modal
+                                isOpen={modalIsOpen}
+                                onRequestClose={closeModal}
+                                contentLabel="Booking Modal"
+                                className="custom-modal"
+                                overlayClassName="custom-overlay"
+                            >
+                                <button className="close-button" onClick={closeModal}>Close</button>
+                                <Booking01 />
+                            </Modal>
+                        </div>
                     </div>
                 </div>
             </div>
