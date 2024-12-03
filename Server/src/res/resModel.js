@@ -17,7 +17,7 @@ const RestaurantModel = {
             throw error; // Ném lỗi nếu có lỗi xảy ra
         }
     },
-    getFilterRes: async (rate,location,input) => {
+    getFilterRes: async (rate, location, input) => {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
             const query = `
@@ -29,9 +29,9 @@ const RestaurantModel = {
             and (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
             and (($3 = 'default') OR (f.facility_name LIKE '%' || $3 || '%') OR (f.description LIKE '%' || $3 || '%'))
         `;
-        const values = [rate, location,input];
-        const res = await db.query(query, values);  // Truyền tham số hotelID vào câu truy vấn
-        return res.rows;  // Trả về kết quả chi tiết của khách sạn
+            const values = [rate, location, input];
+            const res = await db.query(query, values);  // Truyền tham số hotelID vào câu truy vấn
+            return res.rows;  // Trả về kết quả chi tiết của khách sạn
         } catch (error) {
             console.error('Error fetching hotel details:', error);
             throw error;
@@ -74,24 +74,21 @@ const RestaurantModel = {
                     f.contact AS contact,
                     f.deal AS deal,
                     array_agg(f_i.img_url) AS images,  -- Gom các URL ảnh vào một mảng
-                    r.cuisine_type AS cuisine_type,
-                    r.opening_hours AS opening_hours,
+                    r.amenities as amenities,
                     l.location_name AS location
                 FROM restaurants r
                 JOIN facilities f ON r.facility_id = f.facility_id
                 JOIN facility_images f_i ON f.facility_id = f_i.facility_id
                 JOIN locations l ON l.location_id = f.location_id
-                WHERE r.restaurant_ID = $1
+                WHERE r.restaurant_ID = 'r001'
                 GROUP BY
                     f.facility_name,
                     f.description,
                     f.rating,
                     f.contact,
                     f.deal,
-                    r.cuisine_type ,
-                    r.opening_hours,
+                    r.amenities ,
                     l.location_name
-
             `;
             const res = await db.query(query, [resID]);  // Truyền tham số resID vào câu truy vấn
             return res.rows;  // Trả về kết quả chi tiết của nhà hàng
