@@ -67,28 +67,43 @@ const RestaurantModel = {
     getRestaurantByID: async (resID) => {
         try {
             const query = `
+                WITH facility_images_agg AS (
+                    SELECT
+                        f_i.facility_id,
+                        array_agg(DISTINCT f_i.img_url) AS res_images -- Gom URL ảnh duy nhất
+                    FROM facility_images f_i
+                    GROUP BY f_i.facility_id
+                ),
+                tables_agg AS (
+                    SELECT
+                        t.restaurant_id,
+                        array_agg(
+                            JSON_BUILD_OBJECT(
+                                'table_id', t.table_id,
+                                'price', t.price,
+                                'status', t.status
+                            )
+                        ) AS res_tables -- Gom thông tin bàn thành mảng JSON
+                    FROM tables t
+                    GROUP BY t.restaurant_id
+                )
                 SELECT
-                    f.facility_name AS name,
-                    f.description AS description,
-                    f.rating AS rating,
-                    f.contact AS contact,
-                    f.deal AS deal,
-                    array_agg(f_i.img_url) AS images,  -- Gom các URL ảnh vào một mảng
-                    r.amenities as amenities,
-                    l.location_name AS location
+                    f.facility_name AS res_name,
+                    f.description AS res_description,
+                    l.location_name AS location_name,
+                    f.status AS res_status,
+                    f.rating AS res_rating,
+                    f.contact AS res_contact,
+                    f.deal AS res_deal,
+                    COALESCE(fi.res_images, '{}') AS res_images, -- URL ảnh (nếu không có thì trả về mảng rỗng)
+                    r.amenities AS res_amenities,
+                    COALESCE(ta.res_tables, '{}') AS res_tables -- Bàn (nếu không có thì trả về mảng rỗng)
                 FROM restaurants r
                 JOIN facilities f ON r.facility_id = f.facility_id
-                JOIN facility_images f_i ON f.facility_id = f_i.facility_id
                 JOIN locations l ON l.location_id = f.location_id
-                WHERE r.restaurant_ID = 'r001'
-                GROUP BY
-                    f.facility_name,
-                    f.description,
-                    f.rating,
-                    f.contact,
-                    f.deal,
-                    r.amenities ,
-                    l.location_name
+                LEFT JOIN facility_images_agg fi ON f.facility_id = fi.facility_id -- Kết nối với ảnh đã gom nhóm
+                LEFT JOIN tables_agg ta ON r.restaurant_id = ta.restaurant_id -- Kết nối với bàn đã gom nhóm
+                WHERE r.restaurant_id = $1;
             `;
             const res = await db.query(query, [resID]);  // Truyền tham số resID vào câu truy vấn
             return res.rows;  // Trả về kết quả chi tiết của nhà hàng

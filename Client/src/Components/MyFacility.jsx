@@ -4,6 +4,8 @@ import { useState, useEffect} from "react";
 import "../Styles/Profile.css";
 import "../Styles/MyFacility.css";
 
+import {Link} from "react-router-dom";
+
 const MyFacility = () => {
     let provider = 'p001'
     const itemsPerPage = 2;
@@ -107,9 +109,11 @@ const MyFacility = () => {
                                         View detail
                                     </button>
                                     <div className="btn_main">
+                                        <Link to="/facilityForm">
                                         <button className="btn_fix">
                                             <i class="fa-solid fa-screwdriver-wrench"></i>
                                         </button>
+                                        </Link>
 
                                         <button className="btn_delete">
                                             <i class="fa-solid fa-trash"></i>

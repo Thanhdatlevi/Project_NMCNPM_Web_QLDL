@@ -131,7 +131,6 @@ const ManageBooking = () => {
             </div>
         </body>
     );
-
 }
 
 export default ManageBooking;

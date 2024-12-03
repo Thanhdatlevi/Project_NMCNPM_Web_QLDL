@@ -9,14 +9,14 @@ const HotelModel = {
             ORDER BY hotel_id ASC 
         `;
 
-        const res = await db.query(query);  // Truyền tham số hotelID vào câu truy vấn
-        return res.rows;  // Trả về kết quả chi tiết của khách sạn
+            const res = await db.query(query);  // Truyền tham số hotelID vào câu truy vấn
+            return res.rows;  // Trả về kết quả chi tiết của khách sạn
         } catch (error) {
             console.error('Error fetching hotel details:', error);
             throw error;
         }
     },
-    getFilterHotel: async (rate,location,input) => {
+    getFilterHotel: async (rate, location, input) => {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
             const query = `
@@ -28,9 +28,9 @@ const HotelModel = {
             and (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
             and (($3 = 'default') OR (f.facility_name LIKE '%' || $3 || '%') OR (f.description LIKE '%' || $3 || '%'))
         `;
-        const values = [rate, location,input];
-        const res = await db.query(query, values);  // Truyền tham số hotelID vào câu truy vấn
-        return res.rows;  // Trả về kết quả chi tiết của khách sạn
+            const values = [rate, location, input];
+            const res = await db.query(query, values);  // Truyền tham số hotelID vào câu truy vấn
+            return res.rows;  // Trả về kết quả chi tiết của khách sạn
         } catch (error) {
             console.error('Error fetching hotel details:', error);
             throw error;
@@ -66,30 +66,43 @@ const HotelModel = {
     getHotelByID: async (hotelID) => {
         try {
             const query = `
+            WITH facility_images_agg AS (
+                SELECT
+                    f_i.facility_id,
+                    array_agg(DISTINCT f_i.img_url) AS hotel_images -- Gom URL ảnh duy nhất
+                FROM facility_images f_i
+                GROUP BY f_i.facility_id
+            ),
+            rooms_agg AS (
+                SELECT
+                    r.hotel_id,
+                    array_agg(
+                        JSON_BUILD_OBJECT(
+                            'room_id', r.room_id,
+                            'price', r.price,
+                            'status', r.status
+                        )
+                    ) AS hotel_rooms -- Gom thông tin phòng thành mảng JSON
+                FROM rooms r
+                GROUP BY r.hotel_id
+            )
             SELECT
-                f.facility_name AS name,
-                f.description AS description,
-                f.rating AS rating,
-                f.contact AS contact,
-                f.deal AS  deal,
-                array_agg(f_i.img_url) AS images,  -- Gom các URL ảnh vào một mảng
-                h.number_of_rooms AS total_rooms,
-                h.available_rooms AS available_rooms,
-                l.location_name AS location
+                f.facility_name AS hotel_name,
+                f.description AS hotel_description,
+                l.location_name AS location_name,
+                f.status AS hotel_status,
+                f.rating AS hotel_rating,
+                f.contact AS hotel_contact,
+                f.deal AS hotel_deal,
+                COALESCE(fi.hotel_images, '{}') AS hotel_images, -- URL ảnh (nếu không có thì trả về mảng rỗng)
+                h.amenities AS hotel_amenities,
+                COALESCE(ra.hotel_rooms, '{}') AS hotel_rooms -- Phòng (nếu không có thì trả về mảng rỗng)
             FROM hotels h
             JOIN facilities f ON h.facility_id = f.facility_id
-            JOIN facility_images f_i ON f.facility_id = f_i.facility_id
             JOIN locations l ON l.location_id = f.location_id
-            WHERE h.hotel_ID = $1  -- Sử dụng tham số thay vì giá trị cố định
-            GROUP BY
-                f.facility_name,
-                f.description,
-                f.rating,
-                f.contact,
-                f.deal,
-                h.number_of_rooms,
-                h.available_rooms,
-                l.location_name
+            LEFT JOIN facility_images_agg fi ON f.facility_id = fi.facility_id -- Kết nối với ảnh đã gom nhóm
+            LEFT JOIN rooms_agg ra ON h.hotel_id = ra.hotel_id -- Kết nối với phòng đã gom nhóm
+            WHERE h.hotel_id = $1; -- Thay bằng ID khách sạn cụ thể nếu cần
             `;
             const res = await db.query(query, [hotelID]);  // Truyền tham số hotelID vào câu truy vấn
             return res.rows;  // Trả về kết quả chi tiết của khách sạn
@@ -155,7 +168,7 @@ const HotelModel = {
             throw error;  // Ném lỗi nếu có vấn đề với truy vấn
         }
     },
-    
+
     getHotelByProviderid: async (providerID) => {
         try {
             const query = `

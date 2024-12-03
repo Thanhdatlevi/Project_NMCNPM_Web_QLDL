@@ -4,11 +4,10 @@
    
 }
 
-.body {
+.body{
     background-color: #f7f7f7;
     display: flex;
     justify-content: center;
-    min-height: 100vh;
 }
 .blank0{
     flex-basis: 25%;
