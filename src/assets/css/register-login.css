@@ -203,12 +203,12 @@ img {
 
 /*-- end reset --*/
 body {
-    background: #03396c;
+    background: #011f4b;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #03396c, #d8d8d8);
-    background: -moz-linear-gradient(to top, #03396c, #d8d8d8);
-    background: -o-linear-gradient(to top, #03396c, #d8d8d8);
-    background: linear-gradient(to top, #03396c, #d8d8d8);
+    background: -webkit-linear-gradient(to top, #011f4b, #cccccc);
+    background: -moz-linear-gradient(to top, #011f4b, #cccccc);
+    background: -o-linear-gradient(to top, #011f4b, #cccccc);
+    background: linear-gradient(to top, #011f4b, #cccccc);
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
@@ -217,7 +217,7 @@ body {
 h1 {
     font-size: 3em;
     text-align: center;
-    color: #fff;
+    color: #011f4b;
     font-weight: 100;
     text-transform: capitalize;
     letter-spacing: 4px;
@@ -232,7 +232,7 @@ h1 {
 .main-agileinfo {
     width: 35%;
     margin: 3em auto;
-    background: rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 1);
     background-size: cover;
 }
 
@@ -244,21 +244,20 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
     font-size: 0.9em;
-    color: #fff;
+    color: #011f4b;
     font-weight: 100;
     width: 94.5%;
     display: block;
     border: none;
     padding: 0.8em;
-    border: solid 1px rgba(255, 255, 255, 0.37);
+    border: solid 1px #011f4b;
     -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
     transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #fff 4%);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #fff 4%);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #011f4b 4%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #011f4b 4%);
     background-position: -800px 0;
     background-size: 100%;
     background-repeat: no-repeat;
-    color: #fff;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -287,30 +286,30 @@ input.text.w3lpass {
 }
 
 ::-webkit-input-placeholder {
-    color: #fff;
+    color: #011f4b;
     font-weight: 100;
 }
 
 :-moz-placeholder {
     /* Firefox 18- */
-    color: #fff;
+    color: #011f4b;
 }
 
 ::-moz-placeholder {
     /* Firefox 19+ */
-    color: #fff;
+    color: #011f4b;
 }
 
 :-ms-input-placeholder {
-    color: #fff;
+    color: #011f4b;
 }
 
 input[type="submit"] {
     font-size: .9em;
     color: #fff;
-    background: #03396c;
+    background: #011f4b;
     outline: none;
-    border: 1px solid #03396c;
+    border: 1px solid #011f4b;
     cursor: pointer;
     padding: 0.9em;
     -webkit-appearance: none;
@@ -330,14 +329,14 @@ input[type="submit"]:hover {
 
 .agileits-top p {
     font-size: 1em;
-    color: #fff;
+    color: #011f4b;
     text-align: center;
     letter-spacing: 1px;
     font-weight: 300;
 }
 
 .agileits-top p a {
-    color: #fff;
+    color: #011f4b;
     -webkit-transition: .5s all;
     -moz-transition: .5s all;
     transition: .5s all;
@@ -345,21 +344,21 @@ input[type="submit"]:hover {
 }
 
 .agileits-top p a:hover {
-    color: #03396c;
+    color: #011f4b;
 }
 
 /*-- //main --*/
 /*-- checkbox --*/
 .wthree-text label {
     font-size: 0.9em;
-    color: #fff;
+    color: #011f4b;
     font-weight: 200;
     cursor: pointer;
     position: relative;
 }
 
 input.checkbox {
-    background: #d8d8d8;
+    background: #fff;
     cursor: pointer;
     width: 1.2em;
     height: 1.2em;
@@ -382,7 +381,7 @@ input.checkbox:after {
     z-index: 1;
     width: 1.2em;
     height: 1.2em;
-    border: 1px solid #fff;
+    border: 1px solid #011f4b;
     -webkit-transition: .4s ease-in-out;
     -moz-transition: .4s ease-in-out;
     -o-transition: .4s ease-in-out;
@@ -396,7 +395,7 @@ input.checkbox:checked:after {
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
     height: .5rem;
-    border-color: #fff;
+    border-color: #011f4b;
     border-top-color: transparent;
     border-right-color: transparent;
 }
@@ -416,12 +415,12 @@ input.checkbox:checked:after {
 
 @keyframes rippling {
     50% {
-        border-left-color: #fff;
+        border-left-color: #011f4b;
     }
 
     100% {
-        border-bottom-color: #fff;
-        border-left-color: #fff;
+        border-bottom-color: #011f4b;
+        border-left-color: #011f4b;
     }
 }
 
@@ -902,6 +901,52 @@ input.email {
 .divider {
     margin: 0 8px;
     /* Khoảng cách ngang cho dấu gạch đứng */
-    color: #fff;
+    color: #011f4b;
     /* Màu của dấu gạch đứng */
+}
+
+
+
+.role-selection {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    gap: 40px;
+}
+
+.role-card {
+    width: 264px;
+    border: 2px solid #03396c;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.role-card:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    /* Làm sáng phần tử khi hover */
+}
+
+.role-card h3 {
+    margin: 8px;
+    font-size: 1.2em;
+    color: #03396c;
+}
+
+.role-card p {
+    color: #555;
+    font-size: 1em;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .role-selection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
