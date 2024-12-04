@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 
 const AttractionModel = {
     // Phương thức để lấy tất cả các facility
@@ -32,7 +32,7 @@ const AttractionModel = {
             throw error;  // Ném lỗi nếu có sự cố trong quá trình truy vấn
         }
     },
-    getFilterAttraction: async (rate,location,input) => {
+    getFilterAttraction: async (rate, location, input) => {
         const query = `
             SELECT * FROM public.attractions a
             join locations l on l.location_id = a.location_id
@@ -40,7 +40,7 @@ const AttractionModel = {
             and (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
             and (($3 = 'default') OR (a.attraction_name LIKE '%' || $3 || '%') OR (a.description LIKE '%' || $3 || '%'))
         `
-            const values = [rate, location,input];
+        const values = [rate, location, input];
         try {
             const result = await db.query(query, values); // Remove values here
             return result.rows;

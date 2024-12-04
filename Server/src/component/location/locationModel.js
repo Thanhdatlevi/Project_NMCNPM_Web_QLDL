@@ -1,4 +1,4 @@
-const db = require('../config/db');  // Import db để truy vấn cơ sở dữ liệu
+const db = require('../../config/db');  // Import db để truy vấn cơ sở dữ liệu
 
 const LocationModel = {
     getAllLocations: async () => {

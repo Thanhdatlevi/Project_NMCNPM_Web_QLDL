@@ -40,8 +40,6 @@ app.use('/attraction', attractionRoutes);
 
 app.use('/hotel', holRoutes);
 
-app.use('/user', userRoutes);
-
 app.use('/location', locRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
