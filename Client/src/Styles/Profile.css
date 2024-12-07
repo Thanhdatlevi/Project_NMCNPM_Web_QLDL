@@ -1,0 +1,328 @@
+#Profile #titleProfile p {
+    font-size: 15px;
+}
+
+#Profile #titleProfile a {
+    color: #778088;
+
+
+    text-decoration: none;
+    font-size: 15px;
+}
+
+#Profile .divider {
+    width: 2px;
+    /* Độ rộng của đường kẻ dọc */
+    background-color: #F4F4F5;
+    /* Màu của đường kẻ */
+    height: auto;
+    /* Chiều cao tự động để chiếm toàn bộ chiều cao của section */
+}
+
+#Profile #titleProfile {
+    margin-left: 40px;
+    margin-top: 8px;
+    margin-bottom: 8x;
+    background-color: white;
+}
+
+#Profile #titleProfile h3 {
+    margin-bottom: 8px;
+}
+
+#Profile #titleProfile p {
+    margin-top: 0px;
+    margin-bottom: 8px;
+}
+
+#Profile #viewProfile {
+    position: relative;
+    background-color: #b3cde0;
+    /* Thêm màu nền */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+
+#Profile #selectProfile {
+    flex: 3;
+    background-color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    padding-right: 8px;
+    align-items: center;
+}
+
+#Profile #selectProfile .over-profile {
+    position: relative;
+    width: 100%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Profile #selectProfile .over-profile .profile-image-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+#Profile #selectProfile .over-profile .location-birthday {
+    display: flex;
+    margin-top: 12px;
+
+}
+
+#Profile #selectProfile .over-profile .location-birthday p {
+    font-size: 14px;
+    margin-left: 4px;
+}
+
+#Profile #selectProfile .over-profile .location-birthday img {
+    object-fit: contain;
+    margin: 0px;
+}
+
+#Profile .over-profile .profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+}
+
+#Profile .over-profile .edit-icon {
+    position: absolute;
+    bottom: 5px;
+    /* Điều chỉnh khoảng cách từ đáy */
+    right: 5px;
+    /* Điều chỉnh khoảng cách từ phải */
+    width: 40px;
+    height: 40px;
+}
+
+#Profile .over-profile p {
+    font-size: 24px;
+    color: #1C2B38;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#Profile #selectProfile .list-select {
+    flex: 7;
+    padding: 10px;
+    margin: 10px;
+    margin-top: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#Profile #selectProfile .list-select .list-select-content {
+    padding: 20px;
+    margin-bottom: 18px;
+    font-size: 16px;
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#Profile #selectProfile .list-select .list-select-content:focus {
+    background-color: #b3cde0;
+    color: white;
+}
+
+#Profile #contentProfile {
+    flex: 7;
+    background-color: #fff;
+    /* Màu nền cho phần tử này */
+}
+
+#Profile #checkProfile {
+    padding-top: 40px;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+
+#Profile #checkProfile h4 {
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+#Profile .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    text-align: left;
+}
+
+#Profile .content .field-label {
+    margin-bottom: 18px;
+    margin-top: 18px;
+}
+
+#Profile .content .field-label label {
+    display: block;
+    /* Đặt nhãn trên một dòng riêng */
+    color: #1C2B38;
+    margin-bottom: 8px;
+    /* Khoảng cách giữa nhãn và ô input */
+}
+
+#Profile .content .value {
+    width: 100%;
+    background-color: #F4F4F5;
+    /* Màu xám nhạt */
+    padding: 16px;
+    padding-left: 12px;
+    border: none;
+    border-radius: 4px;
+    color: #495560;
+}
+
+#Profile .content .value:focus {
+    outline: none;
+    /* Loại bỏ viền khi nút được chọn */
+}
+
+#Profile .save-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* Khoảng cách giữa thông tin và nút */
+    display: flex;
+    justify-content: flex-start;
+}
+
+#Profile .save-button {
+    width: 280px;
+    padding: 10px 20px;
+    background-color: #b3cde0;
+    /* Màu nền xanh */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#Profile .save-button:hover {
+    background-color: rgba(179, 205, 224, 0.7);
+    /* Màu mờ với độ trong suốt 0.5 */
+}
+
+#Profile .type-booking {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#Profile .type-booking h2 {
+    font-size: 1.5em;
+}
+
+#Profile .type-booking select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#Profile .tabs {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+#Profile .tabs button {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+}
+
+#Profile .tabs .active {
+    color: #b3cde0;
+    border-bottom: 3px solid #b3cde0;
+}
+
+#Profile .booking-card {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#Profile .booking-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+#Profile .booking-info {
+    flex: 1;
+}
+
+#Profile .booking-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+#Profile .booking-info p {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+#Profile .check-info {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.8em;
+    color: #555;
+}
+
+#Profile .check-info div {
+    text-align: center;
+}
+
+
+
+@media (max-width: 768px) {
+    #Profile #viewProfile {
+        flex-direction: column;
+        /* Chuyển hướng flex thành dọc khi màn hình nhỏ */
+        padding-left: 20px;
+        /* Điều chỉnh padding để tiết kiệm không gian */
+        padding-right: 20px;
+    }
+
+    #Profile .divider {
+        height: 2px;
+        /* Đổi đường kẻ dọc thành ngang */
+        width: auto;
+    }
+}
