@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import '../Styles/TourReservationResult.css';
 
 const TourReservationResult = () => {
-    const [selections, setSelections] = useState({});
-    const [city, setCity] = useState('');
     const [placesChosen, setPlacesChosen] = useState([]);
     const [hotelChosen, setHotelChosen] = useState([]);
     const [restaurantChosen, setRestaurantChosen] = useState([]);
@@ -19,7 +17,8 @@ const TourReservationResult = () => {
             }
             const data = await response.json();
             const chosenPlaces = data.filter(element => element.location_id === city)
-            const places = chosenPlaces.filter(element => element.attraction_name === selections[element.attraction_name]);
+            const places = chosenPlaces.filter(element => element.attraction_id === selections[element.attraction_id]);
+            console.log(selections);
             setPlacesChosen(places);
         } catch (error) {
             console.error('Error loading places:', error);
@@ -34,11 +33,12 @@ const TourReservationResult = () => {
             }
             const data = await response.json();
             const chosenHotels = data.filter(element => element.location_id === city)
-            const hotels = chosenHotels.filter(element => element.facility_name === selections[element.facility_name]);    
+            const hotels = chosenHotels.filter(element => element.facility_id === selections[element.facility_id]);    
             setHotelChosen(hotels);
         } catch (error) {
             console.error('Error loading hotels:', error);
         }
+        return true;
     }, []);
 
     const loadRestaurants = useCallback(async (city, selections) => {
@@ -49,11 +49,12 @@ const TourReservationResult = () => {
             }
             const data = await response.json();
             const chosenRestaurants = data.filter(element => element.location_id === city)
-            const restaurants = chosenRestaurants.filter(element => element.facility_name === selections[element.facility_name]);
+            const restaurants = chosenRestaurants.filter(element => element.facility_id === selections[element.facility_id]);
             setRestaurantChosen(restaurants);
         } catch (error) {
             console.error('Error loading restaurants:', error);
         }
+        return true;
     }, []);
 
     const displayItems = () => {
@@ -88,19 +89,13 @@ const TourReservationResult = () => {
             }
         }
         fetchData();
-    }, [loadPlaces, loadHotels, loadRestaurants, displayTotal]);
+        finalTotal();
+    }, []);
 
     useEffect(() => {
         displayTotal();
-    }, [displayTotal]);
-
-    useEffect(() => {
-        finalTotal();
-    }, [finalTotal]);
-
-    useEffect(() => {
         displayItems();
-    }, [displayItems]);
+    }, [displayTotal]);
 
     function editTourButton() {
         window.location.href = "/HomePlace";
@@ -108,7 +103,7 @@ const TourReservationResult = () => {
 
     function confirmButton() {
         alert("Your reservation has been confirmed.");
-        window.location.href = "/";
+        window.location.href = "/booking02";
     }
 
     function generateItem(item) {

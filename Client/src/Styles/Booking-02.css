@@ -118,6 +118,12 @@
 .booking02-details .info-section .title-section,.booking02-details .info-section .location-section,.booking02-details .info-section .total-section, .booking02-details .info-section .initial-section{
     margin-top: 20px;
 }
+
+.booking02-details .info-section .location-section{
+    display: flex;
+    flex-direction: column;
+}
+
 .booking02-details .form-section input {
     width: 100%;
     padding: 10px;
