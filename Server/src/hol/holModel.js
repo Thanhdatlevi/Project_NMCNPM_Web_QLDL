@@ -117,6 +117,7 @@ const HotelModel = {
             const query = `
             SELECT
                 h.hotel_id AS id,
+                f.facility_id AS facid,
                 f.facility_name AS name,
                 f.description AS description,
                 f.rating AS rating,
@@ -135,6 +136,7 @@ const HotelModel = {
             WHERE h.hotel_id != h1.hotel_id
             GROUP BY
                 h.hotel_id,
+                f.facility_id,
                 f.facility_name,
                 f.description,
                 f.rating,

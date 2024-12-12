@@ -7,11 +7,37 @@ import "../Styles/MyFacility.css";
 import {Link} from "react-router-dom";
 
 const MyFacility = () => {
-    let provider = 'p001'
+    let provider = 'p002'
     const itemsPerPage = 2;
     const [currentPage, setCurrentPage] = useState(1);
     const [currentService, setCurrentService] = useState([]);
     const [activeTab, setActiveTab] = useState('res');
+
+    const handleDelete = async (service, id, facilityID) => {
+        if (!window.confirm("Are you sure you want to delete this item?")) {
+            return;
+        }
+        try {
+            await fetch(`/${service}/delete`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    provider_id: provider,
+                    facility_id: facilityID,
+                    specificFacility_id: id,
+                }),
+            });
+    
+            alert("Item deleted successfully.");
+            // Cập nhật danh sách sau khi xóa thành công
+            fetchData(service);
+        } catch (error) {
+            console.error("Error deleting item:", error);
+            alert("An error occurred while deleting the item.");
+        }
+    };
 
     const paginateData = () => {
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -77,17 +103,11 @@ const MyFacility = () => {
                     {paginateData().map((ser)=>{
                         return (
                             <div className="post-card">
-                                <img
-                                src={ser.images[0]}
-                                alt="Service Image"
-                                />
+                                <img src={ser.images[0]} alt="Service Image"/>
                                 <div className="post-info">
                                     <h3>{ser.name}</h3>
                                     <p>
-                                        <span role="img" aria-label="location">
-                                        📍
-                                        </span>{" "}
-                                        {ser.location}
+                                        <span role="img" aria-label="location">📍</span>{" "}{ser.location}
                                     </p>
                                     <div className="check-info">
                                         <div>
@@ -105,9 +125,7 @@ const MyFacility = () => {
                                     </div>
                                 </div>
                                 <div className="zone_btn">
-                                    <button className="btn_detail">
-                                        View detail
-                                    </button>
+                                    <button className="btn_detail">View detail</button>
                                     <div className="btn_main">
                                         <Link to="/facilityForm">
                                         <button className="btn_fix">
@@ -115,7 +133,7 @@ const MyFacility = () => {
                                         </button>
                                         </Link>
 
-                                        <button className="btn_delete">
+                                        <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.id, ser.facid)}>
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>

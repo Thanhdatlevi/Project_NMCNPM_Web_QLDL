@@ -5,6 +5,9 @@ const restaurantController = require('../res/resController');
 router.get('/getAllres', restaurantController.getAllRes);
 
 router.get('/getFilterres', restaurantController.getFilterRes);
+
+router.post('/delete', restaurantController.deleteRes);
+
 // router.get('/tours/:location_name', tourController.getToursByLocation);
 router.get('/3-PopularRes', restaurantController.get_3_PopularRestaurants);
 

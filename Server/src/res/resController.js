@@ -9,6 +9,16 @@ const RestaurantController = {
             res.status(500).json({ message: 'Error retrieving popular restaurants' });
         }
     },
+
+    deleteRes: async (req, res) => {
+        try {
+            const { provider_id, facility_id, specificFacility_id} = req.body;
+            await RestaurantModel.deleteRes(provider_id, facility_id, specificFacility_id);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving popular restaurants' });
+        }
+    },
+
     getFilterRes: async (req, res) => {
         try {
             const result = {

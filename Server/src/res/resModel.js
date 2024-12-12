@@ -17,6 +17,31 @@ const RestaurantModel = {
             throw error; // Ném lỗi nếu có lỗi xảy ra
         }
     },
+
+    deleteRes: async (provider_id, facility_id, specificFacility_id) => {
+        try {
+            // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
+            const query = `
+            delete from tables
+            where restaurant_id = $3
+
+            delete from facility_images
+            where facility_id = $2
+
+            delete from restaurants
+            where facility_id =  $2
+
+            delete from facilities
+            where facility_id = $2 and provider = $1
+        `;
+            console.log(query)
+        await db.query(query, [provider_id, facility_id, specificFacility_id]);
+        } catch (error) {
+            console.error('Error fetching popular restaurants:', error);
+            throw error; // Ném lỗi nếu có lỗi xảy ra
+        }
+    },
+
     getFilterRes: async (rate, location, input) => {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
@@ -160,6 +185,7 @@ const RestaurantModel = {
             const query = `
                 SELECT 
                     r.restaurant_id AS id,
+                    f.facility_id AS facid,
                     f.facility_name AS name,
                     f.description AS description,
                     l.location_name AS location,
@@ -173,6 +199,7 @@ const RestaurantModel = {
                 WHERE f.provider_id = $1
                 GROUP BY
                     r.restaurant_id,
+                    f.facility_id,
                     f.facility_name,
                     f.description,
                     l.location_name,
