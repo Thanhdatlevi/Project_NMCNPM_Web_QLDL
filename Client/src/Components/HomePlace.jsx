@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import '../Styles/HomePlace.css';
 import { Link, useNavigate } from "react-router-dom";
+import BookingDialog from './BookingDialog';
 
 function HomePlace() {
-
+    const [isBookingVisible, setIsBookingVisible] = useState(false);
     const [city, setCity] = useState("");
     const [data, setData] = useState([]);
     const [cityList, setCityList] = useState([]);
@@ -72,6 +73,8 @@ function HomePlace() {
         }
     }
 
+    const [handleBookingFinished, setHandleBookingFinished] = useState(null);
+
     let navigate = useNavigate();
     function bookBtn(event, type) {
         const parent = event.target.parentNode.parentNode.parentNode.parentNode;
@@ -80,8 +83,30 @@ function HomePlace() {
             const selected = parent.querySelector('.list').value;
             localStorage.setItem('selected', selected);
             localStorage.setItem('type', type);
-            window.location.href = '/booking01';
-            navigate('/booking01');
+        }
+
+        const quantity = parent.querySelector('p').innerHTML.toString().split(' ')[0];
+        localStorage.setItem('quantity', quantity);
+
+        const p = parent.querySelector('p');
+
+        const booking = document.getElementById('dialog');
+        booking.classList.toggle('hidden');
+        setIsBookingVisible(prevState => !prevState);
+
+        const handleBookingFinished_func = (new_quantity) => {
+            setQuantity(p, type, new_quantity);
+        };
+
+        // Pass the callback to BookingDialog
+        setHandleBookingFinished(()=>handleBookingFinished_func);
+    }
+
+    function setQuantity(p, _type, _value) {
+        if(_value) {
+            console.log(_value);
+            const p_string = _value.toString() + (_type === 'res' ? " tables" : " days");
+            p.innerHTML = p_string;
         }
     }
 
@@ -139,7 +164,6 @@ function HomePlace() {
 
     function addElement(e) {
         if (city === "") {
-            console.log(e);
             const notice = document.getElementById(`notice-${e}`);
             notice.innerHTML = "Please choose the city first.";
             return;
@@ -161,7 +185,6 @@ function HomePlace() {
         const container = document.getElementById(`display-${type}`);
         const notice = document.getElementById(`notice-${type}`);
 
-        console.log(container.childElementCount);
         if (container.childElementCount === 2) {
             notice.innerHTML = "You can't delete the last item.";
             return;
@@ -218,6 +241,10 @@ function HomePlace() {
 
     return (
         <main id="main_content_homePlaces">
+            <BookingDialog id="dialog" 
+                        isBookingVisible={isBookingVisible} 
+                        handleBookingFinished={handleBookingFinished}
+                        />
             <div id="itinar">
                 <section className="header-container-form">
                     <div id="tour-name-container">
@@ -285,6 +312,8 @@ function HomePlace() {
                                         <select className="list" value="res">
                                             <option value="" disabled selected>Select a restaurant</option>
                                         </select>
+                                        <p value="0" >0 tables</p>
+
                                         <div>
                                             <button className="detail-button"><img src="/Images/detail.png" /></button>
                                             <button id="book-res-button" value='res' className='bookbtn' onClick={(event)=>bookBtn(event, 'res')}><img src="/Images/book.png" /></button>
@@ -316,6 +345,7 @@ function HomePlace() {
                                         <select className="list" onChange="show_infor(this,'hol')" value="hol">
                                             <option value="" disabled selected>Select a Hotel</option>
                                         </select>
+                                        <p value="0" >0 days</p>
                                         <div>
                                             <button className="detail-button"><img src="/Images/detail.png" /></button>
                                             <button id="book-hol-button" value='hol' className='bookbtn' onClick={(event)=>bookBtn(event, 'hol')}><img src="/Images/book.png" /></button>
@@ -342,8 +372,9 @@ function HomePlace() {
                     <Link to={canNavigate && "/tourReservationResult"} id='submit-btn' onClick={submitBtnHandle}> Submit </Link>
                 </div>
             </div>
+            
         </main>
-
+    
     );
 }
 export default HomePlace;
