@@ -16,9 +16,13 @@ const TourReservationResult = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenPlaces = data.filter(element => element.location_id === city)
-            const places = chosenPlaces.filter(element => element.attraction_id === selections[element.attraction_id]);
-            console.log(selections);
+            const chosenPlaces = data.filter(element => element.location_id === city);
+            const places = chosenPlaces.filter(element => selections[element.attraction_id])
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.attraction_id].quantity
+                }));
+            console.log(places);
             setPlacesChosen(places);
         } catch (error) {
             console.error('Error loading places:', error);
@@ -32,13 +36,16 @@ const TourReservationResult = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenHotels = data.filter(element => element.location_id === city)
-            const hotels = chosenHotels.filter(element => element.facility_id === selections[element.facility_id]);    
+            const chosenHotels = data.filter(element => element.location_id === city);
+            const hotels = chosenHotels.filter(element => selections[element.facility_id])
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.facility_id].quantity
+                }));
             setHotelChosen(hotels);
         } catch (error) {
             console.error('Error loading hotels:', error);
         }
-        return true;
     }, []);
 
     const loadRestaurants = useCallback(async (city, selections) => {
@@ -48,13 +55,16 @@ const TourReservationResult = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenRestaurants = data.filter(element => element.location_id === city)
-            const restaurants = chosenRestaurants.filter(element => element.facility_id === selections[element.facility_id]);
+            const chosenRestaurants = data.filter(element => element.location_id === city);
+            const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.facility_id].quantity
+                }));
             setRestaurantChosen(restaurants);
         } catch (error) {
             console.error('Error loading restaurants:', error);
         }
-        return true;
     }, []);
 
     const displayItems = () => {
@@ -64,7 +74,7 @@ const TourReservationResult = () => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + 100, 0);
+            .reduce((acc, item) => acc + 100*item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -110,9 +120,9 @@ const TourReservationResult = () => {
         return (
             <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
                 <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
-                <p id="service-quantity">1</p>
+                <p id="service-quantity">{item.quantity}</p>
                 <p id="service-price">{100}</p>
-                <p id="service-total-price">{100}</p>
+                <p id="service-total-price">{100*item.quantity}</p>
             </div>
         );
     }

@@ -4,18 +4,18 @@
    
 }
 
-.body{
+.bookingDialog .body{
     background-color: #f7f7f7;
     display: flex;
     justify-content: center;
 }
-.blank0{
+.bookingDialog .blank0{
     flex-basis: 25%;
 }
-.blank{
+.bookingDialog .blank{
     flex-basis: 10%;
 }
-.booking-container {
+.bookingDialog .booking-container {
     width: 500px;
     height: auto;
     background-color: #ffffff;
@@ -26,38 +26,38 @@
     margin-top: -75px;
 }
 
-.booking-header img {
+.bookingDialog .booking-header img {
     margin-top: 10px;
     margin-bottom: 15px;
     width: 80px;
     height: 30px;
 }
-.booking-header{
+.bookingDialog .booking-header{
     border-bottom: #E5E5E5;
     border-bottom-width: 2px;
     border-bottom-style: solid;
 }
-.booking01-info .booking-content h2 {
+.bookingDialog .booking01-info .booking-content h2 {
     margin: 30px;
     font-size: 24px;
     font-weight: 600;
     color: #152C5B;
 }
 
-.booking01-info .booking-content p {
+.bookingDialog .booking01-info .booking-content p {
     font-size: 18px;
     color: #B0B0B0;
     font-weight: 300;
 }
-.progress-line {
+.bookingDialog .progress-line {
     width: 50px;
     height: 3px;
     background-color: #e0e0e0;
   }
-.progress-line.completed {
+  .bookingDialog .progress-line.completed {
     background-color: #1ABC9C;
   }
-.progress-indicator {
+  .bookingDialog .progress-indicator {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -65,7 +65,7 @@
     margin-top: 51px;    
 }
 
-.progress-indicator .completed-step {
+.bookingDialog .progress-indicator .completed-step {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -77,7 +77,7 @@
     font-size: 32px;
 }
 
-.progress-indicator .inactive-step {
+.bookingDialog .progress-indicator .inactive-step {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -90,18 +90,18 @@
     font-weight: 300;
 }
 
-.booking-container .booking01-details {
+.bookingDialog .booking-container .booking01-details {
     display: flex;
     justify-content: space-between; /* Ensure sections are on opposite sides */
     margin-top: 80px;
     position: relative; /* Position relative to place the border */
 }
 
-.info-section, .form-section {
+.bookingDialog .info-section, .form-section {
     flex-basis: 100%; /* Each section takes up 48% of the width */
 }
 
-.booking01-details .divider {
+.bookingDialog .booking01-details .divider {
     position: absolute;
     left: 52%;
     top: 0;
@@ -110,15 +110,15 @@
     background-color: #E5E5E5;
     transform: translateX(-50%);
 }
-.form-section{
+.bookingDialog .form-section{
     text-align: left;
 }
-.booking01-details .form-section label {
+.bookingDialog .booking01-details .form-section label {
     font-size: 16px;
     font-weight: 400;
     color: #152C5B;
 }
-.form-section .duration-control{
+.bookingDialog .form-section .duration-control{
     width: 75%;
     display: flex;
     align-items: center;
@@ -129,14 +129,14 @@
     margin-bottom: 40px;
 }
 
-.form-section .duration-control span{
+.bookingDialog .form-section .duration-control span{
     font-size: 8px;
     color: #152C5B;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.form-section .duration-control button {
+.bookingDialog .form-section .duration-control button {
     width: 40px;
     height: 40px;
     border: none;
@@ -147,11 +147,11 @@
     cursor: pointer;
     outline: none;
 }
-.duration-control button:nth-child(3) {
+.bookingDialog .duration-control button:nth-child(3) {
     background-color: #17c671;
 }
 
-.date-picker {
+.bookingDialog .date-picker {
     width: 75%;
     display: flex;
     align-items: center;
@@ -160,7 +160,7 @@
     margin-top:10px;
     margin-bottom: 40px;
 }
-.date-picker .date-wrapper {
+.bookingDialog .date-picker .date-wrapper {
     flex: 1; /* Chiếm toàn bộ không gian còn lại */
     display: flex;
     justify-content: center; /* Căn giữa theo chiều ngang */
@@ -168,57 +168,57 @@
     color: #152C5B;
     font-weight: 400;
 }
-.date-picker .calendar-icon {
+.bookingDialog .date-picker .calendar-icon {
     font-size: 15px;
     color: #1a1a7a;
 
 }
-.price-info{
+.bookingDialog .price-info{
     font-size: 15px;
     font-weight: 500;
     color: #152C5B;
 }
 
-.info-section .image-section img{
+.bookingDialog .info-section .image-section img{
     width:210px;
     height: 155px;
     border-radius: 16px;
 }
-.location-section {
+.bookingDialog .location-section {
     display: flex;
     justify-content: space-between; /* Căn giữa các phần tử con theo chiều ngang */
 
 }
-.location-section h3 {
+.bookingDialog .location-section h3 {
     font-size: 12px;
     color: #152C5B;
     font-weight: 400;
     text-align: start;
     width:70%;
 }
-.location-section p {
+.bookingDialog .location-section p {
     text-align: end;
     font-size: 10px;
     color: #B0B0B0;
     font-weight: 300;
 }
-.action-section{
+.bookingDialog .action-section{
     margin-top: 72px;
     display: flex;
     flex-direction: column;
     align-items: center;
     
 }
-.action-section button{
+.bookingDialog .action-section button{
     border: 2px solid transparent;
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.action-section button:hover{
+.bookingDialog .action-section button:hover{
     border-color: #03396C;
     box-shadow: 0 0 10px #03396C;
 }
-.action-section .book-now {
+.bookingDialog .action-section .book-now {
     width: 323px;
     padding: 10px;
     background-color: #003DFC;
@@ -227,7 +227,7 @@
     font-size: 24px;
     font-weight: 500;
 }
-.action-section .cancel {
+.bookingDialog .action-section .cancel {
     width: 300px;
     padding: 10px;
     background-color: #F5F6F8;
@@ -240,7 +240,7 @@
     font-weight: 500;
 }
 
-.dialog {
+.bookingDialog .dialog {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -250,11 +250,11 @@
     align-items: center;
 }
 
-.hidden {
+.bookingDialog .hidden {
     display: none;
 }
 
-.dialog-content-booking {
+.bookingDialog .dialog-content-booking {
     background: #fff;
     padding: 20px;
     border-radius: 8px;

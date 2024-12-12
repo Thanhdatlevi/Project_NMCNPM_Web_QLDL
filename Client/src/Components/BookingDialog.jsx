@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../Styles/BookingDialog.css"; // Adjust this path according to your CSS file location
 import { Link, useNavigate } from 'react-router-dom';
 
-const BookingDialog = ({ isBookingVisible, handleBookingFinished}) => {
+const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
     const [fac, setFac] = useState({});
     const type = localStorage.getItem('type');
     useEffect(() => {
@@ -44,12 +44,12 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished}) => {
     const handleBooking = () => {
         const booking = document.getElementById('dialog');
         booking.classList.toggle('hidden');
-        if(handleBookingFinished)
-        {
+        if (handleBookingFinished) {
             handleBookingFinished(duration);
         }
     };
     return (
+        <div className="bookingDialog">
             <div id="dialog" className="dialog hidden">
                 <div className="dialog-content-booking">
                     <div className="booking-container">
@@ -111,6 +111,7 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished}) => {
                     </div>
                 </div>
             </div>
+        </div>
     );
 };
 

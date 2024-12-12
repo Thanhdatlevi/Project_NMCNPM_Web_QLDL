@@ -214,7 +214,19 @@ function HomePlace() {
             let count_selected = 0;
             Array.from(selected).some(element => {
                 if (element.selectedIndex !== 0) {
-                    selections[element.value] = element.value;
+                    let quantity = "";
+                    if(element.parentNode.querySelector('p')) {
+                        quantity = element.parentNode.querySelector('p').innerHTML.split(' ')[0];
+                    }
+                    else
+                    {
+                        quantity = "1";
+                    }
+
+                    selections[element.value] = {
+                        ID: element.value,
+                        quantity: quantity,
+                    };
                     count_selected++;
                 }
             });
