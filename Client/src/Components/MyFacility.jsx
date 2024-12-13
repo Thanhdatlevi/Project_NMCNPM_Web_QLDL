@@ -18,7 +18,7 @@ const MyFacility = () => {
             return;
         }
         try {
-            await fetch(`/${service}/delete`, {
+            const response = await fetch(`/${service}/delete`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -29,9 +29,13 @@ const MyFacility = () => {
                     specificFacility_id: id,
                 }),
             });
+            if (!response.ok) {
+                const errorMessage = await response.json();
+                throw new Error(errorMessage.message || "Failed to delete item.");
+            }
     
             alert("Item deleted successfully.");
-            // Cập nhật danh sách sau khi xóa thành công
+
             fetchData(service);
         } catch (error) {
             console.error("Error deleting item:", error);

@@ -20,22 +20,29 @@ const RestaurantModel = {
 
     deleteRes: async (provider_id, facility_id, specificFacility_id) => {
         try {
-            // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
-            const query = `
-            delete from tables
-            where restaurant_id = $3
-
-            delete from facility_images
-            where facility_id = $2
-
-            delete from restaurants
-            where facility_id =  $2
-
-            delete from facilities
-            where facility_id = $2 and provider = $1
-        `;
-            console.log(query)
-        await db.query(query, [provider_id, facility_id, specificFacility_id]);
+            const deleteTablesQuery = `
+                DELETE FROM tables
+                WHERE restaurant_id = $1;
+            `;
+            await db.query(deleteTablesQuery, [specificFacility_id]);
+        
+            const deleteImagesQuery = `
+                DELETE FROM facility_images
+                WHERE facility_id = $1;
+            `;
+            await db.query(deleteImagesQuery, [facility_id]);
+        
+            const deleteRestaurantsQuery = `
+                DELETE FROM restaurants
+                WHERE facility_id = $1;
+            `;
+            await db.query(deleteRestaurantsQuery, [facility_id]);
+        
+            const deleteFacilitiesQuery = `
+                DELETE FROM facilities
+                WHERE facility_id = $1 AND provider_id = $2;
+            `;
+            await db.query(deleteFacilitiesQuery, [facility_id, provider_id]);
         } catch (error) {
             console.error('Error fetching popular restaurants:', error);
             throw error; // Ném lỗi nếu có lỗi xảy ra

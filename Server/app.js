@@ -20,10 +20,10 @@ const locRoutes = require('./src/routes/locationRoutes') // Điều hướng đ�
 
 
 
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-//Handlebars
+// Handlebars
 // app.engine('hbs', exphbs.engine({
 //     extname: '.hbs',
 //     defaultLayout: 'main' // Layout chính
