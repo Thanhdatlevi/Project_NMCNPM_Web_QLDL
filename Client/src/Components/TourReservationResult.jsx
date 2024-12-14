@@ -112,6 +112,7 @@ const TourReservationResult = () => {
     }
 
     function confirmButton() {
+        
         alert("Your reservation has been confirmed.");
         window.location.href = "/booking02";
     }

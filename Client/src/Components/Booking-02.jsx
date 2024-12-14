@@ -15,10 +15,14 @@ const Booking02 = ({ bookingData }) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const data = await response.json();
-            const chosenPlaces = data.filter(element => element.location_id === city)
-            const places = chosenPlaces.filter(element => element.attraction_id === selections[element.attraction_id]);
-            console.log(selections);
+            const data = await response.json();// get all the data about attractions
+            const chosenPlaces = data.filter(element => element.location_id === city) // get all the attractions in the city
+            
+            const places = chosenPlaces.filter(element => selections[element.attraction_id])
+            .map(element => ({
+                ...element,
+                quantity: selections[element.attraction_id].quantity
+            }));
             setPlacesChosen(places);
         } catch (error) {
             console.error('Error loading places:', error);
@@ -33,7 +37,12 @@ const Booking02 = ({ bookingData }) => {
             }
             const data = await response.json();
             const chosenHotels = data.filter(element => element.location_id === city)
-            const hotels = chosenHotels.filter(element => element.facility_id === selections[element.facility_id]);    
+            const hotels = chosenHotels.filter(element => selections[element.facility_id])
+            .map(element => ({
+                ...element,
+                quantity: selections[element.facility_id].quantity
+            }));
+         
             setHotelChosen(hotels);
         } catch (error) {
             console.error('Error loading hotels:', error);
@@ -49,8 +58,13 @@ const Booking02 = ({ bookingData }) => {
             }
             const data = await response.json();
             const chosenRestaurants = data.filter(element => element.location_id === city)
-            const restaurants = chosenRestaurants.filter(element => element.facility_id === selections[element.facility_id]);
+            const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
+            .map(element => ({
+                ...element,
+                quantity: selections[element.facility_id].quantity
+            }));
             setRestaurantChosen(restaurants);
+            
         } catch (error) {
             console.error('Error loading restaurants:', error);
         }
@@ -64,7 +78,7 @@ const Booking02 = ({ bookingData }) => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + 100, 0);
+            .reduce((acc, item) => acc + 100*item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -97,19 +111,60 @@ const Booking02 = ({ bookingData }) => {
         displayItems();
     }, [displayTotal]);
 
-    function editTourButton() {
-        window.location.href = "/HomePlace";
-    }
+    function payNow() {
+        const transformedPlaces = placesChosen.map(place => ({
+            attraction_id: place.attraction_id,
+            quantity: place.quantity
+        }));
 
-    function confirmButton() {
-        alert("Your reservation has been confirmed.");
-        window.location.href = "/booking02";
+        const transformedHotels = hotelChosen.map(hotel => ({
+            hotel_id: hotel.facility_id,
+            quantity: hotel.quantity
+        }));
+
+    
+        const transformedRestaurants = restaurantChosen.map(restaurant => ({
+            res_id: restaurant.facility_id,
+            quantity: restaurant.quantity
+        }));
+    
+        const bookingData = {
+            location_id:localStorage.getItem('city'),
+            places: transformedPlaces,
+            hotels: transformedHotels,
+            restaurants: transformedRestaurants,
+            final_total: finalTotal()
+        };
+    console.log(bookingData);
+        // fetch('http://localhost:3000/booking/submit', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(bookingData)
+        // })
+        // .then(response => {
+        //     if (!response.ok) {
+        //         throw new Error('Network response was not ok');
+        //     }
+        //     return response.json();
+        // })
+        // .then(data => {
+        //     console.log('Success:', data);
+        //     alert("Your payment has been processed successfully.");
+        //     window.location.href = "/confirmation";
+        // })
+        // .catch(error => {
+        //     console.error('Error:', error);
+        //     alert("There was an error processing your payment. Please try again.");
+        // });
     }
 
     function generateItem(item) {
+       
         return (
             <h3>
-                <strong> {} {item.attraction_id ? "tickets" : (item.restaurant_id ? "tables" : "days") } 
+                <strong> {item.quantity} {item.attraction_id ? "tickets" : (item.restaurant_id ? "tables" : "days") } 
                     </strong> at <strong>{item.attraction_name ? item.attraction_name : item.facility_name}</strong>
                     ,<strong> {item.location_name}</strong>
             </h3>
@@ -119,7 +174,7 @@ const Booking02 = ({ bookingData }) => {
     return (
         <div className="body">
 
-        <div className="booking-container">
+        <div className="booking00-container">
             <div className="booking-header">
                 <img src="/Images/logoITISE.png" alt="ITISE Logo" />
             </div>
@@ -137,13 +192,13 @@ const Booking02 = ({ bookingData }) => {
                     <h2>Payment</h2>
                     <p>Kindly follow the instructions below</p>
                 </div>
-                <div className="booking02-details">
+                <div className="booking00-details">
                     <div className="blank0"></div>
                     <div className="info-section">
                         <div className="title-section">
                             <h3>Transfer ITISE:</h3>
                         </div>
-                        <div className="location-section">
+                        <div className="detail-section">
                             {
                                 displayItems()
                             }
@@ -162,6 +217,7 @@ const Booking02 = ({ bookingData }) => {
                     <div className="blank"></div>
                     <div className="divider"></div>
                     <div className="blank"></div>
+                    
                     <div className="form-section">
                         <label htmlFor="phone-number">Card Number</label>
                         <div className="phone-section">
@@ -203,7 +259,7 @@ const Booking02 = ({ bookingData }) => {
                 </div>
             </div>
             <div className="action-section">
-                <button className="pay-now">Pay Now</button>
+                <button className="pay-now" onClick={payNow}>Pay Now</button>
                 <button onClick={()=> {navigate(-1);}} className="cancel">Cancel</button>
             </div>
         </div>

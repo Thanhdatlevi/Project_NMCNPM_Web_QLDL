@@ -5,7 +5,7 @@ import "../Styles/Profile.css";
 
 
 const DetailProfile = () => {
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState({});
     useEffect(() => {
         const userId = "u001"; // Thay thế bằng userId thực tế
         fetch(`/user/u001`) 
@@ -31,26 +31,25 @@ const DetailProfile = () => {
     };
     return (
         <body id="Profile">
-            {user.map((item) => (
             <main id="checkProfile">
                 <section id="personInfo">
                     <h4>Personal Information</h4>
                     <div class="content">
                         <div class="field-label">
                             <label for="name">Name: </label>
-                            <input type="text" id="name" class="value" value={item.full_name} />
+                            <input type="text" id="name" class="value" value={user.full_name} />
                         </div>
                         <div class="field-label">
                             <label for="dob">Ngày sinh:</label>
-                            <input type="text" id="dob" class="value" value={formatDate(item.user_birthday)} />
+                            <input type="text" id="dob" class="value" value={formatDate(user.user_birthday)} />
                         </div>
                         <div class="field-label">
                             <label for="phone">Số điện thoại:</label>
-                            <input type="text" id="phone" class="value" value={item.user_contact}/>
+                            <input type="text" id="phone" class="value" value={user.user_contact}/>
                         </div>
                         <div class="field-label">
                             <label for="address">Địa chỉ:</label>
-                            <input type="text" id="address" class="value" value={item.user_address} />
+                            <input type="text" id="address" class="value" value={user.user_address} />
                         </div>
                     </div>
                     <div class="save-container">
@@ -62,7 +61,7 @@ const DetailProfile = () => {
                     <div class="content">
                         <div class="field-label">
                             <label for="email">Email:</label>
-                            <input type="text" id="email" class="value" value={item.user_email} />
+                            <input type="text" id="email" class="value" value={user.user_email} />
                         </div>
                         <div class="field-label">
                             <label for="password">Password:</label>
@@ -78,7 +77,6 @@ const DetailProfile = () => {
                     </div>
                 </section>
             </main>
-            ))}
         </body>
     );
 };
