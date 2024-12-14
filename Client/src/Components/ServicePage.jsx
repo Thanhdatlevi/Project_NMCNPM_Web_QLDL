@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import '../Styles/ServicePage.css';
 import { Link, useParams } from 'react-router-dom';
 import Booking01 from './Booking-01';
-import Modal from 'react-modal'
 const ServicePage = () => {
 
     const { idService } = useParams();
@@ -51,13 +50,12 @@ const ServicePage = () => {
             stars[i - 1].style.color = 'gold';
         };
     }
-
-    const SubmitFeedback = () => {
+    const SubmitFeedback = async () => {
         const stars = document.querySelectorAll('.fas');
 
         let rating = 0;
 
-        for(let i = 0; i < stars.length; i++) {
+        for (let i = 0; i < stars.length; i++) {
             if (stars[i].style.color === 'gold') {
                 rating = stars.length - i;
                 break;
@@ -68,16 +66,40 @@ const ServicePage = () => {
 
         // send feedback to server
         console.log(rating, feedback_text);
+        // Gửi yêu cầu POST lên server để lưu dữ liệu
+        try {
+            const response = await fetch('/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    rating, 
+                    feedback_text,
+                    serviceId: idService, // Id của dịch vụ (có thể sử dụng idService từ useParams())
+                }),
+            });
 
-        // set default value for rating
-        stars.forEach((star) => {
-            star.style.color = 'black';
-        });
-        const feedback = document.querySelector('.feedback-text');
-        feedback.value = '';
+            if (!response.ok) {
+                throw new Error('Failed to submit feedback');
+            }
 
-        // close feedback dialog
-        document.getElementById('dialog').classList.toggle('hidden');
+            // Xử lý thành công
+            alert('Feedback submitted successfully');
+
+            // Reset lại các ngôi sao và textarea
+            stars.forEach((star) => {
+                star.style.color = 'black';
+            });
+            const feedback = document.querySelector('.feedback-text');
+            feedback.value = '';
+
+            // Đóng dialog feedback
+            document.getElementById('dialog').classList.toggle('hidden');
+        } catch (error) {
+            console.error("Error submitting feedback:", error);
+            alert('Error submitting feedback, please try again later.');
+        }
     }
     return (
 
@@ -218,22 +240,21 @@ const ServicePage = () => {
                         <div className='feedback-container'>
                             <h3>Leave your feedback here</h3>
                             <div className="star-wrapper">
-                                <span className="fas fa-star s1" value="1" onClick={(event)=>starClick(event)}></span>
-                                <span className="fas fa-star s2" value="2" onClick={(event)=>starClick(event)}></span>
-                                <span className="fas fa-star s3" value="3" onClick={(event)=>starClick(event)}></span>
-                                <span className="fas fa-star s4" value="4" onClick={(event)=>starClick(event)}></span>
-                                <span className="fas fa-star s5" value="5" onClick={(event)=>starClick(event)}></span>
+                                <span className="fas fa-star s1" value="1" onClick={(event) => starClick(event)}></span>
+                                <span className="fas fa-star s2" value="2" onClick={(event) => starClick(event)}></span>
+                                <span className="fas fa-star s3" value="3" onClick={(event) => starClick(event)}></span>
+                                <span className="fas fa-star s4" value="4" onClick={(event) => starClick(event)}></span>
+                                <span className="fas fa-star s5" value="5" onClick={(event) => starClick(event)}></span>
                             </div>
 
-                            <textarea type="text" placeholder="Leave your feedback here" className='feedback-text'/>
+                            <textarea type="text" placeholder="Leave your feedback here" className='feedback-text' />
                             <div className="submit-feedback-container">
-                                <p className="submit-feedback" onClick={()=>SubmitFeedback()}>Submit</p>
-                                <p className="cancel-feedback" onClick={()=>{document.getElementById('dialog').classList.add('hidden')}}>Cancel</p>
+                                <p className="submit-feedback" onClick={() => SubmitFeedback()}>Submit</p>
+                                <p className="cancel-feedback" onClick={() => { document.getElementById('dialog').classList.add('hidden') }}>Cancel</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
 
                 <div className="userrating-reviews-Feedback">
                     <div className="Feedback-items">

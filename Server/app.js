@@ -17,13 +17,14 @@ const resRoutes = require('./src/routes/resRoutes');  // Điều hướng tour
 const attractionRoutes = require('./src/routes/attractionRoutes') // Điều hướng đến user
 const userRoutes = require('./src/routes/userRoutes') // Điều hướng đến user
 const locRoutes = require('./src/routes/locationRoutes') // Điều hướng đến user
+const feedbackRoutes = require('./src/routes/feedbackRoutes');
 
 
 
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-//Handlebars
+// Handlebars
 // app.engine('hbs', exphbs.engine({
 //     extname: '.hbs',
 //     defaultLayout: 'main' // Layout chính
@@ -43,6 +44,9 @@ app.use('/hotel', holRoutes);
 app.use('/user', userRoutes);
 
 app.use('/location', locRoutes);
+
+app.use('/feedback',feedbackRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

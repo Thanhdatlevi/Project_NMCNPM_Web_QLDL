@@ -49,6 +49,7 @@
     color: #B0B0B0;
     font-weight: 300;
 }
+
 .bookingDialog .progress-line {
     width: 50px;
     height: 3px;
@@ -160,6 +161,7 @@
     margin-top:10px;
     margin-bottom: 40px;
 }
+  
 .bookingDialog .date-picker .date-wrapper {
     flex: 1; /* Chiếm toàn bộ không gian còn lại */
     display: flex;
@@ -168,6 +170,7 @@
     color: #152C5B;
     font-weight: 400;
 }
+  
 .bookingDialog .date-picker .calendar-icon {
     font-size: 15px;
     color: #1a1a7a;

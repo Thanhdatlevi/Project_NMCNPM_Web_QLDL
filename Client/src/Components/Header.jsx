@@ -21,7 +21,7 @@ const Header = () => {
         <header class="header-container">
         <nav id="nav">
             <div class="logo-container">
-                <a href="./index.html" class="logo-link">
+                <a href="/home" class="logo-link">
                     <img src="/Images/logoITISE.png" class="logo-image" alt="logITISE"/>
                 </a>
             </div>
@@ -47,7 +47,7 @@ const Header = () => {
                     <span class="on">VI</span>
                     <span class="off">EN</span>
                 </div>
-                <Link to="/profile" class="button bg-user-icon"></Link>
+                <Link to="/login" class="button bg-user-icon"></Link>
             </div>
 
         </nav>

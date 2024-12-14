@@ -17,6 +17,38 @@ const RestaurantModel = {
             throw error; // Ném lỗi nếu có lỗi xảy ra
         }
     },
+
+    deleteRes: async (provider_id, facility_id, specificFacility_id) => {
+        try {
+            const deleteTablesQuery = `
+                DELETE FROM tables
+                WHERE restaurant_id = $1;
+            `;
+            await db.query(deleteTablesQuery, [specificFacility_id]);
+        
+            const deleteImagesQuery = `
+                DELETE FROM facility_images
+                WHERE facility_id = $1;
+            `;
+            await db.query(deleteImagesQuery, [facility_id]);
+        
+            const deleteRestaurantsQuery = `
+                DELETE FROM restaurants
+                WHERE facility_id = $1;
+            `;
+            await db.query(deleteRestaurantsQuery, [facility_id]);
+        
+            const deleteFacilitiesQuery = `
+                DELETE FROM facilities
+                WHERE facility_id = $1 AND provider_id = $2;
+            `;
+            await db.query(deleteFacilitiesQuery, [facility_id, provider_id]);
+        } catch (error) {
+            console.error('Error fetching popular restaurants:', error);
+            throw error; // Ném lỗi nếu có lỗi xảy ra
+        }
+    },
+
     getFilterRes: async (rate, location, input) => {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
@@ -160,6 +192,7 @@ const RestaurantModel = {
             const query = `
                 SELECT 
                     r.restaurant_id AS id,
+                    f.facility_id AS facid,
                     f.facility_name AS name,
                     f.description AS description,
                     l.location_name AS location,
@@ -173,6 +206,7 @@ const RestaurantModel = {
                 WHERE f.provider_id = $1
                 GROUP BY
                     r.restaurant_id,
+                    f.facility_id,
                     f.facility_name,
                     f.description,
                     l.location_name,

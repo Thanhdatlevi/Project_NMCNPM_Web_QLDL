@@ -11,6 +11,36 @@ const MyFacility = () => {
     const [currentService, setCurrentService] = useState([]);
     const [activeTab, setActiveTab] = useState('res');
 
+    const handleDelete = async (service, id, facilityID) => {
+        if (!window.confirm("Are you sure you want to delete this item?")) {
+            return;
+        }
+        try {
+            const response = await fetch(`/${service}/delete`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    provider_id: provider,
+                    facility_id: facilityID,
+                    specificFacility_id: id,
+                }),
+            });
+            if (!response.ok) {
+                const errorMessage = await response.json();
+                throw new Error(errorMessage.message || "Failed to delete item.");
+            }
+    
+            alert("Item deleted successfully.");
+
+            fetchData(service);
+        } catch (error) {
+            console.error("Error deleting item:", error);
+            alert("An error occurred while deleting the item.");
+        }
+    };
+
     const paginateData = () => {
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
@@ -86,7 +116,6 @@ const MyFacility = () => {
                         
 
                         return (
-                            
                             <div className="post-card" key={ser.id}>
                                 <img
                                     src={ser.images[0]}
@@ -116,18 +145,15 @@ const MyFacility = () => {
                                     </div>
                                 </div>
                                 <div className="zone_btn">
-                                    <button className="btn_detail">
-                                        View detail
-                                    </button>
+                                    <button className="btn_detail">View detail</button>
                                     <div className="btn_main">
                                         <Link to="/facilityForm">
                                             <button className="btn_fix" onClick={() => handleEditClick(ser.id,ser.name,ser.location, ser.des)}>
                                                 <i className="fa-solid fa-screwdriver-wrench"></i>
                                             </button>
                                         </Link>
-
-                                        <button className="btn_delete">
-                                            <i className="fa-solid fa-trash"></i>
+                                        <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.id, ser.facid)}>
+                                            <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
                                 </div>
