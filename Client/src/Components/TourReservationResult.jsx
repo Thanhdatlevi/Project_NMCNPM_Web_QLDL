@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import '../Styles/TourReservationResult.css';
 
 const TourReservationResult = () => {
-    const [selections, setSelections] = useState({});
-    const [city, setCity] = useState('');
     const [placesChosen, setPlacesChosen] = useState([]);
     const [hotelChosen, setHotelChosen] = useState([]);
     const [restaurantChosen, setRestaurantChosen] = useState([]);
@@ -18,8 +16,13 @@ const TourReservationResult = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenPlaces = data.filter(element => element.location_id === city)
-            const places = chosenPlaces.filter(element => element.attraction_name === selections[element.attraction_name]);
+            const chosenPlaces = data.filter(element => element.location_id === city);
+            const places = chosenPlaces.filter(element => selections[element.attraction_id])
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.attraction_id].quantity
+                }));
+            console.log(places);
             setPlacesChosen(places);
         } catch (error) {
             console.error('Error loading places:', error);
@@ -33,8 +36,12 @@ const TourReservationResult = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenHotels = data.filter(element => element.location_id === city)
-            const hotels = chosenHotels.filter(element => element.facility_name === selections[element.facility_name]);    
+            const chosenHotels = data.filter(element => element.location_id === city);
+            const hotels = chosenHotels.filter(element => selections[element.facility_id])
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.facility_id].quantity
+                }));
             setHotelChosen(hotels);
         } catch (error) {
             console.error('Error loading hotels:', error);
@@ -48,8 +55,12 @@ const TourReservationResult = () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const chosenRestaurants = data.filter(element => element.location_id === city)
-            const restaurants = chosenRestaurants.filter(element => element.facility_name === selections[element.facility_name]);
+            const chosenRestaurants = data.filter(element => element.location_id === city);
+            const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.facility_id].quantity
+                }));
             setRestaurantChosen(restaurants);
         } catch (error) {
             console.error('Error loading restaurants:', error);
@@ -63,7 +74,7 @@ const TourReservationResult = () => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + 100, 0);
+            .reduce((acc, item) => acc + 100*item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -88,36 +99,31 @@ const TourReservationResult = () => {
             }
         }
         fetchData();
-    }, [loadPlaces, loadHotels, loadRestaurants, displayTotal]);
+        finalTotal();
+    }, []);
 
     useEffect(() => {
         displayTotal();
-    }, [displayTotal]);
-
-    useEffect(() => {
-        finalTotal();
-    }, [finalTotal]);
-
-    useEffect(() => {
         displayItems();
-    }, [displayItems]);
+    }, [displayTotal]);
 
     function editTourButton() {
         window.location.href = "/HomePlace";
     }
 
     function confirmButton() {
+        
         alert("Your reservation has been confirmed.");
-        window.location.href = "/";
+        window.location.href = "/booking02";
     }
 
     function generateItem(item) {
         return (
             <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
                 <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
-                <p id="service-quantity">1</p>
+                <p id="service-quantity">{item.quantity}</p>
                 <p id="service-price">{100}</p>
-                <p id="service-total-price">{100}</p>
+                <p id="service-total-price">{100*item.quantity}</p>
             </div>
         );
     }

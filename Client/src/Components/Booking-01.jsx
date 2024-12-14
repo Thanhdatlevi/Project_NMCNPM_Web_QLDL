@@ -60,7 +60,7 @@ const Booking01 = ({ setBookingData }) => {
     let navigate = useNavigate();
     return (
         <div className="body">
-            <div className="booking-container">
+            <div className="booking00-container">
                 <div className="booking-header">
                     <img src="/Images/logoITISE.png" alt="ITISE Logo" />
                 </div>
@@ -79,7 +79,7 @@ const Booking01 = ({ setBookingData }) => {
                         <h2>Booking Information</h2>
                         <p>Please fill up the blank fields below</p>
                     </div>
-                    <div className="booking01-details">
+                    <div className="booking00-details">
                         <div className="blank0"></div>
 
                         <div className="info-section">

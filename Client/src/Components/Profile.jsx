@@ -18,7 +18,7 @@ const Profile = () => {
             return <BookingHis />;
         }else return <MyFacility />;
     };
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState({});
     useEffect(() => {
         const userId = "u001"; // Thay thế bằng userId thực tế
         fetch(`/user/u001`) 
@@ -57,23 +57,21 @@ const Profile = () => {
                 <section id="viewProfile">
 
                     <div id="selectProfile">
-                        {user.map((item) => (
                         <div className="over-profile">
                             <div className="profile-image-container">
                                 <img src="/Images/img_profile/PTD.jpg" alt="Profile Picture" className="profile-image" />
                                 <img src="/Images/img_profile/pencil.png" alt="Edit Icon" className="edit-icon" />
                             </div>
-                            <p>{item.full_name}</p>
+                            <p>{user.full_name}</p>
                             <div className="location-birthday">
                                 <img src="/Images/img_profile/Vector.jpg" />
-                                <p>{item.user_address}</p>
+                                <p>{user.user_address}</p>
                                 <p> | </p>
                                 <img src="/Images/img_profile/fe_birthday-cake.jpg" />
-                                <p>{formatDate(item.user_birthday)}</p>
+                                <p>{formatDate(user.user_birthday)}</p>
 
                             </div>
                         </div>
-                        ))}
                         <div className="list-select">
                             <div className="list-select-content" tabIndex="0" onClick={() => setContentType('profile')}>Chỉnh sửa thông
                                 tin

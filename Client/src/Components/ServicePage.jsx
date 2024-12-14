@@ -50,7 +50,6 @@ const ServicePage = () => {
             stars[i - 1].style.color = 'gold';
         };
     }
-
     const SubmitFeedback = async () => {
         const stars = document.querySelectorAll('.fas');
 
@@ -256,7 +255,6 @@ const ServicePage = () => {
                         </div>
                     </div>
                 </div>
-
 
                 <div className="userrating-reviews-Feedback">
                     <div className="Feedback-items">

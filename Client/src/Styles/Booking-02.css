@@ -10,35 +10,9 @@
     justify-content: center;
     min-height: 100vh;
 }
-.blank0{
-    flex-basis: 25%;
-}
-.blank{
-    flex-basis: 10%;
-}
 
-.booking-header img {
-    margin-top: 21px;
-    margin-bottom: 30px;
-    width: 112px;
-    height: 40px;
-}
-.booking-header{
-    border-bottom: #E5E5E5;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
-}
-.booking02-info .booking-content h2 {
-    font-size: 36px;
-    font-weight: 600;
-    color: #152C5B;
-}
 
-.booking02-info .booking-content p {
-    font-size: 18px;
-    color: #B0B0B0;
-    font-weight: 300;
-}
+
 .progress-indicator {
     display: flex;
     align-items: center;
@@ -51,7 +25,7 @@
     height: 3px;
     background-color: #e0e0e0;
   }
-.progress-line.completed {
+.progress-line .completed {
     background-color: #1ABC9C;
   }
 .progress-indicator .completed-step {
@@ -79,20 +53,9 @@
     font-weight: 300;
 }
 
-.booking02-details {
-    display: flex;
-    justify-content: space-between; /* Ensure sections are on opposite sides */
-    margin-top: 80px;
-    position: relative; /* Position relative to place the border */
-}
-.info-section {
-    flex-basis: 30%; /* Each section takes up 48% of the width */
-}
-.form-section{
-    flex-basis: 30%; /* Each section takes up 48% of the width */
-}
-.booking02-details .divider {
-    position: absolute;
+
+
+.booking00-container .divider {
     left: 50%;
     top: 0;
     bottom: 0;
@@ -101,24 +64,28 @@
     background-color: #E5E5E5;
     transform: translateX(-50%);
 }
-.form-section{
+.booking00-details .form-section{
     text-align: left;
 }
-.booking02-details .form-section label {
+.booking00-details .form-section label {
     font-size: 16px;
     font-weight: 400;
     color: #152C5B;
 }
-.booking02-details .info-section h3{
+.booking00-details .info-section h3{
     text-align: left;
     font-size: 24px;
     font-weight: 400;
     color: #152C5B;
 }
-.booking02-details .info-section .title-section,.booking02-details .info-section .location-section,.booking02-details .info-section .total-section, .booking02-details .info-section .initial-section{
+.booking00-details .detail-section{
+    margin: 20px 00px;
+}
+
+.booking00-details .info-section .title-section,.booking00-details .info-section .detail-section,.booking00-details .info-section .total-section, .booking00-details .info-section .initial-section{
     margin-top: 20px;
 }
-.booking02-details .form-section input {
+.booking00-details .form-section input {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -128,12 +95,12 @@
     background-color: #F5F6F8;
     margin-bottom: 20px;
 }
-.booking02-details .form-section label{
+.booking00-details .form-section label{
     color: #152C5B;
     font-size: 16px;
     font-weight: 400;
 }
-.booking02-details .form-section ::placeholder{
+.booking00-details .form-section ::placeholder{
     color: #D3D6DC;
     font-family: poppins, sans-serif;
     font-size: 16px;

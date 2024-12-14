@@ -208,26 +208,40 @@ function HomePlace() {
     const [canNavigate, setCanNavigate] = useState(false);
 
     function submitBtnHandle() {
-        const selected = document.querySelectorAll('.list');
-        const selections = {};
-        let count_selected = 0;
-        Array.from(selected).some(element => {
-            if (element.selectedIndex !== 0) {
-                selections[element.value] = element.value;
-                count_selected++;
-            }
-        });
+        if(!canNavigate){
+            const selected = document.querySelectorAll('.list');
+            const selections = {};
+            let count_selected = 0;
+            Array.from(selected).some(element => {
+                if (element.selectedIndex !== 0) {
+                    let quantity = "";
+                    if(element.parentNode.querySelector('p')) {
+                        quantity = element.parentNode.querySelector('p').innerHTML.split(' ')[0];
+                    }
+                    else
+                    {
+                        quantity = "1";
+                    }
 
-        if(count_selected === 0) {
-            alert("At least one field must be selected.");
-            return;
-        } else {
-            // Handle the case where at least one field is selected
-            var jsonSelections = JSON.stringify(selections);
-            localStorage.setItem('selections', jsonSelections);
-            localStorage.setItem('city', city);
-            setCanNavigate(true);
-            submitBtnHandle();
+                    selections[element.value] = {
+                        ID: element.value,
+                        quantity: quantity,
+                    };
+                    count_selected++;
+                }
+            });
+
+            if(count_selected === 0) {
+                alert("At least one field must be selected.");
+                return;
+            } else {
+                // Handle the case where at least one field is selected
+                var jsonSelections = JSON.stringify(selections);
+                localStorage.setItem('selections', jsonSelections);
+                localStorage.setItem('city', city);
+                setCanNavigate(true);
+                submitBtnHandle();
+            }
         }
     }
 

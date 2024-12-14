@@ -4,18 +4,14 @@
    
 }
 
-.body{
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-}
-.blank0{
+
+.booking00-container .blank0{
     flex-basis: 25%;
 }
-.blank{
+.booking00-container .blank{
     flex-basis: 10%;
 }
-.booking-container {
+.booking00-container {
     width: 1440px;
     height: 1025px;
     background-color: #ffffff;
@@ -24,38 +20,38 @@
     text-align: center;
 }
 
-.booking-header img {
+.booking00-container .booking-header img {
     margin-top: 21px;
     margin-bottom: 30px;
     width: 112px;
     height: 40px;
 }
-.booking-header{
+.booking00-container .booking-header{
     border-bottom: #E5E5E5;
     border-bottom-width: 2px;
     border-bottom-style: solid;
 }
-.booking01-info .booking-content h2 {
+.booking00-container .booking-content h2 {
     margin: 30px;
     font-size: 36px;
     font-weight: 600;
     color: #152C5B;
 }
 
-.booking01-info .booking-content p {
+.booking00-container .booking-content p {
     font-size: 18px;
     color: #B0B0B0;
     font-weight: 300;
 }
-.progress-line {
+.booking00-container.progress-indicator .progress-line {
     width: 50px;
     height: 3px;
     background-color: #e0e0e0;
   }
-.progress-line.completed {
+  .booking00-container .progress-indicator .progress-line .completed {
     background-color: #1ABC9C;
   }
-.progress-indicator {
+  .booking00-container.progress-indicator {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -63,7 +59,7 @@
     margin-top: 51px;    
 }
 
-.progress-indicator .completed-step {
+.booking00-container .progress-indicator .completed-step {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -75,7 +71,7 @@
     font-size: 32px;
 }
 
-.progress-indicator .inactive-step {
+.booking00-container .progress-indicator .inactive-step {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -88,35 +84,26 @@
     font-weight: 300;
 }
 
-.booking-container .booking01-details {
+.booking00-container .booking00-details {
     display: flex;
     justify-content: space-between; /* Ensure sections are on opposite sides */
     margin-top: 80px;
     position: relative; /* Position relative to place the border */
 }
 
-.info-section, .form-section {
+.booking00-container .info-section, .booking00-container .form-section {
     flex-basis: 48%; /* Each section takes up 48% of the width */
 }
 
-.booking01-details .divider {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background-color: #E5E5E5;
-    transform: translateX(-50%);
-}
-.form-section{
+.booking00-container .form-section{
     text-align: left;
 }
-.booking01-details .form-section label {
+.booking00-container .form-section label {
     font-size: 16px;
     font-weight: 400;
     color: #152C5B;
 }
-.form-section .duration-control{
+.booking00-container .form-section .duration-control{
     width: 75%;
     display: flex;
     align-items: center;
@@ -127,7 +114,7 @@
     margin-top: 10px;
     margin-bottom: 40px;
 }
-.form-section .duration-control button {
+.booking00-container .form-section .duration-control button {
     width: 40px;
     height: 40px;
     border: none;
@@ -138,7 +125,7 @@
     cursor: pointer;
     outline: none;
 }
-.duration-control button:nth-child(3) {
+.booking00-container  .duration-control button:nth-child(3) {
     background-color: #17c671;
 }
 
@@ -170,7 +157,7 @@
     color: #152C5B;
 }
 
-.info-section .image-section img{
+.booking00-container .info-section .image-section img{
     width:421px;
     height: 316px;
     border-radius: 16px;
