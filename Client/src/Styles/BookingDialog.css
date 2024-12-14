@@ -16,19 +16,21 @@
     flex-basis: 10%;
 }
 .booking-container {
-    width: 1440px;
-    height: 1025px;
+    width: 500px;
+    height: auto;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    align-items: center;
+    margin-top: -75px;
 }
 
 .booking-header img {
-    margin-top: 21px;
-    margin-bottom: 30px;
-    width: 112px;
-    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 80px;
+    height: 30px;
 }
 .booking-header{
     border-bottom: #E5E5E5;
@@ -37,7 +39,7 @@
 }
 .booking01-info .booking-content h2 {
     margin: 30px;
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 600;
     color: #152C5B;
 }
@@ -96,12 +98,12 @@
 }
 
 .info-section, .form-section {
-    flex-basis: 48%; /* Each section takes up 48% of the width */
+    flex-basis: 100%; /* Each section takes up 48% of the width */
 }
 
 .booking01-details .divider {
     position: absolute;
-    left: 50%;
+    left: 52%;
     top: 0;
     bottom: 0;
     width: 2px;
@@ -122,11 +124,18 @@
     align-items: center;
     justify-content: space-between;
     background-color: #F5F6F8;
-
     border-radius: 8px;
     margin-top: 10px;
     margin-bottom: 40px;
 }
+
+.form-section .duration-control span{
+    font-size: 8px;
+    color: #152C5B;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .form-section .duration-control button {
     width: 40px;
     height: 40px;
@@ -155,24 +164,24 @@
     flex: 1; /* Chiếm toàn bộ không gian còn lại */
     display: flex;
     justify-content: center; /* Căn giữa theo chiều ngang */
-    font-size: 16px;
+    font-size: 10px;
     color: #152C5B;
     font-weight: 400;
 }
 .date-picker .calendar-icon {
-    font-size: 30px;
+    font-size: 15px;
     color: #1a1a7a;
 
 }
 .price-info{
-    font-size: 24px;
+    font-size: 15px;
     font-weight: 500;
     color: #152C5B;
 }
 
 .info-section .image-section img{
-    width:421px;
-    height: 316px;
+    width:210px;
+    height: 155px;
     border-radius: 16px;
 }
 .location-section {
@@ -181,7 +190,7 @@
 
 }
 .location-section h3 {
-    font-size: 20px;
+    font-size: 12px;
     color: #152C5B;
     font-weight: 400;
     text-align: start;
@@ -189,7 +198,7 @@
 }
 .location-section p {
     text-align: end;
-    font-size: 16px;
+    font-size: 10px;
     color: #B0B0B0;
     font-weight: 300;
 }
@@ -229,4 +238,28 @@
     margin-top: 27px;
     font-size: 24px;
     font-weight: 500;
+}
+
+.dialog {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.dialog-content-booking {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 550px;
+    height: fit-content;
+    text-align: center;
+    margin-top: -50px;
 }
