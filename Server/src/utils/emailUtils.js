@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer'); // Gửi email
+require('dotenv').config();
 
 async function sendVerificationEmail(email, token) {
     const transporter = nodemailer.createTransport({
@@ -13,17 +14,16 @@ async function sendVerificationEmail(email, token) {
     })
 
     const ENV_URL = process.env.NODE_ENV === 'development'
-        ? process.env.PRODUCTION_URL // URL production
-        : 'http://localhost:3000'; // URL local development
+        ? 'http://localhost:3000' // URL production
+        : process.env.PRODUCTION_URL; // URL local development
 
     const mailOptions = {
-        from: 'tailieuithcmus@gmail.com',
+        from: 'neyduc167@gmail.com',
         to: email,
         subject: 'Email Verification',
-        text: `Please verify your email by clicking on the following link:  
-        ${ENV_URL}/verify/${token}`
-    }
-
+        html: `Please verify your email by clicking on the following link: <br>
+        <a href="${ENV_URL}/verify/${token}">${ENV_URL}/verify/${token}</a>`
+    };
     try {
         // Gửi email
         await transporter.sendMail(mailOptions);

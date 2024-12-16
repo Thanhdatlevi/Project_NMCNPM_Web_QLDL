@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const userModel = require('../component/user/userModel');
+const AccountModel = require('../component/account/accountModel');
 const { hashPassword } = require('../utils/passwordUtils');
 
 passport.use(
@@ -12,29 +12,27 @@ passport.use(
         async (username_email, password, done) => {
             try {
                 username_email = username_email.trim();
-                const pendingUser = await userModel.checkUserExistsInPendingUsers(username_email, username_email);
+                const pendingAccount = await AccountModel.checkAccountExistsInPendingAccounts(username_email, username_email);
 
-                if (pendingUser) {
+                if (pendingAccount) {
                     return done(null, false, {
                         message: 'This username or email is already registered and awaiting email verification. Please check your email to verify your account.'
                     });
                 }
 
-                const user = await userModel.checkUserExistsInUsers(username_email, username_email);
+                const account = await AccountModel.checkAccountExistsInAccounts(username_email, username_email);
 
-                if (!user) {
+                if (!account) {
                     return done(null, false, { message: 'Invalid username/email or password.' });
                 }
 
                 // Kiểm tra mật khẩu
-                const hashedPassword = hashPassword(password, user.getSalt());
-                if (hashedPassword !== user.getHashPassword()) {
+                const hashedPassword = hashPassword(password, account.salt);
+                if (hashedPassword !== account.accountPassword) {
                     return done(null, false, { message: 'Invalid username/email or password.' });
                 }
 
-                // Nếu xác thực thành công
-
-                return done(null, user);
+                return done(null, account);
             } catch (error) {
                 return done(error);
             }

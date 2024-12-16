@@ -1,12 +1,12 @@
 const { Pool } = require('pg');
-
+require('dotenv').config();
 // Tạo pool kết nối tới cơ sở dữ liệu
 const pool = new Pool({
-    user: 'avnadmin',         // Thay 'your_username' bằng tên người dùng của bạn
-    host: 'cnpm-tailieuithcmus-21f9.j.aivencloud.com',      // Địa chỉ máy chủ PostgreSQL
-    database: 'defaultdb', // Thay 'your_database_name' bằng tên cơ sở dữ liệu của bạn
-    password: 'AVNS_AVbAZYAy-YpNinEJSYW',      // Thay 'your_password' bằng mật khẩu của bạn
-    port: 27110,                     // Cổng mặc định của PostgreSQL
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
     ssl: {
         require: true,
         rejectUnauthorized: false

@@ -1,48 +1,18 @@
 const db = require('../../config/db');
-const crypto = require('crypto');
-const userModel = require('../user/userModel');
-const { sendVerificationEmail } = require('../../utils/emailUtils');
-
 require('dotenv').config();
 
-class registerModel {
+class RegisterModel {
 
-    // Hàm kiểm tra tài khoản đã tồn tại
-    static async #checkUserExists(userName, email) {
-        const [existingUsers, pendingUsers] = await Promise.all([
-            userModel.checkUserExistsInUsers(userName, email),
-            userModel.checkUserExistsInPendingUsers(userName, email)
-        ]);
-
-        if (existingUsers) {
-            throw new Error('Username or Email already exists.');
-        }
-        if (pendingUsers) {
-            throw new Error('This username or email is already registered and awaiting email verification. Please check your email to verify your account.');
-        }
-    }
-
-    // Hàm đăng ký tài khoản
-    static async registerUser(userName, email, encryptionPassword, salt, role_id) {
+    static async createPendingAccount(accountName, email, encryptionPassword, verificationToken, role, salt) {
         try {
-
-            await registerModel.#checkUserExists(userName, email);
-
-            // Tạo token xác thực
-            const verificationToken = crypto.randomBytes(20).toString('hex');
-
-            // Chèn người dùng mới vào bảng pending_users
-            const query = `INSERT INTO pending_accounts (pending_name, pending_email, pending_password, verification_token, salt, pending_role)
-             VALUES ($1, $2, $3, $4, $5, $6)`;
-            await db.query(query, [userName, email, encryptionPassword, verificationToken, salt, role_id]);
-
-            // Gửi email xác thực
-            await sendVerificationEmail(email, verificationToken);
-
+            const query = 'INSERT INTO pending_accounts (pending_name, pending_email, pending_password, verification_token, pending_role, salt) VALUES ($1, $2, $3, $4, $5, $6)';
+            await db.query(query, [accountName, email, encryptionPassword, verificationToken, role, salt]);
         } catch (error) {
-            throw new Error(error.message);
+            console.error("Error createPendingAccount in RegisterModel: ", error.message);
+            throw error;
         }
     }
+
 }
 
-module.exports = registerModel;
+module.exports = RegisterModel;

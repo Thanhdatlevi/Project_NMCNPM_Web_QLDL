@@ -1,17 +1,20 @@
-const db = require('../../config/db');  // Import db để truy vấn cơ sở dữ liệu
+const db = require('../../config/db'); // Import database config
 
-const LocationModel = {
-    getAllLocations: async () => {
+class LocationModel {
+    static async getAllLocations() {
         try {
-            // Truy vấn tất cả các địa điểm từ bảng locations
             const query = 'SELECT l.location_id, l.location_name FROM locations l';
-            const result = await db.query(query);  // Thực thi câu truy vấn
-            return result.rows;  // Trả về kết quả
+            const result = await db.query(query);
+            const locations = result.rows.map(row => ({
+                locationId: row.location_id,
+                locationName: row.location_name,
+            }));
+            return locations;
         } catch (error) {
-            console.error('Error retrieving locations:', error);
-            throw error;  // Ném lỗi nếu có sự cố trong quá trình truy vấn
+            console.error('Error getAllLocations in LocationModel:', error);
+            throw error;
         }
-    },
-};
+    }
+}
 
 module.exports = LocationModel;

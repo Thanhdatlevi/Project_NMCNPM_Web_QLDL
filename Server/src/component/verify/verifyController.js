@@ -1,36 +1,23 @@
-const verifyModel = require('./verifyModel');
+const VerifyService = require('./verifyService');
 
-async function verifyAccount(req, res) {
-    const { token } = req.params;
+class VerifyController {
+    static async verifyAccount(req, res) {
+        try {
+            const { token } = req.params;
 
-    try {
-        // Kiểm tra token có hợp lệ không
-        const user = await verifyModel.findUserByToken(token);
-
-        if (!user) {
-            return res.json({
-                success: false,
-                message: 'Invalid or expired token.'
-            })
+            const result = await VerifyService.verifyAccount(token);
+            if (!result.success) {
+                return res.status(400).json({ message: result.message });
+            }
+            return res.status(200).json({
+                message: result.message,
+                redirectUrl: '/login',
+            });
+        } catch (error) {
+            console.error('Error during verification:', error);
+            return res.status(500).json({ message: 'Internal server error' });
         }
-
-        // Chuyển người dùng vào bảng `users` 
-        await verifyModel.moveUserToVerified(user);
-
-        // Xóa người dùng khỏi bảng `pending_users`
-        await verifyModel.deleteUserFromPending(token);
-
-        return res.json({
-            success: true,
-            message: 'Account verified successfully, you can now login.',
-        })
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error in verification', error: error.message });
     }
 }
 
-module.exports = {
-    verifyAccount,
-};
+module.exports = VerifyController;

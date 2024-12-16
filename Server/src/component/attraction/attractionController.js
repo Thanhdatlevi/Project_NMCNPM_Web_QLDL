@@ -1,16 +1,50 @@
 const AttractionModel = require('./attractionModel');
+const AttractionService = require('./attractionService');
 
+class AttractionController {
 
-const AttractionController = {
-    getAllAttraction: async (req, res) => {
+    static async getAttractionById(req, res) {
         try {
-            const popularAttractions = await AttractionModel.getAllAttraction();
-            res.json(popularAttractions); // Trả về 3 khách sạn có rating cao nhất
+            const { attractionId } = req.params;
+            const attractionDetail = await AttractionService.getAttractionById(attractionId);
+            if (!attractionDetail) {
+                return res.status(404).json({ message: 'Attraction not found' });
+            }
+            res.status(200).json(attractionDetail);  // Trả về thông tin chi tiết attraction
         } catch (error) {
-            res.status(500).json({ message: 'Error retrieving popular restaurants' });
+            console.error("Error in getAttractionById:", error);
+            res.status(500).json({ message: 'Internal server error' });
         }
-    },
-    getFilterAttraction: async (req, res) => {
+    }
+
+    static async get_10_PopularAttractions(req, res) {
+        try {
+            const popularAttractions = await AttractionService.get_10_PopularAttractions();
+            if (!popularAttractions) {
+                return res.status(404).json({ message: 'Popular attractions not found' });
+            }
+            res.status(200).json(popularAttractions);
+        } catch (error) {
+            console.error("Error in get_10_PopularAttractions:", error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    static async getAttractionsByLocationId(req, res) {
+        try {
+            const { locationId } = req.params;
+            const relatedAttraction = await AttractionService.getAttractionsByLocationId(locationId);
+            if (!relatedAttraction) {
+                return res.status(404).json({ message: 'No attractions found for this location' });
+            }
+            res.status(200).json(relatedAttraction);
+        } catch (error) {
+            console.error("Error in getAttractionsByLocationId:", error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    static async getFilterAttraction(req, res) {
         try {
             const result = {
                 rate: req.query.rate || -1,
@@ -18,43 +52,40 @@ const AttractionController = {
                 input: req.query.input || 'default',
             };
             const popularAttractions = await AttractionModel.getFilterAttraction(result.rate, result.location, result.input);
-            res.json(popularAttractions); // Trả về 3 khách sạn có rating cao nhất
+            res.status(200).json(popularAttractions); // Trả về attractions sau khi lọc
         } catch (error) {
-            res.status(500).json({ message: 'Error restaurants' });
+            console.error("Error in getFilterAttraction:", error);
+            res.status(500).json({ message: 'Error retrieving filtered attractions' });
         }
-    },
-    get_10_PopularAttractions: async (req, res) => {
+    }
+
+    static async getAttractionsTotal(req, res) {
         try {
-            const popularAttractions = await AttractionModel.get_10_PopularAttractions();
-            res.json(popularAttractions); // Trả về 3 khách sạn có rating cao nhất
-        } catch (error) {
-            res.status(500).json({ message: 'Error retrieving popular restaurants' });
-        }
-    },
-    getAttractionByID: async (req, res) => {
-        try {
-            const { attractionID } = req.params;
-            const attractionDetail = await AttractionModel.getAttractionByID(attractionID);
-            if (!attractionDetail) {
-                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            const total = await AttractionService.getAttractionsTotal();
+            if (!total) {
+                return res.status(404).json({ message: 'No total attractions found' });
             }
-            res.json(attractionDetail);  // Trả về thông tin chi tiết nhà hàng
+            res.status(200).json(total);
         } catch (error) {
-            res.status(500).json({ message: 'Error retrieving attraction details' });
+            console.error("Error in getAttractionsTotal:", error);
+            return res.status(500).json({ message: 'Internal server error' });
         }
-    },
-    getRelatedAttraction: async (req, res) => {
+    }
+
+    static async getAttractionsByPage(req, res) {
         try {
-            const { attractionID } = req.params;
-            const attractionRelated = await AttractionModel.getRelatedAttraction(attractionID);
-            if (!attractionRelated) {
-                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            const pageNum = parseInt(req.query.page, 10) || 1;
+            const limit = parseInt(req.query.limit, 10) || 5;
+            const attractions = await AttractionService.getAttractionsByPage(pageNum, limit);
+            if (!attractions) {
+                return res.status(404).json({ message: 'No attractions found for this page' });
             }
-            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+            return res.status(200).json(attractions);
         } catch (error) {
-            res.status(500).json({ message: 'Error retrieving attraction details' });
+            console.error("Error in getAttractionsByPage:", error);
+            return res.status(500).json({ message: 'Internal server error' });
         }
-    },
-};
+    }
+}
 
 module.exports = AttractionController;
