@@ -11,7 +11,6 @@ import SearchService from './Components/SearchService';
 function App() {
   return (
     <div className="App">
-      <Header />
       <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Content />} />
@@ -19,7 +18,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/searchService" element={<SearchService />} />
       </Routes>
-      <Footer />
+      
     </div>
   );
 }
