@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import DetailProfile from "./DetailProfile";
-import BookingHis from "./BookingHis";
+//import BookingHis from "./BookingHis";
 import MyFacility from "./MyFacility";
 
 import "../Styles/Profile.css";
@@ -10,14 +10,14 @@ import "../Styles/Profile.css";
 const Profile = () => {
     const [contentType, setContentType] = useState('profile');
 
-    const renderContent = () => {
-        if (contentType === 'profile') {
-            return <DetailProfile />;
-        }
-        else if(contentType === 'booking'){
-            return <BookingHis />;
-        }else return <MyFacility />;
-    };
+    // const renderContent = () => {
+    //     if (contentType === 'profile') {
+    //         return <DetailProfile />;
+    //     }
+    //     else if(contentType === 'booking'){
+    //         return <BookingHis />;
+    //     }else return <MyFacility />;
+    // };
     const [user, setUser] = useState({});
     useEffect(() => {
         const userId = "u001"; // Thay thế bằng userId thực tế
@@ -84,7 +84,7 @@ const Profile = () => {
                     </div>
                     <div className="divider"></div>
                     <div id="contentProfile">
-                        {renderContent()}
+                       
                     </div>
                 </section>
             </main>

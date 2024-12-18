@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../Styles/ServicePage.css';
 import { Link, useParams } from 'react-router-dom';
-import Booking01 from './Booking-01';
+//import Booking01 from './Booking-01';
 const ServicePage = () => {
 
     const { idService } = useParams();
