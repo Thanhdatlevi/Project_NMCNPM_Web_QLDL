@@ -10,7 +10,7 @@ class loginController {
         passport.authenticate('local', { session: false }, async (err, account, info) => {
             if (err) {
                 console.error("Error during authentication:", err.message);
-                return res.status(500).json({ message: 'Authentication failed. Please try again later.' });
+                return res.status(500).json({ message: 'Xác thực lỗi! Vui lòng thử lại sau!' });
             }
 
             if (!account) {
@@ -34,7 +34,7 @@ class loginController {
 
             } catch (error) {
                 console.error("Error in loginController:", error.message);
-                res.status(500).json({ message: 'Failed to log in. Please try again later.' });
+                res.status(500).json({ message: 'Hệ thống đang lỗi! Vui lòng thử lại sau!' });
             }
         })(req, res);
     }

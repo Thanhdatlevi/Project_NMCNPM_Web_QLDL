@@ -1,5 +1,3 @@
-const VerifyModel = require('./verifyModel');
-
 class VerifyService {
     static async verifyAccount(token) {
         try {
@@ -7,8 +5,8 @@ class VerifyService {
             if (!account) {
                 return {
                     success: false,
-                    message: `The verification link is invalid or has expired.
-                Please try again or request a new one.`
+                    message: `Liên kết xác minh không hợp lệ hoặc đã hết hạn.
+                    Vui lòng thử lại hoặc yêu cầu một liên kết mới.`
                 };
             }
 
@@ -18,7 +16,7 @@ class VerifyService {
             // Xóa người dùng khỏi bảng `pending_accounts`
             await VerifyModel.deleteAccountFromPending(token);
 
-            return { success: true, message: 'Account verified successfully.' };
+            return { success: true, message: 'Tài khoản đã được xác minh thành công.' };
         } catch (error) {
             throw error;
         }
