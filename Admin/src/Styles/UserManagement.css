@@ -1,0 +1,20 @@
+.list-user .user-card-header{
+    display: grid;
+    grid-template-columns:0.5fr 0.7fr 1fr 0.7fr 0.7fr 1fr .5fr 0.5fr;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    font-weight: bold;
+}
+
+.list-user .user-card-item{
+    height: 600px;
+    overflow-y: auto;
+}
+
+.list-user .user-card-item::-webkit-scrollbar{
+    width: 5px;
+}
+
+.hidden{
+    display: none;
+}

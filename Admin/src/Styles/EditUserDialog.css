@@ -1,0 +1,81 @@
+.edit-user-dialog{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-user-dialog-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.edit-user-dialog-content div{
+    margin-bottom: 20px;
+}
+
+.edit-user-dialog-content div label{
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.edit-user-dialog-content div input{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+
+
+.edit-user-dialog-action{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.dialog-close {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dialog-close:hover {
+    background-color: #0056b3;
+}
+
+.dialog-save {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dialog-save:hover {
+    background-color: #0056b3;
+}
+
+.hidden{
+    display: none;
+}
