@@ -1,5 +1,6 @@
 import '../Styles/UserManagement.css';
 import React from 'react';
+import UserCard from './UserCard';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -17,14 +18,12 @@ const UserManagement = () => {
                 User Management
             </h3>
             <div className="list-user">
-                <div className="list-user-content">
-                    <Link to="/userManagement/addUser">Add User</Link>
-                </div>
-                <div className="list-user-content">
-                    <Link to="/userManagement/editUser">Edit User</Link>
-                </div>
-                <div className="list-user-content">
-                    <Link to="/userManagement/deleteUser">Delete User</Link>
+                <div className="user-card-header">
+                    <p>Full Name</p>
+                    <p>Email</p>
+                    <p>Contact</p>
+                    <p>Birthday</p>
+                    <p>Address</p>
                 </div>
             </div>
         </section>

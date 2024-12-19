@@ -130,7 +130,7 @@ const Booking02 = ({ bookingData }) => {
     
         const bookingData = {
             location_id:localStorage.getItem('city'),
-            places: transformedPlaces,
+            //places: transformedPlaces,
             hotels: transformedHotels,
             restaurants: transformedRestaurants,
             final_total: finalTotal()

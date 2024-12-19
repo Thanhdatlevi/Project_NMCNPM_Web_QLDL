@@ -147,8 +147,6 @@ const MyFacility = () => {
                                             </button>
                                         </Link>
                                         <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.id, ser.facid)}>
-
-                                        <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.id, ser.facid)}>
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
