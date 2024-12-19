@@ -31,7 +31,7 @@ const Booking02 = ({ bookingData }) => {
 
     const loadHotels = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/hotel/getfilterhotel');
+            const response = await fetch('http://localhost:3000/hotel/getfilterholtel');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -52,7 +52,7 @@ const Booking02 = ({ bookingData }) => {
 
     const loadRestaurants = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/res/getFilterres');
+            const response = await fetch('http://localhost:3000/restaurant/getFilterres');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -78,7 +78,7 @@ const Booking02 = ({ bookingData }) => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + 100*item.quantity, 0);
+            .reduce((acc, item) => acc + item.average_price*item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -95,7 +95,7 @@ const Booking02 = ({ bookingData }) => {
             try {
                 const selections = JSON.parse(localStorage.getItem('selections'));
                 const city = localStorage.getItem('city');
-                await loadPlaces(city, selections);
+                //await loadPlaces(city, selections);
                 await loadHotels(city, selections);
                 await loadRestaurants(city, selections);
             } catch (error) {
@@ -112,10 +112,10 @@ const Booking02 = ({ bookingData }) => {
     }, [displayTotal]);
 
     function payNow() {
-        const transformedPlaces = placesChosen.map(place => ({
-            attraction_id: place.attraction_id,
-            quantity: place.quantity
-        }));
+        // const transformedPlaces = placesChosen.map(place => ({
+        //     attraction_id: place.attraction_id,
+        //     quantity: place.quantity
+        // }));
 
         const transformedHotels = hotelChosen.map(hotel => ({
             hotel_id: hotel.facility_id,
@@ -136,28 +136,28 @@ const Booking02 = ({ bookingData }) => {
             final_total: finalTotal()
         };
     console.log(bookingData);
-        // fetch('http://localhost:3000/booking/submit', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(bookingData)
-        // })
-        // .then(response => {
-        //     if (!response.ok) {
-        //         throw new Error('Network response was not ok');
-        //     }
-        //     return response.json();
-        // })
-        // .then(data => {
-        //     console.log('Success:', data);
-        //     alert("Your payment has been processed successfully.");
-        //     window.location.href = "/confirmation";
-        // })
-        // .catch(error => {
-        //     console.error('Error:', error);
-        //     alert("There was an error processing your payment. Please try again.");
-        // });
+        fetch('http://localhost:3000/booking/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookingData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Your payment has been processed successfully.");
+            window.location.href = "/confirmation";
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("There was an error processing your payment. Please try again.");
+        });
     }
 
     function generateItem(item) {

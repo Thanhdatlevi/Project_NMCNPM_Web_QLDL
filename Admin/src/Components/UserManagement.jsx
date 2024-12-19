@@ -3,6 +3,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+// api uri
+// http://localhost:8000/api/user
+
+
+// field to be displayed
+// u.user_name, u.user_email, u.user_contact, u.user_birthday, u.user_address, u.full_name
+
 const UserManagement = () => {
     return (
         <section className="UserManagement">

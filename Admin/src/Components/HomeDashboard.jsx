@@ -6,7 +6,7 @@ import { use } from "react";
 const HomeDashboard = () => {
     const [attractions, setAttractions] = useState([])
     useEffect(()=>{
-        fetch('/attraction/getAllAttraction')
+        fetch('/attraction/getFilterAttraction')
             .then((response) => response.json())
             .then((data) => {
             setAttractions(data)
@@ -34,7 +34,7 @@ const HomeDashboard = () => {
     const [hotels, setHotels] = useState(0)
     const [restaurants, setRestaurants] = useState(0)
     useEffect(()=>{
-        fetch('/res/getAllRes')
+        fetch('/res/getFilterres')
             .then((response) => response.json())
             .then((data) => {
             setFacilities(facilities+data.length)
@@ -43,7 +43,7 @@ const HomeDashboard = () => {
             .catch((error) => console.error('Error:', error));
     },[]);
     useEffect(()=>{
-        fetch('/hotel/getAllHotel')
+        fetch('/hotel/getFilterholtel')
             .then((response) => response.json())
             .then((data) => {
             setFacilities(facilities+data.length)

@@ -1,6 +1,6 @@
-import React from 'react';
 import '../Styles/Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 const Header = () => {
     // document.getElementById("menu-toggle").addEventListener("click", function () {
     //     const navList = document.querySelector(".nav-list");
@@ -16,7 +16,62 @@ const Header = () => {
     //         menuIcon.src = "/Images/list-button.png"; // Đổi về icon list
     //     }
     // });
-    
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+    const toggleDropdown = () => {
+        setDropdownVisible(!isDropdownVisible);
+    };
+    const [user, setUser] = useState(null); // Lưu thông tin người dùng
+    const navigate = useNavigate(); // Sử dụng để chuyển hướng trang
+
+    // Gọi API để lấy thông tin xác thực người dùng
+    useEffect(() => {
+        const fetchAuthentication = async () => {
+            try {
+                const response = await fetch('/authenticate', {
+                    method: 'GET',
+                    credentials: 'include', // Để gửi cookie cùng yêu cầu
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setUser(data);
+                } else {
+                    setUser(null); // Chưa đăng nhập
+                }
+            } catch (error) {
+                console.error('Error fetching authentication:', error);
+                setUser(null);
+            }
+        };
+
+        fetchAuthentication();
+    }, []);
+
+    // Xử lý logout
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('/logout', {
+                method: 'POST',
+                credentials: 'include', // Để gửi cookie trong yêu cầu
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                console.log('Logout successful');
+                setUser(null); // Xóa trạng thái đăng nhập
+                navigate('/login'); // Chuyển hướng về trang đăng nhập
+            } else {
+                console.error('Logout failed');
+                alert('Logout failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error during logout:', error);
+            alert('An error occurred during logout. Please try again.');
+        }
+    };
     return (
         <header class="header-container">
         <nav id="nav">
@@ -47,7 +102,26 @@ const Header = () => {
                     <span class="on">VI</span>
                     <span class="off">EN</span>
                 </div>
-                <Link to="/login" class="button bg-user-icon"></Link>
+                {user ? (
+                    <div className="user-dropdown">
+                        <div className="user-info" onClick={toggleDropdown}>
+                            <span className="user-name">{user.accountName}</span>
+                            <span className={`arrow ${isDropdownVisible ? 'open' : ''}`}>▼</span>
+                        </div>
+                        {isDropdownVisible && (
+                            <div className="dropdown-menu">
+                                <Link to="/profile">
+                                    <button className="dropdown-item">Profile</button>
+                                </Link>
+                                <button className="dropdown-item" onClick={handleLogout}>
+                                    Logout
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <Link to="/login" className="button bg-user-icon"></Link>
+                )}
             </div>
 
         </nav>

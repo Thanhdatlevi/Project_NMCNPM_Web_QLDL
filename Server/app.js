@@ -1,7 +1,9 @@
 const express = require('express');
-// const exphbs = require('express-handlebars');
 const path = require('path');
 const app = express();
+const cookieParser = require('cookie-parser');
+const { authenticateToken, requireTourist, requireProvider, requireAdmin, checkout } = require('./src/middleware/authMiddleware');
+
 const PORT = process.env.PORT || 3000;
 
 // access static files
@@ -12,41 +14,38 @@ app.use((req, res, next) => {
     next();
 });
 
-const holRoutes = require('./src/routes/holRoutes'); // Điều hướng view
-const resRoutes = require('./src/routes/resRoutes');  // Điều hướng tour
-const attractionRoutes = require('./src/routes/attractionRoutes') // Điều hướng đến user
-const userRoutes = require('./src/routes/userRoutes') // Điều hướng đến user
-const locRoutes = require('./src/routes/locationRoutes') // Điều hướng đến user
-const feedbackRoutes = require('./src/routes/feedbackRoutes');
-
-
+const hotelRoutes = require('./src/routes/hotelRoutes'); // Điều hướng view
+const restaurentoutes = require('./src/routes/restaurantRoutes');  // Điều hướng tour
+const attractionRoutes = require('./src/routes/attractionRoutes'); // Điều hướng đến user
+const locationRoutes = require('./src/routes/locationRoutes'); // Điều hướng đến location
+const registerRoutes = require('./src/routes/registerRoutes.js');
+const loginRoutes = require('./src/routes/loginRoutes.js');
+const logoutRoutes = require('./src/routes/logout.Routes.js');
+const verifyRoutes = require('./src/routes/verifyRoutes.js');
+const authenticateRoutes = require('./src/routes/authenticateRoutes.js');
+const adminRoutes = require('./src/routes/adminRoutes.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Handlebars
-// app.engine('hbs', exphbs.engine({
-//     extname: '.hbs',
-//     defaultLayout: 'main' // Layout chính
-// }));
 
-// app.set('view engine', 'hbs');
-// app.set('views', path.join(__dirname, 'src', 'views'))
+app.use(cookieParser());
+app.use(authenticateToken);
+
 
 app.use(express.static(path.join(__dirname, 'src', 'public')));
 
-app.use('/res', resRoutes);
-
+app.use('/authenticate', authenticateRoutes);
+app.use('/restaurant', restaurentoutes);
 app.use('/attraction', attractionRoutes);
+app.use('/hotel', hotelRoutes);
+app.use('/location', locationRoutes);
+app.use('/register', registerRoutes);
+app.use('/login', loginRoutes);
+app.use('/logout', logoutRoutes);
+app.use('/verify', verifyRoutes);
 
-app.use('/hotel', holRoutes);
-
-app.use('/user', userRoutes);
-
-app.use('/location', locRoutes);
-
-app.use('/feedback',feedbackRoutes);
-
+app.use('/admin', adminRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -7,12 +7,13 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
     const type = localStorage.getItem('type');
     useEffect(() => {
         if (type === 'hol') {
-            fetch('/hotel/getfilterhotel')
+            fetch('/hotel/getfilterholtel')
                 .then((response) => response.json())
                 .then((data) => {
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].facility_id === localStorage.getItem('selected')) {
                             setFac(data[i]);
+                            console.log(data[i]);   
                         }
                     }
                 })
@@ -89,7 +90,7 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
                                     </div>
                                     <div className="price-info">
                                         <p>
-                                            You will pay <strong> {duration * 200}$ USD</strong>
+                                            You will pay <strong> {duration * fac.average_price}$ USD</strong>
                                         </p>
                                         <p>per <strong>{duration} {type === 'hol' ? 'Days' : 'Tables'}</strong></p>
                                     </div>

@@ -23,6 +23,7 @@ function HomePlace() {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
+            console.log(data);
             setCityList(data);
         } catch (error) {
             console.error('Error loading cities:', error);
@@ -52,8 +53,8 @@ function HomePlace() {
             displayCity.current.innerHTML = originalContent.city;
             cityList.forEach((element) => {
                 const option = document.createElement('option');
-                option.textContent = element.location_name;
-                option.value = element.location_id;
+                option.textContent = element.locationName;
+                option.value = element.locationId;
                 displayCity.current.appendChild(option);
             });
         }
@@ -116,13 +117,13 @@ function HomePlace() {
         return data1;
     }
     async function loadJSON2() {
-        const response = await fetch('http://localhost:3000/hotel/getfilterhotel');
+        const response = await fetch('http://localhost:3000/hotel/getfilterholtel');
         const data2 = await response.json();
         return data2;
     }
 
     async function loadJSON3() {
-        const response = await fetch('http://localhost:3000/res/getFilterres');
+        const response = await fetch('http://localhost:3000/restaurant/getFilterres');
         const data2 = await response.json();
         return data2;
     }
@@ -217,6 +218,9 @@ function HomePlace() {
                     let quantity = "";
                     if(element.parentNode.querySelector('p')) {
                         quantity = element.parentNode.querySelector('p').innerHTML.split(' ')[0];
+                        if(quantity === "0") {
+                            quantity = "1";
+                        }
                     }
                     else
                     {

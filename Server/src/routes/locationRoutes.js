@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const locationController = require('../location/locationController');
+const LocationController = require('../component/location/locationController');
 
 // Route lấy tất cả các địa điểm
-router.get('/allLocation', locationController.getAllLocations);
+router.get('/allLocation', LocationController.getAllLocations);
 
 module.exports = router;
