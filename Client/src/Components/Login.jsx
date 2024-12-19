@@ -2,9 +2,41 @@ import React, {useEffect,useState} from 'react';
 import '../Styles/LoginandRegister.css';
 import { Link, useParams} from 'react-router-dom';
 const LoginPage = () => {
-    // useEffect(()=>{
-    //     handleFetch();
-    // },[]);
+    const [formData, setFormData] = useState({ Username_Email: '', password: '' });
+    const [error, setError] = useState(null);
+
+    // Xử lý khi người dùng nhập dữ liệu
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    // Xử lý đăng nhập
+    const handleLogin = async (e) => {
+        e.preventDefault(); // Ngăn hành vi gửi form mặc định
+        setError(null); // Xóa lỗi cũ
+
+        try {
+            const response = await fetch('/login/api/postLogin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Đăng nhập thất bại. Vui lòng kiểm tra lại.');
+            }
+
+            const data = await response.json();
+            console.log('Đăng nhập thành công:', data);
+            window.location.href = '/';
+        } catch (err) {
+            console.error(err);
+            setError(err.message || 'Có lỗi xảy ra.');
+        }
+    };
     return (
         <section id="loginPage">
             <div class="custom-button-wrapper">
@@ -19,13 +51,14 @@ const LoginPage = () => {
 
                 <div class="main-agileinfo">
                     <div class="agileits-top">
-                        <form action="#" method="post">
-                            <input class="text" type="text" autocomplete="off" name="Username/Email"
-                                placeholder="Tên đăng nhập hoặc email" required=""/>
+                        <form onSubmit={handleLogin}>
+                            <input class="text" type="text" autocomplete="off" name="Username_Email"
+                                placeholder="Tên đăng nhập hoặc email" required="" onChange={handleChange}/>
                             <input class="text" type="password" autocomplete="off" name="password" placeholder="Mật khẩu"
-                                required=""/>
+                                required="" onChange={handleChange}/>
                             <input type="submit" value="Đăng nhập"/>
                         </form>
+                        {error && <p className="error">{error}</p>}
                         <p>
                             <a href="#">Quên mật khẩu</a>
                             <span class="divider">|</span>
