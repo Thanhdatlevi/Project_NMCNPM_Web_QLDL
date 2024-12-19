@@ -23,6 +23,8 @@ const loginRoutes = require('./src/routes/loginRoutes.js');
 const logoutRoutes = require('./src/routes/logout.Routes.js');
 const verifyRoutes = require('./src/routes/verifyRoutes.js');
 const authenticateRoutes = require('./src/routes/authenticateRoutes.js');
+const adminRoutes = require('./src/routes/adminRoutes.js');
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -43,6 +45,7 @@ app.use('/login', loginRoutes);
 app.use('/logout', logoutRoutes);
 app.use('/verify', verifyRoutes);
 
+app.use('/admin', adminRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -262,3 +262,89 @@ input.check-toggle-round-flat+label:after {
 input.check-toggle-round-flat:checked+label:after {
     margin-left: 44px;
 }
+
+* Style for the user dropdown container */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style for the user info section (clickable area) */
+.user-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 5px;
+    background-color: #f4f4f4;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.user-info:hover {
+    background-color: #91c1e1;
+}
+
+/* Style for the user name */
+.user-name {
+    margin-right: 8px;
+}
+
+/* Arrow icon next to the user name */
+.arrow {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.arrow.open {
+    transform: rotate(180deg); /* Rotate arrow when dropdown is open */
+}
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 150px;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* When dropdown is visible, we change display to block */
+.user-dropdown .dropdown-menu.show {
+    display: block;
+}
+
+/* Style for each dropdown item */
+.dropdown-item {
+    padding: 12px 20px;
+    width: 100%;
+    background-color: #fff;
+    text-align: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #cddfeb;
+}
+
+/* Style for the profile and logout buttons inside the dropdown */
+.dropdown-item button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-item button:hover {
+    background-color: #f4f4f4;
+}
