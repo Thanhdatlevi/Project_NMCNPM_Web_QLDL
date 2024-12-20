@@ -16,20 +16,19 @@ passport.use(
 
                 if (pendingAccount) {
                     return done(null, false, {
-                        message: 'This username or email is already registered and awaiting email verification. Please check your email to verify your account.'
+                        message: 'Tên đăng nhập hoặc email này đã được đăng ký và đang chờ xác minh qua email. Vui lòng kiểm tra email để xác minh tài khoản.'
                     });
                 }
 
                 const account = await AccountModel.checkAccountExistsInAccounts(username_email, username_email);
 
                 if (!account) {
-                    return done(null, false, { message: 'Invalid username/email or password.' });
+                    return done(null, false, { message: 'Tên đăng nhập/email hoặc mật khẩu không hợp lệ.' });
                 }
 
-                // Kiểm tra mật khẩu
                 const hashedPassword = hashPassword(password, account.salt);
                 if (hashedPassword !== account.accountPassword) {
-                    return done(null, false, { message: 'Invalid username/email or password.' });
+                    return done(null, false, { message: 'Tên đăng nhập/email hoặc mật khẩu không hợp lệ.' });
                 }
 
                 return done(null, account);

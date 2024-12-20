@@ -14,8 +14,8 @@ async function sendVerificationEmail(email, token) {
     })
 
     const ENV_URL = process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000' // URL production
-        : process.env.PRODUCTION_URL; // URL local development
+        ? 'http://localhost:3000'  // URL local development
+        : process.env.PRODUCTION_URL; // URL production
 
     const mailOptions = {
         from: 'neyduc167@gmail.com',

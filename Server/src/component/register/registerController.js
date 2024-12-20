@@ -30,7 +30,7 @@ class RegisterController {
 
         } catch (error) {
             console.error("Error registerAccount in registerController: ", error.message);
-            return res.status(500);
+            return res.status(500).json({ message: "Hê thống lỗi! Vui lòng thử lại sau" });
         }
     }
 }
