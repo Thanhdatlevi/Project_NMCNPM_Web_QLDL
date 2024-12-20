@@ -167,8 +167,8 @@ const SearchService = () => {
                     {locations.map((location)=>{
                         return(
                             <label>
-                                <input type="radio" name="location" value={location.location_name} onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                                {location.location_name}
+                                <input type="radio" name="location" value={location.locationName} onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
+                                {location.locationName}
                             </label>
                         )
                     })}
