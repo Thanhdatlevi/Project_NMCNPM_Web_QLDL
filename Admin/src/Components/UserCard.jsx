@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import fetch from 'node-fetch';
 import '../Styles/UserCard.css';
 
 const UserCard = ({ user, setSelectedUsers }) => {
@@ -15,26 +16,36 @@ const UserCard = ({ user, setSelectedUsers }) => {
         
         if (confirmDelete) {
             const data = {
-                accountId: user.accountId
+                accountId: user.accountId // Giả sử bạn muốn xóa tài khoản với accountId = 'a018'
             };
-    
-            try {
-                fetch('http://localhost:3000/admin/deleteuser', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    // Optionally, you can remove the user from the UI after successful deletion
-                    // setUsers(prevUsers => prevUsers.filter(u => u.accountId !== user.accountId));
-                });
-            } catch (error) {
-                console.error(error);
-            }
+            
+            const deleteUser = async () => {
+                try {
+                    const response = await fetch('http://localhost:3000/admin/deleteuser', {
+                        method: 'DELETE', // Chắc chắn sử dụng phương thức DELETE thay vì POST
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data) // Chuyển data thành chuỗi JSON
+                    });
+            
+                    // Kiểm tra xem server có trả về thành công hay không
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+            
+                    const result = await response.json(); // Phản hồi trả về dưới dạng JSON
+                    console.log(result); // In ra dữ liệu phản hồi từ server
+            
+                    // Tùy chọn: Bạn có thể xóa người dùng khỏi UI nếu cần
+                    // setUsers(prevUsers => prevUsers.filter(u => u.accountId !== data.accountId));
+            
+                } catch (error) {
+                    console.error('Lỗi khi gọi API:', error);
+                }
+            };
+
+            deleteUser();
         }
     };
 

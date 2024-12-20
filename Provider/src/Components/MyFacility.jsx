@@ -5,7 +5,7 @@ import "../Styles/Profile.css";
 import "../Styles/MyFacility.css";
 
 const MyFacility = () => {
-    let provider = 'p001';
+    let provider = 'p002';
     const itemsPerPage = 2;
     const [currentPage, setCurrentPage] = useState(1);
     const [currentService, setCurrentService] = useState([]);
@@ -57,7 +57,7 @@ const MyFacility = () => {
     const fetchData = async (service) => {
         localStorage.setItem('selectedService', service);
         setActiveTab(service);
-        const response = await fetch(`/${service}/get${service}ByProviderid/${provider}`);
+        const response = await fetch(`/${service == "res" ? "restaurant" : "hotel"}/by-provider/${provider}`);
         if (!response.ok) {
             throw new Error("Failed to fetch data");
         }

@@ -234,9 +234,9 @@ class HotelModel {
                     hotelId: row.id,
                     hotelName: row.name,
                     location: row.location,
-                    hotelDeal: row.deal,
-                    hotelRating: row.rating,
-                    hotelImages: row.images || [], // Nếu không có ảnh, trả về mảng rỗng
+                    deal: row.deal,
+                    rating: row.rating,
+                    images: row.images || [], // Nếu không có ảnh, trả về mảng rỗng
                 }));
                 return hotels;
             }
