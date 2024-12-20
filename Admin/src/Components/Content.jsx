@@ -1,6 +1,7 @@
 import '../Styles/Home_Content.css';
 import HomeDashboard from './HomeDashboard';
 import AttractionsManagement from './AttractionsManagement';
+import {useNavigate } from 'react-router-dom';
 import UserManagement from './UserManagement';
 import FacilitiesManagement from './FacilitiesManagement';
 
@@ -9,7 +10,7 @@ import React, { useState } from 'react';
 
 const Content = () => {
   const [contentType, setContentType] = useState('home');
-
+  const navigate = useNavigate(); // Sử dụng để chuyển hướng trang
   const renderContent = () => {
         if (contentType === 'home') {
             return <HomeDashboard />;
@@ -22,6 +23,28 @@ const Content = () => {
             return <FacilitiesManagement />;
         };
     };
+    const handleLogout = async () => {
+      try {
+          const response = await fetch('/logout', {
+              method: 'POST',
+              credentials: 'include', // Để gửi cookie trong yêu cầu
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          });
+
+          if (response.ok) {
+              console.log('Logout successful');
+              window.location.href = 'http://localhost:3001/login';// Chuyển hướng về trang đăng nhập
+          } else {
+              console.error('Logout failed');
+              alert('Logout failed. Please try again.');
+          }
+      } catch (error) {
+          console.error('Error during logout:', error);
+          alert('An error occurred during logout. Please try again.');
+      }
+  };
   return (
     <section className="container-dashboard">
         <div className ="side-bar">
@@ -59,7 +82,7 @@ const Content = () => {
               <div className="list-select-content" tabIndex="0" >
                 <i class='bx bx-cog'></i>
                 Setting</div>
-              <div className="list-select-content" tabIndex="0" >
+              <div className="list-select-content" tabIndex="0" onClick={handleLogout}>
                 <i class='bx bx-exit' ></i>
                 Logout</div>
           </div>
