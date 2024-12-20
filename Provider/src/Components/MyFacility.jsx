@@ -63,6 +63,7 @@ const MyFacility = () => {
         }
         const detailData = await response.json();
         setCurrentPage(1);
+
         setCurrentService(detailData);
     };
 
@@ -112,11 +113,11 @@ const MyFacility = () => {
 
                 <div className="post-information-container">
                     {paginateData().map((ser) => {
-                        handleEditClick(ser.id);
+                        handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId);
                         
 
                         return (
-                            <div className="post-card" key={ser.id}>
+                            <div className="post-card" key={ser.restaurantId ? ser.restaurantId : ser.hotelId}>
                                 <img
                                     src={ser.images[0]}
                                     alt="Service Image"
@@ -149,11 +150,11 @@ const MyFacility = () => {
                                     <div className="btn_main">
                                         <Link to="/facilityForm">
                                         {/* ,ser.name,ser.location, ser.des */}
-                                            <button className="btn_fix" onClick={() => handleEditClick(ser.id)}> 
+                                            <button className="btn_fix" onClick={() => handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId)}> 
                                                 <i className="fa-solid fa-screwdriver-wrench"></i>
                                             </button>
                                         </Link>
-                                        <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.id, ser.facid)}>
+                                        <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.restaurantId ? ser.restaurantId : ser.hotelId, ser.facid)}>
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>

@@ -24,7 +24,7 @@ const FacilityForm = () => {
         const id = localStorage.getItem("selectedServiceId") ? localStorage.getItem("selectedServiceId") : "r001";
 
         // Fetch data from server
-        fetch(`/${service === "res" ? "restaurant" : "hotel"}/${id}`)
+        fetch(`/${service === "res" ? "restaurant" : "hotel"}/provider/${id}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
@@ -33,37 +33,38 @@ const FacilityForm = () => {
             })
             .then((data) => {
                 console.log("Success:", data);
-                const fetchedData = data[0];
+                const fetchedData = data;
+                console.log("Data: ",fetchedData);
 
                 // Normalize data
                 if (service === "hotel") {
                     setFacilityData({
                         
-                        name: fetchedData.hotel_name,
-                        location: fetchedData.location_name,
-                        description: fetchedData.hotel_description,
-                        img: fetchedData.hotel_images,
-                        capacity: fetchedData.hotel_rooms,
-                        amenities: fetchedData.hotel_amenities,
-                        contact: fetchedData.hotel_contact,
-                        status: fetchedData.hotel_status,
-                        deal: fetchedData.hotel_deal,
+                        name: fetchedData.hotelName,
+                        location: fetchedData.hotelLocation,
+                        description: fetchedData.hotelDescription,
+                        img: fetchedData.hotelImages,
+                        capacity: fetchedData.hotelRooms,
+                        amenities: fetchedData.hotelAmenities,
+                        contact: fetchedData.hotelContact,
+                        status: fetchedData.hotelStatus,
+                        deal: fetchedData.hotelDeal,
                     });
-                    setCapacityList(fetchedData.hotel_rooms);
+                    setCapacityList(fetchedData.hotelRooms);
                 } else if (service === "res") {
                     setFacilityData({
                         
-                        name: fetchedData.res_name,
-                        location: fetchedData.location_name,
-                        description: fetchedData.res_description,
-                        img: fetchedData.res_images,
-                        capacity: fetchedData.res_tables,
-                        amenities: fetchedData.res_amenities,
-                        contact: fetchedData.res_contact,
-                        status: fetchedData.res_status,
-                        deal: fetchedData.res_deal,
+                        name: fetchedData.resName,
+                        location: fetchedData.resLocation,
+                        description: fetchedData.resDescription,
+                        img: fetchedData.resImages,
+                        capacity: fetchedData.resTables,
+                        amenities: fetchedData.resAmenities,
+                        contact: fetchedData.resContact,
+                        status: fetchedData.resStatus,
+                        deal: fetchedData.resDeal,
                     });
-                    setCapacityList(fetchedData.res_tables);
+                    setCapacityList(fetchedData.resTables);
                 }
             })
             .catch((error) => {
