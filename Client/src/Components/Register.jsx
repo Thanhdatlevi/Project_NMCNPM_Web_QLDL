@@ -32,25 +32,25 @@ const RegisterPage = () => {
         e.preventDefault();
 
         console.log(formData);
-        // try {
-        //     const response = await fetch("/register/postRegister", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(formData),
-        //     });
+        try {
+            const response = await fetch("/register/api/postRegister", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
-        //     const result = await response.json();
-        //     if (response.ok) {
-        //         alert("Registration successful!");
-        //     } else {
-        //         alert(`Error: ${result.message}`);
-        //     }
-        // } catch (error) {
-        //     console.error("Error submitting form:", error);
-        //     alert("An error occurred while submitting the form.");
-        // }
+            const result = await response.json();
+            if (response.ok) {
+                alert("Registration successful!");
+            } else {
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("An error occurred while submitting the form.");
+        }
     };
     return (
         <section id="loginPage">

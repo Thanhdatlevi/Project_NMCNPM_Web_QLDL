@@ -23,7 +23,7 @@ const SelectRole = () => {
 
                 <div class="role-selection">
                     <Link to="/register">
-                    <div class="role-card" onClick={() => handleRoleSelect("tourists")}>
+                    <div class="role-card" onClick={() => handleRoleSelect("tourist")}>
                         <h3>Khách du lịch</h3>
                         <p>Người dùng đăng ký với vai trò khách du lịch có thể khám phá các tour du lịch, nhà hàng, khách sạn và
                             những địa điểm thu
@@ -32,7 +32,7 @@ const SelectRole = () => {
                     </Link>
 
                     <Link to="/register">
-                    <div class="role-card" onClick={() => handleRoleSelect("providers")}>
+                    <div class="role-card" onClick={() => handleRoleSelect("provider")}>
                         <h3>Nhà cung cấp</h3>
                         <p>Nhà cung cấp có thể đề nghị đưa nhà hàng, khách sạn của mình lên trang web để giới thiệu đến khách du
                             lịch. Họ cũng có

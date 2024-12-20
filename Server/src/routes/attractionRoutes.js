@@ -1,23 +1,15 @@
 // src/routes/userRoutes.js
 const express = require('express');
 const router = express.Router();
-const AttractionController = require('../attraction/attractionController');
-
-router.get('/getAllAttraction', AttractionController.getAllAttraction);
-
+const AttractionController = require('../component/attraction/attractionController');
 
 router.get('/getFilterattraction', AttractionController.getFilterAttraction);
 
-router.post('/addAttractions', AttractionController.addAttractions)
 
-// Route đăng ký người dùng
+router.get('/', AttractionController.getAttractionsByPage);
+router.get('/api/getAttractionsTotal', AttractionController.getAttractionsTotal);
 router.get('/_10PopularAttraction', AttractionController.get_10_PopularAttractions);
+router.get('/by-locationId/:locationId', AttractionController.getAttractionsByLocationId);
+router.get('/:attractionId', AttractionController.getAttractionById);
 
-router.post('/updateAttractions/:attractionID', AttractionController.updateAttractions)
-
-router.post('/deleteAttractions/:attractionID', AttractionController.deleteAttractions)
-
-router.get('/getRelatedattraction/:attractionID', AttractionController.getRelatedAttraction);
-
-router.get('/:attractionID', AttractionController.getAttractionByID)
 module.exports = router;

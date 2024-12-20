@@ -5,7 +5,7 @@ import "../Styles/Profile.css";
 import "../Styles/MyFacility.css";
 
 const MyFacility = () => {
-    let provider = 'p001';
+    let provider = 'p002'
     const itemsPerPage = 2;
     const [currentPage, setCurrentPage] = useState(1);
     const [currentService, setCurrentService] = useState([]);
@@ -113,21 +113,13 @@ const MyFacility = () => {
                 <div className="post-information-container">
                     {paginateData().map((ser) => {
                         handleEditClick(ser.id);
-                        
-
                         return (
-                            <div className="post-card" key={ser.id}>
-                                <img
-                                    src={ser.images[0]}
-                                    alt="Service Image"
-                                />
+                            <div className="post-card">
+                                <img src={ser.images[0]} alt="Service Image"/>
                                 <div className="post-info">
                                     <h3>{ser.name}</h3>
                                     <p>
-                                        <span role="img" aria-label="location">
-                                            📍
-                                        </span>{" "}
-                                        {ser.location}
+                                        <span role="img" aria-label="location">📍</span>{" "}{ser.location}
                                     </p>
                                     <div className="check-info">
                                         <div>
