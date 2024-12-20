@@ -4,7 +4,7 @@ import { Link, useParams} from 'react-router-dom';
 const LoginPage = () => {
     const [formData, setFormData] = useState({ Username_Email: '', password: '' });
     const [error, setError] = useState(null);
-
+    const [user, setUser] = useState(null);
     // Xử lý khi người dùng nhập dữ liệu
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,7 +31,29 @@ const LoginPage = () => {
 
             const data = await response.json();
             console.log('Đăng nhập thành công:', data);
-            window.location.href = '/';
+            
+            const authResponse = await fetch('/authenticate', {
+                method: 'GET',
+                credentials: 'include',
+            });
+    
+            if (!authResponse.ok) {
+                throw new Error('Lỗi xác thực. Vui lòng thử lại.');
+            }
+    
+            const authData = await authResponse.json();
+            console.log('Dữ liệu xác thực:', authData);
+    
+            // Điều hướng dựa trên vai trò
+            if (authData.role === 'tourist') {
+                window.location.href = '/';
+            } else if (authData.role === 'admin') {
+                window.location.href = 'http://localhost:3002/home';
+            }else if (authData.role === 'provider') {
+                window.location.href = 'http://localhost:3003/home';
+            } else {
+                throw new Error('Vai trò không hợp lệ.');
+            }
         } catch (err) {
             console.error(err);
             setError(err.message || 'Có lỗi xảy ra.');

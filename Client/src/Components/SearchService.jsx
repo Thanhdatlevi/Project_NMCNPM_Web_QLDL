@@ -28,7 +28,7 @@ const SearchService = () => {
                 const [attractionResponse, hotelResponse, resResponse] = await Promise.all([
                     fetch(`/attraction/getFilterattraction?${queryParams}`),
                     fetch(`/hotel/getFilterhotel?${queryParams}`),
-                    fetch(`/res/getFilterres?${queryParams}`),
+                    fetch(`/restaurant/getFilterres?${queryParams}`),
                 ]);
 
                 const [attractionData, hotelData, resData] = await Promise.all([

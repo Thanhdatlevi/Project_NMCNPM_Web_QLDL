@@ -18,7 +18,7 @@ const AttractionsManagement = () => {
   });
 
   useEffect(() => {
-    fetch('/attraction/getAllAttraction')
+    fetch('/attraction/getFilterattraction')
       .then(res => res.json())
       .then(data => setAttractions(data))
       .catch(err => console.error(err));
@@ -68,6 +68,7 @@ const AttractionsManagement = () => {
     })
       .then(res => res.json())
       .then(data => {
+        alert(editingAttraction ? 'Editing successfull' : 'Add successfull')
         if (editingAttraction) {
           setAttractions(attractions.map(attraction => (attraction.attraction_id === data.attraction_id ? data : attraction)));
         } else {
@@ -158,8 +159,8 @@ const AttractionsManagement = () => {
             >
               <option value="">Select Location</option>
               {locations.map(location => (
-                <option key={location.location_id} value={location.location_name}>
-                  {location.location_name}
+                <option key={location.locationId} value={location.locationName}>
+                  {location.locationName}
                 </option>
               ))}
             </select>

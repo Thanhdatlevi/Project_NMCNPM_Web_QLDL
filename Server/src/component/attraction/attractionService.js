@@ -22,6 +22,36 @@ class AttractionService {
         }
     }
 
+    static async addAttractions(name, description, location, phone, openingHours, rating,img_url) {
+        try {
+            const attractions = await AttractionModel.addAttractions(name, description, location, phone, openingHours, rating,img_url);
+            return attractions;
+
+        } catch (error) {
+            console.error("Error in add attraction in AttractionService: ", error);
+            throw error;
+        }
+    }
+    static async updateAttractions(attractionID, name, description, location, phone, openingHours, rating,img_url) {
+        try {
+            const attractions = await AttractionModel.updateAttractions(attractionID, name, description, location, phone, openingHours, rating,img_url);
+            return attractions;
+
+        } catch (error) {
+            console.error("Error in add attraction in AttractionService: ", error);
+            throw error;
+        }
+    }
+    static async deleteAttractions(attractionID) {
+        try {
+            const attractions = await AttractionModel.deleteAttractions(attractionID);
+            return attractions;
+
+        } catch (error) {
+            console.error("Error in add attraction in AttractionService: ", error);
+            throw error;
+        }
+    }
     static async getAttractionsByLocationId(locationId) {
         try {
             const attractions = await AttractionModel.getAttractionsByLocationId(locationId);

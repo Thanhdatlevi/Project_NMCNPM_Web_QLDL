@@ -11,13 +11,13 @@ const FacilitiesManagement = () => {
   
     useEffect(() => {
       // Fetch hotels
-      fetch('/hotel/getAllhotel')
+      fetch('/hotel/getFilterhotel')
         .then(res => res.json())
         .then(data => setHotels(data))
         .catch(err => console.error(err));
   
       // Fetch restaurants
-      fetch('/res/getAllres')
+      fetch('/restaurant/getFilterres')
         .then(res => res.json())
         .then(data => setRestaurants(data))
         .catch(err => console.error(err));
@@ -26,7 +26,7 @@ const FacilitiesManagement = () => {
         if (!window.confirm("Are you sure you want to delete this item?")) {
             return;
         }
-        const endpoint = type === 'hotel' ? `/hotel/delete` : `/res/delete`;
+        const endpoint = type === 'hotel' ? `/hotel/delete` : `/restaurant/delete`;
         try {
             const response = await fetch(endpoint, {
                 method: "POST",

@@ -246,11 +246,74 @@ class AttractionModel {
         }
     }
 
+    static async addAttractions(name, description, location, phone, openingHours, rating,img_url) {
+        try {
+            const query = `
+                INSERT INTO attractions (attraction_id, attraction_name, description, location_id, contact, opening_hours, rating, img_url, detailed_location)
+                VALUES ((SELECT 
+                    'a' || LPAD(CAST(COALESCE(MAX(CAST(SUBSTRING(attraction_id FROM 2 FOR LENGTH(attraction_id) - 1) AS INT)), 0) + 1 AS VARCHAR), 3, '0')
+                FROM attractions), $1, $2, 
+                (select l.location_id
+                from locations l
+                where l.location_name = $3), $4, $5, $6, $7, '123')
+                RETURNING *;
+            `;
+            const values = [name, description, location, phone, openingHours, rating, img_url];
+            const res = await db.query(query, values);
+            return res.rows[0];
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    }
+
+    static async updateAttractions(attractionID, name, description, location, phone, openingHours, rating,img_url) {
+        try {
+            const query = `
+                UPDATE attractions
+                SET 
+                    attraction_name = $1,
+                    description = $2,
+                    location_id = (select l.location_id
+                        from locations l
+                        where l.location_name = $3),
+                    contact = $4,
+                    opening_hours = $5,
+                    rating = $6,
+                    img_url = $7,
+                    detailed_location = '123'
+                WHERE attraction_id = $8
+                RETURNING *;
+            `;
+            const values = [name, description, location, phone, openingHours, rating, img_url,attractionID];
+            const res = await db.query(query, values);
+            return res.rows[0];
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    }
+
+    static async deleteAttractions(attractionID) {
+        try {
+            const query = `
+                DELETE FROM attractions
+                WHERE attraction_id = $1
+                RETURNING *;
+            `;
+            const values = [attractionID];
+            const res = await db.query(query, values);
+            return res.rows[0];
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    }
 
     static async getFilterAttraction(rate, location, input) {
         const query = `
-                SELECT * FROM public.attractions a
-                join locations l on l.location_id = a.location_id
+                SELECT *, l.location_name FROM public.attractions a
+                left join locations l on l.location_id = a.location_id
                 WHERE (($1 = -1) OR (a.rating >= $1 AND a.rating <= $1+1))
                 and (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
                 and (($3 = 'default') OR (a.attraction_name LIKE '%' || $3 || '%') OR (a.description LIKE '%' || $3 || '%'))

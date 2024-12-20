@@ -5,7 +5,11 @@ const AttractionController = require('../component/attraction/attractionControll
 
 router.get('/getFilterattraction', AttractionController.getFilterAttraction);
 
+router.post('/addAttractions', AttractionController.addAttractions)
 
+router.post('/updateAttractions/:attractionID', AttractionController.updateAttractions)
+
+router.post('/deleteAttractions/:attractionID', AttractionController.deleteAttractions)
 router.get('/', AttractionController.getAttractionsByPage);
 router.get('/api/getAttractionsTotal', AttractionController.getAttractionsTotal);
 router.get('/_10PopularAttraction', AttractionController.get_10_PopularAttractions);
