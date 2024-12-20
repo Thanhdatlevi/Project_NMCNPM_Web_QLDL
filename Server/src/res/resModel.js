@@ -5,8 +5,11 @@ const RestaurantModel = {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
             const query = `
-            SELECT * FROM public.restaurants
-            ORDER BY restaurant_id ASC 
+            SELECT * FROM restaurants r
+            join facilities f on f.facility_id = r.facility_id
+            join locations l on l.location_id = f.location_id
+            join facility_images fi on f.facility_id = fi.facility_id and fi.img_id = 1
+            ORDER BY r.restaurant_id ASC 
         `;
 
             const res = await db.query(query);

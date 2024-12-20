@@ -55,6 +55,43 @@ const AttractionController = {
             res.status(500).json({ message: 'Error retrieving attraction details' });
         }
     },
+    addAttractions: async (req, res) => {
+        try {
+            const { name, description, location, phone, openingHours, rating,img_url} = req.body;
+            const attractionRelated = await AttractionModel.addAttractions(name, description, location, phone, openingHours, rating,img_url);
+            if (!attractionRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            }
+            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
+        }
+    },
+    updateAttractions: async (req, res) => {
+        try {
+            const { name, description, location, phone, openingHours, rating,img_url} = req.body;
+            const { attractionID } = req.params;
+            const attractionRelated = await AttractionModel.updateAttractions(attractionID, name, description, location, phone, openingHours, rating,img_url);
+            if (!attractionRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            }
+            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
+        }
+    },
+    deleteAttractions: async (req, res) => {
+        try {
+            const { attractionID } = req.params;
+            const attractionRelated = await AttractionModel.deleteAttractions(attractionID);
+            if (!attractionRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            }
+            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
+        }
+    },
 };
 
 module.exports = AttractionController;

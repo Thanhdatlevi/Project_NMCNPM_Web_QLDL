@@ -5,8 +5,11 @@ const HotelModel = {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
             const query = `
-            SELECT * FROM public.hotels
-            ORDER BY hotel_id ASC 
+            SELECT * FROM hotels h
+            join facilities f on f.facility_id = h.facility_id
+            join locations l on l.location_id = f.location_id
+            join facility_images fi on f.facility_id = fi.facility_id and fi.img_id = 1
+            ORDER BY h.hotel_id ASC 
         `;
 
             const res = await db.query(query);  // Truyền tham số hotelID vào câu truy vấn
@@ -34,6 +37,36 @@ const HotelModel = {
         } catch (error) {
             console.error('Error fetching hotel details:', error);
             throw error;
+        }
+    },
+    deleteHotel: async (provider_id, facility_id, specificFacility_id) => {
+        try {
+            const deleteTablesQuery = `
+                DELETE FROM rooms
+                WHERE hotel_id = $1;
+            `;
+            await db.query(deleteTablesQuery, [specificFacility_id]);
+        
+            const deleteImagesQuery = `
+                DELETE FROM facility_images
+                WHERE facility_id = $1;
+            `;
+            await db.query(deleteImagesQuery, [facility_id]);
+        
+            const deleteRestaurantsQuery = `
+                DELETE FROM hotels
+                WHERE facility_id = $1;
+            `;
+            await db.query(deleteRestaurantsQuery, [facility_id]);
+        
+            const deleteFacilitiesQuery = `
+                DELETE FROM facilities
+                WHERE facility_id = $1 AND provider_id = $2;
+            `;
+            await db.query(deleteFacilitiesQuery, [facility_id, provider_id]);
+        } catch (error) {
+            console.error('Error fetching popular restaurants:', error);
+            throw error; // Ném lỗi nếu có lỗi xảy ra
         }
     },
     get_3_PopularHotels: async () => {

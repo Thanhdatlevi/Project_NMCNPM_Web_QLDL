@@ -1,11 +1,10 @@
 import '../Styles/Home_Content.css';
-import { Link } from 'react-router-dom';
 import HomeDashboard from './HomeDashboard';
 import AttractionsManagement from './AttractionsManagement';
 import UserManagement from './UserManagement';
 import FacilitiesManagement from './FacilitiesManagement';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
 const Content = () => {
@@ -23,15 +22,6 @@ const Content = () => {
             return <FacilitiesManagement />;
         };
     };
-  const [attractions, setAttractions] = useState([])
-  useEffect(()=>{
-    fetch('/attraction/getAllAttraction')
-        .then((response) => response.json())
-        .then((data) => {
-          setAttractions(data)
-        })
-        .catch((error) => console.error('Error:', error));
-  },[]);
   return (
     <section className="container-dashboard">
         <div className ="side-bar">
@@ -39,6 +29,15 @@ const Content = () => {
                   <img src="../Images/logoITISE.png" alt="logo" />
           </div>
           <div className="list-select">
+              <div className="dashboard-header list-select-content">
+                <div className ="notification">
+                  <i class='bx bx-bell'></i>
+                </div>
+                <div className ="admin-info">
+                    <h4>Admin</h4>
+                    <p>admin@gmail.com</p>
+                </div>
+              </div>
               <div className="list-select-content" tabIndex="0" onClick={() => setContentType('home')}>
                 <i class='bx bx-home-alt' ></i>
                 Home
@@ -67,19 +66,6 @@ const Content = () => {
         </div>
         
         <div className="contentDashboard">
-            <div className="dashboard-header">
-              <div className ="notification">
-                <i class='bx bx-bell'></i>
-              </div>
-              <div className ="admin-avt">
-                <img src="../Images/logoITISE.png" alt="logo" />
-              </div>
-              <div className ="admin-info">
-                  <h4>Admin</h4>
-                  <p>admin@gmail.com</p>
-              </div>
-
-            </div>
             {renderContent()}
         </div>
     </section>

@@ -22,8 +22,9 @@ const AttractionModel = {
         try {
             // Truy vấn tất cả dữ liệu từ bảng facilities
             const query = `
-                SELECT * FROM public.attractions
-                ORDER BY attraction_id ASC 
+                SELECT *, l.location_name FROM attractions a
+                JOIN locations l on l.location_id = a.location_id
+                ORDER BY a.attraction_id ASC 
             `;
             const res = await db.query(query);  // Thực thi câu truy vấn
             return res.rows;  // Trả về tất cả các hàng dữ liệu
@@ -97,6 +98,69 @@ const AttractionModel = {
             `;
             const res = await db.query(query, [attractionID]);
             return res.rows;
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    },
+    addAttractions: async (name, description, location, phone, openingHours, rating,img_url) => {
+        try {
+            const query = `
+                INSERT INTO attractions (attraction_id, attraction_name, description, location_id, contact, opening_hours, rating, img_url, detailed_location)
+                VALUES ((SELECT 
+                    'a' || LPAD(CAST(COALESCE(MAX(CAST(SUBSTRING(attraction_id FROM 2 FOR LENGTH(attraction_id) - 1) AS INT)), 0) + 1 AS VARCHAR), 3, '0')
+                FROM attractions), $1, $2, 
+                (select l.location_id
+                from locations l
+                where l.location_name = $3), $4, $5, $6, $7, '123')
+                RETURNING *;
+            `;
+            const values = [name, description, location, phone, openingHours, rating, img_url];
+            const res = await db.query(query, values);
+            return res.rows[0];
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    },
+
+    updateAttractions: async (attractionID, name, description, location, phone, openingHours, rating,img_url) => {
+        try {
+            const query = `
+                UPDATE attractions
+                SET 
+                    attraction_name = $1,
+                    description = $2,
+                    location_id = (select l.location_id
+                        from locations l
+                        where l.location_name = $3),
+                    contact = $4,
+                    opening_hours = $5,
+                    rating = $6,
+                    img_url = $7,
+                    detailed_location = '123'
+                WHERE attraction_id = $8
+                RETURNING *;
+            `;
+            const values = [name, description, location, phone, openingHours, rating, img_url,attractionID];
+            const res = await db.query(query, values);
+            return res.rows[0];
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    },
+
+    deleteAttractions: async (attractionID) => {
+        try {
+            const query = `
+                DELETE FROM attractions
+                WHERE attraction_id = $1
+                RETURNING *;
+            `;
+            const values = [attractionID];
+            const res = await db.query(query, values);
+            return res.rows[0];
         } catch (error) {
             console.error('Error fetching restaurant details:', error);
             throw error;
