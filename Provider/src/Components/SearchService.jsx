@@ -28,7 +28,7 @@ const SearchService = () => {
                 const [attractionResponse, hotelResponse, resResponse] = await Promise.all([
                     fetch(`/attraction/getFilterattraction?${queryParams}`),
                     fetch(`/hotel/getFilterhotel?${queryParams}`),
-                    fetch(`/res/getFilterres?${queryParams}`),
+                    fetch(`/restaurant/getFilterres?${queryParams}`),
                 ]);
 
                 const [attractionData, hotelData, resData] = await Promise.all([
@@ -39,7 +39,7 @@ const SearchService = () => {
 
                 fetchedData = [...attractionData, ...hotelData,...resData];
             } else {
-                const response = await fetch(`/${filters.service}/getFilter${filters.service}?${queryParams}`);
+                const response = await fetch(`/${filters.service === "res" ? "restaurant" : (filters.service === "attraction" ? "attraction" : "hotel")}/getFilter${filters.service}?${queryParams}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
                 }
@@ -167,8 +167,8 @@ const SearchService = () => {
                     {locations.map((location)=>{
                         return(
                             <label>
-                                <input type="radio" name="location" value={location.location_name} onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
-                                {location.location_name}
+                                <input type="radio" name="location" value={location.locationName} onClick={(e) => handleFilterChange(e.target.name, e.target.value)}/>
+                                {location.locationName}
                             </label>
                         )
                     })}

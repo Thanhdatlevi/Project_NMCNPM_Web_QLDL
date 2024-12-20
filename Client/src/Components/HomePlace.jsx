@@ -117,7 +117,7 @@ function HomePlace() {
         return data1;
     }
     async function loadJSON2() {
-        const response = await fetch('http://localhost:3000/hotel/getfilterholtel');
+        const response = await fetch('http://localhost:3000/hotel/getfilterhotel');
         const data2 = await response.json();
         return data2;
     }

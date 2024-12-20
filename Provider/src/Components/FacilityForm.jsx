@@ -21,10 +21,10 @@ const FacilityForm = () => {
     const [service, setService] = useState(localStorage.getItem("selectedService")); // "hotel" or "res"
 
     useEffect(() => {
-        const id = localStorage.getItem("selectedServiceId");
+        const id = localStorage.getItem("selectedServiceId") ? localStorage.getItem("selectedServiceId") : "r001";
 
         // Fetch data from server
-        fetch(`${service}/${id}`)
+        fetch(`/${service === "res" ? "restaurant" : "hotel"}/${id}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");

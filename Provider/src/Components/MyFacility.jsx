@@ -148,7 +148,8 @@ const MyFacility = () => {
                                     <button className="btn_detail">View detail</button>
                                     <div className="btn_main">
                                         <Link to="/facilityForm">
-                                            <button className="btn_fix" onClick={() => handleEditClick(ser.id,ser.name,ser.location, ser.des)}>
+                                        {/* ,ser.name,ser.location, ser.des */}
+                                            <button className="btn_fix" onClick={() => handleEditClick(ser.id)}> 
                                                 <i className="fa-solid fa-screwdriver-wrench"></i>
                                             </button>
                                         </Link>

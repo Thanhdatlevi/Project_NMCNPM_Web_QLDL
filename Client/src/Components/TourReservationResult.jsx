@@ -31,7 +31,7 @@ const TourReservationResult = () => {
 
     const loadHotels = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/hotel/getfilterholtel');
+            const response = await fetch('http://localhost:3000/hotel/getfilterhotel');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

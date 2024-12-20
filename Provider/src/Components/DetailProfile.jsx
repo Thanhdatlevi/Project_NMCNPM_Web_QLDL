@@ -7,8 +7,8 @@ import "../Styles/Profile.css";
 const DetailProfile = () => {
     const [user, setUser] = useState({});
     useEffect(() => {
-        const userId = "u001"; // Thay thế bằng userId thực tế
-        fetch(`/user/u001`) 
+        const userId = "p001"; // Thay thế bằng userId thực tế
+        fetch(`/user/p001`) 
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -37,7 +37,7 @@ const DetailProfile = () => {
                     <div class="content">
                         <div class="field-label">
                             <label for="name">Name: </label>
-                            <input type="text" id="name" class="value" value={user.full_name} />
+                            <input type="text" id="name" class="value" value={user.fullName} />
                         </div>
                         <div class="field-label">
                             <label for="dob">Ngày sinh:</label>

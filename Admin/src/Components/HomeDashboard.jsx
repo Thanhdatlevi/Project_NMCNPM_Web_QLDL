@@ -43,7 +43,7 @@ const HomeDashboard = () => {
             .catch((error) => console.error('Error:', error));
     },[]);
     useEffect(()=>{
-        fetch('/hotel/getFilterholtel')
+        fetch('/hotel/getFilterhotel')
             .then((response) => response.json())
             .then((data) => {
             setFacilities(facilities+data.length)

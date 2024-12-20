@@ -7,7 +7,7 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
     const type = localStorage.getItem('type');
     useEffect(() => {
         if (type === 'hol') {
-            fetch('/hotel/getfilterholtel')
+            fetch('/hotel/getfilterhotel')
                 .then((response) => response.json())
                 .then((data) => {
                     for (let i = 0; i < data.length; i++) {

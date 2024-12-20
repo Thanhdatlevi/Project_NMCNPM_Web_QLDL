@@ -35,7 +35,7 @@ const Header = () => {
                 <li><a href="" class="nav-item">Địa điểm du lịch</a></li>
                 <li><a href="/HomePlace" class="nav-item">Tạo lịch trình</a></li>
                 <li><a href="/searchService" class="nav-item">Cơ sở dịch vụ</a></li>
-                <li><a href="./assets/html/profile.html" class="nav-item">Giới thiệu</a></li>
+                <li><a href="/profile" class="nav-item">Giới thiệu</a></li>
                 <li><a href="#!" class="nav-item">Liên lạc</a></li>
             </ul>
 
