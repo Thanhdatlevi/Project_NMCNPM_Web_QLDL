@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const cookieParser = require('cookie-parser');
-const { authenticateToken, requireTourist, requireProvider, requireAdmin, checkout } = require('./src/middleware/authMiddleware');
+const { authenticateToken, requireTourist, requireProvider, requireAdmin, requireLogin, checkIfLoggedIn } = require('./src/middleware/authMiddleware');
 
 const PORT = process.env.PORT || 3000;
 
@@ -21,9 +21,13 @@ const locationRoutes = require('./src/routes/locationRoutes'); // Điều hướ
 const registerRoutes = require('./src/routes/registerRoutes.js');
 const loginRoutes = require('./src/routes/loginRoutes.js');
 const logoutRoutes = require('./src/routes/logout.Routes.js');
+
 const verifyRoutes = require('./src/routes/verifyRoutes.js');
 const authenticateRoutes = require('./src/routes/authenticateRoutes.js');
+
 const adminRoutes = require('./src/routes/adminRoutes.js');
+const providerRoutes = require('./src/routes/providerRoutes.js');
+const touristRoutes = require('./src/routes/touristRoutes.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -35,17 +39,22 @@ app.use(authenticateToken);
 
 app.use(express.static(path.join(__dirname, 'src', 'public')));
 
-app.use('/authenticate', authenticateRoutes);
 app.use('/restaurant', restaurentoutes);
 app.use('/attraction', attractionRoutes);
 app.use('/hotel', hotelRoutes);
 app.use('/location', locationRoutes);
-app.use('/register', registerRoutes);
-app.use('/login', loginRoutes);
-app.use('/logout', logoutRoutes);
-app.use('/verify', verifyRoutes);
 
-app.use('/admin', adminRoutes);
+app.use('/logout', requireLogin, logoutRoutes);
+
+app.use('/authenticate', checkIfLoggedIn, authenticateRoutes);
+app.use('/register', checkIfLoggedIn, registerRoutes);
+app.use('/login', checkIfLoggedIn, loginRoutes);
+app.use('/verify', checkIfLoggedIn, verifyRoutes);
+
+app.use('/provider', requireProvider, providerRoutes);
+app.use('/admin', requireAdmin, adminRoutes);
+app.use('/tourist', requireTourist, touristRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

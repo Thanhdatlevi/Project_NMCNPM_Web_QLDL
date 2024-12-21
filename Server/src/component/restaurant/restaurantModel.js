@@ -175,7 +175,8 @@ class RestaurantModel {
                 ),
                 tables_agg AS (
                     SELECT t.restaurant_id, array_agg(
-                        JSON_BUILD_OBJECT( 'table_id', t.table_id, 'price', t.price, 'status', t.status
+                        JSON_BUILD_OBJECT( 
+                        'table_id', t.table_id, 'price', t.price, 'status', t.status, 'bookedDates', t.dates_booked
                         )) AS res_tables
                     FROM tables t
                     GROUP BY t.restaurant_id
@@ -358,6 +359,58 @@ class RestaurantModel {
             throw error;
         }
     }
+
+    static async getFacilityIdByRestaurantId(restaurantId) {
+        try {
+            const query = `SELECT facility_id FROM restaurants WHERE restaurant_id = $1`;
+            const result = await db.query(query, [restaurantId]);
+            if (result.rows.length > 0) {
+                return result.rows[0].facility_id;
+            }
+            return null;
+        } catch (error) {
+            console.log("Error in RestaurantModel.getFacilityIdByRestaurantId: ", error);
+            throw error;
+        }
+    }
+
+    static async updateRestaurant(restaurantId, amenities, averagePrice) {
+        try {
+            const fieldsToUpdate = [];
+            const values = [];
+            let index = 1;
+
+            if (amenities !== undefined) {
+                fieldsToUpdate.push(`amenities = $${index}`);
+                values.push(amenities);
+                index++;
+            }
+            if (averagePrice !== undefined) {
+                fieldsToUpdate.push(`average_price = $${index}`);
+                values.push(averagePrice);
+                index++;
+            }
+
+            if (fieldsToUpdate.length === 0) {
+                return false;
+            }
+
+            values.push(restaurantId);
+            const query = `UPDATE restaurants SET ${fieldsToUpdate.join(', ')} WHERE restaurant_id = $${index}`;
+            const result = await db.query(query, values);
+
+            if (result.rowCount > 0) {
+                return true;
+            }
+            return false;
+
+        } catch (error) {
+            console.log("Error in RestaurantModel.updateRestaurant: ", error);
+            throw error;
+        }
+    }
+
+    static async
 }
 
 module.exports = RestaurantModel;

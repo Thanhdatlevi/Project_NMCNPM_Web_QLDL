@@ -209,6 +209,7 @@ class HotelModel {
             throw error;
         }
     }
+
     static async getHotelsByProviderId(providerId) {
         try {
             const query = `
@@ -234,9 +235,9 @@ class HotelModel {
                     hotelId: row.id,
                     hotelName: row.name,
                     location: row.location,
-                    hotelDeal: row.deal,
-                    hotelRating: row.rating,
-                    hotelImages: row.images || [], // Nếu không có ảnh, trả về mảng rỗng
+                    deal: row.deal,
+                    rating: row.rating,
+                    images: row.images || [], // Nếu không có ảnh, trả về mảng rỗng
                 }));
                 return hotels;
             }
@@ -265,6 +266,54 @@ class HotelModel {
             return res.rows;  // Trả về kết quả chi tiết của khách sạn
         } catch (error) {
             console.error('Error fetching hotel details:', error);
+            throw error;
+        }
+    }
+
+    static async getFacilityIdByHotelId(hotelId) {
+        try {
+            const query = `SELECT facility_id FROM hotels WHERE hotel_id = $1`;
+            const result = await db.query(query, [hotelId]);
+            if (result.rows.length > 0) {
+                return result.rows[0].facility_id;
+            }
+            return null;
+        } catch (error) {
+            console.log("Error in HotelModel.getFacilityIdByHotelId: ", error);
+            throw error;
+        }
+    }
+
+    static async updateHotel(hotelId, amenities, averagePrice) {
+        try {
+            const fieldsToUpdate = [];
+            const values = [];
+            let index = 1;
+            if (amenities !== undefined) {
+                fieldsToUpdate.push(`amenities = $${index}`);
+                values.push(amenities);
+                index++;
+            }
+            if (averagePrice !== undefined) {
+                fieldsToUpdate.push(`average_price = $${index}`);
+                values.push(averagePrice);
+                index++;
+            }
+
+            if (fieldsToUpdate.length === 0) {
+                return false;
+            }
+
+            values.push(hotelId);
+            const query = ` UPDATE hotels SET ${fieldsToUpdate.join(', ')} WHERE hotel_id = $${index}`;
+            const result = await db.query(query, values);
+            if (result.rowCount > 0) {
+                return true;
+            }
+            return false;
+
+        } catch (error) {
+            console.log('Error in HotelModel.updateHotel: ', error);
             throw error;
         }
     }

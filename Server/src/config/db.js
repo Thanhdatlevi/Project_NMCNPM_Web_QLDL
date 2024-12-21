@@ -16,4 +16,20 @@ const pool = new Pool({
 
 module.exports = {
     query: (text, params) => pool.query(text, params),
+
+    beginTransaction: async () => {
+        const client = await pool.connect();
+        await client.query('BEGIN');
+        return client;
+    },
+
+    commitTransaction: async (client) => {
+        await client.query('COMMIT');
+        client.release();
+    },
+
+    rollbackTransaction: async (client) => {
+        await client.query('ROLLBACK');
+        client.release();
+    }
 };

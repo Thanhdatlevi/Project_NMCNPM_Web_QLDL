@@ -74,6 +74,7 @@ class HotelService {
     }
 
 
+
 }
 
 module.exports = HotelService;

@@ -5,7 +5,7 @@
 exports.up = async function (knex) {
     return await knex.schema.createTable('hol_requests', function (table) {
         table.string('hol_request_id', 20).primary();
-        table.specificType('provider_id', 'char(4)')
+        table.specificType('provider_id', 'char(4)').notNullable()
             .references('provider_id')
             .inTable('providers')
         table.string('facility_name', 50).notNullable();

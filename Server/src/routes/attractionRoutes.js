@@ -9,7 +9,7 @@ router.get('/getFilterattraction', AttractionController.getFilterAttraction);
 router.get('/', AttractionController.getAttractionsByPage);
 router.get('/api/getAttractionsTotal', AttractionController.getAttractionsTotal);
 router.get('/_10PopularAttraction', AttractionController.get_10_PopularAttractions);
-router.get('/by-locationId/:locationId', AttractionController.getAttractionsByLocationId);
+router.get('/by-location/:locationId', AttractionController.getAttractionsByLocationId);
 router.get('/:attractionId', AttractionController.getAttractionById);
 
 module.exports = router;

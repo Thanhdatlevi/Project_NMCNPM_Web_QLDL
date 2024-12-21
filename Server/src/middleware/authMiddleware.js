@@ -50,10 +50,20 @@ async function authenticateToken(req, res, next) {
 /**
  * Middleware yêu cầu người dùng phải đăng nhập.
  */
+
+function requireLogin(req, res, next) {
+    if (!res.locals.account) {
+        return res.status(401).json({
+            message: 'Truy cập bị từ chối: Bạn chưa đăng nhập.'
+        });
+    }
+    next();
+}
+
 function requireTourist(req, res, next) {
     if (!res.locals.account || res.locals.account.accountRole !== 3) {
         return res.status(401).json({
-            message: 'Unauthorized access: You must be logged in as a tourist to access this resource.'
+            message: 'Truy cập bị từ chối: Bạn phải đăng nhập với vai trò khách du lịch để truy cập tài nguyên này.'
         });
     }
     next();
@@ -62,7 +72,7 @@ function requireTourist(req, res, next) {
 function requireProvider(req, res, next) {
     if (!res.locals.account || res.locals.account.accountRole !== 2) {
         return res.status(401).json({
-            message: 'Unauthorized access: You must be logged in as a provider to access this resource.'
+            message: 'Truy cập bị từ chối: Bạn phải đăng nhập với vai trò nhà cung cấp để truy cập tài nguyên này.'
         });
     }
     next();
@@ -71,32 +81,27 @@ function requireProvider(req, res, next) {
 function requireAdmin(req, res, next) {
     if (!res.locals.account || res.locals.account.accountRole !== 1) {
         return res.status(401).json({
-            message: 'Unauthorized access: You must be logged in as an admin to access this resource.'
+            message: 'Truy cập bị từ chối: Bạn phải đăng nhập với vai trò quản trị viên để truy cập tài nguyên này.'
         });
     }
     next();
 }
 
-function checkout(req, res, next) {
+function checkIfLoggedIn(req, res, next) {
     if (res.locals.account) {
-        const role = res.locals.account.accountRole;
-        if (role === 1) {
-            return res.redirect('/admin');
-        } else if (role === 2) {
-            return res.redirect('/provider');
-        } else if (role === 3) {
-            return res.redirect('/');
-        }
+        return res.status(400).json({
+            message: "Bạn đã đăng nhập rồi, cần đăng xuất."
+        });
     }
-    return next();
+    next();
 }
-
 
 
 module.exports = {
     authenticateToken,
+    requireLogin,
     requireTourist,
     requireProvider,
     requireAdmin,
-    checkout,
+    checkIfLoggedIn,
 };

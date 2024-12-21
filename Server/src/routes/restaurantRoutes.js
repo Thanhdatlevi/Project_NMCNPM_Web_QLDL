@@ -3,6 +3,7 @@ const router = express.Router();
 const RestaurantController = require('../component/restaurant/restaurantController');
 
 router.get('/getFilterres', RestaurantController.getFilterRes);
+
 router.post('/delete', RestaurantController.deleteRes);
 
 router.get('/', RestaurantController.getRestaurantByPage);
@@ -13,8 +14,6 @@ router.get('/by-provider/:providerId', RestaurantController.getRestaurantByProvi
 
 router.get('/api/3-PopularRes', RestaurantController.get_3_PopularRestaurants);
 router.get('/api/getRestaurantsTotal', RestaurantController.getRestaurantsTotal)
-//resId: restaurantId
-router.get('/provider/:resId', RestaurantController.getRestaurantById_provider)
 
 
 module.exports = router;

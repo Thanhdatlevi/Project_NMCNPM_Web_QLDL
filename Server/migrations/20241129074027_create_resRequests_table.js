@@ -5,7 +5,7 @@
 exports.up = async function (knex) {
     await knex.schema.createTable('rest_requests', function (table) {
         table.string('rest_request_id', 20).primary();
-        table.specificType('provider_id', 'char(4)')
+        table.specificType('provider_id', 'char(4)').notNullable()
             .references('provider_id')
             .inTable('providers')
         table.string('facility_name', 50).notNullable();
@@ -30,6 +30,6 @@ exports.up = async function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = async function (knex) {
-    return await knex.schema.dropTable('restRequests');
+    return await knex.schema.dropTable('rest_requests');
 
 };

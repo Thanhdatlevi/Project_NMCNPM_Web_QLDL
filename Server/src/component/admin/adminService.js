@@ -1,4 +1,5 @@
 const AdminModel = require('./adminModel');
+const AccountModel = require('../account/accountModel')
 
 class AdminService {
     static async getAllUsers() {
