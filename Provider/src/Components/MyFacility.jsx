@@ -93,8 +93,9 @@ const MyFacility = () => {
         return buttons;
     };
 
-    const handleEditClick = (id) => {
+    const handleEditClick = (id, type) => {
         localStorage.setItem('selectedServiceId', id);
+        localStorage.setItem('isAdd', type);
     };
 
     return (
@@ -105,15 +106,19 @@ const MyFacility = () => {
             </section>
 
             <section className="post-list-history">
-                <div className="type-post">
-                    <select>
-                        <option>Lastest Booking</option>
-                    </select>
+                <div className="post-header">
+                    <div className="type-post">
+                        <select>
+                            <option>Lastest Booking</option>
+                        </select>
+                    </div>
+                    <Link to={"/facilityForm"} className="Add-facility" onClick={()=>handleEditClick(null, "true")} >Add</Link>
                 </div>
+                
 
                 <div className="post-information-container">
                     {paginateData().map((ser) => {
-                        handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId);
+                        //handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId, "false");
                         
 
                         return (
@@ -150,7 +155,7 @@ const MyFacility = () => {
                                     <div className="btn_main">
                                         <Link to="/facilityForm">
                                         {/* ,ser.name,ser.location, ser.des */}
-                                            <button className="btn_fix" onClick={() => handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId)}> 
+                                            <button className="btn_fix" onClick={() => handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId, "false")}> 
                                                 <i className="fa-solid fa-screwdriver-wrench"></i>
                                             </button>
                                         </Link>

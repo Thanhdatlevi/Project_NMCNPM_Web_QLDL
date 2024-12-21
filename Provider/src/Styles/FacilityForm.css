@@ -134,8 +134,9 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     margin-bottom: 10px;
+    flex-direction: column;
 }
-.facility-form-item .facility-images img{
+.facility-form-item .facility-images #current_image{
     max-width: 30%;
     width: auto; /* Adjust width as needed */
     height: 100px; /* Adjust height as needed */
