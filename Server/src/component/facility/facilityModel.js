@@ -90,9 +90,14 @@ class FacilityModel {
 
     static async deleteFacility(facilityId) {
         try {
+            console.log(facilityId)
             const query = `DELETE FROM facilities WHERE facility_id = $1`;
             const result = await db.query(query, [facilityId]);
-            return result.rows[0];
+            if (result.rowCount > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (error) {
             console.error("Error in facilityModel.deleteFacility:", error.message);
             throw error;

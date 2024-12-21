@@ -3,7 +3,6 @@ import '../Styles/LoginandRegister.css';
 import { Link, useParams, useLocation } from 'react-router-dom';
 const LoginPage = () => {
     const [formData, setFormData] = useState({ Username_Email: '', password: '' });
-<<<<<<< HEAD
     const [message, setMessage] = useState(""); // Thông báo lỗi hoặc thành công
     const [messageColor, setMessageColor] = useState("#b20000"); // Màu thông báo
     const location = useLocation();
@@ -17,12 +16,6 @@ const LoginPage = () => {
             setMessageColor("#008000"); // Màu xanh cho thông báo thành công
         }
     }, [location]);
-
-
-=======
-    const [error, setError] = useState(null);
-    const [user, setUser] = useState(null);
->>>>>>> 14d125cd2f4c8d47fd3dc1d17b73873f8eb6ce14
     // Xử lý khi người dùng nhập dữ liệu
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -44,34 +37,20 @@ const LoginPage = () => {
                 },
                 body: JSON.stringify(formData),
             });
-
             const data = await response.json();
-<<<<<<< HEAD
-
-            if (response.ok) {
-                setMessage(data.message || "Đăng nhập thành công!");
-                setMessageColor("#008000"); // Màu xanh cho thành công
-                // Điều hướng đến trang chính
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1500);
-            } else {
-                setMessage(data.message || "Tên đăng nhập hoặc mật khẩu không đúng.");
-=======
             console.log('Đăng nhập thành công:', data);
-            
+
             const authResponse = await fetch('/authenticate', {
                 method: 'GET',
                 credentials: 'include',
             });
-    
+            console.log(authResponse)
             if (!authResponse.ok) {
                 throw new Error('Lỗi xác thực. Vui lòng thử lại.');
             }
     
             const authData = await authResponse.json();
             console.log('Dữ liệu xác thực:', authData);
-    
             // Điều hướng dựa trên vai trò
             if (authData.role === 'tourist') {
                 window.location.href = '/';
@@ -81,7 +60,6 @@ const LoginPage = () => {
                 window.location.href = 'http://localhost:3003/home';
             } else {
                 throw new Error('Vai trò không hợp lệ.');
->>>>>>> 14d125cd2f4c8d47fd3dc1d17b73873f8eb6ce14
             }
         } catch (err) {
             console.error(err);

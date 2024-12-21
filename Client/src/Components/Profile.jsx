@@ -1,27 +1,12 @@
 import React from "react";
 import { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
-import DetailProfile from "./DetailProfile";
-import BookingHis from "./BookingHis";
-import MyFacility from "./MyFacility";
 
 import "../Styles/Profile.css";
 
 const Profile = () => {
-    const [contentType, setContentType] = useState('profile');
-
-    const renderContent = () => {
-        if (contentType === 'profile') {
-            return <DetailProfile />;
-        }
-        else if(contentType === 'booking'){
-            return <BookingHis />;
-        }else return <MyFacility />;
-    };
     const [user, setUser] = useState({});
     useEffect(() => {
-        const userId = "u001"; // Thay thế bằng userId thực tế
-        fetch(`/user/u001`) 
+        fetch(`tourist/getPublicProfile`) 
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -29,7 +14,8 @@ const Profile = () => {
                 return response.json();
             })
             .then((data) => {
-                setUser(data);
+                setUser(data.userProfile);
+                console.log(data)
                 console.log('Fetch successful:', data); // Thêm console log để kiểm tra kết quả fetch
                  // Thêm thông báo để kiểm tra kết quả fetch
             })
@@ -37,7 +23,8 @@ const Profile = () => {
                 console.error('Error:', error);
                  // Thêm thông báo để kiểm tra lỗi fetch
             });
-    }, []); 
+    }, []);
+
     const formatDate = (dateString) => {
         const options = { month: 'long',day: 'numeric'};
         return new Date(dateString).toLocaleDateString('vi-VN', options);
@@ -62,29 +49,47 @@ const Profile = () => {
                                 <img src="/Images/img_profile/PTD.jpg" alt="Profile Picture" className="profile-image" />
                                 <img src="/Images/img_profile/pencil.png" alt="Edit Icon" className="edit-icon" />
                             </div>
-                            <p>{user.full_name}</p>
+                            <p>{user.userFullname}</p>
                             <div className="location-birthday">
-                                <img src="/Images/img_profile/Vector.jpg" />
-                                <p>{user.user_address}</p>
-                                <p> | </p>
-                                <img src="/Images/img_profile/fe_birthday-cake.jpg" />
-                                <p>{formatDate(user.user_birthday)}</p>
+                                <p>Email: {user.accountEmail}</p>
 
                             </div>
+                            
                         </div>
-                        <div className="list-select">
-                            <div className="list-select-content" tabIndex="0" onClick={() => setContentType('profile')}>Chỉnh sửa thông
-                                tin
-                            </div>
-                            <div className="list-select-content" tabIndex="0" onClick={() => setContentType('booking')}>Lịch sử đặt hàng
-                            </div>
-                            <div className="list-select-content" tabIndex="0" onClick={() => setContentType('service')}>Lịch sử đăng dịch vụ
-                            </div>
-                        </div>
+                        
                     </div>
                     <div className="divider"></div>
                     <div id="contentProfile">
-                        {renderContent()}
+                        <main id="checkProfile">
+                            <section id="personInfo">
+                                <h4>Personal Information</h4>
+                                <div class="content">
+                                    <div class="field-label">
+                                        <label for="name">Name: </label>
+                                        <input type="text" id="name" class="value" value={user.userFullname} />
+                                    </div>
+                                    <div class="field-label">
+                                        <label for="address">Email:</label>
+                                        <input type="text" id="address" class="value" value={user.accountEmail} />
+                                    </div>
+                                    <div class="field-label">
+                                        <label for="dob">Ngày sinh:</label>
+                                        <input type="text" id="dob" class="value" value={formatDate(user.userBirthday)} />
+                                    </div>
+                                    <div class="field-label">
+                                        <label for="phone">Số điện thoại:</label>
+                                        <input type="text" id="phone" class="value" value={user.userContact}/>
+                                    </div>
+                                    <div class="field-label">
+                                        <label for="address">Địa chỉ:</label>
+                                        <input type="text" id="address" class="value" value={user.userAddress} />
+                                    </div>
+                                </div>
+                                <div class="save-container">
+                                    <button id="savePersonButton" class="save-button">Save</button>
+                                </div>
+                            </section>
+                        </main>
                     </div>
                 </section>
             </main>
