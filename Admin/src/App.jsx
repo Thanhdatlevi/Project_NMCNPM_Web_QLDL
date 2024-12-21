@@ -8,6 +8,8 @@ import Profile from './Components/Profile';
 import { BrowserRouter, Routes, Route, Router, Navigate } from 'react-router-dom';
 import ServicePage from './Components/ServicePage';
 import SearchService from './Components/SearchService';
+import FacilityFeedback from './Components/FacilityFeedback';
+
 function App() {
   return (
     <div className="App">

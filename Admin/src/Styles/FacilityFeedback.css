@@ -1,0 +1,30 @@
+.facility-feedback {
+    margin: 20px;
+  }
+  
+  .feedback-title h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .feedback-list {
+    margin-top: 20px;
+  }
+  
+  .feedback-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .feedback-item .feedback-details {
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+  
+  .feedback-item .feedback-details strong {
+    font-weight: bold;
+  }
+  
