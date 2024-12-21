@@ -1,0 +1,169 @@
+/* File: App.css */
+  
+  .attracManage {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .attracManage-header {
+    background-color: #005b96;
+    padding: 20px;
+    color: white;
+  }
+  
+  .attracManage-header h1 {
+    margin: 0;
+    font-size: 2em;
+  }
+  
+  .attracManage .add-button {
+    background-color: #ffffff;
+    border: 2px solid #005b96;
+    color: #005b96;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+  
+  .attracManage .add-button:hover {
+    background-color: #005b96;
+    color: #ffffff;
+  }
+  
+  .attracManage main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .attracManage .attraction-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 15px;
+    text-align: left;
+  }
+  
+  .attracManage .attraction-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .attracManage .attraction-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn chỉ hiển thị 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden; /* Ẩn phần văn bản vượt quá */
+    text-overflow: ellipsis; /* Thêm dấu ... khi văn bản vượt quá */
+    white-space: normal; /* Cho phép văn bản xuống dòng nếu cần */
+  }
+  .attracManage .action-buttons {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .attracManage .action-buttons button {
+    background-color: #005b96;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .attracManage .action-buttons button:first-child {
+    background-color: #005b96;
+  }
+  
+  .attracManage .dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .attracManage .dialog-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .attracManage .dialog-content input,
+  .attracManage .dialog-content textarea,
+  .attracManage .dialog-content select,
+  .attracManage .dialog-content option {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .attracManage .dialog-content button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .attracManage .dialog-content button:first-child {
+    background-color: #005b96;
+    color: white;
+  }
+  
+  .attracManage .dialog-content button:last-child {
+    background-color: #005b96;
+    color: white;
+  }
+  
+  .attracManage .select-location-container {
+    margin-bottom: 20px;
+  }
+  
+  .attracManage .select-location-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .attracManage .select-location-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .attracManage .select-location-container select:focus {
+    border-color: #005b96;
+  }
+
+  .attracManage select {
+    background-color: #fafafa;
+    cursor: pointer;
+  }
+  
+  .attracManage select:focus {
+    border-color: #005b96;
+  }

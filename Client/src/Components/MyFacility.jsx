@@ -1,10 +1,8 @@
 import React from "react";
-import { useState, useEffect} from "react";
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../Styles/Profile.css";
 import "../Styles/MyFacility.css";
-
-import {Link} from "react-router-dom";
 
 const MyFacility = () => {
     let provider = 'p002'
@@ -48,13 +46,16 @@ const MyFacility = () => {
         const endIndex = startIndex + itemsPerPage;
         return currentService.slice(startIndex, endIndex);
     };
+
     function scrollToProductList() {
-        const productList = document.getElementById('history'); // Phần tử danh sách sản phẩm
+        const productList = document.getElementById('history');
         if (productList) {
-            productList.scrollIntoView({ behavior: 'smooth' }); // Cuộn mượt mà đến phần tử
+            productList.scrollIntoView({ behavior: 'smooth' });
         }
     }
+
     const fetchData = async (service) => {
+        localStorage.setItem('selectedService', service);
         setActiveTab(service);
         const response = await fetch(`/${service}/get${service}ByProviderid/${provider}`);
         if (!response.ok) {
@@ -64,9 +65,11 @@ const MyFacility = () => {
         setCurrentPage(1);
         setCurrentService(detailData);
     };
-    useEffect(()=>{
-        fetchData(activeTab)
-    },[])
+
+    useEffect(() => {
+        fetchData(activeTab);
+    }, []);
+
     const renderPageButtons = () => {
         const totalPages = Math.ceil(currentService.length / itemsPerPage);
         const buttons = [];
@@ -77,10 +80,9 @@ const MyFacility = () => {
                     key={i}
                     className={`page-button ${i === currentPage ? 'active' : ''}`}
                     onClick={() => {
-                    scrollToProductList();
-                    setCurrentPage(i)
-                    }
-                    }
+                        scrollToProductList();
+                        setCurrentPage(i);
+                    }}
                 >
                     {i}
                 </button>
@@ -89,22 +91,28 @@ const MyFacility = () => {
 
         return buttons;
     };
+
+    const handleEditClick = (id) => {
+        localStorage.setItem('selectedServiceId', id);
+    };
+
     return (
         <main id="hisPost">
             <section className="tabs">
                 <button id="btn_res" className={activeTab === 'res' ? 'active' : ''} onClick={() => fetchData('res')}>Restaurant Booking</button>
                 <button className={activeTab === 'hotel' ? 'active' : ''} id="btn_hotel" onClick={() => fetchData('hotel')}>Hotel Booking</button>
             </section>
-    
+
             <section className="post-list-history">
                 <div className="type-post">
-                <select>
-                    <option>Lastest Booking</option>
-                </select>
+                    <select>
+                        <option>Lastest Booking</option>
+                    </select>
                 </div>
-        
+
                 <div className="post-information-container">
-                    {paginateData().map((ser)=>{
+                    {paginateData().map((ser) => {
+                        handleEditClick(ser.id);
                         return (
                             <div className="post-card">
                                 <img src={ser.images[0]} alt="Service Image"/>
@@ -132,18 +140,17 @@ const MyFacility = () => {
                                     <button className="btn_detail">View detail</button>
                                     <div className="btn_main">
                                         <Link to="/facilityForm">
-                                        <button className="btn_fix">
-                                            <i class="fa-solid fa-screwdriver-wrench"></i>
-                                        </button>
+                                            <button className="btn_fix" onClick={() => handleEditClick(ser.id,ser.name,ser.location, ser.des)}>
+                                                <i className="fa-solid fa-screwdriver-wrench"></i>
+                                            </button>
                                         </Link>
-
                                         <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.id, ser.facid)}>
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        )
+                        );
                     })}
                 </div>
             </section>
@@ -157,14 +164,13 @@ const MyFacility = () => {
                 {renderPageButtons()}
                 <button
                     onClick={() => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(currentService.length / itemsPerPage)))}
-                    
                     disabled={currentPage === Math.ceil(currentService.length / itemsPerPage)}
                 >
                     Next
                 </button>
             </div>
         </main>
-      );
+    );
 };
 
 export default MyFacility;

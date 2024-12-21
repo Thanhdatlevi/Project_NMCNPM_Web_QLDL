@@ -4,8 +4,6 @@ const router = express.Router();
 const AttractionController = require('../component/attraction/attractionController');
 
 router.get('/getFilterattraction', AttractionController.getFilterAttraction);
-
-
 router.get('/', AttractionController.getAttractionsByPage);
 router.get('/api/getAttractionsTotal', AttractionController.getAttractionsTotal);
 router.get('/_10PopularAttraction', AttractionController.get_10_PopularAttractions);

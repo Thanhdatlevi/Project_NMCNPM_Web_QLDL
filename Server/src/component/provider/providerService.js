@@ -135,7 +135,6 @@ class ProviderService {
                 requestData.description,
                 requestData.specificLocation,
                 requestData.contact,
-                requestData.noteContent,
                 requestData.imageUrls,
                 requestData.roomsNum,
                 requestData.locationId

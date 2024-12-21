@@ -1,0 +1,109 @@
+#hisPost {
+    margin-bottom: 10px;;
+}
+#hisPost .type-post {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#hisPost .type-post h2 {
+    font-size: 1.5em;
+}
+
+#hisPost .type-post select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#hisPost .tabs {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+#hisPost .tabs button {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+}
+
+#hisPost .tabs .active {
+    color: #b3cde0;
+    border-bottom: 3px solid #b3cde0;
+}
+
+#hisPost .post-card {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#hisPost .post-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+#hisPost .post-info {
+    flex: 1;
+}
+
+#hisPost .post-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+#hisPost .post-info p {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+#hisPost .check-info {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.8em;
+    color: #555;
+}
+
+#hisPost .check-info div {
+    text-align: center;
+}
+
+#hisPost .pagination{
+    margin-top: 20px;
+}
+
+#hisPost .zone_btn .btn_detail{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#hisPost .zone_btn .btn_main{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#hisPost .zone_btn .btn_fix{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#hisPost .zone_btn .btn_delete{
+    padding: 10px;
+    border-radius: 10px;
+}

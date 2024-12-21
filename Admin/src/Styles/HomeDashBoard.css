@@ -1,0 +1,98 @@
+.HomeDashboard {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f5f5;  
+}
+.HomeDashboard .dashboard-title{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+    margin-right: 20px;
+    font-size: 32px;
+    color:blue;
+}
+.HomeDashboard .dashboard-content .topic-container{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+.HomeDashboard .dashboard-content .topic-container .topic{
+    background-color: white;
+    padding : 10px; 
+    border-radius: 16px;
+    margin: 10px;
+    width: 25%;
+    height: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+}
+.HomeDashboard .dashboard-content .topic-container .topic h4{
+    font-size: 24px;
+    color: blue;
+}
+.HomeDashboard .dashboard-content .topic-container .topic .total{
+    font-size: 64px;
+    font-weight: bolder;
+    color: rgb(32, 36, 38);
+
+}
+.HomeDashboard .dashboard-content .topic-container .topic .specialty{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-weight: 500;
+    font-size: 20px;
+}
+.HomeDashboard .dashboard-content .topic-container .topic .divider{
+    border: 1px solid rgb(130, 135, 138);
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.dashboard-attraction {
+    max-height: 45vh; /* Giới hạn chiều cao tối đa */
+    overflow-y: auto; /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+    margin-top: 24px;
+    background: white;
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.attraction-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Khoảng cách giữa các thẻ */
+}
+
+.attraction {
+    flex: 1 1 calc(25% - 16px); /* Đặt chiều rộng của mỗi thẻ là 25% trừ đi khoảng cách */
+    box-sizing: border-box;
+    height: fit-content;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.attraction-image img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px 8px 0 0;
+}
+
+.attraction-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.attraction-rating {
+    font-size: 16px;
+    color: #888;
+    margin-top: 4px;
+}

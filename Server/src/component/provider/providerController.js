@@ -81,7 +81,6 @@ class ProviderController {
                     'description',
                     'specificLocation',
                     'contact',
-                    'noteContent',
                     'imageUrls',
                     'roomsNum',
                     'locationId'
@@ -123,9 +122,8 @@ class ProviderController {
                 'description',
                 'specificLocation',
                 'contact',
-                'noteContent',
                 'imageUrls',
-                'tablesNum',    // Có thể bỏ nếu không cần cho nhà hàng
+                'tablesNum',
                 'locationId'
             ];
 

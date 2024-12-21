@@ -1,0 +1,27 @@
+.manage-booking {
+    padding: 20px;
+}
+
+
+.hotel-booking .booking-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 20px;
+    background-color:#6497b1;
+}
+
+.hotel-booking .booking-header #page-name{
+    font-size: 30px;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.hotel-booking .booking-header #filter{
+    width: 200px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    align-self: center;
+    margin-right: 20px;
+}
