@@ -45,7 +45,7 @@ app.use('/location', locationRoutes);
 
 app.use('/logout', requireLogin, logoutRoutes);
 
-app.use('/authenticate', checkIfLoggedIn, authenticateRoutes);
+app.use('/authenticate', authenticateRoutes);
 app.use('/register', checkIfLoggedIn, registerRoutes);
 app.use('/login', checkIfLoggedIn, loginRoutes);
 app.use('/verify', checkIfLoggedIn, verifyRoutes);
