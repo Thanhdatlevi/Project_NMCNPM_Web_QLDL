@@ -28,7 +28,7 @@ class FacilityModel {
             throw error;
         }
     }
-    static async updateFacility(client, facilityId, facilityName, description, locationId, contact, status, specificLocation) {
+    static async updateFacility(facilityId, facilityName, description, locationId, contact, status, specificLocation) {
         try {
             let fieldsToUpdate = [];
             let values = [];
@@ -76,7 +76,7 @@ class FacilityModel {
             RETURNING *;
             `;
             values.push(facilityId);
-            const result = await client.query(query, values);
+            const result = await db.query(query, values);
             if (result.rowCount > 0) {
                 return true;
             }

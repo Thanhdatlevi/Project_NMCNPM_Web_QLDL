@@ -1,4 +1,5 @@
 const HotelModel = require('./hotelModel');
+const AccountModel = require(`../account/accountModel`);
 
 
 class HotelService {
@@ -63,8 +64,9 @@ class HotelService {
         }
     }
 
-    static async getHotelsByProviderId(providerId) {
+    static async getHotelsByProviderId(accountId) {
         try {
+            const providerId = await AccountModel.getProviderId(accountId);
             const hotels = await HotelModel.getHotelsByProviderId(providerId);
             return hotels;
         } catch (error) {
