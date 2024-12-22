@@ -95,7 +95,8 @@ class HotelModel {
                     f.specific_location AS specific_location,
                     COALESCE(fi.images, '{}') AS images, -- URL ảnh (nếu không có thì trả về mảng rỗng)
                     h.amenities AS amenities,
-                    h.average_price AS average_price
+                    h.average_price AS average_price,
+                    h.facility_id as facility_id
                 FROM hotels h
                 JOIN facilities f ON h.facility_id = f.facility_id
                 JOIN locations l ON l.location_id = f.location_id
@@ -108,6 +109,7 @@ class HotelModel {
                 const hotelDetail = {
                     name: row.name,
                     description: row.description,
+                    facilityId: row.facility_id,
                     locationId: row.location_id,
                     location: row.location_name,
                     status: row.status,

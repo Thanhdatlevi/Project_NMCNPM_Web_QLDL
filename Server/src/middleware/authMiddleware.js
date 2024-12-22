@@ -8,7 +8,6 @@ require('dotenv').config();
 async function authenticateToken(req, res, next) {
     const accessToken = req.cookies[process.env.ACCESS_TOKEN_NAME];
     const refreshToken = req.cookies[process.env.REFRESH_TOKEN_NAME];
-
     if (accessToken) {
         try {
             const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);

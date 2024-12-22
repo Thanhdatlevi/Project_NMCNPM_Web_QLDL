@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const AccountController = require('../component/account/accountController');
-
+const ReservationController = require('../component/reservation/reservationModel');
 router.get('/getPublicProfile', AccountController.getPublicProfile);
-router.get('/');
+router.post('/createReservation', ReservationController.createReservation);
 module.exports = router;

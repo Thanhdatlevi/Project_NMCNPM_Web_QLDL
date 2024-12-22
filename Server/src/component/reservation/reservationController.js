@@ -3,11 +3,11 @@ const ReservationService = require('./reservationService');
 class ReservationController {
     static async createReservation(req, res) {
         try {
-            const { detailReservation, status, accountId } = req.body;
+            const { accountId } = res.locals.account;
+            const { detailReservation, status, } = req.body;
             if (!detailReservation || !status) {
                 return res.status(400).json({ success: false, message: 'Thiếu dữ liệu' });
             }
-
             const result = await ReservationService.createReservation(accountId, status, detailReservation); // reservationDate = null
             if (result.success) {
                 return res.status(201).json({

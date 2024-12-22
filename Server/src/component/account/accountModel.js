@@ -49,7 +49,7 @@ class AccountModel {
             const query = 'select tourist_id from tourists t where t.account_id = $1';
             const result = await db.query(query, [accountId]);
             if (result.rows.length > 0) {
-                return { touristId: result.rows[0].tourist_id };
+                return result.rows[0].tourist_id;
             }
             return null;
         } catch (error) {
@@ -63,7 +63,7 @@ class AccountModel {
             const query = 'select admin_id from admins a where a.account_id = $1';
             const result = await db.query(query, [accountId]);
             if (result.rows.length > 0) {
-                return { adminId: result.rows[0].admin_id };
+                return result.rows[0].admin_id;
             }
             return null;
         } catch (error) {

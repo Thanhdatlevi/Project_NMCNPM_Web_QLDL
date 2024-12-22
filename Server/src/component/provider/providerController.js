@@ -1,3 +1,4 @@
+const { console } = require('inspector');
 const ProviderService = require('./providerService');
 
 
@@ -39,7 +40,6 @@ class ProviderController {
             const { accountId } = res.locals.account;
             const { restaurantId } = req.params;
             const { updateData } = req.body;
-
             if (!restaurantId) {
                 return res.status(400).json({ message: "Thiếu restaurantId." });
             }

@@ -1,23 +1,15 @@
 const express = require('express');
-const path = require('path');
+const cors = require('cors');
 const app = express();
 const cookieParser = require('cookie-parser');
 const { authenticateToken, requireTourist, requireProvider, requireAdmin, requireLogin, checkIfLoggedIn } = require('./src/middleware/authMiddleware');
 
 const PORT = process.env.PORT || 3000;
-
-// access static files
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3001'); // Chỉ cho phép localhost:3001
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH'); // Cho phép các phương thức HTTP
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'); // Cho phép các header
-    if (req.method === 'OPTIONS') {
-        res.sendStatus(200); // Trả về OK cho yêu cầu preflight
-    } else {
-        next(); // Chuyển sang middleware tiếp theo
-    }
-});
-
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+}));
 
 const hotelRoutes = require('./src/routes/hotelRoutes'); // Điều hướng view
 const restaurantRoutes = require('./src/routes/restaurantRoutes');  // Điều hướng tour
@@ -43,8 +35,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(authenticateToken);
 
-app.use(express.static(path.join(__dirname, 'src', 'public')));
-
 app.use('/restaurant', restaurantRoutes);
 app.use('/attraction', attractionRoutes);
 app.use('/hotel', hotelRoutes);
@@ -57,7 +47,7 @@ app.use('/register', checkIfLoggedIn, registerRoutes);
 app.use('/login', checkIfLoggedIn, loginRoutes);
 app.use('/verify', checkIfLoggedIn, verifyRoutes);
 
-app.use('reservation', reservationRoutes);
+app.use('/reservation', reservationRoutes);
 
 app.use('/provider', requireProvider, providerRoutes);
 app.use('/admin', requireAdmin, adminRoutes);

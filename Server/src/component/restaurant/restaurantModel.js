@@ -218,7 +218,8 @@ class RestaurantModel {
                     f.specific_location AS res_specific_location,
                     COALESCE(fi.res_images, '{}') AS res_images, -- URL ảnh (nếu không có thì trả về mảng rỗng)
                     r.amenities AS res_amenities,
-                    r.average_price AS res_average_price
+                    r.average_price AS res_average_price,
+                    r.facility_id as facility_id
                 FROM restaurants r
                 JOIN facilities f ON r.facility_id = f.facility_id
                 JOIN locations l ON l.location_id = f.location_id
@@ -231,6 +232,7 @@ class RestaurantModel {
                 const restaurantDetails = {
                     name: row.res_name,
                     description: row.res_description,
+                    facilityId: row.facility_id,
                     location: row.location_name,
                     status: row.res_status,
                     rating: row.res_rating,
