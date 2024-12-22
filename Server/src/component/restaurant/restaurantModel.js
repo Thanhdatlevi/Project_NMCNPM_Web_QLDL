@@ -145,7 +145,7 @@ class RestaurantModel {
                 tables_agg AS (
                     SELECT t.restaurant_id, array_agg(
                         JSON_BUILD_OBJECT( 
-                        'table_id', t.table_id, 'price', t.price, 'status', t.status, 'bookedDates', t.dates_booked
+                        'table_id', t.table_id, 'price', t.price, 'status', t.status
                         )) AS res_tables
                     FROM tables t
                     GROUP BY t.restaurant_id

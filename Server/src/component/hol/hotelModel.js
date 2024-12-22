@@ -1,4 +1,5 @@
 const db = require('../../config/db');
+const FacilityModel = require('../facility/facilityModel');
 class HotelModel {
 
     static async get3PopularHotels() {
@@ -136,7 +137,7 @@ class HotelModel {
                 ),
                 rooms_agg AS (
                     SELECT r.hotel_id, array_agg(
-                        JSON_BUILD_OBJECT( 'roomId', r.room_id, 'price', r.price, 'status', r.status, 'bookedDates', r.dates_booked
+                        JSON_BUILD_OBJECT( 'roomId', r.room_id, 'price', r.price, 'status', r.status
                         )) AS rooms
                     FROM rooms r
                     GROUP BY r.hotel_id
@@ -284,7 +285,7 @@ class HotelModel {
         }
     }
 
-    static async updateHotel(hotelId, amenities, averagePrice) {
+    static async updateHotel(client, hotelId, amenities, averagePrice) {
         try {
             const fieldsToUpdate = [];
             const values = [];
@@ -306,7 +307,7 @@ class HotelModel {
 
             values.push(hotelId);
             const query = ` UPDATE hotels SET ${fieldsToUpdate.join(', ')} WHERE hotel_id = $${index}`;
-            const result = await db.query(query, values);
+            const result = await client.query(query, values);
             if (result.rowCount > 0) {
                 return true;
             }
@@ -352,6 +353,38 @@ class HotelModel {
             return res.rows;  // Trả về kết quả chi tiết của khách sạn
         } catch (error) {
             console.error('Error fetching hotel details:', error);
+            throw error;
+        }
+    }
+
+    static async updateHotelWithFacility(hotelId, updateData) {
+        const client = await db.beginTransaction();
+        try {
+            const { facilityData, hotelData } = updateData;
+            if (facilityData) {
+                await FacilityModel.updateFacility(
+                    client,
+                    hotelId,
+                    facilityData.facilityName,
+                    facilityData.description,
+                    facilityData.locationId,
+                    facilityData.contact,
+                    facilityData.status,
+                    facilityData.specificLocation
+                );
+            }
+            if (hotelData) {
+                await HotelModel.updateHotel(
+                    client,
+                    hotelId,
+                    hotelData.amenities,
+                    hotelData.averagePrice
+                );
+            }
+            await db.commitTransaction(client);
+            return true;
+        } catch (error) {
+            await db.rollbackTransaction(client);
             throw error;
         }
     }

@@ -1,4 +1,3 @@
-const db = require('../../config/db');
 const ProviderModel = require('./providerModel');
 const FacilityModel = require('../facility/facilityModel');
 const HotelModel = require('../hol/hotelModel');
@@ -7,7 +6,6 @@ const AccountModel = require('../account/accountModel')
 class ProviderService {
 
     static async updateHotel(hotelId, accountId, updateData) {
-        const client = await db.beginTransaction();
         try {
             const [facilityId, providerId] = await Promise.all([
                 HotelModel.getFacilityIdByHotelId(hotelId),
@@ -16,54 +14,13 @@ class ProviderService {
 
             const facility = await FacilityModel.getFacilityById(facilityId);
             if (providerId !== facility.providerId) {
-                await db.rollbackTransaction(client);
                 return { success: false, message: "Bạn không có quyền chỉnh sửa dữ liệu khách sạn này!" }
             }
 
-            const { facilityData, hotelData } = updateData;
-            const updatePromises = [];
+            const result = await HotelModel.updateHotelWithFacility(hotelId, updateData);
 
-            if (facilityData) {
-                const updatedFacilityData = {
-                    facilityName: facilityData?.facilityName || undefined,
-                    description: facilityData?.description || undefined,
-                    locationId: facilityData?.locationId || undefined,
-                    contact: facilityData?.contact || undefined,
-                    status: facilityData?.status || undefined,
-                    specificLocation: facilityData?.specificLocation || undefined,
-                };
-
-                updatePromises.push(
-                    FacilityModel.updateFacility(
-                        facilityId,
-                        updatedFacilityData.facilityName,
-                        updatedFacilityData.description,
-                        updatedFacilityData.locationId,
-                        updatedFacilityData.contact,
-                        updatedFacilityData.status,
-                        updatedFacilityData.specificLocation
-                    )
-                );
-            }
-            if (hotelData) {
-                const updatedHotelData = {
-                    amenities: hotelData?.amenities || undefined,
-                    averagePrice: hotelData?.averagePrice || undefined,
-                };
-
-                updatePromises.push(
-                    HotelModel.updateHotel(
-                        hotelId,
-                        updatedHotelData.amenities,
-                        updatedHotelData.averagePrice
-                    )
-                );
-            }
-            await Promise.all(updatePromises);
-            await db.commitTransaction(client);
             return { success: true, message: "Cập nhật khách sạn thành công!" };
         } catch (error) {
-            await db.rollbackTransaction(client);
             throw error;
         }
     }

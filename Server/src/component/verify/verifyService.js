@@ -1,3 +1,4 @@
+const VerifyModel = require('./verifyModel')
 class VerifyService {
     static async verifyAccount(token) {
         try {

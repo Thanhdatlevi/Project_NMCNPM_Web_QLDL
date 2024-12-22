@@ -2,7 +2,9 @@ const RegisterService = require('./registerService');
 class RegisterController {
     static async registerAccount(req, res) {
         const { user_name, email, password, confirmPassword, role } = req.body;
-
+        if (!user_name || !email || !password || !confirmPassword || !role) {
+            return res.status(400).json({ success: false, message: 'Vui lòng điền đầy đủ các thông tin' });
+        }
         if (password !== confirmPassword) {
             return res.status(400).json({
                 message: "Mật khẩu không khớp!"
