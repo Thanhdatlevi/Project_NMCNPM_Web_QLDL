@@ -1,3 +1,4 @@
+const db = require('../../config/db');
 const ProviderModel = require('./providerModel');
 const FacilityModel = require('../facility/facilityModel');
 const HotelModel = require('../hol/hotelModel');

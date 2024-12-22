@@ -40,7 +40,8 @@ const Booking02 = ({ bookingData }) => {
             const hotels = chosenHotels.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
-                    quantity: selections[element.facility_id].quantity
+                    quantity: selections[element.facility_id].quantity,
+                    date: selections[element.facility_id].date
                 }));
 
             setHotelChosen(hotels);
@@ -61,7 +62,8 @@ const Booking02 = ({ bookingData }) => {
             const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
-                    quantity: selections[element.facility_id].quantity
+                    quantity: selections[element.facility_id].quantity,
+                    date: selections[element.facility_id].date
                 }));
             setRestaurantChosen(restaurants);
 
@@ -119,13 +121,15 @@ const Booking02 = ({ bookingData }) => {
 
         const transformedHotels = hotelChosen.map(hotel => ({
             hotel_id: hotel.facility_id,
-            quantity: hotel.quantity
+            quantity: hotel.quantity,
+            date: hotel.date
         }));
 
 
         const transformedRestaurants = restaurantChosen.map(restaurant => ({
             res_id: restaurant.facility_id,
-            quantity: restaurant.quantity
+            quantity: restaurant.quantity,
+            date: restaurant.date
         }));
 
         const bookingData = {
@@ -165,8 +169,8 @@ const Booking02 = ({ bookingData }) => {
         return (
             <h3>
                 <strong> {item.quantity} {item.attraction_id ? "tickets" : (item.restaurant_id ? "tables" : "days")}
-                </strong> at <strong>{item.attraction_name ? item.attraction_name : item.facility_name}</strong>
-                ,<strong> {item.location_name}</strong>
+                </strong> in <strong>{item.attraction_name ? item.attraction_name : item.facility_name} </strong>
+                ,<strong> {item.location_name} at {item.date}</strong>
             </h3>
         );
     }

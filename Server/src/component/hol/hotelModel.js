@@ -285,7 +285,7 @@ class HotelModel {
         }
     }
 
-    static async updateHotel(client, hotelId, amenities, averagePrice) {
+    static async updateHotel(hotelId, amenities, averagePrice) {
         try {
             const fieldsToUpdate = [];
             const values = [];
@@ -307,7 +307,7 @@ class HotelModel {
 
             values.push(hotelId);
             const query = ` UPDATE hotels SET ${fieldsToUpdate.join(', ')} WHERE hotel_id = $${index}`;
-            const result = await client.query(query, values);
+            const result = await db.query(query, values);
             if (result.rowCount > 0) {
                 return true;
             }

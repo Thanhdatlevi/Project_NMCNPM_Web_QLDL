@@ -40,7 +40,8 @@ const TourReservationResult = () => {
             const hotels = chosenHotels.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
-                    quantity: selections[element.facility_id].quantity
+                    quantity: selections[element.facility_id].quantity,
+                    date: selections[element.facility_id].date
                 }));
             setHotelChosen(hotels);
         } catch (error) {
@@ -59,7 +60,8 @@ const TourReservationResult = () => {
             const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
-                    quantity: selections[element.facility_id].quantity
+                    quantity: selections[element.facility_id].quantity,
+                    date: selections[element.facility_id].date
                 }));
             setRestaurantChosen(restaurants);
         } catch (error) {
@@ -121,7 +123,7 @@ const TourReservationResult = () => {
         return (
             <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
                 <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
-                <p id="service-quantity">{item.quantity}</p>
+                <p id="service-quantity">{item.quantity} {item.date}</p>
                 <p id="service-price">{100}</p>
                 <p id="service-total-price">{100 * item.quantity}</p>
             </div>

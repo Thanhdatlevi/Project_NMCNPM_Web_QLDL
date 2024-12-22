@@ -5,7 +5,7 @@ import "../Styles/Profile.css";
 import "../Styles/MyFacility.css";
 
 const MyFacility = () => {
-    let provider = 'p002'
+    let provider = 'p002';
     const itemsPerPage = 2;
     const [currentPage, setCurrentPage] = useState(1);
     const [currentService, setCurrentService] = useState([]);
@@ -57,12 +57,13 @@ const MyFacility = () => {
     const fetchData = async (service) => {
         localStorage.setItem('selectedService', service);
         setActiveTab(service);
-        const response = await fetch(`/${service}/get${service}ByProviderid/${provider}`);
+        const response = await fetch(`/${service == "res" ? "restaurant" : "hotel"}/by-provider/${provider}`);
         if (!response.ok) {
             throw new Error("Failed to fetch data");
         }
         const detailData = await response.json();
         setCurrentPage(1);
+
         setCurrentService(detailData);
     };
 
@@ -92,8 +93,9 @@ const MyFacility = () => {
         return buttons;
     };
 
-    const handleEditClick = (id) => {
+    const handleEditClick = (id, type) => {
         localStorage.setItem('selectedServiceId', id);
+        localStorage.setItem('isAdd', type);
     };
 
     return (
@@ -104,22 +106,34 @@ const MyFacility = () => {
             </section>
 
             <section className="post-list-history">
-                <div className="type-post">
-                    <select>
-                        <option>Lastest Booking</option>
-                    </select>
+                <div className="post-header">
+                    <div className="type-post">
+                        <select>
+                            <option>Lastest Booking</option>
+                        </select>
+                    </div>
+                    <Link to={"/facilityForm"} className="Add-facility" onClick={()=>handleEditClick(null, "true")} >Add</Link>
                 </div>
+                
 
                 <div className="post-information-container">
                     {paginateData().map((ser) => {
-                        handleEditClick(ser.id);
+                        //handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId, "false");
+                        
+
                         return (
-                            <div className="post-card">
-                                <img src={ser.images[0]} alt="Service Image"/>
+                            <div className="post-card" key={ser.restaurantId ? ser.restaurantId : ser.hotelId}>
+                                <img
+                                    src={ser.images[0]}
+                                    alt="Service Image"
+                                />
                                 <div className="post-info">
                                     <h3>{ser.name}</h3>
                                     <p>
-                                        <span role="img" aria-label="location">📍</span>{" "}{ser.location}
+                                        <span role="img" aria-label="location">
+                                            📍
+                                        </span>{" "}
+                                        {ser.location}
                                     </p>
                                     <div className="check-info">
                                         <div>
@@ -140,11 +154,12 @@ const MyFacility = () => {
                                     <button className="btn_detail">View detail</button>
                                     <div className="btn_main">
                                         <Link to="/facilityForm">
-                                            <button className="btn_fix" onClick={() => handleEditClick(ser.id,ser.name,ser.location, ser.des)}>
+                                        {/* ,ser.name,ser.location, ser.des */}
+                                            <button className="btn_fix" onClick={() => handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId, "false")}> 
                                                 <i className="fa-solid fa-screwdriver-wrench"></i>
                                             </button>
                                         </Link>
-                                        <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.id, ser.facid)}>
+                                        <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.restaurantId ? ser.restaurantId : ser.hotelId, ser.facid)}>
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
