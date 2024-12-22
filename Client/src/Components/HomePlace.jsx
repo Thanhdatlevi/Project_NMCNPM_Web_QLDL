@@ -5,6 +5,7 @@ import BookingDialog from './BookingDialog';
 
 function HomePlace() {
     const [isBookingVisible, setIsBookingVisible] = useState(false);
+    const [dateBooking, setDateBooking] = useState('');
     const [city, setCity] = useState("");
     const [data, setData] = useState([]);
     const [cityList, setCityList] = useState([]);
@@ -107,7 +108,9 @@ function HomePlace() {
     function setQuantity(p, _type, _value) {
         if (_value) {
             console.log(_value);
-            const p_string = _value.toString() + (_type === 'res' ? " tables" : " days");
+            const date = localStorage.getItem('date');
+            console.log(dateBooking);
+            const p_string = _value.toString() + (_type === 'res' ? " tables" : " days") + " at " + date ;
             p.innerHTML = p_string;
         }
     }
@@ -217,8 +220,10 @@ function HomePlace() {
             Array.from(selected).some(element => {
                 if (element.selectedIndex !== 0) {
                     let quantity = "";
+                    let date = "";
                     if (element.parentNode.querySelector('p')) {
                         quantity = element.parentNode.querySelector('p').innerHTML.split(' ')[0];
+                        date = element.parentNode.querySelector('p').innerHTML.split(' ')[3];
                         if (quantity === "0") {
                             quantity = "1";
                         }
@@ -230,6 +235,7 @@ function HomePlace() {
                     selections[element.value] = {
                         ID: element.value,
                         quantity: quantity,
+                        date: date,
                     };
                     count_selected++;
                 }
@@ -260,6 +266,7 @@ function HomePlace() {
             <BookingDialog id="dialog"
                 isBookingVisible={isBookingVisible}
                 handleBookingFinished={handleBookingFinished}
+                dateBooking={dateBooking}
             />
             <div id="itinar">
                 <section className="header-container-form">
