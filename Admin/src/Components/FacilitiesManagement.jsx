@@ -26,20 +26,18 @@ const FacilitiesManagement = () => {
         if (!window.confirm("Are you sure you want to delete this item?")) {
             return;
         }
-        const endpoint = type === 'hotel' ? `/hotel/delete` : `/restaurant/delete`;
+        const endpoint = `/admin/deleteFacility`;
         try {
             const response = await fetch(endpoint, {
-                method: "POST",
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    provider_id: providerID,
-                    facility_id: facilityID,
-                    specificFacility_id: id,
+                  facilityId: facilityID,
                 }),
             });
-        
+            console.log(response)
             // Check if the response is not ok and throw an error
             if (!response.ok) {
                 const errorMessage = await response.json();
@@ -49,9 +47,9 @@ const FacilitiesManagement = () => {
             // If the response is ok, process the deletion
             alert("Item deleted successfully.");
             if (type === 'hotel') {
-                setHotels((prevHotels) => prevHotels.filter((hotel) => hotel.hotel_id !== id));
+                setHotels((prevHotels) => prevHotels.filter((hotel) => hotel.facility_id !== facilityID));
             } else {
-                setRestaurants((prevRestaurants) => prevRestaurants.filter((restaurant) => restaurant.restaurant_id !== id));
+                setRestaurants((prevRestaurants) => prevRestaurants.filter((restaurant) => restaurant.facility_id !== facilityID));
             }
         } catch (error) {
             // Handle errors

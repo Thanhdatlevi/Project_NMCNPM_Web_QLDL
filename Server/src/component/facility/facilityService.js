@@ -16,7 +16,7 @@ class FacilityService {
                     return { success: false, message: "Bạn không có quyền xóa facility này." };
                 }
             }
-            else if (accountRole !== 3) {
+            else if (accountRole !== 1) {
                 return { success: false, message: "Bạn không có quyền thực hiện thao tác này." };
             }
 
