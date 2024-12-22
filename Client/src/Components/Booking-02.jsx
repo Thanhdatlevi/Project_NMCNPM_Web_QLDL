@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import "../Styles/Booking-02.css"; // Adjust this path according to your CSS file location
 const Booking02 = ({ bookingData }) => {
     let navigate = useNavigate();
@@ -11,18 +11,18 @@ const Booking02 = ({ bookingData }) => {
 
     const loadPlaces = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/attraction/getfilterattraction');
+            const response = await fetch('http://localhost:3000/attraction/getFilterattraction');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();// get all the data about attractions
             const chosenPlaces = data.filter(element => element.location_id === city) // get all the attractions in the city
-            
+
             const places = chosenPlaces.filter(element => selections[element.attraction_id])
-            .map(element => ({
-                ...element,
-                quantity: selections[element.attraction_id].quantity
-            }));
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.attraction_id].quantity
+                }));
             setPlacesChosen(places);
         } catch (error) {
             console.error('Error loading places:', error);
@@ -31,18 +31,18 @@ const Booking02 = ({ bookingData }) => {
 
     const loadHotels = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/hotel/getfilterhotel');
+            const response = await fetch('http://localhost:3000/hotel/getFilterhotel');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
             const chosenHotels = data.filter(element => element.location_id === city)
             const hotels = chosenHotels.filter(element => selections[element.facility_id])
-            .map(element => ({
-                ...element,
-                quantity: selections[element.facility_id].quantity
-            }));
-         
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.facility_id].quantity
+                }));
+
             setHotelChosen(hotels);
         } catch (error) {
             console.error('Error loading hotels:', error);
@@ -52,19 +52,19 @@ const Booking02 = ({ bookingData }) => {
 
     const loadRestaurants = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/res/getFilterres');
+            const response = await fetch('http://localhost:3000/restaurant/getFilterrestaurant');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
             const chosenRestaurants = data.filter(element => element.location_id === city)
             const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
-            .map(element => ({
-                ...element,
-                quantity: selections[element.facility_id].quantity
-            }));
+                .map(element => ({
+                    ...element,
+                    quantity: selections[element.facility_id].quantity
+                }));
             setRestaurantChosen(restaurants);
-            
+
         } catch (error) {
             console.error('Error loading restaurants:', error);
         }
@@ -78,7 +78,7 @@ const Booking02 = ({ bookingData }) => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + 100*item.quantity, 0);
+            .reduce((acc, item) => acc + 100 * item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -122,20 +122,20 @@ const Booking02 = ({ bookingData }) => {
             quantity: hotel.quantity
         }));
 
-    
+
         const transformedRestaurants = restaurantChosen.map(restaurant => ({
             res_id: restaurant.facility_id,
             quantity: restaurant.quantity
         }));
-    
+
         const bookingData = {
-            location_id:localStorage.getItem('city'),
+            location_id: localStorage.getItem('city'),
             places: transformedPlaces,
             hotels: transformedHotels,
             restaurants: transformedRestaurants,
             final_total: finalTotal()
         };
-    console.log(bookingData);
+        console.log(bookingData);
         // fetch('http://localhost:3000/booking/submit', {
         //     method: 'POST',
         //     headers: {
@@ -161,12 +161,12 @@ const Booking02 = ({ bookingData }) => {
     }
 
     function generateItem(item) {
-       
+
         return (
             <h3>
-                <strong> {item.quantity} {item.attraction_id ? "tickets" : (item.restaurant_id ? "tables" : "days") } 
-                    </strong> at <strong>{item.attraction_name ? item.attraction_name : item.facility_name}</strong>
-                    ,<strong> {item.location_name}</strong>
+                <strong> {item.quantity} {item.attraction_id ? "tickets" : (item.restaurant_id ? "tables" : "days")}
+                </strong> at <strong>{item.attraction_name ? item.attraction_name : item.facility_name}</strong>
+                ,<strong> {item.location_name}</strong>
             </h3>
         );
     }
@@ -174,96 +174,96 @@ const Booking02 = ({ bookingData }) => {
     return (
         <div className="body">
 
-        <div className="booking00-container">
-            <div className="booking-header">
-                <img src="/Images/logoITISE.png" alt="ITISE Logo" />
-            </div>
-
-            <div className="progress-indicator">
-                <span className="completed-step">✓</span>
-                <div className="progress-line completed"></div>
-                <span className="completed-step">✓</span>
-                <div className="progress-line"></div>
-                <span className="inactive-step">3</span>
-            </div>
-
-            <div className="booking02-info">
-                <div className="booking-content">
-                    <h2>Payment</h2>
-                    <p>Kindly follow the instructions below</p>
+            <div className="booking00-container">
+                <div className="booking-header">
+                    <img src="/Images/logoITISE.png" alt="ITISE Logo" />
                 </div>
-                <div className="booking00-details">
-                    <div className="blank0"></div>
-                    <div className="info-section">
-                        <div className="title-section">
-                            <h3>Transfer ITISE:</h3>
-                        </div>
-                        <div className="detail-section">
-                            {
-                                displayItems()
-                            }
-                        </div>
-                        <div className="total-section">
-                            <h3>
-                                Total: <strong>${finalTotal()} USD</strong>
-                            </h3>
-                        </div>
-                        <div className="initial-section">
-                            <h3>
-                                Initial Payment: <strong>${finalTotal()} USD</strong>
-                            </h3>
-                        </div>
+
+                <div className="progress-indicator">
+                    <span className="completed-step">✓</span>
+                    <div className="progress-line completed"></div>
+                    <span className="completed-step">✓</span>
+                    <div className="progress-line"></div>
+                    <span className="inactive-step">3</span>
+                </div>
+
+                <div className="booking02-info">
+                    <div className="booking-content">
+                        <h2>Payment</h2>
+                        <p>Kindly follow the instructions below</p>
                     </div>
-                    <div className="blank"></div>
-                    <div className="divider"></div>
-                    <div className="blank"></div>
-                    
-                    <div className="form-section">
-                        <label htmlFor="phone-number">Card Number</label>
-                        <div className="phone-section">
-                            <input
-                                className="phone-input"
-                                placeholder="Payment card number"
-                                type="text"
-                            />
+                    <div className="booking00-details">
+                        <div className="blank0"></div>
+                        <div className="info-section">
+                            <div className="title-section">
+                                <h3>Transfer ITISE:</h3>
+                            </div>
+                            <div className="detail-section">
+                                {
+                                    displayItems()
+                                }
+                            </div>
+                            <div className="total-section">
+                                <h3>
+                                    Total: <strong>${finalTotal()} USD</strong>
+                                </h3>
+                            </div>
+                            <div className="initial-section">
+                                <h3>
+                                    Initial Payment: <strong>${finalTotal()} USD</strong>
+                                </h3>
+                            </div>
                         </div>
+                        <div className="blank"></div>
+                        <div className="divider"></div>
+                        <div className="blank"></div>
 
-                        <label htmlFor="bank">Bank</label>
-                        <div className="phone-section">
-                            <input
-                                className="bank-input"
-                                placeholder="Select bank"
-                                type="text"
-                            />
-                        </div>
+                        <div className="form-section">
+                            <label htmlFor="phone-number">Card Number</label>
+                            <div className="phone-section">
+                                <input
+                                    className="phone-input"
+                                    placeholder="Payment card number"
+                                    type="text"
+                                />
+                            </div>
 
-                        <label htmlFor="exp-date">Exp Date</label>
-                        <div className="exp-section">
-                            <input
-                                className="exp-input"
-                                placeholder="Validation date"
-                                type="text"
-                            />
-                        </div>
+                            <label htmlFor="bank">Bank</label>
+                            <div className="phone-section">
+                                <input
+                                    className="bank-input"
+                                    placeholder="Select bank"
+                                    type="text"
+                                />
+                            </div>
 
-                        <label htmlFor="cvv">CVV</label>
-                        <div className="cvv-section">
-                            <input
-                                className="cvv-input"
-                                placeholder="Beside the card"
-                                type="password"
-                            />
+                            <label htmlFor="exp-date">Exp Date</label>
+                            <div className="exp-section">
+                                <input
+                                    className="exp-input"
+                                    placeholder="Validation date"
+                                    type="text"
+                                />
+                            </div>
+
+                            <label htmlFor="cvv">CVV</label>
+                            <div className="cvv-section">
+                                <input
+                                    className="cvv-input"
+                                    placeholder="Beside the card"
+                                    type="password"
+                                />
+                            </div>
                         </div>
+                        <div className="blank0"></div>
                     </div>
-                    <div className="blank0"></div>
+                </div>
+                <div className="action-section">
+                    <button className="pay-now" onClick={payNow}>Pay Now</button>
+                    <button onClick={() => { navigate(-1); }} className="cancel">Cancel</button>
                 </div>
             </div>
-            <div className="action-section">
-                <button className="pay-now" onClick={payNow}>Pay Now</button>
-                <button onClick={()=> {navigate(-1);}} className="cancel">Cancel</button>
-            </div>
-        </div>
-                    
+
         </div>
     );
 };

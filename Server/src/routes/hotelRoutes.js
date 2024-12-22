@@ -4,6 +4,7 @@ const HotelController = require('../component/hol/hotelController');
 
 
 router.get('/getFilterhotel', HotelController.getFilterHotel);
+router.get('/getRelatedhotel/:hotelID', HotelController.getRelatedHotel);
 
 router.get('/', HotelController.getHotelByPage);
 router.get('/:holId', HotelController.getHotelById_tourist)

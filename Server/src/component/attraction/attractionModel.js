@@ -122,27 +122,36 @@ class AttractionModel {
                     a.rating AS rating,
                     a.contact AS contact,
                     a.opening_hours AS opening_hours,
-                    a.img_url AS attractionimage,
+                    json_agg(a.img_url) AS attraction_images,
                     a.location_id as location_id,
                     l.location_name AS location,
                     a.detailed_location as detailed_location
                 FROM attractions a
                 JOIN locations l ON l.location_id = a.location_id
                 WHERE a.attraction_ID = $1
+                GROUP BY
+                    a.attraction_name,
+                    a.description,
+                    a.rating,
+                    a.contact,
+                    a.opening_hours,
+                    a.location_id,
+                    l.location_name,
+                    a.detailed_location;
             `;
             const res = await db.query(query, [attractionId]);
             if (res.rows.length > 0) {
                 const row = res.rows[0];
                 const attraction = {
-                    attractionName: row.name,
-                    attractionDescription: row.description,
-                    attractionRating: row.rating,
-                    attractionContact: row.contact,
-                    attractionOpeningHours: row.opening_hours,
-                    attractionImageUrl: row.attraction_image,
-                    attractionLocationId: row.location_id,
-                    attractionLocation: row.location,
-                    attractionDetailedLocation: row.detailed_location,
+                    name: row.name,
+                    description: row.description,
+                    rating: row.rating,
+                    contact: row.contact,
+                    openingHours: row.opening_hours,
+                    images: row.attraction_images,
+                    locationId: row.location_id,
+                    location: row.location,
+                    detailedLocation: row.detailed_location,
                 };
                 return attraction;
             }

@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 const hotelRoutes = require('./src/routes/hotelRoutes'); // Điều hướng view
-const restaurentoutes = require('./src/routes/restaurantRoutes');  // Điều hướng tour
+const restaurantRoutes = require('./src/routes/restaurantRoutes');  // Điều hướng tour
 const attractionRoutes = require('./src/routes/attractionRoutes'); // Điều hướng đến user
 const locationRoutes = require('./src/routes/locationRoutes'); // Điều hướng đến location
 const registerRoutes = require('./src/routes/registerRoutes.js');
@@ -38,7 +38,7 @@ app.use(authenticateToken);
 
 app.use(express.static(path.join(__dirname, 'src', 'public')));
 
-app.use('/restaurant', restaurentoutes);
+app.use('/restaurant', restaurantRoutes);
 app.use('/attraction', attractionRoutes);
 app.use('/hotel', hotelRoutes);
 app.use('/location', locationRoutes);

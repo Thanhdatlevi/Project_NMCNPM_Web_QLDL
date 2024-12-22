@@ -229,23 +229,23 @@ class RestaurantModel {
             if (res.rows.length > 0) {
                 const row = res.rows[0];
                 const restaurantDetails = {
-                    resName: row.res_name,
-                    resDescription: row.res_description,
-                    resLocation: row.location_name,
-                    resStatus: row.res_status,
-                    resRating: row.res_rating,
-                    resContact: row.res_contact,
-                    resDeal: row.res_deal,
-                    resSpecificLocation: row.res_specific_location,
-                    resImages: row.res_images,
-                    resAmenities: row.res_amenities,
-                    resAveragePrice: row.res_average_price,
+                    name: row.res_name,
+                    description: row.res_description,
+                    location: row.location_name,
+                    status: row.res_status,
+                    rating: row.res_rating,
+                    contact: row.res_contact,
+                    deal: row.res_deal,
+                    specificLocation: row.res_specific_location,
+                    images: row.res_images,
+                    amenities: row.res_amenities,
+                    averagePrice: row.res_average_price,
                 };
                 return restaurantDetails;
             }
             return null;
         } catch (error) {
-            console.log("Error getRestaurantById_tourist in restaurantModel");
+            console.log("Error getRestaurantById_tourist in restaurantModel: ", error.message);
             throw error;
         }
     }
@@ -409,7 +409,6 @@ class RestaurantModel {
                 LIMIT 3
             `;
             const res = await db.query(query, [resID]);  // Truyền tham số resID vào câu truy vấn
-            console.log(res)
             return res.rows;  // Trả về kết quả chi tiết của nhà hàng
         } catch (error) {
             console.error('Error fetching restaurant details:', error);

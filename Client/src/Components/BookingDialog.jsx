@@ -19,7 +19,7 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
                 .catch((error) => console.error('Error:', error));
         }
         else if (type === 'res') {
-            fetch('/res/getFilterres')
+            fetch('/restaurant/getFilterrestaurant')
                 .then((response) => response.json())
                 .then((data) => {
                     for (let i = 0; i < data.length; i++) {

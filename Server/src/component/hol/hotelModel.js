@@ -105,18 +105,18 @@ class HotelModel {
             if (res.rows.length > 0) {
                 const row = res.rows[0];
                 const hotelDetail = {
-                    holtelName: row.name,
-                    hotelDescription: row.description,
-                    hotelLocationId: row.location_id,
-                    hotelLocation: row.location_name,
-                    hotelStatus: row.status,
-                    hotelRating: row.rating,
-                    hotelContact: row.contact,
-                    hotelDeal: row.deal,
-                    hotelSpecificLocation: row.specific_location,
-                    hotelImages: row.images,
-                    hotelAmenities: row.amenities,
-                    hotelAveragePrice: row.average_price,
+                    name: row.name,
+                    description: row.description,
+                    locationId: row.location_id,
+                    location: row.location_name,
+                    status: row.status,
+                    rating: row.rating,
+                    contact: row.contact,
+                    deal: row.deal,
+                    specificLocation: row.specific_location,
+                    images: row.images,
+                    amenities: row.amenities,
+                    averagePrice: row.average_price,
                 };
                 return hotelDetail;
             }

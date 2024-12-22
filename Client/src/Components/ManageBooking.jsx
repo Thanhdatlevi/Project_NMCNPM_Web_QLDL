@@ -92,7 +92,7 @@ const ManageBooking = () => {
     // fetch data use callback
     const fetchImgPath = useCallback(async () => {
         try {
-            const response = await fetch('http://localhost:3000/res/getfilterres');
+            const response = await fetch('http://localhost:3000/restaurant/getFilterrestaurant');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -122,10 +122,10 @@ const ManageBooking = () => {
                         </select>
                     </div>
                 </div>
-                
+
                 <div className="booking-list">
                     {bookings.map((booking) => (
-                        <BookingCard key={booking.id} booking={booking} imgPath={imgPath}/>
+                        <BookingCard key={booking.id} booking={booking} imgPath={imgPath} />
                     ))}
                 </div>
             </div>

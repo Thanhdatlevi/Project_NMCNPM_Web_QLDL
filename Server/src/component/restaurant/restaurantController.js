@@ -5,7 +5,6 @@ class RestaurantController {
 
     static async getFilterRes(req, res) {
         try {
-            console.log(1);
             const result = {
                 rate: req.query.rate || -1,
                 location: req.query.location || 'default',

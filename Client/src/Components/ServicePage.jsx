@@ -111,12 +111,12 @@ const ServicePage = () => {
                     <div className="NameModel">
                         <div className="leftside">
                             <div className="Title">
-                                <h1>{service.hotelName}</h1>
+                                <h1>{service.name}</h1>
                             </div>
                             <div className="location">
                                 <span className="location-icon">
                                     <i className='bx bx-map'></i>
-                                    <p>{service.hotelLocation}</p>
+                                    <p>{service.location}</p>
                                 </span>
                             </div>
                             <div className="rating">
@@ -147,11 +147,11 @@ const ServicePage = () => {
                     </div>
                     <div className="Gallery">
                         <div className="main-pic">
-                            <img src={service.attractionimage || service.hotelImages[0]} alt="pic1" />
+                            <img src={service.attractionimage || service.images[0]} alt="pic1" />
                         </div>
                         <div className="sub-pic">
-                            <img className="pic2" src={service.attractionimage || service.hotelImages[0]} alt="pic2" />
-                            <img className="pic3" src={service.attractionimage || service.hotelImages[0]} alt="pic3" />
+                            <img className="pic2" src={service.attractionimage || service.images[0]} alt="pic2" />
+                            <img className="pic3" src={service.attractionimage || service.images[0]} alt="pic3" />
                         </div>
                     </div>
                     <section className='short-description'>

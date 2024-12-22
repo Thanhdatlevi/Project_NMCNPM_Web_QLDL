@@ -5,12 +5,13 @@ const AttractionController = require('../component/attraction/attractionControll
 
 router.get('/getFilterattraction', AttractionController.getFilterAttraction);
 router.get('/getRelatedattraction/:attractionID', AttractionController.getRelatedAttraction);
+router.get('/_10PopularAttraction', AttractionController.get_10_PopularAttractions);
 
 router.get('/', AttractionController.getAttractionsByPage);
-router.get('/api/getAttractionsTotal', AttractionController.getAttractionsTotal);
-router.get('/_10PopularAttraction', AttractionController.get_10_PopularAttractions);
-router.get('/by-location/:locationId', AttractionController.getAttractionsByLocationId);
 router.get('/:attractionId', AttractionController.getAttractionById);
+
+router.get('/api/getAttractionsTotal', AttractionController.getAttractionsTotal);
+router.get('/by-location/:locationId', AttractionController.getAttractionsByLocationId);
 
 
 
