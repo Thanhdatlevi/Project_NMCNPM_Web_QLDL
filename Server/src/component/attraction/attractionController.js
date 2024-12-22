@@ -46,8 +46,8 @@ class AttractionController {
 
     static async addAttractions(req, res) {
         try {
-            const { name, description, location, phone, openingHours, rating,img_url} = req.body;
-            const attractionRelated = await AttractionService.addAttractions(name, description, location, phone, openingHours, rating,img_url);
+            const { name, description, location, phone, openingHours, rating, img_url } = req.body;
+            const attractionRelated = await AttractionService.addAttractions(name, description, location, phone, openingHours, rating, img_url);
             if (!attractionRelated) {
                 return res.status(404).json({ message: 'Can\'t add attraction' });
             }
@@ -59,9 +59,9 @@ class AttractionController {
 
     static async updateAttractions(req, res) {
         try {
-            const { name, description, location, phone, openingHours, rating,img_url} = req.body;
+            const { name, description, location, phone, openingHours, rating, img_url } = req.body;
             const { attractionID } = req.params;
-            const attractionRelated = await AttractionService.updateAttractions(attractionID, name, description, location, phone, openingHours, rating,img_url);
+            const attractionRelated = await AttractionService.updateAttractions(attractionID, name, description, location, phone, openingHours, rating, img_url);
             if (!attractionRelated) {
                 return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
             }
@@ -124,6 +124,19 @@ class AttractionController {
         } catch (error) {
             console.error("Error in getAttractionsByPage:", error);
             return res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    static async getRelatedAttraction(req, res) {
+        try {
+            const { attractionID } = req.params;
+            const attractionRelated = await AttractionModel.getRelatedAttraction(attractionID);
+            if (!attractionRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            }
+            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
         }
     }
 }

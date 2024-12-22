@@ -3,19 +3,9 @@ const RestaurantModel = require('./restaurantModel');
 
 class RestaurantController {
 
-    static async deleteRes(req, res) {
-        try {
-            const { provider_id, facility_id, specificFacility_id } = req.body;
-            await RestaurantModel.deleteRes(provider_id, facility_id, specificFacility_id);
-            res.status(200).json({ message: 'Delete successful' });
-        } catch (error) {
-            console.error('Error in deleteRes:', error);
-            res.status(500).json({ message: 'Error deleting restaurant' });
-        }
-    }
-
     static async getFilterRes(req, res) {
         try {
+            console.log(1);
             const result = {
                 rate: req.query.rate || -1,
                 location: req.query.location || 'default',
@@ -121,6 +111,19 @@ class RestaurantController {
         } catch (error) {
             console.error('Error in getRestaurantByProviderId:', error);
             res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    static async getRelatedRes(req, res) {
+        try {
+            const { resID } = req.params;
+            const resRelated = await RestaurantModel.getRelatedRes(resID);
+            if (!resRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });
+            }
+            res.json(resRelated);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
         }
     }
 }

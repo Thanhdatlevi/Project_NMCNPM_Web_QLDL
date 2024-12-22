@@ -1,37 +1,6 @@
 const db = require('../../config/db');
 
 class RestaurantModel {
-
-
-
-    // Xóa nhà hàng theo các ID
-    static async deleteRes(provider_id, facility_id, specificFacility_id) {
-        try {
-            await db.query(`
-                DELETE FROM tables
-                WHERE restaurant_id = $1;
-            `, [specificFacility_id]);
-
-            await db.query(`
-                DELETE FROM facility_images
-                WHERE facility_id = $1;
-            `, [facility_id]);
-
-            await db.query(`
-                DELETE FROM restaurants
-                WHERE facility_id = $1;
-            `, [facility_id]);
-
-            await db.query(`
-                DELETE FROM facilities
-                WHERE facility_id = $1 AND provider_id = $2;
-            `, [facility_id, provider_id]);
-        } catch (error) {
-            console.error('Error deleting restaurant:', error);
-            throw error;
-        }
-    }
-
     // Lọc nhà hàng theo tiêu chí
     static async getFilterRes(rate, location, input) {
         try {
@@ -410,7 +379,43 @@ class RestaurantModel {
         }
     }
 
-    static async
+    static async getRelatedRes(resID) {
+        try {
+            const query = `
+                SELECT
+                    r.restaurant_id AS id,
+                    f.facility_name AS name,
+                    f.description AS description,
+                    f.rating AS rating,
+                    f.contact AS contact,
+                    f.deal AS deal,
+                    array_agg(f_i.img_url) AS images,  -- Gom các URL ảnh vào một mảng
+                    l.location_name AS location
+                FROM restaurants r
+                JOIN facilities f ON r.facility_id = f.facility_id
+                JOIN facility_images f_i ON f.facility_id = f_i.facility_id
+                JOIN locations l ON l.location_id = f.location_id
+                JOIN restaurants r1 ON r1.restaurant_id=$1
+                JOIN facilities f1 ON r1.facility_id = f1.facility_id and l.location_id = f1.location_id
+                WHERE r.restaurant_id != r1.restaurant_id
+                GROUP BY
+                    r.restaurant_id,
+                    f.facility_name,
+                    f.description,
+                    f.rating,
+                    f.contact,
+                    f.deal,
+                    l.location_name
+                LIMIT 3
+            `;
+            const res = await db.query(query, [resID]);  // Truyền tham số resID vào câu truy vấn
+            console.log(res)
+            return res.rows;  // Trả về kết quả chi tiết của nhà hàng
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    }
 }
 
 module.exports = RestaurantModel;

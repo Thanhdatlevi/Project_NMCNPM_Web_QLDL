@@ -114,6 +114,20 @@ class HotelController {
             res.status(500).json({ message: 'Failed to retrieve filtered hotels' });
         }
     }
+
+    static async getRelatedHotel(req, res) {
+        try {
+            const { hotelID } = req.params;
+            const hotelRelated = await HotelModel.getRelatedHotel(hotelID);
+            if (!hotelRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            }
+            res.json(hotelRelated);  // Trả về thông tin chi tiết nhà hàng
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
+        }
+    }
+
 }
 
 module.exports = HotelController;

@@ -39,16 +39,16 @@ const Content = () => {
                 <div className="framePlace">
                   <div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center', padding: '10px' }}>
-                      <img src={attr.img_url} alt="tour_ha_long" width="220" height="200" style={{ objectFit: 'cover' }} />
+                      <img src={attr.imageUrl} alt="tour_ha_long" width="220" height="200" style={{ objectFit: 'cover' }} />
                     </div>
                     <div className="place_content">
-                      <h4>{attr.attraction_name}</h4>
+                      <h4>{attr.attractionName}</h4>
                       <p style={{ marginTop: '10px' }}>
                         <span className="tagView text-clamp">{attr.description}</span>
                       </p>
                       <p style={{ marginTop: '5px', color: '#757575' }}>
                         <span style={{ color: '#f09b0a', fontWeight: 'bold', marginRight: '10px' }}>★ {attr.rating}</span>
-                        <span>Mở cửa: {attr.opening_hours} </span>
+                        <span>Mở cửa: {attr.openingHours} </span>
                         {/* <span> • 3M+ booked </span> */}
                       </p>
                       <p style={{ marginTop: '20px' }}>
