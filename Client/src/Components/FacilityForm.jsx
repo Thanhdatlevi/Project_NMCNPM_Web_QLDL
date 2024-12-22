@@ -26,7 +26,7 @@ const FacilityForm = () => {
         const id = localStorage.getItem("selectedServiceId");
         console.log(id);
         // Fetch data from server
-        fetch(`${service == "res" ? "restaurant" : "hotel"}/${id}`)
+        fetch(`provider/${service == "res" ? "restaurant" : "hotel"}/${id}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
@@ -54,17 +54,15 @@ const FacilityForm = () => {
                     setCapacityList(fetchedData.hotel_rooms);
                 } else if (service === "res") {
                     setFacilityData({
-                        name: fetchedData.name,
-                        location: fetchedData.location,
-                        description: fetchedData.description,
-                        img: fetchedData.images,
-                     
-                        amenities: fetchedData.amenities,
-                        contact: fetchedData.contact,
-                        status: fetchedData.status,
-                        deal: fetchedData.deal,
-                        specificLocation: fetchedData.specificLocation,
-                        averagePrice: fetchedData.averagePrice,
+                        name: fetchedData.resName,
+                        location: fetchedData.resLocation,
+                        description: fetchedData.resDescription,
+                        img: fetchedData.resImages,
+                        amenities: fetchedData.resAmenities,
+                        contact: fetchedData.resContact,
+                        status: fetchedData.resStatus,
+                        specificLocation: fetchedData.resSpecificLocation,
+                        averagePrice: fetchedData.resAveragePrice,
                     });
                     
                 }
@@ -102,7 +100,7 @@ const FacilityForm = () => {
             facilityData:{
                 facilityName: facilityData.name,
                 description: facilityData.description,
-                location: facilityData.location,
+               
                 contact: facilityData.contact,
                 status: facilityData.status,
                 specificLocation: facilityData.specificLocation,
@@ -115,8 +113,8 @@ const FacilityForm = () => {
         };
         console.log(newFacilityData);
         //Send data to server
-        fetch(`${service}/update`, {
-            method: "POST",
+        fetch(`http://localhost:3000/provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },

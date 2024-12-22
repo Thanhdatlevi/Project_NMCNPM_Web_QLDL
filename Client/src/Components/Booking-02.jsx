@@ -121,6 +121,7 @@ const Booking02 = ({ bookingData }) => {
 
         const transformedHotels = hotelChosen.map(hotel => ({
             hotel_id: hotel.facility_id,
+            name: hotel.facility_name,
             quantity: hotel.quantity,
             date: hotel.date
         }));
@@ -128,13 +129,14 @@ const Booking02 = ({ bookingData }) => {
 
         const transformedRestaurants = restaurantChosen.map(restaurant => ({
             res_id: restaurant.facility_id,
+            name: restaurant.facility_name,
             quantity: restaurant.quantity,
             date: restaurant.date
         }));
 
         const bookingData = {
-            location_id: localStorage.getItem('city'),
-            places: transformedPlaces,
+            
+            
             hotels: transformedHotels,
             restaurants: transformedRestaurants,
             final_total: finalTotal()

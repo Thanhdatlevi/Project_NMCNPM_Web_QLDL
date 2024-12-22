@@ -57,7 +57,7 @@ const MyFacility = () => {
     const fetchData = async (service) => {
         localStorage.setItem('selectedService', service);
         setActiveTab(service);
-        const response = await fetch(`/${service == "res" ? "restaurant" : "hotel"}/by-provider/${provider}`);
+        const response = await fetch(`provider/${service == "res" ? "restaurant" : "hotel"}/by-provider`);
         if (!response.ok) {
             throw new Error("Failed to fetch data");
         }

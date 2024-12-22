@@ -28,7 +28,7 @@ class FacilityModel {
             throw error;
         }
     }
-    static async updateFacility( facilityId, facilityName, description, locationId, contact, status, specificLocation) {
+    static async updateFacility(facilityId, facilityName, description, locationId, contact, status, specificLocation) {
         try {
             let fieldsToUpdate = [];
             let values = [];

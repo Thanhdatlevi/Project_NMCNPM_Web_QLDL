@@ -1,6 +1,5 @@
 const HotelModel = require('./hotelModel');
 const HotelService = require('./hotelService');
-
 class HotelController {
 
     static async get_3_PopularHotels(req, res) {
@@ -85,8 +84,8 @@ class HotelController {
 
     static async getHotelsByProviderId(req, res) {
         try {
-            const { providerId } = req.params;
-            const hotels = await HotelService.getHotelsByProviderId(providerId);
+            const { accountId } = res.locals.account;
+            const hotels = await HotelService.getHotelsByProviderId(accountId);
             if (!hotels || hotels.length === 0) {
                 return res.status(404).json({ message: 'No hotels found for this provider' });
             }

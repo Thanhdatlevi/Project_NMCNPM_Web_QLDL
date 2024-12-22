@@ -1,4 +1,5 @@
 const RestaurantModel = require('./restaurantModel');
+const AccountModel = require(`../account/accountModel`);
 
 class RestaurantService {
 
@@ -76,8 +77,9 @@ class RestaurantService {
         }
     }
 
-    static async getRestaurantByProviderId(providerId) {
+    static async getRestaurantByProviderId(accountId) {
         try {
+            const providerId = await AccountModel.getProviderId(accountId);
             const restaurants = await RestaurantModel.getRestaurantByProviderId(providerId);
             return restaurants;
         } catch (error) {
@@ -85,7 +87,6 @@ class RestaurantService {
             throw new Error("Unable to fetch restaurants by provider.");
         }
     }
-
 }
 
 module.exports = RestaurantService;

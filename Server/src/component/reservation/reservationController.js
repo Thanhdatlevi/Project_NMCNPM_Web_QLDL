@@ -1,23 +1,27 @@
 const ReservationService = require('./reservationService');
+
 class ReservationController {
     static async createReservation(req, res) {
         try {
-            const touristId = await AccountModel.getTouristId(accountId);
-            if (!touristId) {
-                return { success: false, message: "Tài khoản không tồn tại." };
+            const { detailReservation, status, accountId } = req.body;
+            if (!detailReservation || !status) {
+                return res.status(400).json({ success: false, message: 'Thiếu dữ liệu' });
             }
-            const reservationDate = new Date().toISOString();
-            const result = await ReservationModel.createReservation(touristId, reservationDate, status, detailReservations);
-            if (result) {
-                return { success: true, message: "Tạo đơn thành công.", reserveId: result };
+
+            const result = await ReservationService.createReservation(accountId, status, detailReservation); // reservationDate = null
+            if (result.success) {
+                return res.status(201).json({
+                    message: 'Reservation created successfully.',
+                    reserveId: result.reserveId
+                });
             } else {
-                return { success: false, message: "Có lỗi xảy ra. Vui lòng thử lại sau." };
+                return res.status(400).json({ success: false, message: result.message });
             }
         } catch (error) {
-            console.error("Error in ReservationService.createReservation:", error.message);
-            throw error;
+            console.error("Error in ReservationController.createReservation:", error.message);
+            return res.status(500).json({ message: "Có lỗi xảy ra. Xin vui lòng thử lại sau" });
         }
     }
 }
 
-module.exports = ReservationService;
+module.exports = ReservationController;

@@ -8,11 +8,16 @@ const PORT = process.env.PORT || 3000;
 
 // access static files
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*'); // Allow all origins
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3001'); // Chỉ cho phép localhost:3001
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH'); // Cho phép các phương thức HTTP
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'); // Cho phép các header
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200); // Trả về OK cho yêu cầu preflight
+    } else {
+        next(); // Chuyển sang middleware tiếp theo
+    }
 });
+
 
 const hotelRoutes = require('./src/routes/hotelRoutes'); // Điều hướng view
 const restaurantRoutes = require('./src/routes/restaurantRoutes');  // Điều hướng tour

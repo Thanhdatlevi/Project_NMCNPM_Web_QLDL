@@ -217,6 +217,7 @@ class HotelModel {
             SELECT 
                 h.hotel_id AS id,
                 f.facility_name AS name,
+                f.facility_id as facility_id,
                 l.location_name AS location,
                 f.deal AS deal,
                 f.rating AS rating,
@@ -227,12 +228,13 @@ class HotelModel {
             JOIN facility_images f_i ON f.facility_id = f_i.facility_id
             WHERE f.provider_id = $1
             GROUP BY
-                h.hotel_id, f.facility_name,
+                h.hotel_id, f.facility_name, f.facility_id,
                 l.location_name, f.rating, f.deal;
         `;
             const res = await db.query(query, [providerId]);
             if (res.rows.length > 0) {
                 const hotels = res.rows.map(row => ({
+                    facilityId: row.facility_id,
                     hotelId: row.id,
                     hotelName: row.name,
                     location: row.location,

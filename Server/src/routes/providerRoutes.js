@@ -12,11 +12,14 @@ router.patch('/api/updateRestaurant/:restaurantId', ProviderController.updateRes
 
 router.post('/api/requestHotel', ProviderController.requestHotel);
 router.post('/api/requestRestaurant', ProviderController.requestRestaurant);
-router.post('/getPublicProfile', AccountController.getPublicProfile);
 
 router.delete('/deleteFacility', FacilityController.deleteFacility);
 
-router.get('/api/getProfile',)
+router.get('/hotel/by-provider', HotelController.getHotelsByProviderId);
+router.get('/restaurant/by-provider', RestaurantController.getRestaurantByProviderId);
+
+router.get('/api/getFacilites',)
+router.get('/getPublicProfile', AccountController.getPublicProfile);
 router.get('/hotel/:holId', HotelController.getHotelById_provider);
 router.get('/restaurant/:resId', RestaurantController.getRestaurantById_provider);
 

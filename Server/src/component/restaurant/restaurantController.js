@@ -101,8 +101,8 @@ class RestaurantController {
 
     static async getRestaurantByProviderId(req, res) {
         try {
-            const { providerId } = req.params;
-            const restaurants = await RestaurantService.getRestaurantByProviderId(providerId);
+            const { accountId } = res.locals.account;
+            const restaurants = await RestaurantService.getRestaurantByProviderId(accountId);
             if (!restaurants) {
                 return res.status(404).json({ message: 'No restaurants found for this provider' });
             }
