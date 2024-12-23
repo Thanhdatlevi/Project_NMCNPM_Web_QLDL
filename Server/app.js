@@ -19,6 +19,7 @@ const registerRoutes = require('./src/routes/registerRoutes.js');
 const loginRoutes = require('./src/routes/loginRoutes.js');
 const logoutRoutes = require('./src/routes/logout.Routes.js');
 const verifyRoutes = require('./src/routes/verifyRoutes.js');
+const feedbackRoutes = require('./src/routes/feedbackRoutes.js');
 const authenticateRoutes = require('./src/routes/authenticateRoutes.js');
 
 const adminRoutes = require('./src/routes/adminRoutes.js');
@@ -36,6 +37,7 @@ app.use('/restaurant', restaurantRoutes);
 app.use('/attraction', attractionRoutes);
 app.use('/hotel', hotelRoutes);
 app.use('/location', locationRoutes);
+app.use('/feedback', feedbackRoutes);
 
 app.use('/logout', requireLogin, logoutRoutes);
 
