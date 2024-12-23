@@ -143,8 +143,11 @@ const Booking02 = ({ bookingData }) => {
         }));
 
         const bookingData = {
-            hotels: transformedHotels,
-            restaurants: transformedRestaurants,
+            status: 'reserved',
+            detailReservation: [
+                ...transformedHotels,
+                ...transformedRestaurants,
+            ],
             //final_total: finalTotal()
         };
         console.log(bookingData);

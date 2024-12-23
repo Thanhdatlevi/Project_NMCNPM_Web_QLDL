@@ -39,7 +39,7 @@ class ReservationModel {
             const result = await client.query(query, values);
             return result.rowCount > 0;
         } catch (error) {
-            console.error("Error in insertDetailReservations:", error.message);
+            console.error("Error in ReservationModel.insertDetailReservations:", error.message);
             throw error;
         }
     }
@@ -48,6 +48,10 @@ class ReservationModel {
         const client = await db.beginTransaction();
         try {
             await client.query('BEGIN');
+            console.log(touristId);
+            console.log(reservationDate);
+            console.log(status);
+            console.log(detailReservations);
             const reserveId = await this.#insertReservation(touristId, reservationDate, status, client);
             if (!reserveId) {
                 throw new Error("Failed to create reservation");
@@ -60,7 +64,7 @@ class ReservationModel {
             return reserveId;
         } catch (error) {
             await db.rollbackTransaction(client);
-            console.error("Error in createReservation:", error.message);
+            console.error("Error in ReservationModel.createReservation:", error.message);
             throw error;
         }
     }
