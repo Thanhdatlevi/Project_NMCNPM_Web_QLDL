@@ -110,24 +110,24 @@ function HomePlace() {
             console.log(_value);
             const date = localStorage.getItem('date');
             console.log(dateBooking);
-            const p_string = _value.toString() + (_type === 'res' ? " tables" : " days") + " at " + date ;
+            const p_string = _value.toString() + (_type === 'res' ? " tables" : " days") + " at " + date;
             p.innerHTML = p_string;
         }
     }
 
     async function loadJSON1() {
-        const response = await fetch('http://localhost:3000/attraction/getFilterattraction');
+        const response = await fetch('attraction/getFilterattraction');
         const data1 = await response.json();
         return data1;
     }
     async function loadJSON2() {
-        const response = await fetch('http://localhost:3000/hotel/getFilterhotel');
+        const response = await fetch('hotel/getFilterhotel');
         const data2 = await response.json();
         return data2;
     }
 
     async function loadJSON3() {
-        const response = await fetch('http://localhost:3000/restaurant/getFilterrestaurant');
+        const response = await fetch('restaurant/getFilterrestaurant');
         const data2 = await response.json();
         return data2;
     }

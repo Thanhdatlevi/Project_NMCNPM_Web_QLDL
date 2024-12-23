@@ -64,7 +64,7 @@ const FacilityForm = () => {
                         specificLocation: fetchedData.resSpecificLocation,
                         averagePrice: fetchedData.resAveragePrice,
                     });
-                    
+
                 }
             })
             .catch((error) => {
@@ -148,9 +148,9 @@ const FacilityForm = () => {
                     </div>
                     <div className="facility-form-item-inline">
                         <div className="facility-form-item">
-                            <input type="text" id="facility_location" name="facility_location" placeholder="Location"
-                                value={facilityData.location} required
-                                onChange={(e) => setFacilityData({ ...facilityData, location: e.target.value })} />
+                            <input type="text" id="facility_location" name="facility_location" placeholder="Location" value={facilityData.location}
+                                readOnly
+                            />
                         </div>
                         <div className="facility-form-item">
                             <input type="text" id="facility_location_detail" name="facility_location_details" placeholder="Location Detail"
@@ -171,7 +171,7 @@ const FacilityForm = () => {
                                         <p>Status</p>
                                         <p>Action</p>
                                     </div>
-                                    
+
                                     <button onClick={addCapacity}>Add Capacity</button>
                                     <button onClick={toggleDialog}>Close</button>
                                 </div>
@@ -190,9 +190,9 @@ const FacilityForm = () => {
                     <div className="facility-form-item">
 
                         <div className="facility-images">
-                        {facilityData.img.map((image, index) => (
-                                    <img id="current_image" key={index} src={image} alt={`Facility ${index}`} />
-                                ))}
+                            {facilityData.img.map((image, index) => (
+                                <img id="current_image" key={index} src={image} alt={`Facility ${index}`} />
+                            ))}
 
                         </div>
                     </div>
