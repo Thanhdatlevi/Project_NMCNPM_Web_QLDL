@@ -1,5 +1,5 @@
+const { console } = require('inspector');
 const ProviderService = require('./providerService');
-
 
 class ProviderController {
 
@@ -27,7 +27,7 @@ class ProviderController {
                 });
             }
         } catch (error) {
-            console.error("Error in updateHotel controller: ", error);
+            console.error("Error in ProviderController.updateHotel controller: ", error);
             return res.status(500).json({
                 message: "Đã có lỗi xảy ra. Vui lòng thử lại sau."
             });
@@ -39,7 +39,6 @@ class ProviderController {
             const { accountId } = res.locals.account;
             const { restaurantId } = req.params;
             const { updateData } = req.body;
-
             if (!restaurantId) {
                 return res.status(400).json({ message: "Thiếu restaurantId." });
             }
@@ -58,7 +57,7 @@ class ProviderController {
                 });
             }
         } catch (error) {
-            console.error("Error in updateRestaurant controller: ", error);
+            console.error("Error in ProviderController.updateRestaurant: ", error);
             return res.status(500).json({
                 message: "Đã có lỗi xảy ra. Vui lòng thử lại sau."
             });
@@ -82,7 +81,6 @@ class ProviderController {
                     'specificLocation',
                     'contact',
                     'imageUrls',
-                    'roomsNum',
                     'locationId'
                 ];
 
@@ -123,7 +121,6 @@ class ProviderController {
                 'specificLocation',
                 'contact',
                 'imageUrls',
-                'tablesNum',
                 'locationId'
             ];
 
@@ -146,6 +143,81 @@ class ProviderController {
         }
     }
 
+    static async deleteFacility(req, res) {
+        try {
+            const { facilityId } = req.body;
+            const { accountId } = res.locals.account;
+            if (!facilityId) {
+                return res.status(400).json({ message: "Thiếu facilityId." });
+            }
+            const result = await ProviderService.deleteFacility(accountId, facilityId);
+            if (result.success) {
+                return res.status(200).json({ message: "Facility đã được xóa thành công." });
+            } else {
+                return res.status(404).json({ message: "Facility không tồn tại hoặc không thể xóa." });
+            }
+
+        } catch (error) {
+            console.error("Error in ProviderController.deleteFacility:", error.message);
+            return res.status(500).json({ message: "Có lỗi xảy ra, vui lòng thử lại sau." });
+        }
+    }
+
+    static async getHotelsByProviderId(req, res) {
+        try {
+            const { accountId } = res.locals.account;
+            const hotels = await ProviderService.getHotelsByProviderId(accountId);
+            if (!hotels || hotels.length === 0) {
+                return res.status(404).json({ message: 'No hotels found for this provider' });
+            }
+            res.status(200).json(hotels);
+        } catch (error) {
+            console.error('Error retrieving hotels by provider:', error.message);
+            res.status(500).json({ message: 'Failed to retrieve hotels by provider' });
+        }
+    }
+
+    static async getRestaurantByProviderId(req, res) {
+        try {
+            const { accountId } = res.locals.account;
+            const restaurants = await ProviderService.getRestaurantByProviderId(accountId);
+            if (!restaurants) {
+                return res.status(404).json({ message: 'No restaurants found for this provider' });
+            }
+            res.status(200).json(restaurants);
+        } catch (error) {
+            console.error('Error in getRestaurantByProviderId:', error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    static async getHotelById_provider(req, res) {
+        try {
+            const { holId } = req.params;
+            const hotelDetail = await ProviderService.getHotelById_provider(holId);
+            if (!hotelDetail) {
+                return res.status(404).json({ message: 'Hotel not found for provider' });
+            }
+            res.status(200).json(hotelDetail);
+        } catch (error) {
+            console.error('Error in getHotelById_provider:', error.message);
+            res.status(500).json({ message: 'Failed to retrieve hotel details for provider' });
+        }
+    }
+
+    static async getRestaurantById_provider(req, res) {
+        try {
+            const { resId } = req.params;
+            const restaurantDetail = await ProviderService.getRestaurantById_provider(resId);
+            if (!restaurantDetail) {
+                return res.status(404).json({ message: 'Restaurant not found' });
+            }
+            res.status(200).json(restaurantDetail);
+        } catch (error) {
+            console.error('Error in getRestaurantById_provider:', error);
+            res.status(500).json({ message: 'Error retrieving restaurant details' });
+        }
+    }
 
 }
 

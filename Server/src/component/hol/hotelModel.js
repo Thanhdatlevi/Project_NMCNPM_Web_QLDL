@@ -1,4 +1,5 @@
 const db = require('../../config/db');
+const FacilityModel = require('../facility/facilityModel');
 class HotelModel {
 
     static async get3PopularHotels() {
@@ -94,7 +95,8 @@ class HotelModel {
                     f.specific_location AS specific_location,
                     COALESCE(fi.images, '{}') AS images, -- URL ảnh (nếu không có thì trả về mảng rỗng)
                     h.amenities AS amenities,
-                    h.average_price AS average_price
+                    h.average_price AS average_price,
+                    h.facility_id as facility_id
                 FROM hotels h
                 JOIN facilities f ON h.facility_id = f.facility_id
                 JOIN locations l ON l.location_id = f.location_id
@@ -105,18 +107,19 @@ class HotelModel {
             if (res.rows.length > 0) {
                 const row = res.rows[0];
                 const hotelDetail = {
-                    holtelName: row.name,
-                    hotelDescription: row.description,
-                    hotelLocationId: row.location_id,
-                    hotelLocation: row.location_name,
-                    hotelStatus: row.status,
-                    hotelRating: row.rating,
-                    hotelContact: row.contact,
-                    hotelDeal: row.deal,
-                    hotelSpecificLocation: row.specific_location,
-                    hotelImages: row.images,
-                    hotelAmenities: row.amenities,
-                    hotelAveragePrice: row.average_price,
+                    name: row.name,
+                    description: row.description,
+                    facilityId: row.facility_id,
+                    locationId: row.location_id,
+                    location: row.location_name,
+                    status: row.status,
+                    rating: row.rating,
+                    contact: row.contact,
+                    deal: row.deal,
+                    specificLocation: row.specific_location,
+                    images: row.images,
+                    amenities: row.amenities,
+                    averagePrice: row.average_price,
                 };
                 return hotelDetail;
             }
@@ -136,7 +139,7 @@ class HotelModel {
                 ),
                 rooms_agg AS (
                     SELECT r.hotel_id, array_agg(
-                        JSON_BUILD_OBJECT( 'roomId', r.room_id, 'price', r.price, 'status', r.status, 'bookedDates', r.dates_booked
+                        JSON_BUILD_OBJECT( 'roomId', r.room_id, 'price', r.price, 'status', r.status
                         )) AS rooms
                     FROM rooms r
                     GROUP BY r.hotel_id
@@ -216,6 +219,7 @@ class HotelModel {
             SELECT 
                 h.hotel_id AS id,
                 f.facility_name AS name,
+                f.facility_id as facility_id,
                 l.location_name AS location,
                 f.deal AS deal,
                 f.rating AS rating,
@@ -226,12 +230,13 @@ class HotelModel {
             JOIN facility_images f_i ON f.facility_id = f_i.facility_id
             WHERE f.provider_id = $1
             GROUP BY
-                h.hotel_id, f.facility_name,
+                h.hotel_id, f.facility_name, f.facility_id,
                 l.location_name, f.rating, f.deal;
         `;
             const res = await db.query(query, [providerId]);
             if (res.rows.length > 0) {
                 const hotels = res.rows.map(row => ({
+                    facilityId: row.facility_id,
                     hotelId: row.id,
                     hotelName: row.name,
                     location: row.location,
@@ -247,7 +252,6 @@ class HotelModel {
             throw error;
         }
     }
-
 
     static async getFilterHotel(rate, location, input) {
         try {
@@ -317,6 +321,88 @@ class HotelModel {
             throw error;
         }
     }
+
+    static async getRelatedHotel(hotelID) {
+        try {
+            const query = `
+            SELECT
+                h.hotel_id AS id,
+                f.facility_id AS facid,
+                f.facility_name AS name,
+                f.description AS description,
+                f.rating AS rating,
+                f.contact AS contact,
+                f.deal AS  deal,
+                array_agg(f_i.img_url) AS images,
+                l.location_name AS location
+            FROM hotels h
+            JOIN facilities f ON h.facility_id = f.facility_id
+            JOIN facility_images f_i ON f.facility_id = f_i.facility_id
+            JOIN locations l ON l.location_id = f.location_id
+            JOIN hotels h1 ON h1.hotel_id=$1
+            JOIN facilities f1 ON h1.facility_id = f1.facility_id and l.location_id = f1.location_id
+            WHERE h.hotel_id != h1.hotel_id
+            GROUP BY
+                h.hotel_id,
+                f.facility_id,
+                f.facility_name,
+                f.description,
+                f.rating,
+                f.contact,
+                f.deal,
+                l.location_name
+            LIMIT 3
+            `;
+            const res = await db.query(query, [hotelID]);  // Truyền tham số hotelID vào câu truy vấn
+            return res.rows;  // Trả về kết quả chi tiết của khách sạn
+        } catch (error) {
+            console.error('Error fetching hotel details:', error);
+            throw error;
+        }
+    }
+
+    static async updateHotelWithFacility(hotelId, updateData) {
+        const client = await db.beginTransaction();
+        try {
+            const { facilityData, hotelData } = updateData;
+            if (facilityData) {
+                await FacilityModel.updateFacility(
+                    client,
+                    hotelId,
+                    facilityData.facilityName,
+                    facilityData.description,
+                    facilityData.locationId,
+                    facilityData.contact,
+                    facilityData.status,
+                    facilityData.specificLocation
+                );
+            }
+            if (hotelData) {
+                await HotelModel.updateHotel(
+                    client,
+                    hotelId,
+                    hotelData.amenities,
+                    hotelData.averagePrice
+                );
+            }
+            await db.commitTransaction(client);
+            return true;
+        } catch (error) {
+            await db.rollbackTransaction(client);
+            throw error;
+        }
+    }
+
+    static async insertHotel(facilityId) {
+        try {
+            const hotelQuery = `INSERT INTO hotels (facility_id) VALUES ($1);`;
+            await db.query(hotelQuery, [facilityId]);
+        } catch (error) {
+            console.error("Error in HotelModel.insertHotel:", error.message);
+            throw error;
+        }
+    }
+
 
 }
 

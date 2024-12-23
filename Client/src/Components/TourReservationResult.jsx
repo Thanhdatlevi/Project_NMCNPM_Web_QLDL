@@ -11,7 +11,7 @@ const TourReservationResult = () => {
 
     const loadPlaces = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/attraction/getfilterattraction');
+            const response = await fetch('http://localhost:3000/attraction/getFilterattraction');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -31,7 +31,7 @@ const TourReservationResult = () => {
 
     const loadHotels = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/hotel/getfilterhotel');
+            const response = await fetch('http://localhost:3000/hotel/getFilterhotel');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -40,7 +40,10 @@ const TourReservationResult = () => {
             const hotels = chosenHotels.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
-                    quantity: selections[element.facility_id].quantity
+                    quantity: selections[element.facility_id].quantity,
+                    date: selections[element.facility_id].date,
+                    price: selections[element.facility_id].price,
+                    totalPrice: selections[element.facility_id].price * selections[element.facility_id].quantity
                 }));
             setHotelChosen(hotels);
         } catch (error) {
@@ -50,7 +53,7 @@ const TourReservationResult = () => {
 
     const loadRestaurants = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/res/getFilterres');
+            const response = await fetch('http://localhost:3000/restaurant/getFilterrestaurant');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -59,7 +62,10 @@ const TourReservationResult = () => {
             const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
-                    quantity: selections[element.facility_id].quantity
+                    quantity: selections[element.facility_id].quantity,
+                    date: selections[element.facility_id].date,
+                    price: selections[element.facility_id].price,
+                    totalPrice: selections[element.facility_id].price * selections[element.facility_id].quantity
                 }));
             setRestaurantChosen(restaurants);
         } catch (error) {
@@ -74,7 +80,7 @@ const TourReservationResult = () => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + 100*item.quantity, 0);
+            .reduce((acc, item) => acc + 100 * item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -112,7 +118,7 @@ const TourReservationResult = () => {
     }
 
     function confirmButton() {
-        
+
         alert("Your reservation has been confirmed.");
         window.location.href = "/booking02";
     }
@@ -121,9 +127,9 @@ const TourReservationResult = () => {
         return (
             <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
                 <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
-                <p id="service-quantity">{item.quantity}</p>
-                <p id="service-price">{100}</p>
-                <p id="service-total-price">{100*item.quantity}</p>
+                <p id="service-quantity">{item.quantity} {item.date}</p>
+                <p id="service-price">{item.price}</p>
+                <p id="service-total-price">{item.totalPrice}</p>
             </div>
         );
     }

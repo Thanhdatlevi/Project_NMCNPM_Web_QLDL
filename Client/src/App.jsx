@@ -18,6 +18,7 @@ import ManageBooking from './Components/ManageBooking';
 import FacilityForm from './Components/FacilityForm';
 import ProtectedUserRoute from './Components/ProtectedRouteUser';
 import ProtectedRoute from './Components/ProtectedRoute';
+import MyFacility from './Components/MyFacility';
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -73,6 +74,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/role" element={<SelectRole />} />
+          
+          <Route path="/myfacility" element={<MyFacility />} />
       </Routes>
       <Footer />
     </div>

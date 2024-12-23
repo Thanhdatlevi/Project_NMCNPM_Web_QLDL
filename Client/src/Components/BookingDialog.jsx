@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/BookingDialog.css"; // Adjust this path according to your CSS file location
 import { Link, useNavigate } from 'react-router-dom';
+import { use } from "react";
 
-const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
+const BookingDialog = ({isBookingVisible, handleBookingFinished }) => {
     const [fac, setFac] = useState({});
+    const [date, setDate] = useState('');
     const type = localStorage.getItem('type');
     useEffect(() => {
         if (type === 'hol') {
@@ -19,7 +21,7 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
                 .catch((error) => console.error('Error:', error));
         }
         else if (type === 'res') {
-            fetch('/res/getFilterres')
+            fetch('/restaurant/getFilterrestaurant')
                 .then((response) => response.json())
                 .then((data) => {
                     for (let i = 0; i < data.length; i++) {
@@ -42,12 +44,27 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
         setDuration(duration + 1);
     };
     const handleBooking = () => {
+        localStorage.setItem('price',fac.average_price);
         const booking = document.getElementById('dialog');
         booking.classList.toggle('hidden');
         if (handleBookingFinished) {
             handleBookingFinished(duration);
         }
     };
+    function handleDateChange(event) {
+        const today = new Date().toISOString().split('T')[0];
+        if (event.target.value < today) {
+            const notice = document.getElementById('notice-place');
+            notice.innerHTML = "You can't choose the past date.";
+            event.target.value = today;
+        } else {
+            const notice = document.getElementById('notice-place');
+            notice.innerHTML = "";
+            console.log(event.target.value);
+            localStorage.setItem('date', event.target.value);   
+        }
+    }
+
     return (
         <div className="bookingDialog">
             <div id="dialog" className="dialog hidden">
@@ -82,10 +99,7 @@ const BookingDialog = ({ isBookingVisible, handleBookingFinished }) => {
 
                                     <label htmlFor="date">Pick a Date</label>
                                     <div className="date-picker">
-                                        <span className="calendar-icon">📅</span>
-                                        <div className="date-wrapper">
-                                            <span className="date">20 Jan - 22 Jan</span>
-                                        </div>
+                                        <input id="time-place" type="datetime-local" onChange={handleDateChange} />
                                     </div>
                                     <div className="price-info">
                                         <p>

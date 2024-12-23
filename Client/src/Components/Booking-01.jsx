@@ -8,7 +8,7 @@ const Booking01 = ({ setBookingData }) => {
     useEffect(() => {
         console.log(type);
         if (type === 'hol') {
-            fetch('/hotel/getfilterhotel')
+            fetch('/hotel/getFilterhotel')
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
@@ -21,7 +21,7 @@ const Booking01 = ({ setBookingData }) => {
                 .catch((error) => console.error('Error:', error));
         }
         else if (type === 'res') {
-            fetch('/res/getFilterres')
+            fetch('/restaurant/getFilterrestaurant')
                 .then((response) => response.json())
                 .then((data) => {
                     for (let i = 0; i < data.length; i++) {

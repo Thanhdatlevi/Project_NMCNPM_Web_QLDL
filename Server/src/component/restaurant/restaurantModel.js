@@ -1,37 +1,6 @@
 const db = require('../../config/db');
 
 class RestaurantModel {
-
-
-
-    // Xóa nhà hàng theo các ID
-    static async deleteRes(provider_id, facility_id, specificFacility_id) {
-        try {
-            await db.query(`
-                DELETE FROM tables
-                WHERE restaurant_id = $1;
-            `, [specificFacility_id]);
-
-            await db.query(`
-                DELETE FROM facility_images
-                WHERE facility_id = $1;
-            `, [facility_id]);
-
-            await db.query(`
-                DELETE FROM restaurants
-                WHERE facility_id = $1;
-            `, [facility_id]);
-
-            await db.query(`
-                DELETE FROM facilities
-                WHERE facility_id = $1 AND provider_id = $2;
-            `, [facility_id, provider_id]);
-        } catch (error) {
-            console.error('Error deleting restaurant:', error);
-            throw error;
-        }
-    }
-
     // Lọc nhà hàng theo tiêu chí
     static async getFilterRes(rate, location, input) {
         try {
@@ -72,6 +41,7 @@ class RestaurantModel {
         try {
             const query = `
             SELECT 
+                f.facility_id as facility_id,
                 r.restaurant_id AS res_id,
                 f.facility_name AS res_name,
                 l.location_name AS location,
@@ -84,12 +54,13 @@ class RestaurantModel {
             JOIN facility_images f_i ON f.facility_id = f_i.facility_id
             WHERE f.provider_id = $1
             GROUP BY
-                r.restaurant_id, f.facility_name,
+                f.facility_id, r.restaurant_id, f.facility_name,
                 l.location_name, f.rating, f.deal;
         `;
             const res = await db.query(query, [providerId]);
             if (res.rows.length > 0) {
                 const restaurants = res.rows.map(row => ({
+                    facilityId: row.facility_id,
                     restaurantId: row.res_id,
                     restaurantName: row.res_name,
                     location: row.location,
@@ -176,7 +147,7 @@ class RestaurantModel {
                 tables_agg AS (
                     SELECT t.restaurant_id, array_agg(
                         JSON_BUILD_OBJECT( 
-                        'table_id', t.table_id, 'price', t.price, 'status', t.status, 'bookedDates', t.dates_booked
+                        'table_id', t.table_id, 'price', t.price, 'status', t.status
                         )) AS res_tables
                     FROM tables t
                     GROUP BY t.restaurant_id
@@ -249,7 +220,8 @@ class RestaurantModel {
                     f.specific_location AS res_specific_location,
                     COALESCE(fi.res_images, '{}') AS res_images, -- URL ảnh (nếu không có thì trả về mảng rỗng)
                     r.amenities AS res_amenities,
-                    r.average_price AS res_average_price
+                    r.average_price AS res_average_price,
+                    r.facility_id as facility_id
                 FROM restaurants r
                 JOIN facilities f ON r.facility_id = f.facility_id
                 JOIN locations l ON l.location_id = f.location_id
@@ -260,23 +232,24 @@ class RestaurantModel {
             if (res.rows.length > 0) {
                 const row = res.rows[0];
                 const restaurantDetails = {
-                    resName: row.res_name,
-                    resDescription: row.res_description,
-                    resLocation: row.location_name,
-                    resStatus: row.res_status,
-                    resRating: row.res_rating,
-                    resContact: row.res_contact,
-                    resDeal: row.res_deal,
-                    resSpecificLocation: row.res_specific_location,
-                    resImages: row.res_images,
-                    resAmenities: row.res_amenities,
-                    resAveragePrice: row.res_average_price,
+                    name: row.res_name,
+                    description: row.res_description,
+                    facilityId: row.facility_id,
+                    location: row.location_name,
+                    status: row.res_status,
+                    rating: row.res_rating,
+                    contact: row.res_contact,
+                    deal: row.res_deal,
+                    specificLocation: row.res_specific_location,
+                    images: row.res_images,
+                    amenities: row.res_amenities,
+                    averagePrice: row.res_average_price,
                 };
                 return restaurantDetails;
             }
             return null;
         } catch (error) {
-            console.log("Error getRestaurantById_tourist in restaurantModel");
+            console.log("Error getRestaurantById_tourist in restaurantModel: ", error.message);
             throw error;
         }
     }
@@ -410,7 +383,42 @@ class RestaurantModel {
         }
     }
 
-    static async
+    static async getRelatedRes(resID) {
+        try {
+            const query = `
+                SELECT
+                    r.restaurant_id AS id,
+                    f.facility_name AS name,
+                    f.description AS description,
+                    f.rating AS rating,
+                    f.contact AS contact,
+                    f.deal AS deal,
+                    array_agg(f_i.img_url) AS images,  -- Gom các URL ảnh vào một mảng
+                    l.location_name AS location
+                FROM restaurants r
+                JOIN facilities f ON r.facility_id = f.facility_id
+                JOIN facility_images f_i ON f.facility_id = f_i.facility_id
+                JOIN locations l ON l.location_id = f.location_id
+                JOIN restaurants r1 ON r1.restaurant_id=$1
+                JOIN facilities f1 ON r1.facility_id = f1.facility_id and l.location_id = f1.location_id
+                WHERE r.restaurant_id != r1.restaurant_id
+                GROUP BY
+                    r.restaurant_id,
+                    f.facility_name,
+                    f.description,
+                    f.rating,
+                    f.contact,
+                    f.deal,
+                    l.location_name
+                LIMIT 3
+            `;
+            const res = await db.query(query, [resID]);  // Truyền tham số resID vào câu truy vấn
+            return res.rows;  // Trả về kết quả chi tiết của nhà hàng
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    }
 }
 
 module.exports = RestaurantModel;

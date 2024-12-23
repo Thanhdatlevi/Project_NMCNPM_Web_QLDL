@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../Styles/ServicePage.css';
 import { Link, useParams } from 'react-router-dom';
-import Booking01 from './Booking-01';
+import FeedbackItem from './FeedbackItem';
 const ServicePage = () => {
 
     const { idService } = useParams();
@@ -11,7 +11,7 @@ const ServicePage = () => {
         const typeService = idService.charAt(0);
         let type;
         if (typeService === 'h') type = "hotel"
-        else if (typeService === 'r') type = "res"
+        else if (typeService === 'r') type = "restaurant"
         else type = "attraction"
         try {
             const response = await fetch(`/${type}/${idService}`);
@@ -19,7 +19,7 @@ const ServicePage = () => {
                 throw new Error("Failed to fetch data");
             }
             const detailData = await response.json();
-
+            console.log(detailData);
             setService(detailData);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -74,7 +74,7 @@ const ServicePage = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    rating, 
+                    rating,
                     feedback_text,
                     serviceId: idService, // Id của dịch vụ (có thể sử dụng idService từ useParams())
                 }),
@@ -111,18 +111,18 @@ const ServicePage = () => {
                     <div className="NameModel">
                         <div className="leftside">
                             <div className="Title">
-                                <h1>{service[0].name}</h1>
+                                <h1>{service.name}</h1>
                             </div>
                             <div className="location">
                                 <span className="location-icon">
                                     <i className='bx bx-map'></i>
-                                    <p>{service[0].location}</p>
+                                    <p>{service.location}</p>
                                 </span>
                             </div>
                             <div className="rating">
                                 <p>
-                                    <span className="rating-point">{service[0].rating}</span>
-                                    <strong className="Status">{service[0].deal}</strong>
+                                    <span className="rating-point">{service.rating}</span>
+                                    <strong className="Status">{service.deal}</strong>
                                     <span className="rating-total">8386 reviews</span>
                                 </p>
                             </div>
@@ -147,11 +147,11 @@ const ServicePage = () => {
                     </div>
                     <div className="Gallery">
                         <div className="main-pic">
-                            <img src={service[0].attractionimage || service[0].images[0]} alt="pic1" />
+                            <img src={service.attractionimage || service.images[0]} alt="pic1" />
                         </div>
                         <div className="sub-pic">
-                            <img className="pic2" src={service[0].attractionimage || service[0].images[0]} alt="pic2" />
-                            <img className="pic3" src={service[0].attractionimage || service[0].images[0]} alt="pic3" />
+                            <img className="pic2" src={service.attractionimage || service.images[0]} alt="pic2" />
+                            <img className="pic3" src={service.attractionimage || service.images[0]} alt="pic3" />
                         </div>
                     </div>
                     <section className='short-description'>
@@ -160,7 +160,7 @@ const ServicePage = () => {
                         </div>
                         <div className="description-content">
                             <p>
-                                {service[0].description}
+                                {service.description}
                             </p>
 
                         </div>
@@ -257,7 +257,9 @@ const ServicePage = () => {
                 </div>
 
                 <div className="userrating-reviews-Feedback">
-                    <div className="Feedback-items">
+                    <FeedbackItem facilityId={service.facilityId} />
+
+                    {/* <div className="Feedback-items">
                         <div className="feedback-avt">
                             <img src={'/Images/voucher_tour2.jpg'} alt="pic1" />
                         </div>
@@ -336,7 +338,8 @@ const ServicePage = () => {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+
                 </div>
             </div>
             <div id="related">

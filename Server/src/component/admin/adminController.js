@@ -78,7 +78,64 @@ class AdminController {
         }
     }
 
+    static async deleteFacility(req, res) {
+        try {
+            const { facilityId } = req.body;
+            if (!facilityId) {
+                return res.status(400).json({ message: "Thiếu facilityId." });
+            }
+            const result = await AdminService.deleteFacility(facilityId);
+            if (result.success) {
+                return res.status(200).json({ message: "Facility đã được xóa thành công." });
+            } else {
+                return res.status(404).json({ message: "Facility không tồn tại hoặc không thể xóa." });
+            }
 
+        } catch (error) {
+            console.error("Error in AdminController.deleteFacility:", error.message);
+            return res.status(500).json({ message: "Có lỗi xảy ra, vui lòng thử lại sau." });
+        }
+    }
+
+    static async addAttractions(req, res) {
+        try {
+            const { name, description, location, phone, openingHours, rating, img_url } = req.body;
+            const attractionRelated = await AdminService.addAttractions(name, description, location, phone, openingHours, rating, img_url);
+            if (!attractionRelated) {
+                return res.status(404).json({ message: 'Can\'t add attraction' });
+            }
+            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+        } catch (error) {
+            res.status(500).json({ message: 'Can\'t add attraction' });
+        }
+    }
+
+    static async updateAttractions(req, res) {
+        try {
+            const { name, description, location, phone, openingHours, rating, img_url } = req.body;
+            const { attractionID } = req.params;
+            const attractionRelated = await AdminService.updateAttractions(attractionID, name, description, location, phone, openingHours, rating, img_url);
+            if (!attractionRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            }
+            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
+        }
+    }
+
+    static async deleteAttractions(req, res) {
+        try {
+            const { attractionID } = req.params;
+            const attractionRelated = await AdminService.deleteAttractions(attractionID);
+            if (!attractionRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });  // Nếu không tìm thấy nhà hàng
+            }
+            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving attraction details' });
+        }
+    }
 }
 module.exports = AdminController;
 

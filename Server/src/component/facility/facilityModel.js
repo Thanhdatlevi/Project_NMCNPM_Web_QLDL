@@ -90,7 +90,6 @@ class FacilityModel {
 
     static async deleteFacility(facilityId) {
         try {
-            console.log(facilityId)
             const query = `DELETE FROM facilities WHERE facility_id = $1`;
             const result = await db.query(query, [facilityId]);
             if (result.rowCount > 0) {
@@ -104,6 +103,59 @@ class FacilityModel {
         }
     }
 
+    static async #insertFacility(providerId, facilityName, description, locationId, contact, specificLocation, client) {
+        try {
+            const query = `INSERT INTO Facilities (provider_id, facility_name, description, location_id, contact, specific_location) VALUES ($1, $2, $3, $4, $5, $6) RETURNING facility_id;`;
+            const values = [providerId, facilityName, description, locationId, contact, specificLocation];
+            const result = await client.query(query, values);
+            return result.rows[0]?.facility_id || null;
+        } catch (error) {
+            console.error("Error in facilityModel.#insertFacility:", error.message);
+            throw error;
+        }
+    }
+
+    static async #insertFacilityImages(facilityId, facilityImgs, client) {
+        try {
+            const query = `
+            INSERT INTO facility_images (facility_id, img_url) 
+            VALUES ${facilityImgs.map((_, index) => `($1, $${index + 2})`).join(', ')};
+        `;
+            const values = [facilityId, ...facilityImgs];
+            await client.query(query, values);
+        } catch (error) {
+            console.error("Error in facilityModel.#insertFacilityImages:", error.message);
+            throw error;
+        }
+    }
+
+    static async createFacility(providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs) {
+        const client = await db.beginTransaction();
+        try {
+            const facilityId = await FacilityModel.#insertFacility(
+                providerId,
+                facilityName,
+                description,
+                locationId,
+                contact,
+                specificLocation,
+                client
+            );
+            if (!facilityId) {
+                await db.rollbackTransaction(client);
+                return null;
+            }
+            if (facilityImgs.length > 0) {
+                await FacilityModel.#insertFacilityImages(facilityId, facilityImgs, client);
+            }
+            await db.commitTransaction(client);
+            return facilityId;
+        } catch (error) {
+            await db.rollbackTransaction(client);
+            console.error('Error in FacilityModel.createFacility:', error.message);
+            throw error;
+        }
+    }
 }
 
 module.exports = FacilityModel;

@@ -3,17 +3,6 @@ const RestaurantModel = require('./restaurantModel');
 
 class RestaurantController {
 
-    static async deleteRes(req, res) {
-        try {
-            const { provider_id, facility_id, specificFacility_id } = req.body;
-            await RestaurantModel.deleteRes(provider_id, facility_id, specificFacility_id);
-            res.status(200).json({ message: 'Delete successful' });
-        } catch (error) {
-            console.error('Error in deleteRes:', error);
-            res.status(500).json({ message: 'Error deleting restaurant' });
-        }
-    }
-
     static async getFilterRes(req, res) {
         try {
             const result = {
@@ -96,33 +85,19 @@ class RestaurantController {
         }
     }
 
-    static async getRestaurantById_provider(req, res) {
+    static async getRelatedRes(req, res) {
         try {
-            const { resId } = req.params;
-            const restaurantDetail = await RestaurantService.getRestaurantById_provider(resId);
-            if (!restaurantDetail) {
-                return res.status(404).json({ message: 'Restaurant not found' });
+            const { resID } = req.params;
+            const resRelated = await RestaurantModel.getRelatedRes(resID);
+            if (!resRelated) {
+                return res.status(404).json({ message: 'Attraction not found' });
             }
-            res.status(200).json(restaurantDetail);
+            res.json(resRelated);
         } catch (error) {
-            console.error('Error in getRestaurantById_provider:', error);
-            res.status(500).json({ message: 'Error retrieving restaurant details' });
+            res.status(500).json({ message: 'Error retrieving attraction details' });
         }
     }
 
-    static async getRestaurantByProviderId(req, res) {
-        try {
-            const { providerId } = req.params;
-            const restaurants = await RestaurantService.getRestaurantByProviderId(providerId);
-            if (!restaurants) {
-                return res.status(404).json({ message: 'No restaurants found for this provider' });
-            }
-            res.status(200).json(restaurants);
-        } catch (error) {
-            console.error('Error in getRestaurantByProviderId:', error);
-            res.status(500).json({ message: 'Internal server error' });
-        }
-    }
 }
 
 module.exports = RestaurantController;

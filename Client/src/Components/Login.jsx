@@ -46,6 +46,8 @@ const LoginPage = () => {
       
           handleAuthAndLogout();
     }, [location]);
+
+
     // Xử lý khi người dùng nhập dữ liệu
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -68,28 +70,16 @@ const LoginPage = () => {
                 body: JSON.stringify(formData),
             });
             const data = await response.json();
-            console.log('Đăng nhập thành công:', data);
 
-            const authResponse = await fetch('/authenticate', {
-                method: 'GET',
-                credentials: 'include',
-            });
-            console.log(authResponse)
-            if (!authResponse.ok) {
-                throw new Error('Lỗi xác thực. Vui lòng thử lại.');
-            }
-    
-            const authData = await authResponse.json();
-            console.log('Dữ liệu xác thực:', authData);
-            // Điều hướng dựa trên vai trò
-            if (authData.role === 'tourist') {
-                window.location.href = '/';
-            } else if (authData.role === 'admin') {
-                window.location.href = 'http://localhost:3002/home';
-            }else if (authData.role === 'provider') {
-                window.location.href = 'http://localhost:3003/home';
+            if (response.ok) {
+                setMessage(data.message || "Đăng nhập thành công!");
+                setMessageColor("#008000"); // Màu xanh cho thành công
+                // Điều hướng đến trang chính
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1500);
             } else {
-                throw new Error('Vai trò không hợp lệ.');
+                setMessage(data.message || "Tên đăng nhập hoặc mật khẩu không đúng.");
             }
         } catch (err) {
             console.error(err);

@@ -10,13 +10,13 @@
     justify-content: center;
 }
 .bookingDialog .blank0{
-    flex-basis: 25%;
+    flex-basis: 15%;
 }
 .bookingDialog .blank{
     flex-basis: 10%;
 }
 .bookingDialog .booking-container {
-    width: 500px;
+    width: 550px;
     height: auto;
     background-color: #ffffff;
     border-radius: 10px;
@@ -113,6 +113,7 @@
 }
 .bookingDialog .form-section{
     text-align: left;
+    margin-left: 20px;
 }
 .bookingDialog .booking01-details .form-section label {
     font-size: 16px;
@@ -162,13 +163,13 @@
     margin-bottom: 40px;
 }
   
-.bookingDialog .date-picker .date-wrapper {
-    flex: 1; /* Chiếm toàn bộ không gian còn lại */
-    display: flex;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    font-size: 10px;
-    color: #152C5B;
-    font-weight: 400;
+.bookingDialog .date-picker #time-place {
+    font-size: 17px;
+    border: #000 solid 2px;
+    border: none;          /* Loại bỏ khung mặc định */
+    border-bottom: 1px dashed #000;
+    outline: none;
+
 }
   
 .bookingDialog .date-picker .calendar-icon {
@@ -261,7 +262,7 @@
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 550px;
+    width: 600px;
     height: fit-content;
     text-align: center;
     margin-top: -50px;

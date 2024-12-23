@@ -122,27 +122,36 @@ class AttractionModel {
                     a.rating AS rating,
                     a.contact AS contact,
                     a.opening_hours AS opening_hours,
-                    a.img_url AS attractionimage,
+                    json_agg(a.img_url) AS attraction_images,
                     a.location_id as location_id,
                     l.location_name AS location,
                     a.detailed_location as detailed_location
                 FROM attractions a
                 JOIN locations l ON l.location_id = a.location_id
                 WHERE a.attraction_ID = $1
+                GROUP BY
+                    a.attraction_name,
+                    a.description,
+                    a.rating,
+                    a.contact,
+                    a.opening_hours,
+                    a.location_id,
+                    l.location_name,
+                    a.detailed_location;
             `;
             const res = await db.query(query, [attractionId]);
             if (res.rows.length > 0) {
                 const row = res.rows[0];
                 const attraction = {
-                    attractionName: row.name,
-                    attractionDescription: row.description,
-                    attractionRating: row.rating,
-                    attractionContact: row.contact,
-                    attractionOpeningHours: row.opening_hours,
-                    attractionImageUrl: row.attraction_image,
-                    attractionLocationId: row.location_id,
-                    attractionLocation: row.location,
-                    attractionDetailedLocation: row.detailed_location,
+                    name: row.name,
+                    description: row.description,
+                    rating: row.rating,
+                    contact: row.contact,
+                    openingHours: row.opening_hours,
+                    images: row.attraction_images,
+                    locationId: row.location_id,
+                    location: row.location,
+                    detailedLocation: row.detailed_location,
                 };
                 return attraction;
             }
@@ -246,7 +255,7 @@ class AttractionModel {
         }
     }
 
-    static async addAttractions(name, description, location, phone, openingHours, rating,img_url) {
+    static async addAttractions(name, description, location, phone, openingHours, rating, img_url) {
         try {
             const query = `
                 INSERT INTO attractions (attraction_id, attraction_name, description, location_id, contact, opening_hours, rating, img_url, detailed_location)
@@ -267,7 +276,7 @@ class AttractionModel {
         }
     }
 
-    static async updateAttractions(attractionID, name, description, location, phone, openingHours, rating,img_url) {
+    static async updateAttractions(attractionID, name, description, location, phone, openingHours, rating, img_url) {
         try {
             const query = `
                 UPDATE attractions
@@ -285,7 +294,7 @@ class AttractionModel {
                 WHERE attraction_id = $8
                 RETURNING *;
             `;
-            const values = [name, description, location, phone, openingHours, rating, img_url,attractionID];
+            const values = [name, description, location, phone, openingHours, rating, img_url, attractionID];
             const res = await db.query(query, values);
             return res.rows[0];
         } catch (error) {
@@ -326,8 +335,29 @@ class AttractionModel {
             throw new Error('Error fetching tours by location: ' + err.message);
         }
     }
-
-
+    static async getRelatedAttraction(attractionID) {
+        try {
+            const query = `
+                    SELECT
+                    a.attraction_id AS id,
+                    a.attraction_name AS name,
+                    a.description AS description,
+                    a.rating AS rating,
+                    a.img_url AS images,
+                    l.location_name AS location
+                FROM attractions a
+                JOIN locations l ON l.location_id = a.location_id
+                JOIN attractions re ON re.attraction_id = $1 and re.location_id = l.location_id
+                WHERE a.attraction_id != re.attraction_id
+                LIMIT 3
+            `;
+            const res = await db.query(query, [attractionID]);
+            return res.rows;
+        } catch (error) {
+            console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    }
 }
 
 module.exports = AttractionModel
