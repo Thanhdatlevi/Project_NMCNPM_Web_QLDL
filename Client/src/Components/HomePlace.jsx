@@ -221,6 +221,8 @@ function HomePlace() {
                 if (element.selectedIndex !== 0) {
                     let quantity = "";
                     let date = "";
+                    let price = "";
+                    price= localStorage.getItem('price');
                     if (element.parentNode.querySelector('p')) {
                         quantity = element.parentNode.querySelector('p').innerHTML.split(' ')[0];
                         date = element.parentNode.querySelector('p').innerHTML.split(' ')[3];
@@ -236,7 +238,10 @@ function HomePlace() {
                         ID: element.value,
                         quantity: quantity,
                         date: date,
+                        price: price,
+                        
                     };
+                    console.log(selections);
                     count_selected++;
                 }
             });

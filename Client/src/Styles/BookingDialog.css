@@ -16,7 +16,7 @@
     flex-basis: 10%;
 }
 .bookingDialog .booking-container {
-    width: 600px;
+    width: 550px;
     height: auto;
     background-color: #ffffff;
     border-radius: 10px;
@@ -262,7 +262,7 @@
     background: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 650px;
+    width: 600px;
     height: fit-content;
     text-align: center;
     margin-top: -50px;

@@ -44,6 +44,7 @@ const BookingDialog = ({isBookingVisible, handleBookingFinished }) => {
         setDuration(duration + 1);
     };
     const handleBooking = () => {
+        localStorage.setItem('price',fac.average_price);
         const booking = document.getElementById('dialog');
         booking.classList.toggle('hidden');
         if (handleBookingFinished) {
@@ -98,7 +99,7 @@ const BookingDialog = ({isBookingVisible, handleBookingFinished }) => {
 
                                     <label htmlFor="date">Pick a Date</label>
                                     <div className="date-picker">
-                                        <input id="time-place" type="datetime-local" onChange={handleDateChange} />
+                                        <input id="time-place" type="date" onChange={handleDateChange} />
                                     </div>
                                     <div className="price-info">
                                         <p>

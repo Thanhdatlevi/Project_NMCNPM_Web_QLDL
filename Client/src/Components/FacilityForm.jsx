@@ -96,33 +96,33 @@ const FacilityForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const newFacilityData = {
-            facilityData:{
+        const updateData = {
+            facilityData: {
                 facilityName: facilityData.name,
                 description: facilityData.description,
-               
                 contact: facilityData.contact,
                 status: facilityData.status,
                 specificLocation: facilityData.specificLocation,
             },
-            restaurantData:{
+            restaurantData: {
                 amenities: facilityData.amenities,
-                averagePrice: facilityData.averagePrice,
             },
-  
+
         };
-        console.log(newFacilityData);
         //Send data to server
-        fetch(`http://localhost:3000/provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
+        fetch(`provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(newFacilityData),
+            body: JSON.stringify({ updateData }),
         })
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Failed to update data");
+                    return response.json().then((errorData) => {
+                        console.log(errorData.message); // In thông điệp lỗi từ server
+                        throw new Error("Failed to update data");
+                    });
                 }
                 return response.json();
             })
