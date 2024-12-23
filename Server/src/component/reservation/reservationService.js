@@ -1,12 +1,8 @@
 const ReservationModel = require('./reservationModel');
-const AccountModel = require('../account/accountModel');
+
 class ReservationService {
-    static async createReservation(accountId, status, detailReservations) {
+    static async createReservation(touristId, status, detailReservations) {
         try {
-            const touristId = await AccountModel.getTouristId(accountId);
-            if (!touristId) {
-                return { success: false, message: "Tài khoản không tồn tại." };
-            }
             const reservationDate = new Date().toISOString();
             const result = await ReservationModel.createReservation(touristId, reservationDate, status, detailReservations);
             if (result) {
@@ -19,6 +15,20 @@ class ReservationService {
             throw error;
         }
     }
+
+    static async getReservationHistory(touristId) {
+        try {
+            const result = await ReservationModel.getReservationHistory(touristId);
+            if (result) {
+                return { success: true, data: result };
+            }
+            return { succes: false };
+        } catch (error) {
+            console.error("Error in ReservationService.createReservation:", error.message);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = ReservationService;

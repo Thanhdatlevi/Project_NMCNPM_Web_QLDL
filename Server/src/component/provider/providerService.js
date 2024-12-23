@@ -1,20 +1,22 @@
 const db = require('../../config/db');
 const ProviderModel = require('./providerModel');
-const FacilityModel = require('../facility/facilityModel');
-const HotelModel = require('../hol/hotelModel');
-const RestaurantModel = require('../restaurant/restaurantModel');
-const AccountModel = require('../account/accountModel')
+
+const FacilityService = require('../facility/facilityService');
+const HotelService = require('../hol/hotelService');
+const AccountService = require('../account/accountService');
+const RestaurantService = require('../restaurant/restaurantService');
+
 class ProviderService {
 
     static async updateHotel(hotelId, accountId, updateData) {
         const client = await db.beginTransaction();
         try {
             const [facilityId, providerId] = await Promise.all([
-                HotelModel.getFacilityIdByHotelId(hotelId),
-                AccountModel.getProviderId(accountId)
+                HotelService.getFacilityIdByHotelId(hotelId),
+                AccountService.getProviderId(accountId)
             ]);
 
-            const facility = await FacilityModel.getFacilityById(facilityId);
+            const facility = await FacilityService.getFacilityById(facilityId);
             if (providerId !== facility.providerId) {
                 await db.rollbackTransaction(client);
                 return { success: false, message: "Bạn không có quyền chỉnh sửa dữ liệu khách sạn này!" }
@@ -34,7 +36,7 @@ class ProviderService {
                 };
 
                 updatePromises.push(
-                    FacilityModel.updateFacility(
+                    FacilityService.updateFacility(
                         facilityId,
                         updatedFacilityData.facilityName,
                         updatedFacilityData.description,
@@ -52,7 +54,7 @@ class ProviderService {
                 };
 
                 updatePromises.push(
-                    HotelModel.updateHotel(
+                    HotelService.updateHotel(
                         hotelId,
                         updatedHotelData.amenities,
                         updatedHotelData.averagePrice
@@ -72,10 +74,10 @@ class ProviderService {
         const client = await db.beginTransaction();
         try {
             const [facilityId, providerId] = await Promise.all([
-                RestaurantModel.getFacilityIdByRestaurantId(restaurantId),
-                AccountModel.getProviderId(accountId)
+                RestaurantService.getFacilityIdByRestaurantId(restaurantId),
+                AccountService.getProviderId(accountId)
             ]);
-            const facility = await FacilityModel.getFacilityById(facilityId);
+            const facility = await FacilityService.getFacilityById(facilityId);
             if (providerId !== facility.providerId) {
                 await db.rollbackTransaction(client);
                 return { success: false, message: "Bạn không có quyền chỉnh sửa dữ liệu nhà hàng này!" }
@@ -93,7 +95,7 @@ class ProviderService {
                 };
 
                 updatePromises.push(
-                    FacilityModel.updateFacility(
+                    FacilityService.updateFacility(
                         facilityId,
                         updatedFacilityData.facilityName,
                         updatedFacilityData.description,
@@ -110,7 +112,7 @@ class ProviderService {
                     averagePrice: restaurantData?.averagePrice || undefined,
                 };
                 updatePromises.push(
-                    RestaurantModel.updateRestaurant(
+                    RestaurantService.updateRestaurant(
                         restaurantId,
                         updatedRestaurantData.amenities,
                         updatedRestaurantData.averagePrice
@@ -128,7 +130,7 @@ class ProviderService {
 
     static async requestHotel(accountId, requestData) {
         try {
-            const providerId = await AccountModel.getProviderId(accountId);
+            const providerId = await AccountService.getProviderId(accountId);
             await ProviderModel.addRequestHotel(
                 providerId,
                 requestData.facilityName,
@@ -136,7 +138,6 @@ class ProviderService {
                 requestData.specificLocation,
                 requestData.contact,
                 requestData.imageUrls,
-                requestData.roomsNum,
                 requestData.locationId
             );
             return { success: true, message: "Yêu cầu đã được gửi đến admin." };
@@ -149,7 +150,7 @@ class ProviderService {
     static async requestRestaurant(accountId, requestData) {
         try {
             // Lấy providerId từ accountId
-            const providerId = await AccountModel.getProviderId(accountId);
+            const providerId = await AccountService.getProviderId(accountId);
 
             // Thêm yêu cầu vào bảng restaurants
             await ProviderModel.addRequestRestaurant(
@@ -159,7 +160,6 @@ class ProviderService {
                 requestData.specificLocation,
                 requestData.contact,
                 requestData.imageUrls,
-                requestData.tablesNum,
                 requestData.locationId
             );
 
@@ -171,8 +171,71 @@ class ProviderService {
         }
     }
 
+    static async deleteFacility(accountId, facilityId) {
+        try {
+            const [facility, provider] = await Promise.all([
+                FacilityService.getFacilityById(facilityId),
+                AccountService.getProviderId(accountId)
+            ]);
+            if (!facility) {
+                return { success: false, message: "Facility không tồn tại." };
+            }
+            if (provider !== facility.provider_id) {
+                return { success: false, message: "Bạn không có quyền xóa facility này." };
+            }
+            const deletedFacility = await FacilityService.deleteFacility(facilityId);
+            if (!deletedFacility) {
+                return { success: false, message: "Facility không tồn tại." };
+            }
+            return { success: true, message: "Facility đã được xóa thành công." };
 
+        } catch (error) {
+            console.error("Error in ProviderService.deleteFacility:", error.message);
+            throw error;
+        }
+    }
 
+    static async getHotelsByProviderId(accountId) {
+        try {
+            const providerId = await AccountService.getProviderId(accountId);
+            const hotels = await HotelService.getHotelsByProviderId(providerId);
+            return hotels;
+        } catch (error) {
+            console.log("Error in getHotelsByProviderId in hotelService:", error);
+            throw new Error("Unable to fetch hotels by provider.");
+        }
+    }
+
+    static async getRestaurantByProviderId(accountId) {
+        try {
+            const providerId = await AccountService.getProviderId(accountId);
+            const restaurants = await RestaurantService.getRestaurantByProviderId(providerId);
+            return restaurants;
+        } catch (error) {
+            console.log("Error in ProviderService.getRestaurantByProviderId:", error);
+            throw new Error("Unable to fetch restaurants by provider.");
+        }
+    }
+
+    static async getHotelById_provider(holId) {
+        try {
+            const hotel = await HotelService.getHotelById_provider(holId);
+            return hotel;
+        } catch (error) {
+            console.error("Error in ProviderService.getHotelById_provider: ", error.message);
+            throw new Error("Unable to retrieve restaurant information");
+        }
+    }
+
+    static async getRestaurantById_provider(resId) {
+        try {
+            const restaurant = await RestaurantService.getRestaurantById_provider(resId);
+            return restaurant;
+        } catch (error) {
+            console.error("Error in ProviderService.getRestaurantById_tourist: ", error.message);
+            throw new Error("Unable to retrieve restaurant information");
+        }
+    }
 }
 
 module.exports = ProviderService

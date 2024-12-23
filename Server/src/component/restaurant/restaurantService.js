@@ -77,14 +77,49 @@ class RestaurantService {
         }
     }
 
-    static async getRestaurantByProviderId(accountId) {
+    static async getRestaurantByProviderId(providerId) {
         try {
-            const providerId = await AccountModel.getProviderId(accountId);
             const restaurants = await RestaurantModel.getRestaurantByProviderId(providerId);
             return restaurants;
         } catch (error) {
             console.log("Error in getRestaurantByProviderId in restaurantService:", error);
             throw new Error("Unable to fetch restaurants by provider.");
+        }
+    }
+
+    /**
+    * Lấy Facility ID từ Restaurant ID.
+    * @param {number} restaurantId - ID của nhà hàng.
+    * @returns {number|null} - Facility ID hoặc null nếu không tìm thấy.
+    */
+    static async getFacilityIdByRestaurantId(restaurantId) {
+        if (!restaurantId) {
+            throw new Error('Restaurant ID là bắt buộc.');
+        }
+        try {
+            return await RestaurantModel.getFacilityIdByRestaurantId(restaurantId);
+        } catch (error) {
+            console.error('Error in RestaurantService.getFacilityIdByRestaurantId:', error.message);
+            throw new Error('Đã xảy ra lỗi khi lấy Facility ID.');
+        }
+    }
+
+    /**
+     * Cập nhật thông tin nhà hàng.
+     * @param {number} restaurantId - ID của nhà hàng.
+     * @param {string} amenities - Tiện nghi mới của nhà hàng.
+     * @param {number} averagePrice - Giá trung bình mới của nhà hàng.
+     * @returns {boolean} - Trạng thái cập nhật (true: thành công, false: thất bại).
+     */
+    static async updateRestaurant(restaurantId, amenities, averagePrice) {
+        if (!restaurantId) {
+            throw new Error('Restaurant ID là bắt buộc.');
+        }
+        try {
+            return await RestaurantModel.updateRestaurant(restaurantId, amenities, averagePrice);
+        } catch (error) {
+            console.error('Error in RestaurantService.updateRestaurant:', error.message);
+            throw new Error('Đã xảy ra lỗi khi cập nhật nhà hàng.');
         }
     }
 }

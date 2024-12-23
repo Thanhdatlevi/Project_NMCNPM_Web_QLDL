@@ -1,7 +1,6 @@
 const HotelModel = require('./hotelModel');
 const HotelService = require('./hotelService');
 class HotelController {
-
     static async get_3_PopularHotels(req, res) {
         try {
             const popularHotels = await HotelService.get_3_PopularHotels();
@@ -54,20 +53,6 @@ class HotelController {
         }
     }
 
-    static async getHotelById_provider(req, res) {
-        try {
-            const { holId } = req.params;
-            const hotelDetail = await HotelService.getHotelById_provider(holId);
-            if (!hotelDetail) {
-                return res.status(404).json({ message: 'Hotel not found for provider' });
-            }
-            res.status(200).json(hotelDetail);
-        } catch (error) {
-            console.error('Error in getHotelById_provider:', error.message);
-            res.status(500).json({ message: 'Failed to retrieve hotel details for provider' });
-        }
-    }
-
     static async getHotelsByLocationId(req, res) {
         try {
             const { locationId } = req.params;
@@ -82,19 +67,7 @@ class HotelController {
         }
     }
 
-    static async getHotelsByProviderId(req, res) {
-        try {
-            const { accountId } = res.locals.account;
-            const hotels = await HotelService.getHotelsByProviderId(accountId);
-            if (!hotels || hotels.length === 0) {
-                return res.status(404).json({ message: 'No hotels found for this provider' });
-            }
-            res.status(200).json(hotels);
-        } catch (error) {
-            console.error('Error retrieving hotels by provider:', error.message);
-            res.status(500).json({ message: 'Failed to retrieve hotels by provider' });
-        }
-    }
+
 
     static async getFilterHotel(req, res) {
         try {

@@ -253,7 +253,6 @@ class HotelModel {
         }
     }
 
-
     static async getFilterHotel(rate, location, input) {
         try {
             // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
@@ -322,6 +321,7 @@ class HotelModel {
             throw error;
         }
     }
+
     static async getRelatedHotel(hotelID) {
         try {
             const query = `
@@ -392,6 +392,18 @@ class HotelModel {
             throw error;
         }
     }
+
+    static async insertHotel(facilityId) {
+        try {
+            const hotelQuery = `INSERT INTO hotels (facility_id) VALUES ($1);`;
+            await db.query(hotelQuery, [facilityId]);
+        } catch (error) {
+            console.error("Error in HotelModel.insertHotel:", error.message);
+            throw error;
+        }
+    }
+
+
 }
 
 
