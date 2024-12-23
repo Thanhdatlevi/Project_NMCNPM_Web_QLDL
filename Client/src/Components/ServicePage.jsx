@@ -74,9 +74,9 @@ const ServicePage = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    rating,
-                    feedback_text,
-                    serviceId: idService, // Id của dịch vụ (có thể sử dụng idService từ useParams())
+                    rate: rating,
+                    details: feedback_text,
+                    facility_id: service.facilityId, // Id của dịch vụ (có thể sử dụng idService từ useParams())
                 }),
             });
 

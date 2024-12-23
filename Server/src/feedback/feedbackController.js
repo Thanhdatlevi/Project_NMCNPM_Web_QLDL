@@ -204,6 +204,30 @@ class FeedbackController {
       return res.status(500).json({ message: "Có lỗi xảy ra. Vui lòng thử lại sau." });
     }
   }
+
+  static async submitFeedback(req, res) {
+    const { rate, details, facility_id } = req.body;
+
+    // Kiểm tra nếu có dữ liệu thiếu
+    if (!tourist_id || !details || !rate || !facility_id) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    try {
+      // Lưu feedback vào database
+      const newFeedback = await FeedbackModel.submitFeedback(rate, details, facility_id);
+
+      // Trả về feedback mới đã được lưu
+      res.status(201).json({
+        message: 'Feedback submitted successfully',
+        feedback: newFeedback,
+      });
+    } catch (error) {
+      console.error('Error saving feedback:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
 }
 
 module.exports = FeedbackController;
