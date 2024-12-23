@@ -99,7 +99,7 @@ const BookingDialog = ({isBookingVisible, handleBookingFinished }) => {
 
                                     <label htmlFor="date">Pick a Date</label>
                                     <div className="date-picker">
-                                        <input id="time-place" type="date" onChange={handleDateChange} />
+                                        <input id="time-place" type="datetime-local" onChange={handleDateChange} />
                                     </div>
                                     <div className="price-info">
                                         <p>
