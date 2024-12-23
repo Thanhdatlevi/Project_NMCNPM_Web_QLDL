@@ -10,6 +10,7 @@ router.get('/getAllocationsNum', AdminController.getAllocationsNum);
 router.get('/getFacilitiesNum', AdminController.getFacilitiesNum);
 router.get('/getUsersNum', AdminController.getUsersNum);
 router.get('/getPublicProfile', AccountController.getPublicProfile);
+router.post('/updateProfile', AccountController.updateProfile);
 
 router.post('/addAttractions', AttractionController.addAttractions)
 router.post('/updateAttractions/:attractionID', AttractionController.updateAttractions)

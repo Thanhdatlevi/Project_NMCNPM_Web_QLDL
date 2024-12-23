@@ -113,10 +113,7 @@ const Content = () => {
                 Facilities Management
               </div>
               <div className ="blank">
-              </div>
-              <div className="list-select-content" tabIndex="0" >
-                <i class='bx bx-cog'></i>
-                Setting</div>
+              </div> 
               <div className="list-select-content" tabIndex="0" onClick={handleLogout}>
                 <i class='bx bx-exit' ></i>
                 Logout</div>

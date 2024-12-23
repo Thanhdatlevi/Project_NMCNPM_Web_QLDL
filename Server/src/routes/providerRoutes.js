@@ -12,7 +12,8 @@ router.patch('/api/updateRestaurant/:restaurantId', ProviderController.updateRes
 
 router.post('/api/requestHotel', ProviderController.requestHotel);
 router.post('/api/requestRestaurant', ProviderController.requestRestaurant);
-router.post('/getPublicProfile', AccountController.getPublicProfile);
+router.get('/getPublicProfile', AccountController.getPublicProfile);
+router.post('/updateProfile', AccountController.updateProfile);
 
 router.delete('/deleteFacility', FacilityController.deleteFacility);
 

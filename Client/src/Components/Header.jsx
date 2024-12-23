@@ -76,9 +76,9 @@ const Header = () => {
         <header class="header-container">
         <nav id="nav">
             <div class="logo-container">
-                <a href="/home" class="logo-link">
-                    <img src="/Images/logoITISE.png" class="logo-image" alt="logITISE"/>
-                </a>
+            <Link to="/home" className="logo-link">
+                <img src="/Images/logoITISE.png" className="logo-image" alt="logITISE"/>
+            </Link>
             </div>
 
             <button id="menu-toggle" class="menu-button" aria-label="Toggle Menu">
@@ -86,12 +86,9 @@ const Header = () => {
             </button>
 
             <ul class="nav-list">
-                <li><a href="/home" class="nav-item">Home</a></li>
-                <li><a href="" class="nav-item">Địa điểm du lịch</a></li>
-                <li><a href="/HomePlace" class="nav-item">Tạo lịch trình</a></li>
-                <li><a href="/searchService" class="nav-item">Cơ sở dịch vụ</a></li>
-                <li><a href="./assets/html/profile.html" class="nav-item">Giới thiệu</a></li>
-                <li><a href="#!" class="nav-item">Liên lạc</a></li>
+                <Link to="/home" className="nav-item">Home</Link>
+                {user && (<Link to="/HomePlace" className="nav-item">Tạo lịch trình</Link>)}
+                <Link to="/searchService" className="nav-item">Cơ sở dịch vụ</Link>
             </ul>
 
             <div class="nav-button-list">

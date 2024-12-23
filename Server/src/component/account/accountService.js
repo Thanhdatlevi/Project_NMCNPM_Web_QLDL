@@ -11,6 +11,16 @@ class AccountService {
             throw error;
         }
     }
+    
+    static async updateProfile(accountId, userFullname, userBirthday, userContact, userAddress) {
+        try {
+            const userProfile = await AccountModel.updateProfile(accountId, userFullname, userBirthday, userContact, userAddress);
+            return userProfile;
+        } catch (error) {
+            console.error("Error in ProviderService.getPublicProfile:", error.message);
+            throw error;
+        }
+    }
 }
 
 module.exports = AccountService;

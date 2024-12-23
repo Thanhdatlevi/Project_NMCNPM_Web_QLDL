@@ -1,0 +1,17 @@
+.user-card-content{
+    display: grid;
+    grid-template-columns:1.5fr 2.5fr 1.5fr 1.5fr 2.5fr 1fr 0.5fr;
+    padding: 10px;
+}
+
+.user-card-content .user-card-action{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-card-content img{
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+}

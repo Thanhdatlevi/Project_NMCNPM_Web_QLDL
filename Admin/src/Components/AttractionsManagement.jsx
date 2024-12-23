@@ -30,7 +30,7 @@ const AttractionsManagement = () => {
   }, []);
 
   const handleDelete = (attraction_id) => {
-    fetch(`/attraction/deleteAttractions/${attraction_id}`, {
+    fetch(`/admin/deleteAttractions/${attraction_id}`, {
       method: 'POST'
     })
       .then(() => setAttractions(attractions.filter(attraction => attraction.attraction_id !== attraction_id)))
@@ -59,7 +59,7 @@ const AttractionsManagement = () => {
 
   const handleSubmit = () => {
     const method = 'POST';
-    const url = editingAttraction ? `/attraction/updateAttractions/${editingAttraction}` : '/attraction/addAttractions';
+    const url = editingAttraction ? `/admin/updateAttractions/${editingAttraction}` : '/admin/addAttractions';
 
     fetch(url, {
       method,

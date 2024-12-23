@@ -97,6 +97,25 @@ class AccountModel {
         }
     }
 
+    static async updateProfile(accountId, userFullname, userBirthday, userContact, userAddress) {
+        try {
+            const query = `
+            UPDATE users
+            SET user_fullname=$2, user_birthday=$3,user_contact=$4, user_address =$5
+            WHERE account_id = $1
+            RETURNING *
+            `;
+            const result = await db.query(query, [accountId, userFullname, userBirthday, userContact, userAddress]);
+            if (result.rowCount > 0) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error("Error in accountModel.getPublicProfile:", error.message);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = AccountModel;
