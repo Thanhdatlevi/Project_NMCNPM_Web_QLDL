@@ -17,7 +17,7 @@ const FacilitiesManagement = () => {
         .catch(err => console.error(err));
   
       // Fetch restaurants
-      fetch('/restaurant/getFilterres')
+      fetch('/restaurant/getFilterrestaurant')
         .then(res => res.json())
         .then(data => setRestaurants(data))
         .catch(err => console.error(err));
