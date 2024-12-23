@@ -1,5 +1,5 @@
 const RestaurantModel = require('./restaurantModel');
-const AccountModel = require(`../account/accountModel`);
+const FacilityService = require('../facility/facilityService');
 
 class RestaurantService {
 
@@ -122,6 +122,26 @@ class RestaurantService {
             throw new Error('Đã xảy ra lỗi khi cập nhật nhà hàng.');
         }
     }
+
+    static async createHotel(providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs) {
+        try {
+            const facilityId = await FacilityService.createFacility
+                (providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs);
+
+            if (!facilityId) {
+                return { success: false, message: "Failed to create facility. Facility ID is null." }
+            }
+            const restaurantId = await RestaurantModel.insertRestaurant(facilityId);
+            if (!restaurantId) {
+                return { success: false, message: "Failed to insert hotel. Hotel ID is null." }
+            }
+            return { success: true, facilityId, restaurantId };
+        } catch (error) {
+            console.error("Error in HotelService.createHotel: ", error.message);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = RestaurantService;

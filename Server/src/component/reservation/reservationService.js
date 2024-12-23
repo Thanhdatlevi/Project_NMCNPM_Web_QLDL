@@ -1,6 +1,7 @@
 const ReservationModel = require('./reservationModel');
 
 class ReservationService {
+
     static async createReservation(touristId, status, detailReservations) {
         try {
             const reservationDate = new Date().toISOString();
@@ -28,6 +29,8 @@ class ReservationService {
             throw error;
         }
     }
+
+
 
 }
 

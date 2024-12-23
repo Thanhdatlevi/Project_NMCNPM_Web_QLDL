@@ -361,42 +361,11 @@ class HotelModel {
         }
     }
 
-    static async updateHotelWithFacility(hotelId, updateData) {
-        const client = await db.beginTransaction();
-        try {
-            const { facilityData, hotelData } = updateData;
-            if (facilityData) {
-                await FacilityModel.updateFacility(
-                    client,
-                    hotelId,
-                    facilityData.facilityName,
-                    facilityData.description,
-                    facilityData.locationId,
-                    facilityData.contact,
-                    facilityData.status,
-                    facilityData.specificLocation
-                );
-            }
-            if (hotelData) {
-                await HotelModel.updateHotel(
-                    client,
-                    hotelId,
-                    hotelData.amenities,
-                    hotelData.averagePrice
-                );
-            }
-            await db.commitTransaction(client);
-            return true;
-        } catch (error) {
-            await db.rollbackTransaction(client);
-            throw error;
-        }
-    }
-
     static async insertHotel(facilityId) {
         try {
-            const hotelQuery = `INSERT INTO hotels (facility_id) VALUES ($1);`;
-            await db.query(hotelQuery, [facilityId]);
+            const hotelQuery = `INSERT INTO hotels (facility_id) VALUES ($1) RETURNING hotel_id;`;
+            const result = await db.query(hotelQuery, [facilityId]);
+            return result.rows[0]?.hotel_id || null;
         } catch (error) {
             console.error("Error in HotelModel.insertHotel:", error.message);
             throw error;

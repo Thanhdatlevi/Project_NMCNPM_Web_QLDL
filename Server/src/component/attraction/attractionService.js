@@ -22,9 +22,9 @@ class AttractionService {
         }
     }
 
-    static async addAttractions(name, description, location, phone, openingHours, rating,img_url) {
+    static async addAttractions(name, description, location, phone, openingHours, rating, img_url) {
         try {
-            const attractions = await AttractionModel.addAttractions(name, description, location, phone, openingHours, rating,img_url);
+            const attractions = await AttractionModel.addAttractions(name, description, location, phone, openingHours, rating, img_url);
             return attractions;
 
         } catch (error) {
@@ -32,13 +32,13 @@ class AttractionService {
             throw error;
         }
     }
-    static async updateAttractions(attractionID, name, description, location, phone, openingHours, rating,img_url) {
+    static async updateAttractions(attractionID, name, description, location, phone, openingHours, rating, img_url) {
         try {
-            const attractions = await AttractionModel.updateAttractions(attractionID, name, description, location, phone, openingHours, rating,img_url);
+            const attractions = await AttractionModel.updateAttractions(attractionID, name, description, location, phone, openingHours, rating, img_url);
             return attractions;
 
         } catch (error) {
-            console.error("Error in add attraction in AttractionService: ", error);
+            console.error("Error in AttractionService.updateAttractions: ", error);
             throw error;
         }
     }
@@ -48,7 +48,7 @@ class AttractionService {
             return attractions;
 
         } catch (error) {
-            console.error("Error in add attraction in AttractionService: ", error);
+            console.error("Error in AttractionService.deleteAttractions: ", error);
             throw error;
         }
     }

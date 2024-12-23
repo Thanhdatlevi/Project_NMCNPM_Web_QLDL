@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const FeedbackController = require('../feedback/feedbackController')
+const FeedbackController = require('../component/feedback/feedbackController')
 
 // // POST /feedback: Nhận feedback từ frontend và gọi controller xử lý
 // router.post('/', feedbackController.submitFeedback);

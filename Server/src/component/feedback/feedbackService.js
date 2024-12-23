@@ -14,6 +14,18 @@ class FeedbackService {
             throw error;
         }
     }
+    static async submitFeedBack(touristId, facilityId, rate, detail) {
+        try {
+            const isInserted = await FeedbackModel.submitFeedBack(touristId, facilityId, rate, detail);
+            if (!isInserted) {
+                return { success: false, message: "Failed to submit feedback." };
+            }
+            return { success: true, message: "Feedback submitted successfully." };
+        } catch (error) {
+            console.error("Error in FeedbackService.submitFeedBack:", error.message);
+            throw error;
+        }
+    }
 }
 
 module.exports = FeedbackService;

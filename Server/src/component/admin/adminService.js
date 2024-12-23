@@ -76,7 +76,7 @@ class AdminService {
             return attractions;
 
         } catch (error) {
-            console.error("Error in add attraction in AttractionService: ", error);
+            console.error("Error in add AdminService.addAttractions: ", error);
             throw error;
         }
     }
@@ -86,7 +86,7 @@ class AdminService {
             return attractions;
 
         } catch (error) {
-            console.error("Error in add attraction in AttractionService: ", error);
+            console.error("Error in add AdminService.updateAttractions: ", error);
             throw error;
         }
     }
@@ -96,7 +96,27 @@ class AdminService {
             return attractions;
 
         } catch (error) {
-            console.error("Error in add attraction in AttractionService: ", error);
+            console.error("Error in AdminService.deleteAttractions: ", error);
+            throw error;
+        }
+    }
+
+    static async getHotelRequests() {
+        try {
+            const hotelRequests = await AdminModel.getHotelRequests();
+            return hotelRequests;
+        } catch (error) {
+            console.error('Error in AdminService.getHotelRequests:', error.message);
+            throw error;
+        }
+    }
+
+    static async getRestaurantRequests() {
+        try {
+            const restaurantRequests = await AdminModel.getRestaurantRequests();
+            return restaurantRequests;
+        } catch (error) {
+            console.error('Error in AdminService.getRestaurantRequests:', error.message);
             throw error;
         }
     }

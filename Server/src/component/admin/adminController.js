@@ -136,6 +136,32 @@ class AdminController {
             res.status(500).json({ message: 'Error retrieving attraction details' });
         }
     }
+
+    static async getHotelRequests(req, res) {
+        try {
+            const hotelRequests = await AdminService.getHotelRequests();
+            if (!hotelRequests) {
+                return res.status(404).json({ message: 'Không có yêu cầu khách sạn nào.' });
+            }
+            return res.status(200).json(hotelRequests);
+        } catch (error) {
+            console.error('Error in AdminController.getHotelRequests:', error.message);
+            return res.status(500).json({ message: 'Có lỗi xảy ra. Vui lòng thử lại sau.' });
+        }
+    }
+
+    static async getRestaurantRequests(req, res) {
+        try {
+            const restaurantRequests = await AdminService.getRestaurantRequests();
+            if (!restaurantRequests) {
+                return res.status(404).json({ message: 'Không có yêu cầu nhà hàng nào.' });
+            }
+            return res.status(200).json(restaurantRequests);
+        } catch (error) {
+            console.error('Error in AdminController.getRestaurantRequests:', error.message);
+            return res.status(500).json({ message: 'Có lỗi xảy ra. Vui lòng thử lại sau.' });
+        }
+    }
 }
 module.exports = AdminController;
 

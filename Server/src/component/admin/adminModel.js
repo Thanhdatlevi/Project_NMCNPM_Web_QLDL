@@ -86,7 +86,67 @@ class AdminModel {
         }
     }
 
+    static async getHotelRequests() {
+        try {
+            const query = `
+                SELECT hr.*, u.user_fullname
+                FROM hol_requests hr
+                JOIN providers p ON hr.provider_id = p.provider_id
+                JOIN users u ON u.user_id = p.user_id
+            `;
+            const result = await db.query(query);
 
+            if (result.rows.length > 0) {
+                return result.rows.map(request => ({
+                    holRequestId: request.hol_request_id,
+                    providerId: request.provider_id,
+                    facilityName: request.facility_name,
+                    description: request.description,
+                    specificLocation: request.specific_location,
+                    contact: request.contact,
+                    noteContent: request.note_content,
+                    imageUrls: request.image_urls,
+                    locationId: request.location_id,
+                    userFullName: request.user_fullname,
+                }));
+            }
+            return null;
+        } catch (error) {
+            console.error('Error in AdminModel.getHotelRequests:', error.message);
+            throw error;
+        }
+    }
+
+    static async getRestaurantRequests() {
+        try {
+            const query = `
+                SELECT rr.*, u.user_fullname
+                FROM rest_requests rr
+                JOIN providers p ON rr.provider_id = p.provider_id
+                JOIN users u ON u.user_id = p.user_id
+            `;
+            const result = await db.query(query);
+
+            if (result.rows.length > 0) {
+                return result.rows.map(request => ({
+                    restRequestId: request.rest_request_id,
+                    providerId: request.provider_id,
+                    facilityName: request.facility_name,
+                    description: request.description,
+                    specificLocation: request.specific_location,
+                    contact: request.contact,
+                    noteContent: request.note_content,
+                    imageUrls: request.image_urls,
+                    locationId: request.location_id,
+                    userFullName: request.user_fullname,
+                }));
+            }
+            return null;
+        } catch (error) {
+            console.error('Error in AdminModel.getRestaurantRequests:', error.message);
+            throw error;
+        }
+    }
 }
 
 module.exports = AdminModel;

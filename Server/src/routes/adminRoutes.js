@@ -14,7 +14,8 @@ router.post('/deleteAttractions/:attractionID', AdminController.deleteAttraction
 
 router.delete('/deleteuser', AdminController.deleteAccount);
 router.delete('/deleteFacility', AdminController.deleteFacility);
-
+router.get('/getHotelRequests', AdminController.getHotelRequests);
+router.get('/getRestaurantRequests', AdminController.getRestaurantRequests);
 router.get('/getPublicProfile', AccountController.getPublicProfile);
 
 module.exports = router

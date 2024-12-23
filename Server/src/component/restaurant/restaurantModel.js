@@ -419,6 +419,17 @@ class RestaurantModel {
             throw error;
         }
     }
+
+    static async insertRestaurant(facilityId) {
+        try {
+            const restaurantQuery = `INSERT INTO restaurants (facility_id) VALUES ($1) RETURNING restaurant_id;`;
+            const result = await db.query(restaurantQuery, [facilityId]);
+            return result.rows[0]?.restaurant_id || null;
+        } catch (error) {
+            console.error("Error in RestaurantModel.insertRestaurant:", error.message);
+            throw error;
+        }
+    }
 }
 
 module.exports = RestaurantModel;

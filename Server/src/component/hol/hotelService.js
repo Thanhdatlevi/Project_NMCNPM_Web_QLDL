@@ -1,8 +1,6 @@
 const HotelModel = require('./hotelModel');
 
 const FacilityService = require('../facility/facilityService');
-const { propfind } = require('../../routes/hotelRoutes');
-
 class HotelService {
 
     static async get_3_PopularHotels() {
@@ -102,16 +100,21 @@ class HotelService {
     static async createHotel(providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs) {
         try {
             const facilityId = await FacilityService.createFacility
-                (providerId, facilityName, description, locationId, contact, facilityImgs);
+                (providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs);
 
             if (!facilityId) {
-
+                return { success: false, message: "Failed to create facility. Facility ID is null." }
             }
-            const hotel = await HotelModel.insertHotel(facilityId);
+            const hotelId = await HotelModel.insertHotel(facilityId);
+            if (!hotelId) {
+                return { success: false, message: "Failed to insert hotel. Hotel ID is null." }
+            }
+            return { success: true, facilityId, hotelId };
         } catch (error) {
             console.error("Error in HotelService.createHotel: ", error.message);
             throw error;
         }
     }
+
 }
 module.exports = HotelService;
