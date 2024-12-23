@@ -64,7 +64,7 @@ const FacilityForm = () => {
                         specificLocation: fetchedData.resSpecificLocation,
                         averagePrice: fetchedData.resAveragePrice,
                     });
-                    
+
                 }
             })
             .catch((error) => {
@@ -96,33 +96,33 @@ const FacilityForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const newFacilityData = {
-            facilityData:{
+        const updateData = {
+            facilityData: {
                 facilityName: facilityData.name,
                 description: facilityData.description,
-               
                 contact: facilityData.contact,
                 status: facilityData.status,
                 specificLocation: facilityData.specificLocation,
             },
-            restaurantData:{
+            restaurantData: {
                 amenities: facilityData.amenities,
-                averagePrice: facilityData.averagePrice,
             },
-  
+
         };
-        console.log(newFacilityData);
         //Send data to server
-        fetch(`http://localhost:3000/provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
+        fetch(`provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(newFacilityData),
+            body: JSON.stringify({ updateData }),
         })
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Failed to update data");
+                    return response.json().then((errorData) => {
+                        console.log(errorData.message); // In thông điệp lỗi từ server
+                        throw new Error("Failed to update data");
+                    });
                 }
                 return response.json();
             })
@@ -148,9 +148,9 @@ const FacilityForm = () => {
                     </div>
                     <div className="facility-form-item-inline">
                         <div className="facility-form-item">
-                            <input type="text" id="facility_location" name="facility_location" placeholder="Location"
-                                value={facilityData.location} required
-                                onChange={(e) => setFacilityData({ ...facilityData, location: e.target.value })} />
+                            <input type="text" id="facility_location" name="facility_location" placeholder="Location" value={facilityData.location}
+                                readOnly
+                            />
                         </div>
                         <div className="facility-form-item">
                             <input type="text" id="facility_location_detail" name="facility_location_details" placeholder="Location Detail"
@@ -171,7 +171,7 @@ const FacilityForm = () => {
                                         <p>Status</p>
                                         <p>Action</p>
                                     </div>
-                                    
+
                                     <button onClick={addCapacity}>Add Capacity</button>
                                     <button onClick={toggleDialog}>Close</button>
                                 </div>
@@ -190,9 +190,9 @@ const FacilityForm = () => {
                     <div className="facility-form-item">
 
                         <div className="facility-images">
-                        {facilityData.img.map((image, index) => (
-                                    <img id="current_image" key={index} src={image} alt={`Facility ${index}`} />
-                                ))}
+                            {facilityData.img.map((image, index) => (
+                                <img id="current_image" key={index} src={image} alt={`Facility ${index}`} />
+                            ))}
 
                         </div>
                     </div>
