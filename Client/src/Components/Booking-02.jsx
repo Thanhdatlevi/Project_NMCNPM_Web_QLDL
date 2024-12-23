@@ -11,7 +11,7 @@ const Booking02 = ({ bookingData }) => {
 
     const loadPlaces = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/attraction/getFilterattraction');
+            const response = await fetch('attraction/getFilterattraction');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -31,7 +31,7 @@ const Booking02 = ({ bookingData }) => {
 
     const loadHotels = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/hotel/getFilterhotel');
+            const response = await fetch('hotel/getFilterhotel');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -41,7 +41,9 @@ const Booking02 = ({ bookingData }) => {
                 .map(element => ({
                     ...element,
                     quantity: selections[element.facility_id].quantity,
-                    date: selections[element.facility_id].date
+                    date: selections[element.facility_id].date,
+                    price: selections[element.facility_id].price,
+                    totalPrice: selections[element.facility_id].price * selections[element.facility_id].quantity
                 }));
 
             setHotelChosen(hotels);
@@ -53,7 +55,7 @@ const Booking02 = ({ bookingData }) => {
 
     const loadRestaurants = useCallback(async (city, selections) => {
         try {
-            const response = await fetch('http://localhost:3000/restaurant/getFilterrestaurant');
+            const response = await fetch('restaurant/getFilterrestaurant');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -63,7 +65,9 @@ const Booking02 = ({ bookingData }) => {
                 .map(element => ({
                     ...element,
                     quantity: selections[element.facility_id].quantity,
-                    date: selections[element.facility_id].date
+                    date: selections[element.facility_id].date,
+                    price: selections[element.facility_id].price,
+                    totalPrice: selections[element.facility_id].price * selections[element.facility_id].quantity
                 }));
             setRestaurantChosen(restaurants);
 
@@ -120,50 +124,54 @@ const Booking02 = ({ bookingData }) => {
         }));
 
         const transformedHotels = hotelChosen.map(hotel => ({
-            hotel_id: hotel.facility_id,
-            name: hotel.facility_name,
+            facilityId: hotel.facility_id,
+            facilityName: hotel.facility_name,
             quantity: hotel.quantity,
-            date: hotel.date
+            price: hotel.price,
+            checkinTime: hotel.date,
+            totalPrice: hotel.totalPrice
         }));
 
 
         const transformedRestaurants = restaurantChosen.map(restaurant => ({
-            res_id: restaurant.facility_id,
-            name: restaurant.facility_name,
+            facilityId: restaurant.facility_id,
+            facilityName: restaurant.facility_name,
             quantity: restaurant.quantity,
-            date: restaurant.date
+            price: restaurant.price,
+            checkinTime: restaurant.date,
+            totalPrice: restaurant.totalPrice
         }));
 
         const bookingData = {
-            
-            
             hotels: transformedHotels,
             restaurants: transformedRestaurants,
-            final_total: finalTotal()
+            //final_total: finalTotal()
         };
         console.log(bookingData);
-        // fetch('http://localhost:3000/booking/submit', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(bookingData)
-        // })
-        // .then(response => {
-        //     if (!response.ok) {
-        //         throw new Error('Network response was not ok');
-        //     }
-        //     return response.json();
-        // })
-        // .then(data => {
-        //     console.log('Success:', data);
-        //     alert("Your payment has been processed successfully.");
-        //     window.location.href = "/confirmation";
-        // })
-        // .catch(error => {
-        //     console.error('Error:', error);
-        //     alert("There was an error processing your payment. Please try again.");
-        // });
+        fetch('/tourist/createReservation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bookingData),
+        })
+            .then(async (response) => {
+                // Kiểm tra nếu response không thành công
+                if (!response.ok) {
+                    const errorMessage = await response.text(); // Hoặc response.json() nếu server trả về JSON
+                    throw new Error(`Error: ${errorMessage}`);
+                }
+                return response.json(); // Đọc nội dung JSON từ server
+            })
+            .then((data) => {
+                console.log('Success:', data.message); // In message từ server nếu có
+                alert(data.message || 'Your payment has been processed successfully.');
+                window.location.href = '/confirmation';
+            })
+            .catch((error) => {
+                console.error('Error:', error.message); // In lỗi từ server hoặc từ client
+                alert(`There was an error: ${error.message}`);
+            });
     }
 
     function generateItem(item) {

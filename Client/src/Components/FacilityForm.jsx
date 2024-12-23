@@ -110,7 +110,7 @@ const FacilityForm = () => {
 
         };
         //Send data to server
-        fetch(`provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
+        fetch(`/provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

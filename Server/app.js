@@ -18,9 +18,6 @@ const locationRoutes = require('./src/routes/locationRoutes'); // Điều hướ
 const registerRoutes = require('./src/routes/registerRoutes.js');
 const loginRoutes = require('./src/routes/loginRoutes.js');
 const logoutRoutes = require('./src/routes/logout.Routes.js');
-
-const reservationRoutes = require('./src/routes/reservationRoutes.js');
-
 const verifyRoutes = require('./src/routes/verifyRoutes.js');
 const authenticateRoutes = require('./src/routes/authenticateRoutes.js');
 
@@ -47,11 +44,10 @@ app.use('/register', checkIfLoggedIn, registerRoutes);
 app.use('/login', checkIfLoggedIn, loginRoutes);
 app.use('/verify', checkIfLoggedIn, verifyRoutes);
 
-app.use('/reservation', reservationRoutes);
 
 app.use('/provider', requireProvider, providerRoutes);
 app.use('/admin', requireAdmin, adminRoutes);
-app.use('/tourist', requireTourist, touristRoutes);
+app.use('/tourist', touristRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
