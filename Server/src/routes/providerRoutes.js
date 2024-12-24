@@ -10,6 +10,7 @@ router.patch('/api/updateRestaurant/:restaurantId', ProviderController.updateRes
 router.post('/api/requestHotel', ProviderController.requestHotel);
 router.post('/api/requestRestaurant', ProviderController.requestRestaurant);
 
+
 router.delete('/deleteFacility', ProviderController.deleteFacility);
 
 router.get('/hotel/by-provider', ProviderController.getHotelsByProviderId);
@@ -19,5 +20,6 @@ router.get('/hotel/:holId', ProviderController.getHotelById_provider);
 router.get('/restaurant/:resId', ProviderController.getRestaurantById_provider);
 
 router.get('/getPublicProfile', AccountController.getPublicProfile);
+router.post('/updateProfile', AccountController.updateProfile);
 
 module.exports = router;

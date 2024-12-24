@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Styles/LoginandRegister.css';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 const LoginPage = () => {
     const [formData, setFormData] = useState({ Username_Email: '', password: '' });
     const [message, setMessage] = useState(""); // Thông báo lỗi hoặc thành công
@@ -15,6 +15,36 @@ const LoginPage = () => {
             setMessage(decodeURIComponent(messageParam)); // Hiển thị thông báo
             setMessageColor("#008000"); // Màu xanh cho thông báo thành công
         }
+
+        const handleAuthAndLogout = async () => {
+            try {
+              // Kiểm tra xác thực
+              const authResponse = await fetch('/authenticate', {
+                method: 'GET',
+                credentials: 'include',
+              });
+      
+              if (!authResponse.ok) {
+                return; // Thoát sớm nếu không xác thực
+              }
+      
+              const authData = await authResponse.json();
+      
+            if (authData.role === 'tourist') {
+                window.location.href = '/';
+            } else if (authData.role === 'admin') {
+                window.location.href = 'http://localhost:3002/home';
+            }else if (authData.role === 'provider') {
+                window.location.href = 'http://localhost:3003/home';
+            } else {
+                throw new Error('Vai trò không hợp lệ.');
+            }
+            } catch (error) {
+              console.error('Error during authentication:', error);
+            }
+          };
+      
+          handleAuthAndLogout();
     }, [location]);
 
 

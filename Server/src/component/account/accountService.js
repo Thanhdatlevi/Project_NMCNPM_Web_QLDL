@@ -12,6 +12,16 @@ class AccountService {
         }
     }
 
+    static async updateProfile(accountId, userFullname, userBirthday, userContact, userAddress) {
+        try {
+            const userProfile = await AccountModel.updateProfile(accountId, userFullname, userBirthday, userContact, userAddress);
+            return userProfile;
+        } catch (error) {
+            console.error("Error in ProviderService.getPublicProfile:", error.message);
+            throw error;
+        }
+    }
+
     /**
     * Lấy provider_id của một tài khoản.
     * @param {number} accountId - ID của tài khoản.

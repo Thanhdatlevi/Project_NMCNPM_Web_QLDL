@@ -6,6 +6,7 @@ const TouristController = require('../component/tourist/touristController');
 
 router.get('/getReservationHistory', TouristController.getReservationHistory);
 router.get('/getPublicProfile', AccountController.getPublicProfile);
+router.post('/updateProfile', AccountController.updateProfile);
 
 router.post('/submitFeedback/:facilityId', TouristController.submitFeedback);
 router.post('/createReservation', TouristController.createReservation);

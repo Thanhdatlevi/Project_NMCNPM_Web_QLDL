@@ -5,8 +5,15 @@ import "../Styles/Profile.css";
 
 const Profile = () => {
     const [user, setUser] = useState({});
+    const [formData, setFormData] = useState({
+        userFullname: '',
+        userBirthday :'',
+        userContact :'',
+        userAddress:'',
+    });
+
     useEffect(() => {
-        fetch(`tourist/getPublicProfile`) 
+        fetch(`/tourist/getPublicProfile`) 
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -14,10 +21,7 @@ const Profile = () => {
                 return response.json();
             })
             .then((data) => {
-                setUser(data.userProfile);
-                console.log(data)
-                console.log('Fetch successful:', data); // Thêm console log để kiểm tra kết quả fetch
-                 // Thêm thông báo để kiểm tra kết quả fetch
+                setFormData(data.userProfile); // Sao chép dữ liệu ban đầu vào formData
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -25,10 +29,43 @@ const Profile = () => {
             });
     }, []);
 
-    const formatDate = (dateString) => {
-        const options = { month: 'long',day: 'numeric'};
-        return new Date(dateString).toLocaleDateString('vi-VN', options);
+    // Xử lý thay đổi trong các ô nhập liệu
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [id]: value,
+        }));
     };
+
+    // Gửi dữ liệu cập nhật đến server
+    const handleSave = async () => {
+        try {
+            // Format ngày sinh trước khi gửi
+            const formattedBirthday = new Date(formData.userBirthday).toISOString().split("T")[0]; // YYYY-MM-DD
+            const updatedData = {
+                ...formData,
+                userBirthday: formattedBirthday,
+            };
+            const response = await fetch(`/tourist/updateProfile`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData),
+            });
+
+            if (response.ok) {
+                alert('Cập nhật thông tin thành công!');
+            } else {
+                alert('Cập nhật thông tin thất bại. Vui lòng thử lại.');
+            }
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert('Có lỗi xảy ra trong quá trình cập nhật.');
+        }
+    };
+
     return (
         <body id="Profile">
             <main id="MyProfile">
@@ -63,30 +100,39 @@ const Profile = () => {
                         <main id="checkProfile">
                             <section id="personInfo">
                                 <h4>Personal Information</h4>
-                                <div class="content">
-                                    <div class="field-label">
-                                        <label for="name">Name: </label>
-                                        <input type="text" id="name" class="value" value={user.userFullname} />
+                                <div className="content">
+                                    <div className="field-label">
+                                        <label htmlFor="userFullname">Name:</label>
+                                        <input type="text" id="userFullname" className="value" value={formData.userFullname || ''} onChange={handleChange}/>
                                     </div>
-                                    <div class="field-label">
-                                        <label for="address">Email:</label>
-                                        <input type="text" id="address" class="value" value={user.accountEmail} />
+                                    <div className="field-label">
+                                        <label htmlFor="accountEmail">Email:</label>
+                                        <input type="text" id="accountEmail" className="value" value={formData.accountEmail || ''} readOnly/>
                                     </div>
-                                    <div class="field-label">
-                                        <label for="dob">Ngày sinh:</label>
-                                        <input type="text" id="dob" class="value" value={formatDate(user.userBirthday)} />
+                                    <div className="field-label">
+                                        <label htmlFor="userBirthday">Ngày sinh:</label>
+                                        <input
+                                            type="date"
+                                            id="userBirthday"
+                                            value={
+                                                formData.userBirthday
+                                                    ? new Date(formData.userBirthday).toISOString().split("T")[0]
+                                                    : ""
+                                            }
+                                            onChange={handleChange}
+                                        />
                                     </div>
-                                    <div class="field-label">
-                                        <label for="phone">Số điện thoại:</label>
-                                        <input type="text" id="phone" class="value" value={user.userContact}/>
+                                    <div className="field-label">
+                                        <label htmlFor="userContact">Số điện thoại:</label>
+                                        <input type="text" id="userContact" className="value" value={formData.userContact || ''} onChange={handleChange} />
                                     </div>
-                                    <div class="field-label">
-                                        <label for="address">Địa chỉ:</label>
-                                        <input type="text" id="address" class="value" value={user.userAddress} />
+                                    <div className="field-label">
+                                        <label htmlFor="userAddress">Địa chỉ:</label>
+                                        <input type="text" id="userAddress" className="value" value={formData.userAddress || ''} onChange={handleChange} />
                                     </div>
                                 </div>
-                                <div class="save-container">
-                                    <button id="savePersonButton" class="save-button">Save</button>
+                                <div className="save-container">
+                                    <button id="savePersonButton" className="save-button" onClick={handleSave}>Save</button>
                                 </div>
                             </section>
                         </main>

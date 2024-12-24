@@ -34,7 +34,7 @@ const HomeDashboard = () => {
     const [hotels, setHotels] = useState(0)
     const [restaurants, setRestaurants] = useState(0)
     useEffect(()=>{
-        fetch('/restaurant/getFilterres')
+        fetch('/restaurant/getFilterrestaurant')
             .then((response) => response.json())
             .then((data) => {
             setFacilities(facilities+data.length)
