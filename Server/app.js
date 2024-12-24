@@ -49,7 +49,7 @@ app.use('/verify', checkIfLoggedIn, verifyRoutes);
 
 app.use('/provider', requireProvider, providerRoutes);
 app.use('/admin', requireAdmin, adminRoutes);
-app.use('/tourist', touristRoutes);
+app.use('/tourist', requireTourist, touristRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

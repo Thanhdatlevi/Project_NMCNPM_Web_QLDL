@@ -131,7 +131,8 @@ class ProviderService {
     static async requestHotel(accountId, requestData) {
         try {
             const providerId = await AccountService.getProviderId(accountId);
-            await ProviderModel.addRequestHotel(
+            if (!providerId) throw new Error("Tài khoản không tồn tại.");
+            const holRequestId = await ProviderModel.addRequestHotel(
                 providerId,
                 requestData.facilityName,
                 requestData.description,
@@ -140,20 +141,36 @@ class ProviderService {
                 requestData.imageUrls,
                 requestData.locationId
             );
-            return { success: true, message: "Yêu cầu đã được gửi đến admin." };
+            if (!holRequestId) throw new Error("Lỗi tạo yêu cầu.");
+            const hotelRequest = await ProviderModel.getHotelRequestById(holRequestId);
+            if (!hotelRequest) throw new Error("Yêu cầu không tồn tại.");
+            const result = await HotelService.createHotel(
+                hotelRequest.providerId,
+                hotelRequest.facilityName,
+                hotelRequest.description,
+                hotelRequest.locationId,
+                hotelRequest.contact,
+                hotelRequest.specificLocation,
+                hotelRequest.imageUrls
+            );
+            if (!result.success) throw new Error("Không thể tạo khách sạn.");
+            await ProviderModel.deleteHotelRequestById(holRequestId);
+            return {
+                success: true,
+                message: "Yêu cầu đã được gửi đến admin.",
+            };
         } catch (error) {
             console.error("Error in providerService.requestHotel:", error.message);
-            return { success: false, message: "Có lỗi xảy ra, vui lòng thử lại sau." };
+            return { success: false, message: error.message || "Có lỗi xảy ra, vui lòng thử lại sau." };
         }
     }
 
+
     static async requestRestaurant(accountId, requestData) {
         try {
-            // Lấy providerId từ accountId
             const providerId = await AccountService.getProviderId(accountId);
-
-            // Thêm yêu cầu vào bảng restaurants
-            await ProviderModel.addRequestRestaurant(
+            if (!providerId) throw new Error("Tài khoản không tồn tại.");
+            const restRequestId = await ProviderModel.addRequestRestaurant(
                 providerId,
                 requestData.facilityName,
                 requestData.description,
@@ -162,9 +179,24 @@ class ProviderService {
                 requestData.imageUrls,
                 requestData.locationId
             );
+            if (!restRequestId) throw new Error("Lỗi tạo yêu cầu.");
+            const restaurantRequest = await ProviderModel.getRestaurantRequestById(restRequestId);
+            if (!restaurantRequest) throw new Error("Yêu cầu không tồn tại.");
+            const result = await RestaurantService.createRestaurant(
+                restaurantRequest.providerId,
+                restaurantRequest.facilityName,
+                restaurantRequest.description,
+                restaurantRequest.locationId,
+                restaurantRequest.contact,
+                restaurantRequest.specificLocation,
+                restaurantRequest.imageUrls);
+            if (!result.success) throw new Error("Không thể tạo nhà hàng.");
+            await ProviderModel.deleteRestaurantRequestById(restRequestId);
+            return {
+                success: true,
+                message: "Yêu cầu đã được gửi đến admin.",
+            };
 
-            // Trả về thông báo thành công
-            return { success: true, message: "Yêu cầu đã được gửi đến admin." };
         } catch (error) {
             console.error("Error in providerService.requestRestaurant:", error.message);
             return { success: false, message: "Có lỗi xảy ra, vui lòng thử lại sau." };

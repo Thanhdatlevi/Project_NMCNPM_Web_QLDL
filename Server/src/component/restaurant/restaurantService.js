@@ -123,7 +123,7 @@ class RestaurantService {
         }
     }
 
-    static async createHotel(providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs) {
+    static async createRestaurant(providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs) {
         try {
             const facilityId = await FacilityService.createFacility
                 (providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs);
