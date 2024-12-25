@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "../Styles/BookingHis.css";
+import "../Styles/ManageBooking.css";
 
 const BookingHistory = () => {
     const itemsPerPage = 2;
@@ -35,7 +35,7 @@ const BookingHistory = () => {
     const fetchData = async (service) => {
         localStorage.setItem('selectedService', service);
         setActiveTab(service);
-        const response = await fetch(`/tourist/reserve${service == "res" ? "restaurant" : "hotel"}/by-tourist`);
+        const response = await fetch(`/provider/reserve${service == "res" ? "restaurant" : "hotel"}/by-provider`);
         if (!response.ok) {
             throw new Error("Failed to fetch data");
         }

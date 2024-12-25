@@ -63,6 +63,7 @@ const Booking02 = ({ bookingData }) => {
             }
             const data = await response.json();
             const chosenRestaurants = data.filter(element => element.location_id === city)
+            console.log(chosenRestaurants)
             const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
@@ -146,7 +147,6 @@ const Booking02 = ({ bookingData }) => {
             totalPrice: restaurant.totalPrice,
             img: restaurant.img_url
         }));
-
         const bookingData = {
             status: 'reserved',
             detailReservation: [

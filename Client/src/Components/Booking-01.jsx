@@ -53,7 +53,7 @@ const Booking01 = ({ setBookingData }) => {
         };
         var jsonSelections = JSON.stringify(selections);
         localStorage.setItem('selections', jsonSelections);
-        localStorage.setItem('city', localStorage.getItem('city'));
+        localStorage.setItem('city', fac.location_id);
 
         // if (fac) {
         //     const data = {
