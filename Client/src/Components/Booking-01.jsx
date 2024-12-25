@@ -7,32 +7,32 @@ const Booking01 = ({ setBookingData }) => {
     const type = localStorage.getItem('type');
     useEffect(() => {
         console.log(type);
-        if (type === 'hol') {
+        const find = localStorage.getItem('selected');
+        if (type === 'hotel') {
             fetch('/hotel/getFilterhotel')
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
                     for (let i = 0; i < data.length; i++) {
-                        if (data[i].facility_id === localStorage.getItem('selected')) {
+                        if (data[i].facility_id === find) {
                             setFac(data[i]);
                         }
                     }
                 })
                 .catch((error) => console.error('Error:', error));
         }
-        else if (type === 'res') {
+        else if (type === 'restaurant') {
             fetch('/restaurant/getFilterrestaurant')
                 .then((response) => response.json())
                 .then((data) => {
                     for (let i = 0; i < data.length; i++) {
-                        if (data[i].facility_id === localStorage.getItem('selected')) {
+                        if (data[i].facility_id === find) {
                             setFac(data[i]);
                         }
                     }
                 })
                 .catch((error) => console.error('Error:', error));
         }
-
+        console.log(fac);
     }, []);
     const [duration, setDuration] = useState(2); // Initial duration in days
 
@@ -44,19 +44,44 @@ const Booking01 = ({ setBookingData }) => {
         setDuration(duration + 1);
     };
     const handleBooking = () => {
-        if (fac) {
-            const data = {
-                duration: duration,
-                name: fac.facility_name,
-                location: fac.location_name,
-                total: 200 * duration,
-                price: 200,
-                imgPath: fac.img_url,
-            };
-            localStorage.setItem('bookingData', JSON.stringify(data));
-            //setBookingData(data);
-        }
+        const selections ={};
+        selections[fac.facility_id]={
+            ID: fac.facility_id,
+            quantity: duration,
+            date: localStorage.getItem('date'),
+            price: fac.average_price,
+        };
+        var jsonSelections = JSON.stringify(selections);
+        localStorage.setItem('selections', jsonSelections);
+        localStorage.setItem('city', localStorage.getItem('city'));
+
+        // if (fac) {
+        //     const data = {
+        //         duration: duration,
+        //         name: fac.facility_name,
+        //         location: fac.location_name,
+        //         total: 200 * duration,
+        //         price: 200,
+        //         imgPath: fac.img_url,
+        //     };
+        //     localStorage.setItem('bookingData', JSON.stringify(data));
+        //     //setBookingData(data);
+        // }
     };
+    function handleDateChange(event) {
+        const today = new Date().toISOString().split('T')[0];
+        if (event.target.value < today) {
+            const notice = document.getElementById('notice-place');
+            notice.innerHTML = "You can't choose the past date.";
+            event.target.value = today;
+        } else {
+            const notice = document.getElementById('notice-place');
+            notice.innerHTML = "";
+            console.log(event.target.value);
+            localStorage.setItem('date', event.target.value);   
+        }
+    }
+
     let navigate = useNavigate();
     return (
         <div className="body">
@@ -96,12 +121,12 @@ const Booking01 = ({ setBookingData }) => {
                         <div className="divider"></div>
                         <div className="blank"></div>
                         <div className="form-section">
-                            <label htmlFor="duration">{type === 'hol' ? 'How long you will stay?' : 'How many tables you want to book?'}</label>
+                            <label htmlFor="duration">{type === 'hotel' ? 'How long you will stay?' : 'How many tables you want to book?'}</label>
                             <div className="duration-control">
                                 <button id="decrease" onClick={decreaseDuration}>
                                     -
                                 </button>
-                                <span id="duration">{duration} {type === 'hol' ? 'Days' : 'Tables'}</span>
+                                <span id="duration">{duration} {type === 'hotel' ? 'Days' : 'Tables'}</span>
                                 <button id="increase" onClick={increaseDuration}>
                                     +
                                 </button>
@@ -109,11 +134,9 @@ const Booking01 = ({ setBookingData }) => {
 
                             <label htmlFor="date">Pick a Date</label>
                             <div className="date-picker">
-                                <span className="calendar-icon">📅</span>
-                                <div className="date-wrapper">
-                                    <span className="date">20 Jan - 22 Jan</span>
-                                </div>
+                                <input id="time-place" type="datetime-local" onChange={handleDateChange} />
                             </div>
+                            <div id="notice-place"></div>
                             <div className="price-info">
                                 <p>
                                     You will pay <strong> {duration * 200}$ USD</strong>
@@ -127,7 +150,7 @@ const Booking01 = ({ setBookingData }) => {
                 </div>
 
                 <div className="action-section">
-                    <Link to="/HomePlace">
+                    <Link to="/booking02">
                         <button onClick={handleBooking} className="book-now">Book Now</button>
                     </Link>
                     <button className="cancel" onClick={() => { navigate(-1); }}

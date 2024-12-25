@@ -35,6 +35,8 @@ const ServicePage = () => {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
+
+        localStorage.setItem('type', type);
     };
     useEffect(() => {
         handleFetch();
@@ -101,6 +103,11 @@ const ServicePage = () => {
             alert('Error submitting feedback, please try again later.');
         }
     }
+    const handleBooking = () => {
+        localStorage.setItem('selected', service.facilityId);
+        
+    }
+
     return (
 
         <div className="detail-container">
@@ -140,7 +147,7 @@ const ServicePage = () => {
                                     <i className='bx bx-share-alt'></i>
                                 </span>
                                 <Link to="/booking01">
-                                    <button className="book-now">Book Now</button>
+                                    <button className="book-now" onClick={handleBooking} >Book Now</button>
                                 </Link>
                             </div>
                         </div>

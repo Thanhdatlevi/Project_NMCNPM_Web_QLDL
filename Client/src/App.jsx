@@ -19,6 +19,7 @@ import SearchService from './Components/SearchService';
 import ManageBooking from './Components/ManageBooking';
 import FacilityForm from './Components/FacilityForm';
 import MyFacility from './Components/MyFacility';
+import AddFacility from './Components/AddFacility';
 function App() {
   return (
     <div className="App">
@@ -38,6 +39,7 @@ function App() {
           <Route path="/manageBooking" element={<ManageBooking />} />
           <Route path="/facilityForm" element={<FacilityForm />} />
           <Route path="/myfacility" element={<MyFacility />} />
+          <Route path="/addfacility" element={<AddFacility />} />
       </Routes>
       <Footer />
     </div>

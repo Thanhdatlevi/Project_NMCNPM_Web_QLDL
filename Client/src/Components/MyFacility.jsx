@@ -112,7 +112,7 @@ const MyFacility = () => {
                             <option>Lastest Booking</option>
                         </select>
                     </div>
-                    <Link to={"/facilityForm"} className="Add-facility" onClick={()=>handleEditClick(null, "true")} >Add</Link>
+                    <Link to={"/addfacility"} className="Add-facility" onClick={()=>handleEditClick(null, "true")} >Add</Link>
                 </div>
                 
 
@@ -128,7 +128,7 @@ const MyFacility = () => {
                                     alt="Service Image"
                                 />
                                 <div className="post-info">
-                                    <h3>{ser.name}</h3>
+                                    <h3>{ser.hotelName? ser.hotelName : ser.restaurantName}</h3>
                                     <p>
                                         <span role="img" aria-label="location">
                                             📍
