@@ -35,6 +35,35 @@ class TouristController {
             return res.status(500).json({ message: "Có lỗi xảy ra. Vui lòng thử lại sau." });
         }
     }
+
+    static async getReserveHotelsByTouristId(req, res) {
+        try {
+            const { accountId } = res.locals.account;
+            const hotels = await TouristServide.getReserveHotelsByTouristId(accountId);
+            if (!hotels || hotels.length === 0) {
+                return res.status(404).json({ message: 'No hotels found for this provider' });
+            }
+            res.status(200).json(hotels);
+        } catch (error) {
+            console.error('Error retrieving hotels by provider:', error.message);
+            res.status(500).json({ message: 'Failed to retrieve hotels by provider' });
+        }
+    }
+
+    static async getReserveRestaurantByTouristId(req, res) {
+        try {
+            console.log(1)
+            const { accountId } = res.locals.account;
+            const restaurants = await TouristServide.getReserveRestaurantByTouristId(accountId);
+            if (!restaurants) {
+                return res.status(404).json({ message: 'No restaurants found for this provider' });
+            }
+            res.status(200).json(restaurants);
+        } catch (error) {
+            console.error('Error in getRestaurantByProviderId:', error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
 }
 
 module.exports = TouristController;

@@ -10,5 +10,7 @@ router.post('/updateProfile', AccountController.updateProfile);
 
 router.post('/createReservation', TouristController.createReservation);
 
+router.get('/reservehotel/by-tourist', TouristController.getReserveHotelsByTouristId);
+router.get('/reserverestaurant/by-tourist', TouristController.getReserveRestaurantByTouristId);
 
 module.exports = router;

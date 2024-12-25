@@ -29,6 +29,57 @@ class ReservationService {
         }
     }
 
+    static async getReserveHotelsByTouristId(touristId) {
+        try {
+            const result = await ReservationModel.getReserveHotelsByTouristId(touristId);
+            if (result) {
+                return { success: true, data: result };
+            }
+            return { succes: false };
+        } catch (error) {
+            console.error("Error in ReservationService.createReservation:", error.message);
+            throw error;
+        }
+    }
+
+    static async getReserveRestaurantByTouristId(touristId) {
+        try {
+            const result = await ReservationModel.getReserveRestaurantByTouristId(touristId);
+            if (result) {
+                return { success: true, data: result };
+            }
+            return { succes: false };
+        } catch (error) {
+            console.error("Error in ReservationService.createReservation:", error.message);
+            throw error;
+        }
+    }
+
+    static async getReserveHotelsByProviderId(providerId) {
+        try {
+            const result = await ReservationModel.getReserveHotelsByProviderId(providerId);
+            if (result) {
+                return { success: true, data: result };
+            }
+            return { succes: false };
+        } catch (error) {
+            console.error("Error in ReservationService.createReservation:", error.message);
+            throw error;
+        }
+    }
+
+    static async getReserveRestaurantByProviderId(providerId) {
+        try {
+            const result = await ReservationModel.getReserveRestaurantByProviderId(providerId);
+            if (result) {
+                return { success: true, data: result };
+            }
+            return { succes: false };
+        } catch (error) {
+            console.error("Error in ReservationService.createReservation:", error.message);
+            throw error;
+        }
+    }
 }
 
 module.exports = ReservationService;

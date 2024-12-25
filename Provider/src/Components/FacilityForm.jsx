@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import "../Styles/FacilityForm.css";
 
 const FacilityForm = () => {
-    const dialogRef = useRef(null);
     const [detail, setDetail] = useState({});
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [capacityList, setCapacityList] = useState([]);
@@ -16,15 +15,17 @@ const FacilityForm = () => {
         contact: "",
         status: "",
         deal: "",
+        specificLocation: "",
+        averagePrice: "",
     });
 
     const [service, setService] = useState(localStorage.getItem("selectedService")); // "hotel" or "res"
 
     useEffect(() => {
         const id = localStorage.getItem("selectedServiceId");
-
+        console.log(id);
         // Fetch data from server
-        fetch(`${service}/${id}`)
+        fetch(`provider/${service == "res" ? "restaurant" : "hotel"}/${id}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to fetch data");
@@ -33,37 +34,37 @@ const FacilityForm = () => {
             })
             .then((data) => {
                 console.log("Success:", data);
-                const fetchedData = data[0];
+                const fetchedData = data;
+                console.log(fetchedData);
 
                 // Normalize data
                 if (service === "hotel") {
                     setFacilityData({
-                        
-                        name: fetchedData.hotel_name,
-                        location: fetchedData.location_name,
-                        description: fetchedData.hotel_description,
-                        img: fetchedData.hotel_images,
-                        capacity: fetchedData.hotel_rooms,
-                        amenities: fetchedData.hotel_amenities,
-                        contact: fetchedData.hotel_contact,
-                        status: fetchedData.hotel_status,
-                        deal: fetchedData.hotel_deal,
+                        name: fetchedData.hotelName,
+                        location: fetchedData.hotelLocation,
+                        description: fetchedData.hotelDescription,
+                        img: fetchedData.hotelImages,
+                        //apacity: fetchedData.hotelRooms,
+                        amenities: fetchedData.hotelAmenities,
+                        contact: fetchedData.hotelContact,
+                        status: fetchedData.hotelStatus,
+                        specificLocation: fetchedData.hotelSpecificLocation,
+                        averagePrice: fetchedData.hotelAveragePrice,
                     });
-                    setCapacityList(fetchedData.hotel_rooms);
+                    setCapacityList(fetchedData.hotelRooms);
                 } else if (service === "res") {
                     setFacilityData({
-                        
-                        name: fetchedData.res_name,
-                        location: fetchedData.location_name,
-                        description: fetchedData.res_description,
-                        img: fetchedData.res_images,
-                        capacity: fetchedData.res_tables,
-                        amenities: fetchedData.res_amenities,
-                        contact: fetchedData.res_contact,
-                        status: fetchedData.res_status,
-                        deal: fetchedData.res_deal,
+                        name: fetchedData.resName,
+                        location: fetchedData.resLocation,
+                        description: fetchedData.resDescription,
+                        img: fetchedData.resImages,
+                        amenities: fetchedData.resAmenities,
+                        contact: fetchedData.resContact,
+                        status: fetchedData.resStatus,
+                        specificLocation: fetchedData.resSpecificLocation,
+                        averagePrice: fetchedData.resAveragePrice,
                     });
-                    setCapacityList(fetchedData.res_tables);
+                    setCapacityList(fetchedData.resTables);
                 }
             })
             .catch((error) => {
@@ -79,12 +80,12 @@ const FacilityForm = () => {
         setIsDialogOpen(!isDialogOpen);
     };
     const addCapacity = () => {
-        const idLength = capacityList.length > 0 ? (service === "res" ? capacityList[0].table_id.length : capacityList[0].room_id.length) - 1 : 3;
+        const idLength = capacityList.length > 0 ? (service === "res" ? capacityList[0].table_id.length : capacityList[0].roomId.length) - 1 : 3;
         const newIdNumber = (capacityList.length + 1).toString().padStart(idLength, '0');
-        const newId = service=== "res" ?`t${newIdNumber}` : `r${newIdNumber}`;
+        const newId = service === "res" ? `t${newIdNumber}` : `r${newIdNumber}`;
         const newCapacity = service === "res"
-            ? { table_id: newId, price: capacityList[0].price, status: "available" }
-            : { room_id: newId, price: capacityList[0].price, status: "available" };
+            ? { tableId: newId, price: capacityList[0].price, status: "available" }
+            : { roomId: newId, price: capacityList[0].price, status: "available" };
         setCapacityList([...capacityList, newCapacity]);
     };
 
@@ -94,42 +95,63 @@ const FacilityForm = () => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
+        let updateData = {};
+        if (service === "res") {
+             updateData = {
+                facilityData: {
+                    facilityName: facilityData.name,
+                    description: facilityData.description,
+                    contact: facilityData.contact,
+                    status: facilityData.status,
+                    specificLocation: facilityData.specificLocation,
+                },
+                restaurantData: {
+                    amenities: facilityData.amenities,
+                    averagePrice: facilityData.averagePrice,
+                },
+        }
+    }
+        else {
+             updateData = {
+                facilityData: {
+                    facilityName: facilityData.name,
+                    description: facilityData.description,
+                    contact: facilityData.contact,
+                    status: facilityData.status,
+                    specificLocation: facilityData.specificLocation,
+                },
+                hotelData: {
+                    amenities: facilityData.amenities,
+                    averagePrice: facilityData.averagePrice,
+                },
+        }
         
-        const newFacilityData = {
-            id: localStorage.getItem("selectedServiceId"),
-            
-            name: facilityData.name,
-            location: facilityData.location,
-            detail: detail.detail,
-            description: facilityData.description,
-            img: facilityData.img,
-            capacity: capacityList,
-            amenities: facilityData.amenities,
-            contact: facilityData.contact,
-            status: facilityData.status,
-            deal: facilityData.deal,
+        
         };
-        console.log(newFacilityData);
+        //console.log(updateData);
         // Send data to server
-        // fetch(`${service}/update`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(newFacilityData),
-        // })
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw new Error("Failed to update data");
-        //         }
-        //         return response.json();
-        //     })
-        //     .then((data) => {
-        //         console.log("Success:", data);
-        //     })
-        //     .catch((error) => {
-        //         console.error("Error:", error);
-        //     });
+        fetch(`/provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ updateData }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then((errorData) => {
+                        console.log(errorData.message); // In thông điệp lỗi từ server
+                        throw new Error("Failed to update data");
+                    });
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Success:", data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
     };
     return (
         <div className="facility-form">
@@ -140,28 +162,28 @@ const FacilityForm = () => {
             <div className="facility-form-body">
                 <div className="facility-form-details">
                     <div className="facility-form-item">
-                        <input type="text" id="facility_name" name="facility_name" placeholder="Name" 
-                        value={facilityData.name} required  
-                        onChange={(e) => setFacilityData({ ...facilityData, name: e.target.value })} />
+                        <input type="text" id="facility_name" name="facility_name" placeholder="Name"
+                            value={facilityData.name} required
+                            onChange={(e) => setFacilityData({ ...facilityData, name: e.target.value })} />
                     </div>
                     <div className="facility-form-item-inline">
                         <div className="facility-form-item">
-                            <input type="text" id="facility_location" name="facility_location" placeholder="Location" 
-                            value={facilityData.location} required  
-                            onChange={(e) => setFacilityData({ ...facilityData, location: e.target.value })}/>
+                            <input type="text" id="facility_location" name="facility_location" placeholder="Location" value={facilityData.location}
+                                readOnly
+                            />
                         </div>
                         <div className="facility-form-item">
-                            <input type="text" id="facility_location_detail" name="facility_location_details" placeholder="Location Detail" 
-                            required onChange={(e) => setDetail({ ...detail, detail: e.target.value })} 
+                            <input type="text" id="facility_location_detail" name="facility_location_details" placeholder="Location Detail"
+                                required onChange={(e) => setDetail({ ...detail, detail: e.target.value })}
                             />
                         </div>
                     </div>
-                    
+
                     <div className="facility-form-item-inline">
-                    <button onClick={toggleDialog}>Add</button>
+                        <button onClick={toggleDialog}>Add</button>
                         {isDialogOpen && (
                             <div className="dialog">
-                                <div className="dialog-conte    nt">
+                                <div className="dialog-content">
                                     <h3>Capacity List</h3>
                                     <div className="capacity-header">
                                         <p>ID</p>
@@ -171,7 +193,7 @@ const FacilityForm = () => {
                                     </div>
                                     {capacityList.map((capacity, index) => (
                                         <div key={index} className="capacity-item">
-                                            <p>{service === "res" ? capacity.table_id : capacity.room_id}</p>
+                                            <p>{service === "res" ? capacity.tableId : capacity.roomId}</p>
                                             <p>{capacity.price}</p>
                                             <p>{capacity.status}</p>
                                             <button onClick={() => removeCapacity(index)}>Remove</button>
@@ -187,17 +209,18 @@ const FacilityForm = () => {
                         </div>
                     </div>
                     <div className="facility-form-item">
-                        <textarea id="facility_description" name="facility_description" placeholder="Description" 
-                        value={facilityData.description} required  
-                        onChange={(e) => setFacilityData({ ...facilityData, description: e.target.value })}/>
+                        <textarea id="facility_description" name="facility_description" placeholder="Description"
+                            value={facilityData.description} required
+                            onChange={(e) => setFacilityData({ ...facilityData, description: e.target.value })} />
                     </div>
-                    
+
                     <div className="facility-form-item">
-                    
+
                         <div className="facility-images">
-                        {facilityData.img.map((image, index) => (
-                            <img key={index} src={image} alt={`Facility ${index}`} />
-                        ))}
+                            {facilityData.img.map((image, index) => (
+                                <img id="current_image" key={index} src={image} alt={`Facility ${index}`} />
+                            ))}
+
                         </div>
                     </div>
                     <div className="facility-form-item">
@@ -208,7 +231,7 @@ const FacilityForm = () => {
                     <img src={"/Images/facility-form.jpg"} alt="Image Preview" />
                 </div>
             </div>
-            
+
         </div>
     );
 };

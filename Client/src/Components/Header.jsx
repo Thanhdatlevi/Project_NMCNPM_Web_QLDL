@@ -89,7 +89,9 @@ const Header = () => {
                 <Link to="/home" className="nav-item">Home</Link>
                 {user && (<Link to="/HomePlace" className="nav-item">Tạo lịch trình</Link>)}
                 <Link to="/searchService" className="nav-item">Cơ sở dịch vụ</Link>
+                <Link to="/bookingHistory" className="nav-item">Lịch sử đặt</Link>
             </ul>
+            
 
             <div class="nav-button-list">
                 <div class="switch">

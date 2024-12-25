@@ -4,6 +4,7 @@ const ProviderModel = require('./providerModel');
 const FacilityService = require('../facility/facilityService');
 const HotelService = require('../hol/hotelService');
 const AccountService = require('../account/accountService');
+const ReservationService = require(`../reservation/reservationService`);
 const RestaurantService = require('../restaurant/restaurantService');
 
 class ProviderService {
@@ -210,6 +211,28 @@ class ProviderService {
         try {
             const providerId = await AccountService.getProviderId(accountId);
             const restaurants = await RestaurantService.getRestaurantByProviderId(providerId);
+            return restaurants;
+        } catch (error) {
+            console.log("Error in ProviderService.getRestaurantByProviderId:", error);
+            throw new Error("Unable to fetch restaurants by provider.");
+        }
+    }
+
+    static async getReserveHotelsByProviderId(accountId) {
+        try {
+            const providerId = await AccountService.getProviderId(accountId);
+            const hotels = await ReservationService.getReserveHotelsByProviderId(providerId);
+            return hotels;
+        } catch (error) {
+            console.log("Error in getHotelsByProviderId in hotelService:", error);
+            throw new Error("Unable to fetch hotels by provider.");
+        }
+    }
+
+    static async getReserveRestaurantByProviderId(accountId) {
+        try {
+            const providerId = await AccountService.getProviderId(accountId);
+            const restaurants = await ReservationService.getReserveRestaurantByProviderId(providerId);
             return restaurants;
         } catch (error) {
             console.log("Error in ProviderService.getRestaurantByProviderId:", error);
