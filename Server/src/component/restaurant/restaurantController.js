@@ -85,34 +85,6 @@ class RestaurantController {
         }
     }
 
-    static async getRestaurantById_provider(req, res) {
-        try {
-            const { resId } = req.params;
-            const restaurantDetail = await RestaurantService.getRestaurantById_provider(resId);
-            if (!restaurantDetail) {
-                return res.status(404).json({ message: 'Restaurant not found' });
-            }
-            res.status(200).json(restaurantDetail);
-        } catch (error) {
-            console.error('Error in getRestaurantById_provider:', error);
-            res.status(500).json({ message: 'Error retrieving restaurant details' });
-        }
-    }
-
-    static async getRestaurantByProviderId(req, res) {
-        try {
-            const { accountId } = res.locals.account;
-            const restaurants = await RestaurantService.getRestaurantByProviderId(accountId);
-            if (!restaurants) {
-                return res.status(404).json({ message: 'No restaurants found for this provider' });
-            }
-            res.status(200).json(restaurants);
-        } catch (error) {
-            console.error('Error in getRestaurantByProviderId:', error);
-            res.status(500).json({ message: 'Internal server error' });
-        }
-    }
-
     static async getRelatedRes(req, res) {
         try {
             const { resID } = req.params;
@@ -125,6 +97,7 @@ class RestaurantController {
             res.status(500).json({ message: 'Error retrieving attraction details' });
         }
     }
+
 }
 
 module.exports = RestaurantController;

@@ -1,5 +1,5 @@
 const RestaurantModel = require('./restaurantModel');
-const AccountModel = require(`../account/accountModel`);
+const FacilityService = require('../facility/facilityService');
 
 class RestaurantService {
 
@@ -77,9 +77,8 @@ class RestaurantService {
         }
     }
 
-    static async getRestaurantByProviderId(accountId) {
+    static async getRestaurantByProviderId(providerId) {
         try {
-            const providerId = await AccountModel.getProviderId(accountId);
             const restaurants = await RestaurantModel.getRestaurantByProviderId(providerId);
             return restaurants;
         } catch (error) {
@@ -87,6 +86,62 @@ class RestaurantService {
             throw new Error("Unable to fetch restaurants by provider.");
         }
     }
+
+    /**
+    * Lấy Facility ID từ Restaurant ID.
+    * @param {number} restaurantId - ID của nhà hàng.
+    * @returns {number|null} - Facility ID hoặc null nếu không tìm thấy.
+    */
+    static async getFacilityIdByRestaurantId(restaurantId) {
+        if (!restaurantId) {
+            throw new Error('Restaurant ID là bắt buộc.');
+        }
+        try {
+            return await RestaurantModel.getFacilityIdByRestaurantId(restaurantId);
+        } catch (error) {
+            console.error('Error in RestaurantService.getFacilityIdByRestaurantId:', error.message);
+            throw new Error('Đã xảy ra lỗi khi lấy Facility ID.');
+        }
+    }
+
+    /**
+     * Cập nhật thông tin nhà hàng.
+     * @param {number} restaurantId - ID của nhà hàng.
+     * @param {string} amenities - Tiện nghi mới của nhà hàng.
+     * @param {number} averagePrice - Giá trung bình mới của nhà hàng.
+     * @returns {boolean} - Trạng thái cập nhật (true: thành công, false: thất bại).
+     */
+    static async updateRestaurant(restaurantId, amenities, averagePrice) {
+        if (!restaurantId) {
+            throw new Error('Restaurant ID là bắt buộc.');
+        }
+        try {
+            return await RestaurantModel.updateRestaurant(restaurantId, amenities, averagePrice);
+        } catch (error) {
+            console.error('Error in RestaurantService.updateRestaurant:', error.message);
+            throw new Error('Đã xảy ra lỗi khi cập nhật nhà hàng.');
+        }
+    }
+
+    static async createRestaurant(providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs) {
+        try {
+            const facilityId = await FacilityService.createFacility
+                (providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs);
+
+            if (!facilityId) {
+                return { success: false, message: "Failed to create facility. Facility ID is null." }
+            }
+            const restaurantId = await RestaurantModel.insertRestaurant(facilityId);
+            if (!restaurantId) {
+                return { success: false, message: "Failed to insert hotel. Hotel ID is null." }
+            }
+            return { success: true, facilityId, restaurantId };
+        } catch (error) {
+            console.error("Error in HotelService.createHotel: ", error.message);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = RestaurantService;

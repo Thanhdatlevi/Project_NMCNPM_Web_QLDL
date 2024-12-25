@@ -41,6 +41,7 @@ class RestaurantModel {
         try {
             const query = `
             SELECT 
+                f.facility_id as facility_id,
                 r.restaurant_id AS res_id,
                 f.facility_name AS res_name,
                 l.location_name AS location,
@@ -53,12 +54,13 @@ class RestaurantModel {
             JOIN facility_images f_i ON f.facility_id = f_i.facility_id
             WHERE f.provider_id = $1
             GROUP BY
-                r.restaurant_id, f.facility_name,
+                f.facility_id, r.restaurant_id, f.facility_name,
                 l.location_name, f.rating, f.deal;
         `;
             const res = await db.query(query, [providerId]);
             if (res.rows.length > 0) {
                 const restaurants = res.rows.map(row => ({
+                    facilityId: row.facility_id,
                     restaurantId: row.res_id,
                     restaurantName: row.res_name,
                     location: row.location,
@@ -414,6 +416,17 @@ class RestaurantModel {
             return res.rows;  // Trả về kết quả chi tiết của nhà hàng
         } catch (error) {
             console.error('Error fetching restaurant details:', error);
+            throw error;
+        }
+    }
+
+    static async insertRestaurant(facilityId) {
+        try {
+            const restaurantQuery = `INSERT INTO restaurants (facility_id) VALUES ($1) RETURNING restaurant_id;`;
+            const result = await db.query(restaurantQuery, [facilityId]);
+            return result.rows[0]?.restaurant_id || null;
+        } catch (error) {
+            console.error("Error in RestaurantModel.insertRestaurant:", error.message);
             throw error;
         }
     }

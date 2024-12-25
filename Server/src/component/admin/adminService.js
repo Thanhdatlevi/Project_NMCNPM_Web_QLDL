@@ -1,5 +1,7 @@
 const AdminModel = require('./adminModel');
-const AccountModel = require('../account/accountModel')
+
+const FacilityService = require('../facility/facilityService');
+const AttractionService = require('../attraction/attractionService');
 
 class AdminService {
     static async getAllUsers() {
@@ -52,7 +54,71 @@ class AdminService {
             console.error("Error in AdminService.deleteAccount:", error);
             throw error;
         }
+    }
 
+    static async deleteFacility(facilityId) {
+        try {
+            const deletedFacility = await FacilityService.deleteFacility(facilityId);
+            if (!deletedFacility) {
+                return { success: false, message: "Facility không tồn tại." };
+            }
+            return { success: true, message: "Facility đã được xóa thành công." };
+
+        } catch (error) {
+            console.error("Error in ProviderService.deleteFacility:", error.message);
+            throw error;
+        }
+    }
+
+    static async addAttractions(name, description, location, phone, openingHours, rating, img_url) {
+        try {
+            const attractions = await AttractionService.addAttractions(name, description, location, phone, openingHours, rating, img_url);
+            return attractions;
+
+        } catch (error) {
+            console.error("Error in add AdminService.addAttractions: ", error);
+            throw error;
+        }
+    }
+    static async updateAttractions(attractionID, name, description, location, phone, openingHours, rating, img_url) {
+        try {
+            const attractions = await AttractionService.updateAttractions(attractionID, name, description, location, phone, openingHours, rating, img_url);
+            return attractions;
+
+        } catch (error) {
+            console.error("Error in add AdminService.updateAttractions: ", error);
+            throw error;
+        }
+    }
+    static async deleteAttractions(attractionID) {
+        try {
+            const attractions = await AttractionService.deleteAttractions(attractionID);
+            return attractions;
+
+        } catch (error) {
+            console.error("Error in AdminService.deleteAttractions: ", error);
+            throw error;
+        }
+    }
+
+    static async getHotelRequests() {
+        try {
+            const hotelRequests = await AdminModel.getHotelRequests();
+            return hotelRequests;
+        } catch (error) {
+            console.error('Error in AdminService.getHotelRequests:', error.message);
+            throw error;
+        }
+    }
+
+    static async getRestaurantRequests() {
+        try {
+            const restaurantRequests = await AdminModel.getRestaurantRequests();
+            return restaurantRequests;
+        } catch (error) {
+            console.error('Error in AdminService.getRestaurantRequests:', error.message);
+            throw error;
+        }
     }
 
 }

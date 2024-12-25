@@ -1,7 +1,6 @@
 const HotelModel = require('./hotelModel');
-const AccountModel = require(`../account/accountModel`);
 
-
+const FacilityService = require('../facility/facilityService');
 class HotelService {
 
     static async get_3_PopularHotels() {
@@ -64,9 +63,8 @@ class HotelService {
         }
     }
 
-    static async getHotelsByProviderId(accountId) {
+    static async getHotelsByProviderId(providerId) {
         try {
-            const providerId = await AccountModel.getProviderId(accountId);
             const hotels = await HotelModel.getHotelsByProviderId(providerId);
             return hotels;
         } catch (error) {
@@ -75,8 +73,48 @@ class HotelService {
         }
     }
 
+    /**
+    * Cập nhật thông tin khách sạn.
+    * @param {number} hotelId - ID của khách sạn.
+    * @param {string} amenities - Tiện nghi mới của khách sạn.
+    * @param {number} averagePrice - Giá trung bình mới của khách sạn.
+    * @returns {Object} - Trạng thái cập nhật và thông báo.
+    */
+    static async updateHotel(hotelId, amenities, averagePrice) {
+        try {
+            if (!hotelId) {
+                return { success: false, message: 'Hotel ID là bắt buộc.' };
+            }
+            const isUpdated = await HotelModel.updateHotel(hotelId, amenities, averagePrice);
+            if (isUpdated) {
+                return { success: true, message: 'Cập nhật thông tin khách sạn thành công.' };
+            } else {
+                return { success: false, message: 'Không tìm thấy khách sạn hoặc không có thông tin nào được cập nhật.' };
+            }
+        } catch (error) {
+            console.error('Error in HotelService.updateHotel:', error.message);
+            throw new Error('Đã xảy ra lỗi khi cập nhật khách sạn.');
+        }
+    }
 
+    static async createHotel(providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs) {
+        try {
+            const facilityId = await FacilityService.createFacility
+                (providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs);
+
+            if (!facilityId) {
+                return { success: false, message: "Failed to create facility. Facility ID is null." }
+            }
+            const hotelId = await HotelModel.insertHotel(facilityId);
+            if (!hotelId) {
+                return { success: false, message: "Failed to insert hotel. Hotel ID is null." }
+            }
+            return { success: true, facilityId, hotelId };
+        } catch (error) {
+            console.error("Error in HotelService.createHotel: ", error.message);
+            throw error;
+        }
+    }
 
 }
-
 module.exports = HotelService;

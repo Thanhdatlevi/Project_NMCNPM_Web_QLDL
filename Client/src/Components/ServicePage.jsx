@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../Styles/ServicePage.css';
 import { Link, useParams } from 'react-router-dom';
-import Booking01 from './Booking-01';
+import FeedbackItem from './FeedbackItem';
 const ServicePage = () => {
 
     const { idService } = useParams();
@@ -264,7 +264,9 @@ const ServicePage = () => {
                 </div>
 
                 <div className="userrating-reviews-Feedback">
-                    <div className="Feedback-items">
+                    <FeedbackItem facilityId={service.facilityId} />
+
+                    {/* <div className="Feedback-items">
                         <div className="feedback-avt">
                             <img src={'/Images/voucher_tour2.jpg'} alt="pic1" />
                         </div>
@@ -343,7 +345,8 @@ const ServicePage = () => {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
+
                 </div>
             </div>
             <div id="related">

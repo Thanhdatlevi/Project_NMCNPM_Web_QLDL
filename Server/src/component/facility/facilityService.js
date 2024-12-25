@@ -1,36 +1,53 @@
 const FacilityModel = require(`./facilityModel`);
-const AccountModel = require(`../account/accountModel`);
 class FacilityService {
-    static async deleteFacility(facilityId, accountId, accountRole) {
+
+    static async getFacilityById(facilityId) {
         try {
-            if (accountRole === 2) {
-                const [facility, provider] = await Promise.all([
-                    FacilityModel.getFacilityById(facilityId),
-                    AccountModel.getProviderId(accountId)
-                ]);
-                if (!facility) {
-                    return { success: false, message: "Facility không tồn tại." };
-                }
-
-                if (provider !== facility.provider_id) {
-                    return { success: false, message: "Bạn không có quyền xóa facility này." };
-                }
-            }
-            else if (accountRole !== 1) {
-                return { success: false, message: "Bạn không có quyền thực hiện thao tác này." };
-            }
-
-            const deletedFacility = await FacilityModel.deleteFacility(facilityId);
-            if (!deletedFacility) {
-                return { success: false, message: "Facility không tồn tại." };
-            }
-
-            return { success: true, message: "Facility đã được xóa thành công." };
+            const facility = await FacilityModel.getFacilityById(facilityId);
+            return facility;
         } catch (error) {
-            console.error("Error in FacilityService.deleteFacility:", error.message);
+            console.error("Error in FacilityService.getFacilityById: ", error.message);
+            throw error;
+        }
+    }
+
+    static async updateFacility(facilityId, facilityName, description, locationId, contact, status, specificLocation) {
+        try {
+            const result = await FacilityModel.updateFacility(facilityId, facilityName, description, locationId, contact, status, specificLocation);
+            return result;
+        } catch (error) {
+            console.error("Error in FacilityService.updateFacility: ".error.message);
+            throw error;
+        }
+    }
+
+    static async deleteFacility(facilityId) {
+        try {
+            const result = await FacilityModel.deleteFacility(facilityId);
+            return result;
+        } catch (error) {
+            console.error("Error in FacilityService.deleteFacility: ", error.message);
+            throw error;
+        }
+    }
+
+    static async createFacility(providerId, facilityName, description, locationId, contact, specificLocation, facilityImgs) {
+        try {
+            const facilityId = await FacilityModel.createFacility(
+                providerId,
+                facilityName,
+                description,
+                locationId,
+                contact,
+                specificLocation,
+                facilityImgs
+            );
+            return facilityId;
+
+        } catch (error) {
+            console.error("Error in FacilityService.createFacility: ".error.message);
             throw error;
         }
     }
 }
-
 module.exports = FacilityService;

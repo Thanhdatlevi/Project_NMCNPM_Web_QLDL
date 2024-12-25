@@ -2,8 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const AccountController = require('../component/account/accountController');
-const ReservationController = require('../component/reservation/reservationController');
+const TouristController = require('../component/tourist/touristController');
 
+router.get('/getReservationHistory', TouristController.getReservationHistory);
 router.get('/getPublicProfile', AccountController.getPublicProfile);
-router.post('/createReservation', ReservationController.createReservation);
+router.post('/updateProfile', AccountController.updateProfile);
+
+router.post('/submitFeedback/:facilityId', TouristController.submitFeedback);
+router.post('/createReservation', TouristController.createReservation);
+
 module.exports = router;
