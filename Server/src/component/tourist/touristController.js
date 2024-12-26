@@ -76,7 +76,7 @@ class TouristController {
         try {
             console.log(1)
             const { accountId } = res.locals.account;
-            const restaurants = await TouristServide.getReserveRestaurantByTouristId(accountId);
+            const restaurants = await TouristService.getReserveRestaurantByTouristId(accountId);
             if (!restaurants) {
                 return res.status(404).json({ message: 'No restaurants found for this provider' });
             }

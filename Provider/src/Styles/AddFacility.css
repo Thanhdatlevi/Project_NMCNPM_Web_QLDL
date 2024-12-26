@@ -1,0 +1,24 @@
+#facility_capacity, #facility_contact{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #000;
+    background: none;
+    outline: none;
+}
+#facility_capacity::placeholder, #facility_contact::placeholder{
+    color: #000;
+}
+#facility_capacity:focus, #facility_contact:focus{
+    border-bottom: 2px solid #007bff;
+}
+#facility_location{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #000;
+    background: none;
+    outline: none;
+}

@@ -3,11 +3,13 @@ import "../Styles/FacilityForm.css";
 
 const FacilityForm = () => {
     const [detail, setDetail] = useState({});
+    const [locations, setLocations] = useState([]);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [capacityList, setCapacityList] = useState([]);
     const [facilityData, setFacilityData] = useState({
         name: "",
         location: "",
+        locationID: "",
         description: "",
         img: [],
         capacity: [], // For rooms or tables
@@ -17,10 +19,21 @@ const FacilityForm = () => {
         deal: "",
         specificLocation: "",
         averagePrice: "",
+
     });
 
     const [service, setService] = useState(localStorage.getItem("selectedService")); // "hotel" or "res"
-
+    // fetch lay danh sach cac location
+    useEffect(() => {
+            fetch("/location/allLocation")
+                .then((response) => response.json())
+                .then((data) => {
+                    setLocations(data);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        }, []);
     useEffect(() => {
         const id = localStorage.getItem("selectedServiceId");
         console.log(id);
@@ -76,31 +89,18 @@ const FacilityForm = () => {
         return <div>Loading...</div>;
     }
 
-    const toggleDialog = () => {
-        setIsDialogOpen(!isDialogOpen);
-    };
-    const addCapacity = () => {
-        const idLength = capacityList.length > 0 ? (service === "res" ? capacityList[0].table_id.length : capacityList[0].roomId.length) - 1 : 3;
-        const newIdNumber = (capacityList.length + 1).toString().padStart(idLength, '0');
-        const newId = service === "res" ? `t${newIdNumber}` : `r${newIdNumber}`;
-        const newCapacity = service === "res"
-            ? { tableId: newId, price: capacityList[0].price, status: "available" }
-            : { roomId: newId, price: capacityList[0].price, status: "available" };
-        setCapacityList([...capacityList, newCapacity]);
-    };
 
-    const removeCapacity = (index) => {
-        const newCapacityList = capacityList.filter((_, i) => i !== index);
-        setCapacityList(newCapacityList);
-    };
     const handleSubmit = (event) => {
         event.preventDefault();
         let updateData = {};
+        let stringAPI = "";
         if (service === "res") {
-             updateData = {
+            stringAPI = `/provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`;
+            updateData = {
                 facilityData: {
                     facilityName: facilityData.name,
                     description: facilityData.description,
+                    locationId: facilityData.locationID,
                     contact: facilityData.contact,
                     status: facilityData.status,
                     specificLocation: facilityData.specificLocation,
@@ -112,10 +112,12 @@ const FacilityForm = () => {
         }
     }
         else {
-             updateData = {
+            stringAPI = `/provider/api/updateHotel/${localStorage.getItem("selectedServiceId")}`;
+            updateData = {
                 facilityData: {
                     facilityName: facilityData.name,
                     description: facilityData.description,
+                    locationId: facilityData.locationID,
                     contact: facilityData.contact,
                     status: facilityData.status,
                     specificLocation: facilityData.specificLocation,
@@ -128,9 +130,11 @@ const FacilityForm = () => {
         
         
         };
-        //console.log(updateData);
+        console.log(updateData);
+        console.log(stringAPI);
         // Send data to server
-        fetch(`/provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
+
+        fetch(stringAPI, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -168,52 +172,63 @@ const FacilityForm = () => {
                     </div>
                     <div className="facility-form-item-inline">
                         <div className="facility-form-item">
-                            <input type="text" id="facility_location" name="facility_location" placeholder="Location" value={facilityData.location}
-                                readOnly
-                            />
+                        <select
+                                id="facility_location"
+                                name="facility_location"
+                                required
+                                
+                                onChange={(e) => setFacilityData({ ...facilityData, locationID: e.target.value })}
+                            >
+                                <option value="">{facilityData.location}</option>
+                                {locations.map(location => (
+                                    <option key={location.locationId} value={location.locationId}>
+                                        {location.locationName}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="facility-form-item">
-                            <input type="text" id="facility_location_detail" name="facility_location_details" placeholder="Location Detail"
-                                required onChange={(e) => setDetail({ ...detail, detail: e.target.value })}
+                            <input type="text" id="facility_contact" name="facility_contact" placeholder="Contact"
+                                required
+                                value={facilityData.contact}
+                                onChange={(e) => setFacilityData({ ...facilityData, contact: e.target.value })}
                             />
                         </div>
                     </div>
 
                     <div className="facility-form-item-inline">
-                        <button onClick={toggleDialog}>Add</button>
-                        {isDialogOpen && (
-                            <div className="dialog">
-                                <div className="dialog-content">
-                                    <h3>Capacity List</h3>
-                                    <div className="capacity-header">
-                                        <p>ID</p>
-                                        <p>Price</p>
-                                        <p>Status</p>
-                                        <p>Action</p>
-                                    </div>
-                                    {capacityList.map((capacity, index) => (
-                                        <div key={index} className="capacity-item">
-                                            <p>{service === "res" ? capacity.tableId : capacity.roomId}</p>
-                                            <p>{capacity.price}</p>
-                                            <p>{capacity.status}</p>
-                                            <button onClick={() => removeCapacity(index)}>Remove</button>
-                                        </div>
-                                    ))}
-                                    <button onClick={addCapacity}>Add Capacity</button>
-                                    <button onClick={toggleDialog}>Close</button>
-                                </div>
-                            </div>
-                        )}
+                        
                         <div id="facility_type" name="facility_type">
                             {service === "hotel" ? "Hotel" : "Restaurant"}
                         </div>
+                        <div className="facility-form-item">
+                            <input type="text" id="facility_location_detail" name="facility_location_details" placeholder="Specific Location"
+                                required 
+                                onChange={(e) => setFacilityData({ ...facilityData, specificLocation: e.target.value })}
+                            />
+                        </div>  
                     </div>
                     <div className="facility-form-item">
                         <textarea id="facility_description" name="facility_description" placeholder="Description"
                             value={facilityData.description} required
                             onChange={(e) => setFacilityData({ ...facilityData, description: e.target.value })} />
                     </div>
-
+                    <div className ="facility-form-item-inline">
+                        <div className ="facility-form-item">
+                            <input type="text" id="facility_amenities" name="facility_amenities" placeholder="Amenities"
+                                required
+                                value={facilityData.amenities}
+                                onChange={(e) => setFacilityData({ ...facilityData, amenities: e.target.value })}
+                            />
+                        </div>
+                        <div className ="facility-form-item">
+                            <input type="text" id="facility_average_price" name="facility_average_price" placeholder="Average Price"
+                                required
+                                value={facilityData.averagePrice}
+                                onChange={(e) => setFacilityData({ ...facilityData, averagePrice: e.target.value })}
+                            />
+                        </div>
+                    </div>
                     <div className="facility-form-item">
 
                         <div className="facility-images">
@@ -223,6 +238,7 @@ const FacilityForm = () => {
 
                         </div>
                     </div>
+                    
                     <div className="facility-form-item">
                         <button type="submit" id="facility_action" onClick={handleSubmit}>Submit</button>
                     </div>

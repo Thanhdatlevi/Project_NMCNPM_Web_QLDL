@@ -5,6 +5,7 @@ import Content from './Components/Content';
 import FacilityForm from './Components/FacilityForm';
 import { BrowserRouter, Routes, Route, Router, Navigate } from 'react-router-dom';
 import ProtectedRoute from './Components/ProtectedRoute';
+import AddFacility from './Components/AddFacility';
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,6 +46,9 @@ function App() {
             </ProtectedRoute>} />
           <Route path="/facilityForm" element={<ProtectedRoute user={user}>
             <FacilityForm />
+          </ProtectedRoute>} />
+          <Route path="/addFacility" element={<ProtectedRoute user={user}>
+            <AddFacility />
           </ProtectedRoute>} />
       </Routes>
       
