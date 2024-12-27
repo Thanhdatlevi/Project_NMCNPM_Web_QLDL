@@ -15,10 +15,11 @@ import RegisterPage from './Components/Register';
 import SelectRole from './Components/selectRole';
 import SearchService from './Components/SearchService';
 import ManageBooking from './Components/ManageBooking';
+import BookingHistory from './Components/BookingHis';
 import FacilityForm from './Components/FacilityForm';
 import ProtectedUserRoute from './Components/ProtectedRouteUser';
 import ProtectedRoute from './Components/ProtectedRoute';
-import MyFacility from './Components/MyFacility';
+
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -69,13 +70,15 @@ function App() {
           <Route path="/searchService" element={<ProtectedRoute user={user}><SearchService /></ProtectedRoute>} />
           <Route path="/manageBooking" element={<ProtectedUserRoute user={user}><ManageBooking /></ProtectedUserRoute>} />
           <Route path="/facilityForm" element={<ProtectedUserRoute user={user}><FacilityForm /></ProtectedUserRoute>} />
-
+          <Route path="/bookingHistory" element={<ProtectedUserRoute user={user}><BookingHistory /></ProtectedUserRoute>} />
 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/role" element={<SelectRole />} />
           
-          <Route path="/myfacility" element={<MyFacility />} />
+         
+
+          
       </Routes>
       <Footer />
     </div>

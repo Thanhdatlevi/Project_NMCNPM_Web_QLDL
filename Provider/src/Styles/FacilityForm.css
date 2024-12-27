@@ -31,6 +31,7 @@
     width: 100%;
     height: 100%;
     border-radius: 8px;
+    margin-left: 16px;
 }
 .image-preview {
     flex: 1;
@@ -42,15 +43,6 @@
 .facility-form-body {
     display: flex;
 }
-#facility_location{
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-bottom: 2px solid #000;
-    background: none;
-    outline: none;
-}
 #facility_location_detail{
     width: 100%;
     padding: 10px;
@@ -60,7 +52,7 @@
     background: none;
     outline: none;
 }
-#facility_name, #facility_price, #facility_type, #facility_description{
+#facility_amenities {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -69,7 +61,25 @@
     background: none;
     outline: none;
 }
-#facility_type, #facility_price{
+#facility_average_price{
+    padding: 10px;
+    margin: 10px 0px;
+    margin-left: 32px;
+    border: none;
+    border-bottom: 2px solid #000;
+    background: none;
+    outline: none;
+}
+#facility_name, #facility_type, #facility_description{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #000;
+    background: none;
+    outline: none;
+}
+#facility_type{
     width: auto;
     padding: 10px;
     margin: 10px 0;

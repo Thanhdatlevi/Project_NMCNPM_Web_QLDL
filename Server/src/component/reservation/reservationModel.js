@@ -20,6 +20,7 @@ class ReservationModel {
     }
 
     static async #insertDetailReservations(reserveId, detailReservations, client) {
+        console.log(detailReservations)
         try {
             const query = `
             INSERT INTO detail_reservations(
@@ -122,5 +123,238 @@ class ReservationModel {
         }
     }
 
+    static async getReserveHotelsByTouristId(touristId) {
+        try {
+            const query = `
+            SELECT 
+                r.reserve_id, 
+                r.reservation_date, 
+                r.status, 
+                r.total_amount,
+                json_agg(
+                    jsonb_build_object(
+                        'quantity', dr.quantity,
+                        'price', dr.price,
+                        'total_price', dr.total_price,
+                        'checkin_time', dr.checkin_time,
+                        'facility_name', dr.facility_name,
+                        'facility_img', dr.facility_img
+                    )
+                ) AS detail_reservations
+            FROM reservations r
+            JOIN detail_reservations dr 
+                ON r.reserve_id = dr.reserve_id
+            JOIN hotels h
+                ON h.facility_id = dr.facility_id
+            WHERE r.tourist_id = $1
+            GROUP BY r.reserve_id
+            ORDER BY r.reservation_date DESC;
+        `;
+            const result = await db.query(query, [touristId]);
+
+            if (result.rows.length > 0) {
+                const reservations = result.rows.map(reservation => {
+                    const detailReservations = Array.isArray(reservation.detail_reservations) && reservation.detail_reservations.length > 0
+                        ? reservation.detail_reservations.map(detail => ({
+                            quantity: detail.quantity,
+                            price: detail.price,
+                            totalPrice: detail.total_price,
+                            checkinTime: detail.checkin_time,
+                            facilityName: detail.facility_name,
+                            facilityImg: detail.facility_img
+                        }))
+                        : null;
+                    return {
+                        reserveId: reservation.reserve_id,
+                        reservationDate: reservation.reservation_date,
+                        status: reservation.status,
+                        totalAmount: reservation.total_amount,
+                        detailReservations: detailReservations
+                    };
+                });
+                return reservations;
+            }
+            return null;
+        } catch (error) {
+            console.error("Error in ReservationModel.getReservationHistory:", error.message);
+            throw error;
+        }
+    }
+
+    static async getReserveRestaurantByTouristId(touristId) {
+        try {
+            const query = `
+            SELECT 
+                r.reserve_id, 
+                r.reservation_date, 
+                r.status, 
+                r.total_amount,
+                json_agg(
+                    jsonb_build_object(
+                        'quantity', dr.quantity,
+                        'price', dr.price,
+                        'total_price', dr.total_price,
+                        'checkin_time', dr.checkin_time,
+                        'facility_name', dr.facility_name,
+                        'facility_img', dr.facility_img
+                    )
+                ) AS detail_reservations
+            FROM reservations r
+            JOIN detail_reservations dr 
+                ON r.reserve_id = dr.reserve_id
+            JOIN restaurants re
+                ON re.facility_id = dr.facility_id
+            WHERE r.tourist_id = $1
+            GROUP BY r.reserve_id
+            ORDER BY r.reservation_date DESC;
+        `;
+            const result = await db.query(query, [touristId]);
+
+            if (result.rows.length > 0) {
+                const reservations = result.rows.map(reservation => {
+                    const detailReservations = Array.isArray(reservation.detail_reservations) && reservation.detail_reservations.length > 0
+                        ? reservation.detail_reservations.map(detail => ({
+                            quantity: detail.quantity,
+                            price: detail.price,
+                            totalPrice: detail.total_price,
+                            checkinTime: detail.checkin_time,
+                            facilityName: detail.facility_name,
+                            facilityImg: detail.facility_img
+                        }))
+                        : null;
+                    return {
+                        reserveId: reservation.reserve_id,
+                        reservationDate: reservation.reservation_date,
+                        status: reservation.status,
+                        totalAmount: reservation.total_amount,
+                        detailReservations: detailReservations
+                    };
+                });
+                return reservations;
+            }
+            return null;
+        } catch (error) {
+            console.error("Error in ReservationModel.getReservationHistory:", error.message);
+            throw error;
+        }
+    }
+
+    static async getReserveHotelsByProviderId(providerId) {
+        try {
+            const query = `
+            SELECT 
+                r.reserve_id, 
+                r.reservation_date, 
+                r.status, 
+                r.total_amount,
+                json_agg(
+                    jsonb_build_object(
+                        'quantity', dr.quantity,
+                        'price', dr.price,
+                        'total_price', dr.total_price,
+                        'checkin_time', dr.checkin_time,
+                        'facility_name', dr.facility_name,
+                        'facility_img', dr.facility_img
+                    )
+                ) AS detail_reservations
+            FROM reservations r
+            JOIN detail_reservations dr 
+                ON r.reserve_id = dr.reserve_id
+            JOIN hotels h
+                ON h.facility_id = dr.facility_id
+            JOIN facilities f on f.facility_id = dr.facility_id
+            WHERE f.provider_id = $1
+            GROUP BY r.reserve_id
+            ORDER BY r.reservation_date DESC;
+        `;
+            const result = await db.query(query, [providerId]);
+
+            if (result.rows.length > 0) {
+                const reservations = result.rows.map(reservation => {
+                    const detailReservations = Array.isArray(reservation.detail_reservations) && reservation.detail_reservations.length > 0
+                        ? reservation.detail_reservations.map(detail => ({
+                            quantity: detail.quantity,
+                            price: detail.price,
+                            totalPrice: detail.total_price,
+                            checkinTime: detail.checkin_time,
+                            facilityName: detail.facility_name,
+                            facilityImg: detail.facility_img
+                        }))
+                        : null;
+                    return {
+                        reserveId: reservation.reserve_id,
+                        reservationDate: reservation.reservation_date,
+                        status: reservation.status,
+                        totalAmount: reservation.total_amount,
+                        detailReservations: detailReservations
+                    };
+                });
+                return reservations;
+            }
+            return null;
+        } catch (error) {
+            console.error("Error in ReservationModel.getReservationHistory:", error.message);
+            throw error;
+        }
+    }
+
+    static async getReserveRestaurantByProviderId(providerId) {
+        try {
+            const query = `
+            SELECT 
+                r.reserve_id, 
+                r.reservation_date, 
+                r.status, 
+                r.total_amount,
+                json_agg(
+                    jsonb_build_object(
+                        'quantity', dr.quantity,
+                        'price', dr.price,
+                        'total_price', dr.total_price,
+                        'checkin_time', dr.checkin_time,
+                        'facility_name', dr.facility_name,
+                        'facility_img', dr.facility_img
+                    )
+                ) AS detail_reservations
+            FROM reservations r
+            JOIN detail_reservations dr 
+                ON r.reserve_id = dr.reserve_id
+            JOIN restaurants re
+                ON re.facility_id = dr.facility_id
+            JOIN facilities f on f.facility_id = dr.facility_id
+            WHERE f.provider_id = $1
+            GROUP BY r.reserve_id
+            ORDER BY r.reservation_date DESC;
+        `;
+            const result = await db.query(query, [providerId]);
+
+            if (result.rows.length > 0) {
+                const reservations = result.rows.map(reservation => {
+                    const detailReservations = Array.isArray(reservation.detail_reservations) && reservation.detail_reservations.length > 0
+                        ? reservation.detail_reservations.map(detail => ({
+                            quantity: detail.quantity,
+                            price: detail.price,
+                            totalPrice: detail.total_price,
+                            checkinTime: detail.checkin_time,
+                            facilityName: detail.facility_name,
+                            facilityImg: detail.facility_img
+                        }))
+                        : null;
+                    return {
+                        reserveId: reservation.reserve_id,
+                        reservationDate: reservation.reservation_date,
+                        status: reservation.status,
+                        totalAmount: reservation.total_amount,
+                        detailReservations: detailReservations
+                    };
+                });
+                return reservations;
+            }
+            return [];
+        } catch (error) {
+            console.error("Error in ReservationModel.getReservationHistory:", error.message);
+            throw error;
+        }
+    }
 }
 module.exports = ReservationModel;

@@ -107,3 +107,46 @@
     padding: 10px;
     border-radius: 10px;
 }
+
+/* Pagination container styling */
+#hisPost .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* General styles for pagination buttons */
+#hisPost .page-button,
+button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Highlight active page button */
+#hisPost .page-button.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    font-weight: bold;
+}
+
+/* Button hover effect */
+#hisPost .page-button:hover,
+button:hover {
+    background-color: #e6e6e6;
+}
+
+/* Disabled button styling */
+#hisPost button[disabled] {
+    background-color: #f9f9f9;
+    color: #aaa;
+    cursor: not-allowed;
+    border-color: #ddd;
+}

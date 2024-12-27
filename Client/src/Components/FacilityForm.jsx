@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import "../Styles/FacilityForm.css";
 
 const FacilityForm = () => {
-    const dialogRef = useRef(null);
     const [detail, setDetail] = useState({});
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [capacityList, setCapacityList] = useState([]);
@@ -41,17 +40,18 @@ const FacilityForm = () => {
                 // Normalize data
                 if (service === "hotel") {
                     setFacilityData({
-                        name: fetchedData.hotel_name,
-                        location: fetchedData.location_name,
-                        description: fetchedData.hotel_description,
-                        img: fetchedData.hotel_images,
-                        capacity: fetchedData.hotel_rooms,
-                        amenities: fetchedData.hotel_amenities,
-                        contact: fetchedData.hotel_contact,
-                        status: fetchedData.hotel_status,
-                        deal: fetchedData.hotel_deal,
+                        name: fetchedData.hotelName,
+                        location: fetchedData.hotelLocation,
+                        description: fetchedData.hotelDescription,
+                        img: fetchedData.hotelImages,
+                        //apacity: fetchedData.hotelRooms,
+                        amenities: fetchedData.hotelAmenities,
+                        contact: fetchedData.hotelContact,
+                        status: fetchedData.hotelStatus,
+                        specificLocation: fetchedData.hotelSpecificLocation,
+                        averagePrice: fetchedData.hotelAveragePrice,
                     });
-                    setCapacityList(fetchedData.hotel_rooms);
+                    setCapacityList(fetchedData.hotelRooms);
                 } else if (service === "res") {
                     setFacilityData({
                         name: fetchedData.resName,
@@ -64,7 +64,7 @@ const FacilityForm = () => {
                         specificLocation: fetchedData.resSpecificLocation,
                         averagePrice: fetchedData.resAveragePrice,
                     });
-
+                    setCapacityList(fetchedData.resTables);
                 }
             })
             .catch((error) => {
@@ -80,12 +80,12 @@ const FacilityForm = () => {
         setIsDialogOpen(!isDialogOpen);
     };
     const addCapacity = () => {
-        const idLength = capacityList.length > 0 ? (service === "res" ? capacityList[0].table_id.length : capacityList[0].room_id.length) - 1 : 3;
+        const idLength = capacityList.length > 0 ? (service === "res" ? capacityList[0].table_id.length : capacityList[0].roomId.length) - 1 : 3;
         const newIdNumber = (capacityList.length + 1).toString().padStart(idLength, '0');
         const newId = service === "res" ? `t${newIdNumber}` : `r${newIdNumber}`;
         const newCapacity = service === "res"
-            ? { table_id: newId, price: capacityList[0].price, status: "available" }
-            : { room_id: newId, price: capacityList[0].price, status: "available" };
+            ? { tableId: newId, price: capacityList[0].price, status: "available" }
+            : { roomId: newId, price: capacityList[0].price, status: "available" };
         setCapacityList([...capacityList, newCapacity]);
     };
 
@@ -95,21 +95,41 @@ const FacilityForm = () => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        const updateData = {
-            facilityData: {
-                facilityName: facilityData.name,
-                description: facilityData.description,
-                contact: facilityData.contact,
-                status: facilityData.status,
-                specificLocation: facilityData.specificLocation,
-            },
-            restaurantData: {
-                amenities: facilityData.amenities,
-            },
-
+        let updateData = {};
+        if (service === "res") {
+             updateData = {
+                facilityData: {
+                    facilityName: facilityData.name,
+                    description: facilityData.description,
+                    contact: facilityData.contact,
+                    status: facilityData.status,
+                    specificLocation: facilityData.specificLocation,
+                },
+                restaurantData: {
+                    amenities: facilityData.amenities,
+                    averagePrice: facilityData.averagePrice,
+                },
+        }
+    }
+        else {
+             updateData = {
+                facilityData: {
+                    facilityName: facilityData.name,
+                    description: facilityData.description,
+                    contact: facilityData.contact,
+                    status: facilityData.status,
+                    specificLocation: facilityData.specificLocation,
+                },
+                hotelData: {
+                    amenities: facilityData.amenities,
+                    averagePrice: facilityData.averagePrice,
+                },
+        }
+        
+        
         };
-        //Send data to server
+        //console.log(updateData);
+        // Send data to server
         fetch(`/provider/api/updateRestaurant/${localStorage.getItem("selectedServiceId")}`, {
             method: "PATCH",
             headers: {
@@ -163,7 +183,7 @@ const FacilityForm = () => {
                         <button onClick={toggleDialog}>Add</button>
                         {isDialogOpen && (
                             <div className="dialog">
-                                <div className="dialog-conte    nt">
+                                <div className="dialog-content">
                                     <h3>Capacity List</h3>
                                     <div className="capacity-header">
                                         <p>ID</p>
@@ -171,7 +191,14 @@ const FacilityForm = () => {
                                         <p>Status</p>
                                         <p>Action</p>
                                     </div>
-
+                                    {capacityList.map((capacity, index) => (
+                                        <div key={index} className="capacity-item">
+                                            <p>{service === "res" ? capacity.tableId : capacity.roomId}</p>
+                                            <p>{capacity.price}</p>
+                                            <p>{capacity.status}</p>
+                                            <button onClick={() => removeCapacity(index)}>Remove</button>
+                                        </div>
+                                    ))}
                                     <button onClick={addCapacity}>Add Capacity</button>
                                     <button onClick={toggleDialog}>Close</button>
                                 </div>

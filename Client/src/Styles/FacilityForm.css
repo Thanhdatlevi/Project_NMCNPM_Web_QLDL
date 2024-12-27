@@ -9,30 +9,30 @@
     border-radius: 8px;
     border: 2px solid #000;
 }
-.facility-form-content{
+.facility-form .facility-form-content{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
     padding: 20px;
 }
-.facility-form-content h2{
+.facility-form .facility-form-content h2{
     color: #007ae7;
     margin-bottom: 10px;
 }
-.facility-form-details{
+.facility-form .facility-form-details{
     display: flex;
     flex-direction: column;
 
     padding: 20px;
     flex: 1;
 }
-.image-preview img{
+.facility-form .image-preview img{
     width: 100%;
     height: 100%;
     border-radius: 8px;
 }
-.image-preview {
+.facility-form .image-preview {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -157,7 +157,6 @@
 }
 
 .dialog-content {
-    display: display;
     justify-content: space-between;
     max-height: 80vh;
     overflow-y: auto;

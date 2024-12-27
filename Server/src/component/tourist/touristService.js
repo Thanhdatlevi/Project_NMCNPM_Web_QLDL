@@ -1,4 +1,6 @@
 const AccountService = require("../account/accountService");
+const HotelService = require('../hol/hotelService');
+const RestaurantService = require('../restaurant/restaurantService');
 const ReservationService = require(`../reservation/reservationService`);
 const FeedbackService = require(`../feedback/feedbackService`);
 class TouristService {
@@ -45,6 +47,28 @@ class TouristService {
         } catch (error) {
             console.error("Error in TouristService.submitFeedback:", error.message);
             return { success: false, message: "Có lỗi xảy ra khi gửi phản hồi." };
+        }
+    }
+    
+    static async getReserveHotelsByTouristId(accountId) {
+        try {
+            const touristId = await AccountService.getTouristId(accountId);
+            const hotels = await ReservationService.getReserveHotelsByTouristId(touristId);
+            return hotels;
+        } catch (error) {
+            console.log("Error in getHotelsByProviderId in hotelService:", error);
+            throw new Error("Unable to fetch hotels by provider.");
+        }
+    }
+
+    static async getReserveRestaurantByTouristId(accountId) {
+        try {
+            const touristId = await AccountService.getTouristId(accountId);
+            const restaurants = await ReservationService.getReserveRestaurantByTouristId(touristId);
+            return restaurants;
+        } catch (error) {
+            console.log("Error in ProviderService.getRestaurantByProviderId:", error);
+            throw new Error("Unable to fetch restaurants by provider.");
         }
     }
 }

@@ -1,132 +1,122 @@
 import '../Styles/Home_Content.css';
-import { Link } from 'react-router-dom';
-// Import các styles của Swiper
+import HomeDashboard from './HomeDashboard';
+import Profile from './Profile'
+import {useNavigate } from 'react-router-dom';
+import ReseveManagement from './ReseveManagement';
+import FacilitiesManagement from './FacilitiesManagement';
 
 import React, { useEffect, useState } from 'react';
 
 
 const Content = () => {
-  const [attractions, setAttractions] = useState([])
-  useEffect(()=>{
-    fetch('/attraction/_10PopularAttraction')
-        .then((response) => response.json())
-        .then((data) => {
-          setAttractions(data)
-        })
-        .catch((error) => console.error('Error:', error));
-  },[]);
+  const [contentType, setContentType] = useState('home');
+  const [user, setUser] = useState(null); // Lưu thông tin người dùng
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate(); // Sử dụng để chuyển hướng trang
+  const renderContent = () => {
+        if (contentType === 'home') {
+            return <HomeDashboard />;
+        }
+        else if(contentType === 'profile'){
+          return <Profile />;
+        }else if(contentType === 'facilitiesManagement'){
+            return <FacilitiesManagement />;
+        }else if(contentType === 'reseveManagement'){
+            return <ReseveManagement />;
+        }
+    };
 
+    useEffect(() => {
+      const fetchAuthentication = async () => {
+          try {
+              const response = await fetch('/authenticate', {
+                  method: 'GET',
+                  credentials: 'include', // Để gửi cookie cùng yêu cầu
+              });
 
+              if (response.ok) {
+                  const data = await response.json();
+                  setUser(data);
+              } else {
+                  setUser(null); // Chưa đăng nhập
+              }
+          } catch (error) {
+              console.error('Error fetching authentication:', error);
+              setUser(null);
+          }finally {
+            setIsLoading(false); // Kết thúc trạng thái tải
+          }
+      };
+
+      fetchAuthentication();
+    }, []);
+  
+    const handleLogout = async () => {
+      try {
+          const response = await fetch('/logout', {
+              method: 'POST',
+              credentials: 'include', // Để gửi cookie trong yêu cầu
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          });
+
+          if (response.ok) {
+              console.log('Logout successful');
+              window.location.href = 'http://localhost:3001/login';// Chuyển hướng về trang đăng nhập
+          } else {
+              console.error('Logout failed');
+              alert('Logout failed. Please try again.');
+          }
+      } catch (error) {
+          console.error('Error during logout:', error);
+          alert('An error occurred during logout. Please try again.');
+      }
+  };
   return (
-    <main>
-        {/* Slider */}
-        <div class="slider-bg">
-            <h1 class="slider-title">Welcome</h1>
+    <section className="container-dashboard">
+        <div className ="side-bar">
+          <div className="logo">
+                  <img src="../Images/logoITISE.png" alt="logo" />
+          </div>
+          <div className="list-select">
+              <div className="dashboard-header list-select-content" onClick={() => setContentType('profile')}>
+                <div className ="notification">
+                  <i class='bx bx-bell'></i>
+                </div>
+                <div className ="admin-info">
+                    <h4>Provider</h4>
+                    {isLoading ? (
+                      <p>Loading...</p>
+                    ) : (
+                      <p>{user ? user.accountName : 'Guest'}</p>
+                    )}
+                </div>
+              </div>
+              <div className="list-select-content" tabIndex="0" onClick={() => setContentType('home')}>
+                <i class='bx bx-home-alt' ></i>
+                Home
+              </div>
+              <div className="list-select-content" tabIndex="0" onClick={() => setContentType('reseveManagement')}>
+                <i class='bx bx-user' ></i>
+                Resevation Management
+              </div>
+              <div className="list-select-content" tabIndex="0" onClick={() => setContentType('facilitiesManagement')}>
+                <i class='bx bx-hotel' ></i>
+                Facilities Management
+              </div>
+              <div className ="blank">
+              </div> 
+              <div className="list-select-content" tabIndex="0" onClick={handleLogout}>
+                <i class='bx bx-exit' ></i>
+                Logout</div>
+          </div>
         </div>
-       
-        {/* List most visited place */}
-        <section className="listVistedPlace">
-          <div style={{ fontSize: '20px', paddingTop: '50px', textAlign: 'center' }}>
-            <h2 data-i18n="list most visited place" style={{ fontSize: '30px', fontWeight: '800', fontFamily: 'Cambria, Cochin, Georgia, Times, "Times New Roman", serif', textAlign: 'left', marginLeft: '20px' }}>
-              Best choice for travellers
-            </h2>
-          </div>
-          <div className="scroll-container">
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              {attractions.map((attr,index)=>{
-                return (
-                  
-                    <div  className="framePlace">
-                      <div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center', padding: '10px' }}>
-                          <img src={attr.img_url} alt="tour_ha_long" width="220" height="200" style={{ objectFit: 'cover' }} />
-                        </div>
-                        <div className="place_content">
-                          <h4>{attr.attraction_name}</h4>
-                          <p style={{ marginTop: '10px' }}>
-                            <span className="tagView text-clamp">{attr.description}</span>
-                          </p>
-                          <p style={{ marginTop: '5px', color: '#757575'}}>
-                            <span style={{ color: '#f09b0a', fontWeight: 'bold', marginRight: '10px' }}>★ {attr.rating}</span>
-                            <span>Mở cửa: {attr.opening_hours} </span>
-                            {/* <span> • 3M+ booked </span> */}
-                          </p>
-                          <p style={{ marginTop: '20px' }}>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  
-                )
-              })}
-              </div>
-          </div>
-        </section>
-
-        <section id="aboutUs">
-          <div class="container">
-              <img src="/Images/girl1_aboutUs.jpg" alt="" id="img1"/>
-              <img src="/Images/man1_aboutUs.jpg" alt="" id="img2"/>
-              <div class="content">
-                  <h2 class="main_title">About us</h2>
-                  <p class="main_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum illo
-                      necessitatibus rem adipisci iste accusamus, fugit quae sit? Placeat tempora, accusamus ipsam
-                      praesentium deserunt quod quis hic inventore tempore sed.</p>
-                  <div class="list_benifit">
-                      <div>
-                          <div>
-                              <i class="fa-solid fa-circle-right"></i>
-                              <span>Personalized Service</span>
-                          </div>
-                          <div>
-                              <i class="fa-solid fa-circle-right"></i>
-                              <span>Best price</span>
-                          </div>
-                      </div>
-                      <div>
-                          <div>
-                              <i class="fa-solid fa-circle-right"></i>
-                              <span>24x7 Support</span>
-                          </div>
-                          <div>
-                              <i class="fa-solid fa-circle-right"></i>
-                              <span>Trusted company</span>
-                          </div>
-                      </div>
-                  </div>
-                  <a href="#!">Explore now</a>
-              </div>
-          </div>
-        </section>
         
-        <section id="featureFacility">
-            <h2>Feature Booking Facility</h2>
-            <div class="container">
-                <a href="#!" class="bookRes ele">
-                    <div>
-                        <Link to="/servicepage">
-                        <h3>Book Restaurant</h3>
-                        </Link>
-                        <p>123+ Restaurant</p>
-                    </div>
-                </a>
-                <a href="#!" class="bookHol ele">
-                    <div>
-                        <h3>Book Hotel</h3>
-                        <p>123+ Hotel</p>
-                    </div>
-                </a>
-                <a href="#!" class="bookTic ele">
-                    <div>
-                        <h3>Book ticket</h3>
-                        <p>123+ Attraction</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    </main>
+        <div className="contentDashboard">
+            {renderContent()}
+        </div>
+    </section>
   );
 };
 

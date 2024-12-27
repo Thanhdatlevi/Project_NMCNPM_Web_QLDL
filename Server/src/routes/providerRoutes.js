@@ -16,6 +16,9 @@ router.delete('/deleteFacility', ProviderController.deleteFacility);
 router.get('/hotel/by-provider', ProviderController.getHotelsByProviderId);
 router.get('/restaurant/by-provider', ProviderController.getRestaurantByProviderId);
 
+router.get('/reservehotel/by-provider', ProviderController.getReserveHotelsByProviderId);
+router.get('/reserverestaurant/by-provider', ProviderController.getReserveRestaurantByProviderId);
+
 router.get('/hotel/:holId', ProviderController.getHotelById_provider);
 router.get('/restaurant/:resId', ProviderController.getRestaurantById_provider);
 

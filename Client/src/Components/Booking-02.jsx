@@ -63,6 +63,7 @@ const Booking02 = ({ bookingData }) => {
             }
             const data = await response.json();
             const chosenRestaurants = data.filter(element => element.location_id === city)
+            console.log(chosenRestaurants)
             const restaurants = chosenRestaurants.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
@@ -146,7 +147,6 @@ const Booking02 = ({ bookingData }) => {
             totalPrice: restaurant.totalPrice,
             img: restaurant.img_url
         }));
-
         const bookingData = {
             status: 'reserved',
             detailReservation: [
@@ -156,30 +156,31 @@ const Booking02 = ({ bookingData }) => {
             //final_total: finalTotal()
         };
         console.log(bookingData);
-        // fetch('/tourist/createReservation', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(bookingData),
-        // })
-        //     .then(async (response) => {
-        //         // Kiểm tra nếu response không thành công
-        //         if (!response.ok) {
-        //             const errorMessage = await response.text(); // Hoặc response.json() nếu server trả về JSON
-        //             throw new Error(`Error: ${errorMessage}`);
-        //         }
-        //         return response.json(); // Đọc nội dung JSON từ server
-        //     })
-        //     .then((data) => {
-        //         console.log('Success:', data.message); // In message từ server nếu có
-        //         alert(data.message || 'Your payment has been processed successfully.');
-        //         window.location.href = '/confirmation';
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error:', error.message); // In lỗi từ server hoặc từ client
-        //         alert(`There was an error: ${error.message}`);
-        //     });
+        fetch('/tourist/createReservation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bookingData),
+        })
+            .then(async (response) => {
+                // Kiểm tra nếu response không thành công
+                if (!response.ok) {
+                    const errorMessage = await response.text(); // Hoặc response.json() nếu server trả về JSON
+                    throw new Error(`Error: ${errorMessage}`);
+                }
+                return response.json(); // Đọc nội dung JSON từ server
+            })
+            .then((data) => {
+                console.log('Success:', data.message); // In message từ server nếu có
+                alert(data.message || 'Your payment has been processed successfully.');
+                window.location.href = '/confirmation';
+            })
+            .catch((error) => {
+                console.error('Error:', error.message); // In lỗi từ server hoặc từ client
+                alert(`There was an error: ${error.message}`);
+            });
+            window.location.href = "/home";
     }
 
     function generateItem(item) {

@@ -8,24 +8,14 @@
     margin-top: 20px;
 }
 
-.type-booking h2 {
-    font-size: 1.5em;
-}
-
-.type-booking select {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.tabs {
+#history .tabs {
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
     border-bottom: 2px solid #e5e5e5;
 }
 
-.tabs button {
+#history .tabs button {
     background: none;
     border: none;
     padding: 10px;
@@ -34,12 +24,12 @@
     color: #555;
 }
 
-.tabs .active {
+#history .tabs .active {
     color: #b3cde0;
     border-bottom: 3px solid #b3cde0;
 }
 
-.booking-card {
+#history .booking-card {
     display: flex;
     align-items: center;
     margin-top: 20px;
@@ -48,7 +38,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.booking-card img {
+#history .booking-card img {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -56,29 +46,111 @@
     margin-right: 15px;
 }
 
-.booking-info {
+#history .booking-info {
     flex: 1;
 }
 
-.booking-info h3 {
+#history .booking-info h3 {
     font-size: 1.2em;
     margin-bottom: 5px;
     margin-left: 10px;
 }
 
-.booking-info p {
+#history .booking-info p {
     color: #888;
     font-size: 0.9em;
     margin-bottom: 5px;
 }
 
-.check-info {
-    display: flex;
-    justify-content: space-around;
-    font-size: 0.8em;
-    color: #555;
+/* Button for opening details */
+#history .detail-button {
+    background-color: #b3cde0;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
-.check-info div {
-    text-align: center;
+#history .detail-button:hover {
+    background-color: #6497b1;
+}
+
+/* Dialog container */
+#history .detail-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Dialog content */
+#history .dialog-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-height: 25vh;
+    overflow-y: auto;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Close button */
+#history .close-dialog {
+    position: absolute;
+    font-size: 40px;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+}
+
+#history .close-dialog:hover {
+    color: #333;
+}
+
+/* Details in dialog */
+#history .dialog-details {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+#history .row{
+    display: flex;
+    justify-content: space-between;
+}
+
+#history .dialog-detail {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#history .dialog-detail:last-child {
+    border-bottom: none;
+}
+
+/* Scrollbar styling for dialog */
+#history .dialog-details::-webkit-scrollbar {
+    width: 8px;
+}
+
+#history .dialog-details::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
+#history .dialog-details::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
 }

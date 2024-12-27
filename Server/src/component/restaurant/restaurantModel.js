@@ -70,7 +70,7 @@ class RestaurantModel {
                 }));
                 return restaurants;
             }
-            return null;
+            return [];
         } catch (error) {
             console.error('Error getRestaurantByProviderId in restaurantModel:', error);
             throw error;
