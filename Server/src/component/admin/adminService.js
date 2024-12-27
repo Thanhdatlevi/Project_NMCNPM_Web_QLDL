@@ -7,7 +7,7 @@ class AdminService {
     static async getAllUsers() {
         try {
             let users = await AdminModel.getAllUsers();
-            return users;
+            return users || [];
         }
         catch (error) {
             console.log("Error getAllUsers in AdminController:", error);
@@ -19,7 +19,7 @@ class AdminService {
     static async getAllocationsNum() {
         try {
             let allcationsNum = await AdminModel.getAllocationsNum();
-            return allcationsNum;
+            return allcationsNum || 0;
         } catch (error) {
             throw error;
         }
@@ -28,7 +28,7 @@ class AdminService {
     static async getFacilitiesNum() {
         try {
             let facilitiesNum = await AdminModel.getFacilitiesNum();
-            return facilitiesNum;
+            return facilitiesNum || 0;
         } catch (error) {
             throw error;
         }
@@ -37,7 +37,7 @@ class AdminService {
     static async getUsersNum() {
         try {
             let usersNum = await AdminModel.getUsersNum();
-            return usersNum;
+            return usersNum || 0;
         } catch (error) {
             throw error;
         }
@@ -104,7 +104,7 @@ class AdminService {
     static async getHotelRequests() {
         try {
             const hotelRequests = await AdminModel.getHotelRequests();
-            return hotelRequests;
+            return hotelRequests || [];
         } catch (error) {
             console.error('Error in AdminService.getHotelRequests:', error.message);
             throw error;
@@ -114,7 +114,7 @@ class AdminService {
     static async getRestaurantRequests() {
         try {
             const restaurantRequests = await AdminModel.getRestaurantRequests();
-            return restaurantRequests;
+            return restaurantRequests || [];
         } catch (error) {
             console.error('Error in AdminService.getRestaurantRequests:', error.message);
             throw error;

@@ -27,9 +27,9 @@ class TouristController {
             const { accountId } = res.locals.account;  // Lấy accountId từ thông tin trong middleware (res.locals)
             const result = await TouristService.getReservationHistory(accountId);
             if (result.success) {
-                return res.status(200).json({ data: result.data });
+                return res.status(200).json(result);
             }
-            return res.status(404).json({ message: result.message || "Không tìm thấy dữ liệu." });
+            return res.status(404).json({ message: result.message });
         } catch (error) {
             console.error("Error in TouristController.getReservationHistory:", error.message);
             return res.status(500).json({ message: "Có lỗi xảy ra. Vui lòng thử lại sau." });
@@ -61,11 +61,11 @@ class TouristController {
     static async getReserveHotelsByTouristId(req, res) {
         try {
             const { accountId } = res.locals.account;
-            const hotels = await TouristServide.getReserveHotelsByTouristId(accountId);
-            if (!hotels || hotels.length === 0) {
-                return res.status(404).json({ message: 'No hotels found for this provider' });
+            const result = await TouristService.getReserveHotelsByTouristId(accountId);
+            if (!result.success) {
+                return res.status(404).json({ message: result.message });
             }
-            res.status(200).json(hotels);
+            res.status(200).json(result);
         } catch (error) {
             console.error('Error retrieving hotels by provider:', error.message);
             res.status(500).json({ message: 'Failed to retrieve hotels by provider' });
@@ -74,19 +74,16 @@ class TouristController {
 
     static async getReserveRestaurantByTouristId(req, res) {
         try {
-            console.log(1)
             const { accountId } = res.locals.account;
-            const restaurants = await TouristService.getReserveRestaurantByTouristId(accountId);
-            if (!restaurants) {
-                return res.status(404).json({ message: 'No restaurants found for this provider' });
+            const result = await TouristService.getReserveRestaurantByTouristId(accountId);
+            if (!result) {
+                return res.status(404).json({ message: result.message });
             }
-            res.status(200).json(restaurants);
+            res.status(200).json(result);
         } catch (error) {
             console.error('Error in getRestaurantByProviderId:', error);
             res.status(500).json({ message: 'Internal server error' });
         }
     }
 }
-
-
 module.exports = TouristController;

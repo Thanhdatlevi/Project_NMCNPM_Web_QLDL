@@ -20,10 +20,7 @@ class ReservationService {
     static async getReservationHistory(touristId) {
         try {
             const result = await ReservationModel.getReservationHistory(touristId);
-            if (result) {
-                return { success: true, data: result };
-            }
-            return { succes: false };
+            return result || [];
         } catch (error) {
             console.error("Error in ReservationService.createReservation:", error.message);
             throw error;
@@ -33,10 +30,7 @@ class ReservationService {
     static async getReserveHotelsByTouristId(touristId) {
         try {
             const result = await ReservationModel.getReserveHotelsByTouristId(touristId);
-            if (result) {
-                return { success: true, data: result };
-            }
-            return { succes: false };
+            return result || [];
         } catch (error) {
             console.error("Error in ReservationService.createReservation:", error.message);
             throw error;
@@ -46,10 +40,7 @@ class ReservationService {
     static async getReserveRestaurantByTouristId(touristId) {
         try {
             const result = await ReservationModel.getReserveRestaurantByTouristId(touristId);
-            if (result) {
-                return { success: true, data: result };
-            }
-            return { succes: false };
+            return result || [];
         } catch (error) {
             console.error("Error in ReservationService.createReservation:", error.message);
             throw error;

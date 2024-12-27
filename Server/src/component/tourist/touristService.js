@@ -49,10 +49,13 @@ class TouristService {
             return { success: false, message: "Có lỗi xảy ra khi gửi phản hồi." };
         }
     }
-    
+
     static async getReserveHotelsByTouristId(accountId) {
         try {
             const touristId = await AccountService.getTouristId(accountId);
+            if (!touristId) {
+                return { success: false, message: "Tài khoản không tồn tại." };
+            }
             const hotels = await ReservationService.getReserveHotelsByTouristId(touristId);
             return hotels;
         } catch (error) {
@@ -64,6 +67,9 @@ class TouristService {
     static async getReserveRestaurantByTouristId(accountId) {
         try {
             const touristId = await AccountService.getTouristId(accountId);
+            if (!touristId) {
+                return { success: false, message: "Tài khoản không tồn tại." };
+            }
             const restaurants = await ReservationService.getReserveRestaurantByTouristId(touristId);
             return restaurants;
         } catch (error) {

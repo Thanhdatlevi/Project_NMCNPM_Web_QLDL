@@ -20,9 +20,6 @@ class AttractionController {
     static async get_10_PopularAttractions(req, res) {
         try {
             const popularAttractions = await AttractionService.get_10_PopularAttractions();
-            if (!popularAttractions) {
-                return res.status(404).json({ message: 'Popular attractions not found' });
-            }
             res.status(200).json(popularAttractions);
         } catch (error) {
             console.error("Error in get_10_PopularAttractions:", error);
@@ -34,15 +31,13 @@ class AttractionController {
         try {
             const { locationId } = req.params;
             const relatedAttraction = await AttractionService.getAttractionsByLocationId(locationId);
-            if (!relatedAttraction) {
-                return res.status(404).json({ message: 'No attractions found for this location' });
-            }
             res.status(200).json(relatedAttraction);
         } catch (error) {
             console.error("Error in getAttractionsByLocationId:", error);
             res.status(500).json({ message: 'Internal server error' });
         }
     }
+
     static async getFilterAttraction(req, res) {
         try {
             const result = {
@@ -61,9 +56,6 @@ class AttractionController {
     static async getAttractionsTotal(req, res) {
         try {
             const total = await AttractionService.getAttractionsTotal();
-            if (!total) {
-                return res.status(404).json({ message: 'No total attractions found' });
-            }
             res.status(200).json(total);
         } catch (error) {
             console.error("Error in getAttractionsTotal:", error);
@@ -76,9 +68,6 @@ class AttractionController {
             const pageNum = parseInt(req.query.page, 10) || 1;
             const limit = parseInt(req.query.limit, 10) || 5;
             const attractions = await AttractionService.getAttractionsByPage(pageNum, limit);
-            if (!attractions) {
-                return res.status(404).json({ message: 'No attractions found for this page' });
-            }
             return res.status(200).json(attractions);
         } catch (error) {
             console.error("Error in getAttractionsByPage:", error);

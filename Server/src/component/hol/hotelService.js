@@ -27,7 +27,7 @@ class HotelService {
         try {
             const offset = (pageNum - 1) * limit;
             const hotels = await HotelModel.getHotelsByPage(limit, offset);
-            return hotels;
+            return hotels || [];
         } catch (error) {
             throw error;
         }
@@ -56,7 +56,7 @@ class HotelService {
     static async getHotelsByLocationId(locationId) {
         try {
             const hotels = await HotelModel.getHotelsByLocation(locationId);
-            return hotels;
+            return hotels || [];
         } catch (error) {
             console.log("Error in getHotelsByLocationId in hotelService:", error);
             throw new Error("Unable to fetch hotels by location.");

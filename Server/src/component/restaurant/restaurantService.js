@@ -7,7 +7,7 @@ class RestaurantService {
         try {
             const offset = (pageNum - 1) * limit;
             const restaurants = await RestaurantModel.getRestaurantsByPage(limit, offset);
-            return restaurants;
+            return restaurants || [];
         } catch (error) {
             throw error;
         }
@@ -16,7 +16,7 @@ class RestaurantService {
     static async getRestaurantsTotal() {
         try {
             const total = await RestaurantModel.getRestaurantsTotal();
-            return total;
+            return total || 0;
         } catch (error) {
             console.error("Error in getRestaurantsTotal in restaurantService: ", error.message);
             throw error;
@@ -70,7 +70,7 @@ class RestaurantService {
     static async getRestaurantsByLocationId(locationId) {
         try {
             const restaurants = await RestaurantModel.getRestaurantsByLocation(locationId);
-            return restaurants;
+            return restaurants || [];
         } catch (error) {
             console.log("Error in getRestaurantsByLocationId in restaurantService:", error);
             throw new Error("Unable to fetch restaurants by location.");

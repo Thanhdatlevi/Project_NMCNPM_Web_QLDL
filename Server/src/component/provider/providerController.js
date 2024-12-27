@@ -15,13 +15,9 @@ class ProviderController {
 
             const result = await ProviderService.updateHotel(hotelId, accountId, updateData);
             if (result.success) {
-                return res.status(200).json({
-                    message: result.message || "Cập nhật khách sạn thành công!"
-                });
+                return res.status(204).send();
             } else {
-                return res.status(400).json({
-                    message: result.message || "Có lỗi xảy ra khi cập nhật khách sạn."
-                });
+                return res.status(400).json({ message: result.message });
             }
         } catch (error) {
             console.error("Error in ProviderController.updateHotel controller: ", error);
@@ -45,13 +41,9 @@ class ProviderController {
             const result = await ProviderService.updateRestaurant(restaurantId, accountId, updateData);
 
             if (result.success) {
-                return res.status(200).json({
-                    message: result.message || "Cập nhật nhà hàng thành công!"
-                });
+                return res.status(204).send();
             } else {
-                return res.status(400).json({
-                    message: result.message || "Có lỗi xảy ra khi cập nhật nhà hàng."
-                });
+                return res.status(400).json({ message: result.message });
             }
         } catch (error) {
             console.error("Error in ProviderController.updateRestaurant: ", error);
@@ -90,7 +82,7 @@ class ProviderController {
                 }
                 const result = await ProviderService.requestHotel(accountId, requestData);
                 if (result.success) {
-                    return res.status(200).json(result);
+                    return res.status(204).send();
                 } else {
                     return res.status(400).json(result);
                 }
@@ -130,7 +122,7 @@ class ProviderController {
             }
             const result = await ProviderService.requestRestaurant(accountId, requestData);
             if (result.success) {
-                return res.status(200).json(result);
+                return res.status(204).send();
             } else {
                 return res.status(400).json(result);
             }
@@ -149,7 +141,7 @@ class ProviderController {
             }
             const result = await ProviderService.deleteFacility(accountId, facilityId);
             if (result.success) {
-                return res.status(200).json({ message: "Facility đã được xóa thành công." });
+                return res.status(204).send();
             } else {
                 return res.status(404).json({ message: "Facility không tồn tại hoặc không thể xóa." });
             }
@@ -164,9 +156,6 @@ class ProviderController {
         try {
             const { accountId } = res.locals.account;
             const hotels = await ProviderService.getHotelsByProviderId(accountId);
-            if (!hotels) {
-                return res.status(204).send();
-            }
             res.status(200).json(hotels);
         } catch (error) {
             console.error('Error retrieving hotels by provider:', error.message);
@@ -178,9 +167,6 @@ class ProviderController {
         try {
             const { accountId } = res.locals.account;
             const restaurants = await ProviderService.getRestaurantByProviderId(accountId);
-            if (!restaurants) {
-                return res.status(204).send();
-            }
             res.status(200).json(restaurants);
         } catch (error) {
             console.error('Error in getRestaurantByProviderId:', error);
@@ -220,10 +206,7 @@ class ProviderController {
         try {
             const { accountId } = res.locals.account;
             const hotels = await ProviderService.getReserveHotelsByProviderId(accountId);
-            if (!hotels) {
-                return res.status(204).send();
-            }
-            res.status(200).json(hotels);
+            return res.status(200).json(hotels);
         } catch (error) {
             console.error('Error in getReserveHotelsByProviderId:', error);
             res.status(500).json({ message: 'Error retrieving hotels by provider' });
@@ -234,10 +217,7 @@ class ProviderController {
         try {
             const { accountId } = res.locals.account;
             const restaurants = await ProviderService.getReserveRestaurantByProviderId(accountId);
-            if (!restaurants) {
-                return res.status(404).json({ message: 'No restaurants found for this provider' });
-            }
-            res.status(200).json(restaurants);
+            return res.status(200).json(restaurants);
         } catch (error) {
             console.error('Error in getReserveRestaurantByProviderId:', error);
             res.status(500).json({ message: 'Internal server error' });

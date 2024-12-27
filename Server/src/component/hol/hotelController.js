@@ -29,9 +29,6 @@ class HotelController {
             const pageNum = parseInt(req.query.page, 10) || 1;
             const limit = parseInt(req.query.limit, 10) || 5;
             const hotels = await HotelService.getHotelsByPage(pageNum, limit);
-            if (!hotels || hotels.length === 0) {
-                return res.status(404).json({ message: 'No hotels found for this page' });
-            }
             return res.status(200).json(hotels);
         } catch (error) {
             console.error('Error in getHotelByPage:', error.message);
@@ -57,17 +54,12 @@ class HotelController {
         try {
             const { locationId } = req.params;
             const hotels = await HotelService.getHotelsByLocationId(locationId);
-            if (!hotels || hotels.length === 0) {
-                return res.status(404).json({ message: 'No hotels found for this location' });
-            }
             res.status(200).json(hotels);
         } catch (error) {
             console.error('Error retrieving hotels by location:', error.message);
             res.status(500).json({ message: 'Failed to retrieve hotels by location' });
         }
     }
-
-
 
     static async getFilterHotel(req, res) {
         try {

@@ -31,9 +31,6 @@ class RestaurantController {
     static async getRestaurantsTotal(req, res) {
         try {
             const total = await RestaurantService.getRestaurantsTotal();
-            if (!total) {
-                return res.status(404).json({ message: 'No restaurants found' });
-            }
             res.status(200).json(total);
         } catch (error) {
             console.error('Error in getRestaurantsTotal:', error);
@@ -46,9 +43,6 @@ class RestaurantController {
             const pageNum = parseInt(req.query.page, 10) || 1;
             const limit = parseInt(req.query.limit, 10) || 5;
             const restaurants = await RestaurantService.getRestaurantsByPage(pageNum, limit);
-            if (!restaurants) {
-                return res.status(404).json({ message: 'No restaurants found for this page' });
-            }
             return res.status(200).json(restaurants);
         } catch (error) {
             console.error("Error in getRestaurantByPage:", error.message);
@@ -60,11 +54,7 @@ class RestaurantController {
         try {
             const { locationId } = req.params;
             const restaurants = await RestaurantService.getRestaurantsByLocationId(locationId);
-            if (restaurants) {
-                res.status(200).json(restaurants);
-            } else {
-                res.status(404).json({ message: 'No restaurants found for this location' });
-            }
+            return res.status(200).json(restaurants);
         } catch (error) {
             console.error('Error retrieving restaurants:', error);
             res.status(500).json({ message: 'Internal server error' });

@@ -4,11 +4,7 @@ class AdminController {
     static async getAllUsers(req, res) {
         try {
             let users = await AdminService.getAllUsers();
-            if (!users) {
-                return res.status(204).json({ message: 'Không tìm thấy người dùng nào.' });
-            }
             return res.status(200).json(users);
-
         } catch (error) {
             console.error("Error in AdminController.getAllUsers:", error);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -18,9 +14,6 @@ class AdminController {
     static async getAllocationsNum(req, res) {
         try {
             let allcationsNum = await AdminService.getAllocationsNum();
-            if (!allcationsNum) {
-                return res.status(204).json({ message: 'Không tìm thấy số lượng địa điểm thu hút' });
-            }
             return res.status(200).json(allcationsNum);
         } catch (error) {
             console.error("Error in AdminController.getAllocationsNum:", error);
@@ -31,9 +24,6 @@ class AdminController {
     static async getFacilitiesNum(req, res) {
         try {
             let facilitiesNum = await AdminService.getFacilitiesNum();
-            if (!facilitiesNum) {
-                return res.status(204).json({ message: 'Không tìm thấy số lượng cơ sở.' });
-            }
             return res.status(200).json(facilitiesNum);
 
         } catch (error) {
@@ -45,9 +35,6 @@ class AdminController {
     static async getUsersNum(req, res) {
         try {
             let usersNum = await AdminService.getUsersNum();
-            if (!usersNum) {
-                return res.status(204).json({ message: 'Không tìm thấy số lượng người dùng.' });
-            }
             return res.status(200).json(usersNum);
 
         } catch (error) {
@@ -60,13 +47,13 @@ class AdminController {
         try {
             const { accountId } = req.body;
             if (!accountId) {
-                return res.status(400).json({ message: 'Bắt buộc phải có accountId' });
+                return res.status(401).json({ message: 'Bạn chưa đăng nhập. Vui lòng đăng nhập để thực hiện thao tác này.' });
             }
             const result = await AdminService.deleteAccount(accountId);
             if (!result.success) {
-                return res.status(204).json({ message: result.message });
+                return res.status(404).json({ message: result.message });
             }
-            return res.status(200).json({ message: result.message });
+            return res.status(204).send();
         } catch (error) {
             console.error("Error in AdminController.deleteAccount:", error);
             return res.status(500).json({ message: 'Hệ thống lỗi! Vui lòng thử lại sau.' });
@@ -80,12 +67,10 @@ class AdminController {
                 return res.status(400).json({ message: "Thiếu facilityId." });
             }
             const result = await AdminService.deleteFacility(facilityId);
-            if (result.success) {
-                return res.status(200).json({ message: "Facility đã được xóa thành công." });
-            } else {
+            if (!result.success) {
                 return res.status(404).json({ message: "Facility không tồn tại hoặc không thể xóa." });
             }
-
+            return res.status(204).send();
         } catch (error) {
             console.error("Error in AdminController.deleteFacility:", error.message);
             return res.status(500).json({ message: "Có lỗi xảy ra, vui lòng thử lại sau." });
@@ -99,7 +84,7 @@ class AdminController {
             if (!attractionRelated) {
                 return res.status(404).json({ message: 'Can\'t add attraction' });
             }
-            res.json(attractionRelated);  // Trả về thông tin chi tiết nhà hàng
+            res.json(attractionRelated);
         } catch (error) {
             res.status(500).json({ message: 'Can\'t add attraction' });
         }
@@ -135,9 +120,6 @@ class AdminController {
     static async getHotelRequests(req, res) {
         try {
             const hotelRequests = await AdminService.getHotelRequests();
-            if (!hotelRequests) {
-                return res.status(404).json({ message: 'Không có yêu cầu khách sạn nào.' });
-            }
             return res.status(200).json(hotelRequests);
         } catch (error) {
             console.error('Error in AdminController.getHotelRequests:', error.message);
@@ -148,9 +130,6 @@ class AdminController {
     static async getRestaurantRequests(req, res) {
         try {
             const restaurantRequests = await AdminService.getRestaurantRequests();
-            if (!restaurantRequests) {
-                return res.status(404).json({ message: 'Không có yêu cầu nhà hàng nào.' });
-            }
             return res.status(200).json(restaurantRequests);
         } catch (error) {
             console.error('Error in AdminController.getRestaurantRequests:', error.message);
