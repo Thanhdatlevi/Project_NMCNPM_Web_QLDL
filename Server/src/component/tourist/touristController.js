@@ -11,7 +11,7 @@ class TouristController {
             if (result.success) {
                 return res.status(201).json({
                     message: 'Reservation created successfully.',
-                    reserveId: result.reserveId
+                    reserveId: result.result.reserveId
                 });
             } else {
                 return res.status(400).json({ success: false, message: result.message });
@@ -27,7 +27,7 @@ class TouristController {
             const { accountId } = res.locals.account;  // Lấy accountId từ thông tin trong middleware (res.locals)
             const result = await TouristService.getReservationHistory(accountId);
             if (result.success) {
-                return res.status(200).json(result);
+                return res.status(200).json(result.data);
             }
             return res.status(404).json({ message: result.message });
         } catch (error) {
@@ -65,7 +65,7 @@ class TouristController {
             if (!result.success) {
                 return res.status(404).json({ message: result.message });
             }
-            res.status(200).json(result);
+            res.status(200).json(result.data);
         } catch (error) {
             console.error('Error retrieving hotels by provider:', error.message);
             res.status(500).json({ message: 'Failed to retrieve hotels by provider' });
@@ -79,7 +79,7 @@ class TouristController {
             if (!result) {
                 return res.status(404).json({ message: result.message });
             }
-            res.status(200).json(result);
+            res.status(200).json(result.data);
         } catch (error) {
             console.error('Error in getRestaurantByProviderId:', error);
             res.status(500).json({ message: 'Internal server error' });

@@ -11,7 +11,7 @@ class TouristService {
                 return { success: false, message: "Tài khoản không tồn tại." };
             }
             const result = await ReservationService.createReservation(touristId, status, detailReservation);
-            return result;
+            return { success: true, result };
         } catch (error) {
             console.error("Error in TouristService.createReservation:", error.message);
             throw new Error("Có lỗi xảy ra khi tạo đơn đặt chỗ.");
@@ -24,8 +24,8 @@ class TouristService {
             if (!touristId) {
                 return { success: false, message: "Tài khoản không tồn tại." };
             }
-            const result = await ReservationService.getReservationHistory(touristId);
-            return result;
+            result = await ReservationService.getReservationHistory(touristId);
+            return { success: true, data: result };
         } catch (error) {
             console.error("Error in TouristService.getReservationHistory:", error.message);
             throw new Error("Có lỗi xảy ra khi lấy lịch sử đặt chỗ.");
@@ -57,7 +57,7 @@ class TouristService {
                 return { success: false, message: "Tài khoản không tồn tại." };
             }
             const hotels = await ReservationService.getReserveHotelsByTouristId(touristId);
-            return hotels;
+            return { success: true, data: hotels };
         } catch (error) {
             console.log("Error in getHotelsByProviderId in hotelService:", error);
             throw new Error("Unable to fetch hotels by provider.");
@@ -71,7 +71,7 @@ class TouristService {
                 return { success: false, message: "Tài khoản không tồn tại." };
             }
             const restaurants = await ReservationService.getReserveRestaurantByTouristId(touristId);
-            return restaurants;
+            return { success: true, data: restaurants };
         } catch (error) {
             console.log("Error in ProviderService.getRestaurantByProviderId:", error);
             throw new Error("Unable to fetch restaurants by provider.");
