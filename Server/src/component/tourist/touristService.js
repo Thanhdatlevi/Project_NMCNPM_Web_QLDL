@@ -24,7 +24,7 @@ class TouristService {
             if (!touristId) {
                 return { success: false, message: "Tài khoản không tồn tại." };
             }
-            result = await ReservationService.getReservationHistory(touristId);
+            const result = await ReservationService.getReservationHistory(touristId);
             return { success: true, data: result };
         } catch (error) {
             console.error("Error in TouristService.getReservationHistory:", error.message);
