@@ -204,6 +204,7 @@ const FacilityForm = () => {
                         <div className="facility-form-item">
                             <input type="text" id="facility_location_detail" name="facility_location_details" placeholder="Specific Location"
                                 required 
+                                value={facilityData.specificLocation}
                                 onChange={(e) => setFacilityData({ ...facilityData, specificLocation: e.target.value })}
                             />
                         </div>  
