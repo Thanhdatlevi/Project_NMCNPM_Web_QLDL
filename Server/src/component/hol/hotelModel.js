@@ -234,7 +234,6 @@ class HotelModel {
                 l.location_name, f.rating, f.deal;
         `;
             const res = await db.query(query, [providerId]);
-            console.log(res);
             if (res.rows.length > 0) {
                 const hotels = res.rows.map(row => ({
                     facilityId: row.facility_id,
@@ -247,7 +246,7 @@ class HotelModel {
                 }));
                 return hotels;
             }
-            return [];
+            return null;
         } catch (error) {
             console.error('Error getHotelsByProviderId in hotelModel:', error);
             throw error;

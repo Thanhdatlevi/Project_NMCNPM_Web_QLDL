@@ -73,6 +73,15 @@ class HotelService {
         }
     }
 
+    static async getFacilityIdByHotelId(hotelId) {
+        try {
+            const facilityId = await HotelModel.getFacilityIdByHotelId(hotelId);
+            return facilityId;
+        } catch (error) {
+            console.error("Error in getFacilityIdByHotelId in hotelService:", error.message);
+            throw new Error("Unable to fetch facility ID by hotel ID.");
+        }
+    }
     /**
     * Cập nhật thông tin khách sạn.
     * @param {number} hotelId - ID của khách sạn.

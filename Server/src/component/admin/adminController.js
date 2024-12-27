@@ -5,7 +5,7 @@ class AdminController {
         try {
             let users = await AdminService.getAllUsers();
             if (!users) {
-                return res.status(204).json({ message: 'No users found' });
+                return res.status(204).json({ message: 'Không tìm thấy người dùng nào.' });
             }
             return res.status(200).json(users);
 
@@ -19,10 +19,9 @@ class AdminController {
         try {
             let allcationsNum = await AdminService.getAllocationsNum();
             if (!allcationsNum) {
-                return res.status(500).json({ message: 'Hệ thống lỗi! Vui lòng thử lại sau.' });
+                return res.status(204).json({ message: 'Không tìm thấy số lượng địa điểm thu hút' });
             }
             return res.status(200).json(allcationsNum);
-
         } catch (error) {
             console.error("Error in AdminController.getAllocationsNum:", error);
             return res.status(500).json({ message: 'Hệ thống lỗi! Vui lòng thử lại sau.' });
@@ -33,7 +32,7 @@ class AdminController {
         try {
             let facilitiesNum = await AdminService.getFacilitiesNum();
             if (!facilitiesNum) {
-                return res.status(500).json({ message: 'Hệ thống lỗi! Vui lòng thử lại sau.' });
+                return res.status(204).json({ message: 'Không tìm thấy số lượng cơ sở.' });
             }
             return res.status(200).json(facilitiesNum);
 
@@ -47,7 +46,7 @@ class AdminController {
         try {
             let usersNum = await AdminService.getUsersNum();
             if (!usersNum) {
-                return res.status(500).json({ message: 'Hệ thống lỗi! Vui lòng thử lại sau.' });
+                return res.status(204).json({ message: 'Không tìm thấy số lượng người dùng.' });
             }
             return res.status(200).json(usersNum);
 
@@ -59,18 +58,14 @@ class AdminController {
 
     static async deleteAccount(req, res) {
         try {
-            console.log(111);
-            const { accountId } = req.body; // Lấy accountId từ body
-
+            const { accountId } = req.body;
             if (!accountId) {
                 return res.status(400).json({ message: 'Bắt buộc phải có accountId' });
             }
             const result = await AdminService.deleteAccount(accountId);
-
             if (!result.success) {
-                return res.status(400).json({ message: result.message });
+                return res.status(204).json({ message: result.message });
             }
-
             return res.status(200).json({ message: result.message });
         } catch (error) {
             console.error("Error in AdminController.deleteAccount:", error);

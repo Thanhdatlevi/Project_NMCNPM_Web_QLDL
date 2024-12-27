@@ -1,14 +1,11 @@
-const { console } = require('inspector');
 const ProviderService = require('./providerService');
 
 class ProviderController {
-
     static async updateHotel(req, res) {
         try {
             const { accountId } = res.locals.account;
             const { hotelId } = req.params;
             const { updateData } = req.body;
-
             if (!hotelId) {
                 return res.status(400).json({ message: "Thiếu hotelId." });
             }
@@ -164,10 +161,12 @@ class ProviderController {
     }
 
     static async getHotelsByProviderId(req, res) {
-        console.log(1)
         try {
             const { accountId } = res.locals.account;
             const hotels = await ProviderService.getHotelsByProviderId(accountId);
+            if (!hotels) {
+                return res.status(204).send();
+            }
             res.status(200).json(hotels);
         } catch (error) {
             console.error('Error retrieving hotels by provider:', error.message);
@@ -179,34 +178,8 @@ class ProviderController {
         try {
             const { accountId } = res.locals.account;
             const restaurants = await ProviderService.getRestaurantByProviderId(accountId);
-            res.status(200).json(restaurants);
-        } catch (error) {
-            console.error('Error in getRestaurantByProviderId:', error);
-            res.status(500).json({ message: 'Internal server error' });
-        }
-    }
-
-    static async getReserveHotelsByProviderId(req, res) {
-        try {
-            const { accountId } = res.locals.account;
-            const hotels = await ProviderService.getReserveHotelsByProviderId(accountId);
-            if (!hotels || hotels.length === 0) {
-                return res.status(404).json({ message: 'No hotels found for this provider' });
-            }
-            res.status(200).json(hotels);
-        } catch (error) {
-            console.error('Error retrieving hotels by provider:', error.message);
-            res.status(500).json({ message: 'Failed to retrieve hotels by provider' });
-        }
-    }
-
-    static async getReserveRestaurantByProviderId(req, res) {
-        try {
-            console.log(1)
-            const { accountId } = res.locals.account;
-            const restaurants = await ProviderService.getReserveRestaurantByProviderId(accountId);
             if (!restaurants) {
-                return res.status(404).json({ message: 'No restaurants found for this provider' });
+                return res.status(204).send();
             }
             res.status(200).json(restaurants);
         } catch (error) {
@@ -217,7 +190,6 @@ class ProviderController {
 
     static async getHotelById_provider(req, res) {
         try {
-            console.log(1)
             const { holId } = req.params;
             const hotelDetail = await ProviderService.getHotelById_provider(holId);
             if (!hotelDetail) {
@@ -232,7 +204,6 @@ class ProviderController {
 
     static async getRestaurantById_provider(req, res) {
         try {
-            console.log(1)
             const { resId } = req.params;
             const restaurantDetail = await ProviderService.getRestaurantById_provider(resId);
             if (!restaurantDetail) {
@@ -242,6 +213,34 @@ class ProviderController {
         } catch (error) {
             console.error('Error in getRestaurantById_provider:', error);
             res.status(500).json({ message: 'Error retrieving restaurant details' });
+        }
+    }
+
+    static async getReserveHotelsByProviderId(req, res) {
+        try {
+            const { accountId } = res.locals.account;
+            const hotels = await ProviderService.getReserveHotelsByProviderId(accountId);
+            if (!hotels) {
+                return res.status(204).send();
+            }
+            res.status(200).json(hotels);
+        } catch (error) {
+            console.error('Error in getReserveHotelsByProviderId:', error);
+            res.status(500).json({ message: 'Error retrieving hotels by provider' });
+        }
+    }
+
+    static async getReserveRestaurantByProviderId(req, res) {
+        try {
+            const { accountId } = res.locals.account;
+            const restaurants = await ProviderService.getReserveRestaurantByProviderId(accountId);
+            if (!restaurants) {
+                return res.status(404).json({ message: 'No restaurants found for this provider' });
+            }
+            res.status(200).json(restaurants);
+        } catch (error) {
+            console.error('Error in getReserveRestaurantByProviderId:', error);
+            res.status(500).json({ message: 'Internal server error' });
         }
     }
 
