@@ -68,14 +68,17 @@ const ServicePage = () => {
 
         // send feedback to server
         console.log(rating, feedback_text);
+
+        //const facility_id = service.facilityId;
         // Gửi yêu cầu POST lên server để lưu dữ liệu
         const data = {
-            rating,
-            feedback_text
+            rate: rating,
+            detail: feedback_text,
         }
 
         try {
-            const response = await fetch(`/tourist/submitFeedback/${idService}`, {
+            console.log(`${service.facilityId}`);
+            const response = await fetch(`/tourist/submitFeedback/${service.facilityId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
