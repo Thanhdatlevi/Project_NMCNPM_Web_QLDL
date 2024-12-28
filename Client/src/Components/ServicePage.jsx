@@ -69,23 +69,35 @@ const ServicePage = () => {
         // send feedback to server
         console.log(rating, feedback_text);
         // Gửi yêu cầu POST lên server để lưu dữ liệu
+        const data = {
+            rating,
+            feedback_text
+        }
+
         try {
-            const response = await fetch('/feedback', {
+            const response = await fetch(`/tourist/submitFeedback/${idService}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    rating,
-                    feedback_text,
-                    serviceId: idService, // Id của dịch vụ (có thể sử dụng idService từ useParams())
+                    data
                 }),
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error('Failed to submit feedback');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Phản hồi từ server:', data);
+            })
+            .catch(error => {
+                console.error('Lỗi khi gọi API:', error.message);
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to submit feedback');
-            }
-
+        
             // Xử lý thành công
             alert('Feedback submitted successfully');
 

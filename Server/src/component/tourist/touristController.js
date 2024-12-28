@@ -38,13 +38,17 @@ class TouristController {
 
     static async submitFeedback(req, res) {
         try {
+
+            console.log('ok1');
             const { accountId } = res.locals.account;
             const { facilityId } = req.params;
-            const { rate, detail } = req.body;
+            const { rate, detail } = req.body.data;
 
             if (!facilityId || !rate || !detail) {
                 return res.status(400).json({ message: 'Thiếu dữ liệu để gửi phản hồi.' });
             }
+
+            
             const result = await TouristService.submitFeedback(accountId, facilityId, rate, detail);
 
             if (result.success) {
