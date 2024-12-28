@@ -40,9 +40,8 @@ const BookingHistory = () => {
             throw new Error("Failed to fetch data");
         }
         const detailData = await response.json();
-        console.log(detailData.data)
         setCurrentPage(1);
-        setCurrentService(detailData.data);
+        setCurrentService(detailData);
     };
 
     useEffect(() => {
@@ -77,12 +76,11 @@ const BookingHistory = () => {
                 <button id="btn_res" className={activeTab === 'res' ? 'active' : ''} onClick={() => fetchData('res')}>Restaurant Booking</button>
                 <button className={activeTab === 'hotel' ? 'active' : ''} id="btn_hotel" onClick={() => fetchData('hotel')}>Hotel Booking</button>
             </section>
-
-            <section className="post-list-history">
                 
               {currentService.length === 0 ? (
               <div>Không có lịch sử đặt</div>
               ) : (
+            <section className="post-list-history">
               <div className="post-information-container">
                 {paginateData().map((reservation) => (
                   <div className="booking-card" key={reservation.reserveId}>
@@ -136,9 +134,7 @@ const BookingHistory = () => {
                   </div>
                 ))}
               </div>
-              )}
-            </section>
-            <div className="pagination">
+              <div className="pagination">
                 <button
                     onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                     disabled={currentPage === 1}
@@ -153,6 +149,8 @@ const BookingHistory = () => {
                     Next
                 </button>
             </div>
+            </section>
+              )}
         </main>
     );
 };

@@ -174,13 +174,12 @@ const Booking02 = ({ bookingData }) => {
             .then((data) => {
                 console.log('Success:', data.message); // In message từ server nếu có
                 alert(data.message || 'Your payment has been processed successfully.');
-                window.location.href = '/confirmation';
+                window.location.href = '/home';
             })
             .catch((error) => {
                 console.error('Error:', error.message); // In lỗi từ server hoặc từ client
                 alert(`There was an error: ${error.message}`);
             });
-            window.location.href = "/home";
     }
 
     function generateItem(item) {

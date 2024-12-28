@@ -50,10 +50,7 @@ class ReservationService {
     static async getReserveHotelsByProviderId(providerId) {
         try {
             const result = await ReservationModel.getReserveHotelsByProviderId(providerId);
-            if (result) {
-                return { success: true, data: result };
-            }
-            return { succes: false };
+            return result || [];
         } catch (error) {
             console.error("Error in ReservationService.createReservation:", error.message);
             throw error;
@@ -63,10 +60,7 @@ class ReservationService {
     static async getReserveRestaurantByProviderId(providerId) {
         try {
             const result = await ReservationModel.getReserveRestaurantByProviderId(providerId);
-            if (result) {
-                return { success: true, data: result };
-            }
-            return { succes: false };
+            return result || [];
         } catch (error) {
             console.error("Error in ReservationService.createReservation:", error.message);
             throw error;

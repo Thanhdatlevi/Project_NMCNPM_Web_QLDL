@@ -110,7 +110,7 @@ const ServicePage = () => {
 
     return (
 
-        <div className="detail-container">
+        <div className="detail-container OverviewService">
             {service.length === 0 ? (
                 <div>Loading...</div>
             ) : (

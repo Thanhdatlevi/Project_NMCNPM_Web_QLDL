@@ -205,8 +205,11 @@ class ProviderController {
     static async getReserveHotelsByProviderId(req, res) {
         try {
             const { accountId } = res.locals.account;
-            const hotels = await ProviderService.getReserveHotelsByProviderId(accountId);
-            return res.status(200).json(hotels);
+            const result = await ProviderService.getReserveHotelsByProviderId(accountId);
+            if (!result.success) {
+                return res.status(404).json({ message: result.message });
+            }
+            res.status(200).json(result.data);
         } catch (error) {
             console.error('Error in getReserveHotelsByProviderId:', error);
             res.status(500).json({ message: 'Error retrieving hotels by provider' });
@@ -216,8 +219,11 @@ class ProviderController {
     static async getReserveRestaurantByProviderId(req, res) {
         try {
             const { accountId } = res.locals.account;
-            const restaurants = await ProviderService.getReserveRestaurantByProviderId(accountId);
-            return res.status(200).json(restaurants);
+            const result = await ProviderService.getReserveRestaurantByProviderId(accountId);
+            if (!result.success) {
+                return res.status(404).json({ message: result.message });
+            }
+            res.status(200).json(result.data);
         } catch (error) {
             console.error('Error in getReserveRestaurantByProviderId:', error);
             res.status(500).json({ message: 'Internal server error' });
