@@ -1,9 +1,9 @@
-
-body{
+body {
     display: block;
     width: 100%;
     height: 100%;
-    overflow-x: hidden; /* Ngăn cuộn ngang toàn bộ trang */
+    overflow-x: hidden;
+    /* Ngăn cuộn ngang toàn bộ trang */
 }
 
 * {
@@ -263,8 +263,7 @@ input.check-toggle-round-flat:checked+label:after {
     margin-left: 44px;
 }
 
-* Style for the user dropdown container */
-.user-dropdown {
+* Style for the user dropdown container */ .user-dropdown {
     position: relative;
     display: inline-block;
 }
@@ -298,7 +297,8 @@ input.check-toggle-round-flat:checked+label:after {
 }
 
 .arrow.open {
-    transform: rotate(180deg); /* Rotate arrow when dropdown is open */
+    transform: rotate(180deg);
+    /* Rotate arrow when dropdown is open */
 }
 
 /* Style for the dropdown menu */
@@ -347,4 +347,68 @@ input.check-toggle-round-flat:checked+label:after {
 
 .dropdown-item button:hover {
     background-color: #f4f4f4;
+}
+
+#menu-toggle {
+    display: block;
+    /* Hiển thị button */
+    z-index: 20;
+    /* Đảm bảo nút nằm trên các phần tử khác */
+    position: relative;
+    /* Để dễ dàng thay đổi vị trí nếu cần */
+    padding: 0;
+    /* Xóa padding */
+}
+
+/* Thay đổi kích thước cho icon trong nút menu */
+#menu-toggle .menu-icon {
+    width: 24px;
+    /* Đặt kích thước cho icon */
+    height: 24px;
+    /* Đặt kích thước cho icon */
+    transition: transform 0.3s ease-in-out;
+    /* Thêm hiệu ứng chuyển động */
+}
+
+@media (max-width: 1024px) {
+
+    #nav .logo-container {
+        display: none;
+    }
+
+    #nav .nav-list {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: 70%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2rem 1rem;
+        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        z-index: 10;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    #nav .nav-list.show {
+        display: flex;
+        padding-top: 60px;
+        left: 0;
+    }
+
+    #nav #menu-toggle {
+        display: block;
+        padding: 0;
+        /* Loại bỏ khoảng cách bên trong */
+        background: none;
+        /* Loại bỏ nền mặc định */
+        border: none;
+        /* Xóa viền mặc định */
+        cursor: pointer;
+        /* Thêm con trỏ chỉ tay khi hover */
+    }
+
+
 }

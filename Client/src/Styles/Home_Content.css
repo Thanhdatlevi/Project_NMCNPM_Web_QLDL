@@ -1,4 +1,6 @@
-.listVistedPlace, #aboutUs, #featureFacility {
+.listVistedPlace,
+#aboutUs,
+#featureFacility {
     margin: 150px 0px;
 }
 
@@ -121,6 +123,7 @@ span {
     width: 30%;
     height: 100%;
     background: url(../../public/Images/TP_HCM/image8.jpg) no-repeat;
+    background-size: cover;
     color: #fff;
     border-radius: 20px;
     border: 10px solid #aaa;
@@ -209,13 +212,20 @@ span {
     background: #FFFFFF;
     /* Bo góc cho khung nhỏ */
 }
+
 .text-clamp {
-    display: -webkit-box; /* Bật chế độ flexbox ảo */
-    -webkit-line-clamp: 2; /* Giới hạn số dòng */
-    -webkit-box-orient: vertical; /* Thiết lập hướng của box */
-    overflow: hidden; /* Ẩn phần dư thừa */
-    text-overflow: ellipsis; /* Thêm dấu ba chấm */
+    display: -webkit-box;
+    /* Bật chế độ flexbox ảo */
+    -webkit-line-clamp: 2;
+    /* Giới hạn số dòng */
+    -webkit-box-orient: vertical;
+    /* Thiết lập hướng của box */
+    overflow: hidden;
+    /* Ẩn phần dư thừa */
+    text-overflow: ellipsis;
+    /* Thêm dấu ba chấm */
 }
+
 .framePlace .tagView {
     background-color: #F5F5F5;
     color: #757575;
@@ -226,6 +236,83 @@ span {
     flex-direction: column;
     align-content: center;
     padding: 10px;
+}
+
+@media (max-width: 1024px) {
+    #aboutUs .container {
+        flex-direction: column;
+        /* Thay đổi bố cục thành cột */
+        gap: 20px;
+        /* Giảm khoảng cách giữa các phần tử */
+        padding: 20px;
+        /* Giảm padding */
+        height: auto;
+        /* Để chiều cao tự động */
+    }
+
+    #aboutUs .container #img1,
+    #aboutUs .container #img2 {
+        width: 100%;
+        /* Hình ảnh chiếm toàn bộ chiều rộng */
+        height: auto;
+        /* Chiều cao tự điều chỉnh */
+    }
+
+    #aboutUs .container .content {
+        padding: 0;
+        /* Loại bỏ padding */
+        align-items: center;
+        /* Căn giữa nội dung */
+    }
+
+    #aboutUs .container .main_title {
+        font-size: 32px;
+        /* Giảm kích thước font tiêu đề */
+        text-align: center;
+        /* Căn giữa tiêu đề */
+    }
+
+    #aboutUs .container p.main_content {
+        font-size: 16px;
+        /* Giảm kích thước font nội dung */
+        text-align: center;
+        /* Căn giữa văn bản */
+    }
+
+    #aboutUs .container .list_benifit {
+        gap: 10px;
+        justify-content: center;
+        /* Căn giữa danh sách */
+    }
+
+    #aboutUs .container .list_benifit div {
+        width: 100%;
+        /* Đặt mỗi cột trên một dòng */
+        text-align: center;
+        /* Căn giữa */
+    }
+
+    #aboutUs .container a {
+        width: 100%;
+        /* Nút chiếm toàn bộ chiều rộng */
+        margin-top: 20px;
+    }
+
+    #featureFacility .container {
+        flex-direction: column;
+        /* Chuyển các mục thành hiển thị theo cột */
+        gap: 20px;
+        /* Giảm khoảng cách giữa các mục */
+        height: auto;
+        /* Chiều cao tự động */
+    }
+
+    #featureFacility .container .ele {
+        width: 100%;
+        /* Mục chiếm toàn bộ chiều rộng */
+        height: 200px;
+        /* Chiều cao cố định hoặc tự điều chỉnh */
+    }
 }
 
 @media (max-width: 640px) {}
