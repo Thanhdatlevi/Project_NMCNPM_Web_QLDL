@@ -34,9 +34,9 @@ const UserManagement = () => {
                     <div className="user-card-header">
                         <p>Full Name</p>
                         <p>Email</p>
-                        <p>Contact</p>
-                        <p>Birthday</p>
-                        <p>Address</p>
+                        <p >Contact</p>
+                        <p className="optional-info">Birthday</p>
+                        <p className="optional-info">Address</p>
                         <p>Feature</p>
                     </div>
                     <div className="user-card-item">
