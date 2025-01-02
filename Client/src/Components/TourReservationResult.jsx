@@ -80,7 +80,7 @@ const TourReservationResult = () => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + 100 * item.quantity, 0);
+            .reduce((acc, item) => acc + (item.price ? item.price : 0) * item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -127,9 +127,9 @@ const TourReservationResult = () => {
         return (
             <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
                 <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
-                <p id="service-quantity">{item.quantity} {item.date}</p>
-                <p id="service-price">{item.price}</p>
-                <p id="service-total-price">{item.totalPrice}</p>
+                <p id="service-quantity">{item.quantity}</p>
+                <p id="service-price">{item.price ? item.price : "--"}</p>
+                <p id="service-total-price">{item.price ? item.totalPrice : "--"}</p>
             </div>
         );
     }
@@ -230,11 +230,7 @@ const TourReservationResult = () => {
                         </div>
 
                         <div className="Option_buttons">
-                            <Link to="/HomePlace" id="edit-tour-button" onClick={editTourButton}> <span>Edit</span> </Link>
                             <Link to="/" id="cancel-tour-button" > <span>Cancel</span></Link>
-                        </div>
-
-                        <div className="Confirm-button">
                             <button id="Confirm-button" onClick={confirmButton}> <span>Confirm</span> </button>
                         </div>
                     </div>

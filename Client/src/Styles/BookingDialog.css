@@ -104,7 +104,7 @@
 
 .bookingDialog .booking01-details .divider {
     position: absolute;
-    left: 52%;
+    left: 47%;
     top: 0;
     bottom: 0;
     width: 2px;
@@ -266,4 +266,118 @@
     height: fit-content;
     text-align: center;
     margin-top: -50px;
+}
+
+/* Existing styles... */
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    /* Tablet styles */
+    .bookingDialog .booking-container {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .bookingDialog .booking-header img {
+        width: 60px;
+        height: 25px;
+    }
+
+    .bookingDialog .booking01-info .booking-content h2 {
+        font-size: 20px;
+    }
+
+    .bookingDialog .booking01-info .booking-content p {
+        font-size: 16px;
+    }
+
+    .bookingDialog .progress-indicator .completed-step,
+    .bookingDialog .progress-indicator .inactive-step {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+
+    .bookingDialog .form-section .duration-control,
+    .bookingDialog .date-picker {
+        width: 90%;
+    }
+
+    .bookingDialog .form-section .duration-control button {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+
+    .bookingDialog .action-section .book-now,
+    .bookingDialog .action-section .cancel {
+        width: 90%;
+        font-size: 20px;
+    }
+
+    .bookingDialog .dialog-content-booking {
+        width: 90%;
+    }
+
+    .bookingDialog .booking01-details .divider{
+        left: 49%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobile styles */
+    .bookingDialog .booking-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .bookingDialog .booking-header img {
+        width: 50px;
+        height: 20px;
+    }
+
+    .bookingDialog .booking01-info .booking-content h2 {
+        font-size: 18px;
+    }
+
+    .bookingDialog .booking01-info .booking-content p {
+        font-size: 14px;
+    }
+
+    .bookingDialog .progress-indicator .completed-step,
+    .bookingDialog .progress-indicator .inactive-step {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .bookingDialog .form-section .duration-control,
+    .bookingDialog .date-picker {
+        width: 60%;
+    }
+
+    .bookingDialog .form-section .duration-control button {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9em;
+    }
+
+    .bookingDialog .action-section .book-now,
+    .bookingDialog .action-section .cancel {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .bookingDialog .dialog-content-booking {
+        width: 100%;
+    }
+
+    .bookingDialog .date-picker #time-place{
+        font-size: 15px;
+        width: 100%;
+    }
+
+    .bookingDialog .booking01-details .divider{
+        left: 49%;
+    }
 }

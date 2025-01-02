@@ -79,7 +79,6 @@ function HomePlace() {
 
     const [handleBookingFinished, setHandleBookingFinished] = useState(null);
 
-    let navigate = useNavigate();
     function bookBtn(event, type) {
         const parent = event.target.parentNode.parentNode.parentNode.parentNode;
         if (type === 'res' || type === 'hol') {
@@ -211,6 +210,7 @@ function HomePlace() {
     }
 
     const [canNavigate, setCanNavigate] = useState(false);
+    const navigate = useNavigate();
 
     function submitBtnHandle() {
         if (!canNavigate) {
@@ -254,8 +254,8 @@ function HomePlace() {
                 var jsonSelections = JSON.stringify(selections);
                 localStorage.setItem('selections', jsonSelections);
                 localStorage.setItem('city', city);
-                setCanNavigate(true);
-                submitBtnHandle();
+                console.log("navigate");
+                window.location.href = "/tourReservationResult";
             }
         }
     }
@@ -285,7 +285,7 @@ function HomePlace() {
                     <button id="resToggle" onClick={() => View_change('res')}>Restaurant</button>
                 </section>
 
-                <div style={{ display: "flex", flexDirection: "row" }}>
+                <div id="form-container">
                     <div id="view-container">
                         {/* <!-- Place --> */}
                         <section id="form_place" style={{ display: visibleSection === 'place' ? 'block' : 'none' }}>
