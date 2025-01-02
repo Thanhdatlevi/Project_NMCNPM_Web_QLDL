@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 
 
 const Content = () => {
+  
   const [contentType, setContentType] = useState('home');
   const [user, setUser] = useState(null); // Lưu thông tin người dùng
   const [isLoading, setIsLoading] = useState(true);
@@ -98,25 +99,26 @@ const Content = () => {
               </div>
               <div className="list-select-content" tabIndex="0" onClick={() => setContentType('home')}>
                 <i class='bx bx-home-alt' ></i>
-                Home
+                <p>Home</p>
               </div>
               <div className="list-select-content" tabIndex="0" onClick={() => setContentType('userManagement')}>
                 <i class='bx bx-user' ></i>
-                User Management
+                <p>User Management</p>
               </div>
               <div className="list-select-content" tabIndex="0" onClick={() => setContentType('attractionsManagement')}>
                 <i class='bx bx-current-location'></i>
-                Attractions Management
+                <p>Attractions Management</p>
               </div>
               <div className="list-select-content" tabIndex="0" onClick={() => setContentType('facilitiesManagement')}>
                 <i class='bx bx-hotel' ></i>
-                Facilities Management
+                <p>Facilities Management</p>
               </div>
               <div className ="blank">
               </div> 
               <div className="list-select-content" tabIndex="0" onClick={handleLogout}>
                 <i class='bx bx-exit' ></i>
-                Logout</div>
+                <p>Logout</p>
+                </div>
           </div>
         </div>
         

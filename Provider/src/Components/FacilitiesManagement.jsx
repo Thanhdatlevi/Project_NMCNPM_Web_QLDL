@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Profile.css";
 import "../Styles/MyFacility.css";
-
 const MyFacility = () => {
     let provider = 'p002';
     const itemsPerPage = 2;

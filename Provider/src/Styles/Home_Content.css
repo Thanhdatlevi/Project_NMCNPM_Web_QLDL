@@ -3,6 +3,10 @@
     flex-direction: row;
     background-color:white;
 }
+.content-container {
+    display: flex;
+    flex-direction: column;
+}
 .container-dashboard .side-bar{
     width: 20%;
     /* height: 100%; */
@@ -32,12 +36,14 @@
     cursor: pointer;
 }
 .container-dashboard .side-bar .list-select .list-select-content{ 
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 18px;
     font-size: 20px;
     cursor: default;
     user-select: none;
     -webkit-user-select: none;
+    display: flex;
+    align-items: center;
 }
 .container-dashboard .side-bar .list-select .list-select-content:focus{
     background-color: #1c96ed;
@@ -54,6 +60,7 @@
     background-color: #f5f5f5;
     padding: 10px;
     flex-basis: 80%;
+    width: 80%;
 }
 .container-dashboard .side-bar .dashboard-header{
     display: flex;
@@ -79,4 +86,108 @@
     border: #1c96ed solid 2px;
     border-radius: 50%;
     margin-right: 10px;
+}
+.logo img {
+    width: 100px; /* Điều chỉnh kích thước logo */
+    height: auto;
+}
+
+
+.list-select-content i {
+    margin-right: 10px;
+}
+.toggle-sidebar-button {
+    margin: 10px;
+    padding: 10px;
+    background-color: #005b96;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.side-bar.hidden {
+    display: none;
+}
+@media (max-width: 640px) {
+    .container-dashboard {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .container-dashboard .side-bar {
+        width: 20%; /* Điều chỉnh kích thước phù hợp cho sidebar */
+        margin-bottom: 0;
+    }
+    
+    .container-dashboard .contentDashboard {
+        width: 80%; /* Điều chỉnh kích thước phù hợp cho content */
+    }
+
+    .container-dashboard .side-bar .side-bar-item {
+        font-size: 0.8em; /* Thu nhỏ kích thước font của các thành phần bên trong sidebar */
+        padding: 3px; /* Điều chỉnh padding cho các thành phần bên trong sidebar */
+    }
+    .logo img {
+        width: 80px; /* Thu nhỏ kích thước logo */
+    }
+
+    .container-dashboard .side-bar .list-select .list-select-content {
+        padding: 0 ;
+        font-size: 1em; /* Thu nhỏ kích thước font */
+    }
+
+    .list-select-content i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+    }
+    .list-select-content p {
+        font-size: 0.8em;
+    }
+    .notification i {
+        font-size: 1.5rem;
+    }
+    .admin-info h4 {
+        font-size: 0.6em; /* Thu nhỏ kích thước font của admin info */
+    }
+    .admin-info p {
+        font-size: 0.6em; /* Thu nhỏ kích thước font của admin info */
+    }
+}
+
+@media (max-width: 480px) {
+    .container-dashboard {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .container-dashboard .side-bar {
+        width: 30%; /* Điều chỉnh kích thước phù hợp cho sidebar */
+        margin-bottom: 0;
+    }
+    
+    .container-dashboard .contentDashboard {
+        width: 70%; /* Điều chỉnh kích thước phù hợp cho content */
+    }
+
+    .container-dashboard .side-bar .side-bar-item {
+        font-size: 0.7em; /* Thu nhỏ kích thước font của các thành phần bên trong sidebar */
+        padding: 3px; /* Điều chỉnh padding cho các thành phần bên trong sidebar */
+    }
+    .logo img {
+        width: 60px; /* Thu nhỏ kích thước logo */
+    }
+    .list-select-content i {
+        margin-right: 6px;
+    }
+
+    .admin-info h4 {
+        font-size: 0.9em; /* Thu nhỏ kích thước font của admin info */
+    }
+
+    .admin-info p {
+        font-size: 0.8em; /* Thu nhỏ kích thước font của admin info */
+    }
 }

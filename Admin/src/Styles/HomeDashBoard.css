@@ -95,3 +95,21 @@
     color: #888;
     margin-top: 4px;
 }
+@media (max-width: 640px) {
+    .HomeDashboard .dashboard-content .topic-container {
+        flex-direction: column;
+    }
+
+    .HomeDashboard .dashboard-content .topic-container .topic {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-attraction {
+        max-height: 30vh;
+    }
+
+    .attraction {
+        flex: 1 1 100%;
+    }
+}

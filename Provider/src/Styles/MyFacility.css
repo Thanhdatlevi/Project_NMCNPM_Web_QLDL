@@ -11,6 +11,13 @@
 #hisPost .type-post h2 {
     font-size: 1.5em;
 }
+.Add-facility {
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+}
 
 #hisPost .type-post select {
     padding: 5px;
@@ -149,4 +156,26 @@ button:hover {
     color: #aaa;
     cursor: not-allowed;
     border-color: #ddd;
+}
+
+@media (max-width: 640px) {
+    #hisPost .type-post {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #hisPost .post-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #hisPost .post-card img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    #hisPost .post-info {
+        width: 100%;
+    }
 }

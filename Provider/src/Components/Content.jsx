@@ -95,21 +95,22 @@ const Content = () => {
               </div>
               <div className="list-select-content" tabIndex="0" onClick={() => setContentType('home')}>
                 <i class='bx bx-home-alt' ></i>
-                Home
+                <p>Home</p>
               </div>
               <div className="list-select-content" tabIndex="0" onClick={() => setContentType('reseveManagement')}>
                 <i class='bx bx-user' ></i>
-                Resevation Management
+                <p>Resevation Management</p>
               </div>
               <div className="list-select-content" tabIndex="0" onClick={() => setContentType('facilitiesManagement')}>
                 <i class='bx bx-hotel' ></i>
-                Facilities Management
+                <p>Facilities Management</p>
               </div>
               <div className ="blank">
               </div> 
               <div className="list-select-content" tabIndex="0" onClick={handleLogout}>
                 <i class='bx bx-exit' ></i>
-                Logout</div>
+                <p>Logout</p>
+                </div>
           </div>
         </div>
         

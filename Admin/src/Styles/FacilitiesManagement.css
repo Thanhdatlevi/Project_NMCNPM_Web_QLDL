@@ -126,8 +126,27 @@
     }
   }
   
+  @media (max-width: 640px) {
+    .manage{
+      padding: 0;
+    }
+    .manage .item-card {
+        width: calc(50% - 10px);
+    }
+
+    .manage .toggle-buttons button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+  }
+
   @media (max-width: 480px) {
     .manage .item-card {
-      width: 100%;
+      width:calc(50% - 10px);
+    }
+
+    .manage .toggle-buttons button {
+        padding: 6px 12px;
+        font-size: 12px;
     }
   }

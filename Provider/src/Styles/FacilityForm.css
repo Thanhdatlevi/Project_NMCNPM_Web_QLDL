@@ -200,3 +200,26 @@
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
+@media (max-width: 640px) {
+    .facility-form {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .facility-form-body {
+        flex-direction: column;
+    }
+
+    .facility-form-item-inline {
+        flex-direction: column;
+    }
+
+    .facility-form-item .facility-images img {
+        max-width: 100%;
+        height: auto;
+    }
+    .image-preview{
+        display: none;
+    }
+}
