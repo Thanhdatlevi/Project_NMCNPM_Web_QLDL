@@ -52,8 +52,6 @@
     font-weight: 300;
 }
 
-
-
 .booking00-container .divider {
     left: 50%;
     top: 0;
@@ -140,4 +138,50 @@
 .action-section button:hover{
     border-color: #03396C;
     box-shadow: 0 0 10px #03396C;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+    .booking00-container .divider {
+        display: none;
+    }
+    
+    .booking00-details {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .progress-indicator {
+        gap: 5px;
+    }
+    
+    .progress-line {
+        width: 30px;
+    }
+    
+    .booking00-details .form-section,
+    .booking00-details .info-section {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .body {
+        padding: 10px;
+    }
+    
+    .booking00-details .form-section input {
+        margin-bottom: 15px;
+    }
+    
+    .action-section {
+        margin-top: 40px;
+    }
+    
+    .action-section .pay-now,
+    .action-section .cancel {
+        width: 100%;
+        max-width: 280px;
+    }
 }
