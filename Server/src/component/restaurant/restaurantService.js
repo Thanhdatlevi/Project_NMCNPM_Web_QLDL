@@ -80,7 +80,7 @@ class RestaurantService {
     static async getRestaurantByProviderId(providerId) {
         try {
             const restaurants = await RestaurantModel.getRestaurantByProviderId(providerId);
-            return restaurants;
+            return restaurants || [];
         } catch (error) {
             console.log("Error in getRestaurantByProviderId in restaurantService:", error);
             throw new Error("Unable to fetch restaurants by provider.");

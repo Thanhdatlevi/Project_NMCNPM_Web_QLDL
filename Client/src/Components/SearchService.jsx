@@ -23,7 +23,6 @@ const SearchService = () => {
         try {
             const queryParams = new URLSearchParams({ ...filters }).toString();
             let fetchedData = [];
-
             if (filters.service === '') {
                 const [attractionResponse, hotelResponse, restaurantResponse] = await Promise.all([
                     fetch(`/attraction/getFilterattraction?${queryParams}`),
@@ -32,11 +31,10 @@ const SearchService = () => {
                 ]);
 
                 const [attractionData, hotelData, resData] = await Promise.all([
-                    attractionResponse.json(),
-                    hotelResponse.json(),
-                    restaurantResponse.json(),
+                    attractionResponse.ok ? attractionResponse.json() : [],
+                    hotelResponse.ok ? hotelResponse.json() : [],
+                    restaurantResponse.ok ? restaurantResponse.json() : [],
                 ]);
-
                 fetchedData = [...attractionData, ...hotelData, ...resData];
             } else {
                 const response = await fetch(`/${filters.service}/getFilter${filters.service}?${queryParams}`);

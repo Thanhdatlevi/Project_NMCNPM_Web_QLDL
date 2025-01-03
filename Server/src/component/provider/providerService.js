@@ -213,7 +213,7 @@ class ProviderService {
             if (!facility) {
                 return { success: false, message: "Facility không tồn tại." };
             }
-            if (provider !== facility.provider_id) {
+            if (provider !== facility.providerId) {
                 return { success: false, message: "Bạn không có quyền xóa facility này." };
             }
             const deletedFacility = await FacilityService.deleteFacility(facilityId);
@@ -253,8 +253,11 @@ class ProviderService {
     static async getReserveHotelsByProviderId(accountId) {
         try {
             const providerId = await AccountService.getProviderId(accountId);
+            if (!providerId) {
+                return { success: false, message: "Tài khoản không tồn tại." };
+            }
             const hotels = await ReservationService.getReserveHotelsByProviderId(providerId);
-            return hotels;
+            return { success: true, data: hotels };
         } catch (error) {
             console.log("Error in getHotelsByProviderId in hotelService:", error);
             throw new Error("Unable to fetch hotels by provider.");
@@ -264,8 +267,11 @@ class ProviderService {
     static async getReserveRestaurantByProviderId(accountId) {
         try {
             const providerId = await AccountService.getProviderId(accountId);
+            if (!providerId) {
+                return { success: false, message: "Tài khoản không tồn tại." };
+            }
             const restaurants = await ReservationService.getReserveRestaurantByProviderId(providerId);
-            return restaurants;
+            return { success: true, data: restaurants };
         } catch (error) {
             console.log("Error in ProviderService.getRestaurantByProviderId:", error);
             throw new Error("Unable to fetch restaurants by provider.");

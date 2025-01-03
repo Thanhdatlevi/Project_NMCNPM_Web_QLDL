@@ -40,6 +40,7 @@ class TouristController {
         try {
             const { accountId } = res.locals.account;
             const { facilityId } = req.params;
+            //console.log('ok2');
             const { rate, detail } = req.body.data;
 
             if (!facilityId || !rate || !detail) {

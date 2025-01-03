@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Profile.css";
 import "../Styles/MyFacility.css";
-
 const MyFacility = () => {
     let provider = 'p002';
     const itemsPerPage = 2;
@@ -11,30 +10,29 @@ const MyFacility = () => {
     const [currentService, setCurrentService] = useState([]);
     const [activeTab, setActiveTab] = useState('res');
 
-    const handleDelete = async (service, id, facilityID) => {
+    const handleDelete = async (facilityID) => {
         if (!window.confirm("Are you sure you want to delete this item?")) {
             return;
         }
         try {
-            const response = await fetch(`/${service}/delete`, {
-                method: "POST",
+            const response = await fetch(`/provider/deleteFacility`, {
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    provider_id: provider,
-                    facility_id: facilityID,
-                    specificFacility_id: id,
+                    facilityId: facilityID,
                 }),
             });
             if (!response.ok) {
+                alert("Item deleted fail.");
                 const errorMessage = await response.json();
                 throw new Error(errorMessage.message || "Failed to delete item.");
             }
     
             alert("Item deleted successfully.");
 
-            fetchData(service);
+            fetchData(activeTab);
         } catch (error) {
             console.error("Error deleting item:", error);
             alert("An error occurred while deleting the item.");
@@ -114,7 +112,9 @@ const MyFacility = () => {
                     <Link to={"/addfacility"} className="Add-facility" onClick={()=>handleEditClick(null, "true")} >Add</Link>
                 </div>
                 
-
+                {currentService.length === 0 ? (
+              <div>Không có dịch vụ nào đã được đăng</div>
+              ) : (
                 <div className="post-information-container">
                     {paginateData().map((ser) => {
                         //handleEditClick(ser.restaurantId ? ser.restaurantId : ser.hotelId, "false");
@@ -158,7 +158,7 @@ const MyFacility = () => {
                                                 <i className="fa-solid fa-screwdriver-wrench"></i>
                                             </button>
                                         </Link>
-                                        <button className="btn_delete" onClick={() => handleDelete(activeTab, ser.restaurantId ? ser.restaurantId : ser.hotelId, ser.facid)}>
+                                        <button className="btn_delete" onClick={() => handleDelete(ser.facilityId)}>
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
@@ -167,6 +167,7 @@ const MyFacility = () => {
                         );
                     })}
                 </div>
+             )}
             </section>
             <div className="pagination">
                 <button

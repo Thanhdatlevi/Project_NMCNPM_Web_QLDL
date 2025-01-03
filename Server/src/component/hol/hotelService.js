@@ -66,7 +66,7 @@ class HotelService {
     static async getHotelsByProviderId(providerId) {
         try {
             const hotels = await HotelModel.getHotelsByProviderId(providerId);
-            return hotels;
+            return hotels || [];
         } catch (error) {
             console.log("Error in getHotelsByProviderId in hotelService:", error);
             throw new Error("Unable to fetch hotels by provider.");

@@ -48,8 +48,8 @@ const UserCard = ({ user}) => {
                 <p>{user.userFullName}</p>
                 <p>{user.accountEmail}</p>
                 <p>{user.userContact}</p>
-                <p>{new Date(user.userBirthday).toISOString().split("T")[0]}</p>
-                <p>{user.userAddress}</p>
+                <p className="optional-info">{new Date(user.userBirthday).toISOString().split("T")[0]}</p>
+                <p className="optional-info">{user.userAddress}</p>
                 <div className="user-card-action">
                     <span><img src='/Images/delete.png' onClick={handleDeleteUser}/></span>
                 </div>

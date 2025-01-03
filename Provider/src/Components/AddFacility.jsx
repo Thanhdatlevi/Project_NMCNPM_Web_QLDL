@@ -56,12 +56,9 @@ const AddFacility = () => {
         })
             .then((response) => {
                 if (!response.ok) {
-                    return response.json().then((errorData) => {
-                        console.log(errorData.message); // In thông điệp lỗi từ server
-                        throw new Error("Failed to update data");
-                    });
+                    alert("Add Fail!")
                 }
-                return response.json();
+                alert("Add successfully!")
             })
             .then((data) => {
                 console.log("Success:", data);

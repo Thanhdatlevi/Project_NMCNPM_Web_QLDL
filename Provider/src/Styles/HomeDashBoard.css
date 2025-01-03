@@ -52,7 +52,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.dashboard-attraction {
+.dashboard-facility {
     max-height: 45vh; /* Giới hạn chiều cao tối đa */
     overflow-y: auto; /* Thêm thanh cuộn dọc nếu nội dung vượt quá chiều cao */
     margin-top: 24px;
@@ -61,13 +61,13 @@
     border-radius: 16px;
 }
 
-.attraction-list {
+.facility-list {
     display: flex;
     flex-wrap: wrap;
     gap: 16px; /* Khoảng cách giữa các thẻ */
 }
 
-.attraction {
+.facility {
     flex: 1 1 calc(25% - 16px); /* Đặt chiều rộng của mỗi thẻ là 25% trừ đi khoảng cách */
     box-sizing: border-box;
     height: fit-content;
@@ -78,20 +78,39 @@
     background-color: #fff;
 }
 
-.attraction-image img {
+.facility-image img {
     width: 100%;
     height: 200px;
     border-radius: 8px 8px 0 0;
 }
 
-.attraction-name {
+.facility-name {
     font-size: 18px;
     font-weight: bold;
     margin-top: 8px;
 }
 
-.attraction-rating {
+.facility-rating {
     font-size: 16px;
     color: #888;
     margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+    .HomeDashboard .dashboard-content .topic-container {
+        flex-direction: column;
+    }
+
+    .HomeDashboard .dashboard-content .topic-container .topic {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-facility {
+        max-height: 30vh;
+    }
+
+    .facility {
+        flex: 1 1 100%;
+    }
 }
