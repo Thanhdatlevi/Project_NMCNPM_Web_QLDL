@@ -7,11 +7,20 @@ class TouristController {
             if (!detailReservation || !status) {
                 return res.status(400).json({ success: false, message: 'Thiếu dữ liệu' });
             }
+            for (let i = 0; i < detailReservation.length; i++) {
+                const { facilityId, facilityName, quantity, price, checkinTime, totalPrice, img } = detailReservation[i];
+                if (!facilityId || !facilityName || !quantity || !price || !checkinTime || !totalPrice || !img) {
+                    return res.status(400).json({
+                        success: false,
+                        message: `Thiếu trường dữ liệu trong sản phẩm thứ ${i + 1} của detailReservation`
+                    });
+                }
+            }
             const result = await TouristService.createReservation(accountId, status, detailReservation);
             if (result.success) {
                 return res.status(201).json({
                     message: 'Reservation created successfully.',
-                    reserveId: result.result.reserveId
+                    reserveId: result.reserveId
                 });
             } else {
                 return res.status(400).json({ success: false, message: result.message });

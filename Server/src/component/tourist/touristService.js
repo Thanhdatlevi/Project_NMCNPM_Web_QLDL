@@ -1,6 +1,4 @@
 const AccountService = require("../account/accountService");
-const HotelService = require('../hol/hotelService');
-const RestaurantService = require('../restaurant/restaurantService');
 const ReservationService = require(`../reservation/reservationService`);
 const FeedbackService = require(`../feedback/feedbackService`);
 class TouristService {
@@ -11,7 +9,11 @@ class TouristService {
                 return { success: false, message: "Tài khoản không tồn tại." };
             }
             const result = await ReservationService.createReservation(touristId, status, detailReservation);
-            return { success: true, result };
+            if (result.success) {
+                return { success: true, message: result.message, reserveId: result.reserveId };
+            } else {
+                return { success: false, message: result.message };
+            }
         } catch (error) {
             console.error("Error in TouristService.createReservation:", error.message);
             throw new Error("Có lỗi xảy ra khi tạo đơn đặt chỗ.");
