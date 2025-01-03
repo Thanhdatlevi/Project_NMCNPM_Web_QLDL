@@ -103,7 +103,7 @@ const BookingDialog = ({isBookingVisible, handleBookingFinished }) => {
                                     </div>
                                     <div className="price-info">
                                         <p>
-                                            You will pay <strong> {duration * 200}$ USD</strong>
+                                            You will pay <strong> {duration * fac.average_price}$ USD</strong>
                                         </p>
                                         <p>per <strong>{duration} {type === 'hol' ? 'Days' : 'Tables'}</strong></p>
                                     </div>

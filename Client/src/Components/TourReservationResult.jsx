@@ -80,7 +80,7 @@ const TourReservationResult = () => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + (item.price ? item.price : 0) * item.quantity, 0);
+            .reduce((acc, item) => acc + (item.average_price ? item.average_price : 0) * item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -128,8 +128,8 @@ const TourReservationResult = () => {
             <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
                 <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
                 <p id="service-quantity">{item.quantity}</p>
-                <p id="service-price">{item.price ? item.price : "--"}</p>
-                <p id="service-total-price">{item.price ? item.totalPrice : "--"}</p>
+                <p id="service-price">{item.average_price ? item.average_price : "--"}</p>
+                <p id="service-total-price">{item.average_price ? item.totalPrice : "--"}</p>
             </div>
         );
     }
