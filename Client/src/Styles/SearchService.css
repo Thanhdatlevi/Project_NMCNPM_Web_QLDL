@@ -183,3 +183,154 @@
     font-weight: bold;
     border-radius: 4px; /* Optional for rounded button appearance */
 }
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    #searchService #main_search {
+        width: 95%;
+        padding: 20px;
+    }
+    #mainContent {
+        padding: 5%;
+        justify-content: space-evenly;
+    }
+
+    #mainContent #filter {
+        /* border-right: 2px dotted #000; */
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    #mainContent #list {
+        width: 50%;
+    }
+
+    #mainContent #list .service {
+        flex-direction: column;
+        width: 100%;
+        height: 400px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    #mainContent #list img {
+        width: 100%;
+        height: 100%;
+    }
+    #mainContent #list a{
+        width: 100%;
+        height: 250px;
+    }
+
+    #mainContent #list .content {
+        width: 100%;
+        padding: 15px;
+        text-align: left;
+    }
+    #searchService p {
+        font-weight: 500;
+        font-size: 15px;
+    }
+    #mainContent #list .content h2 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    #mainContent #list .content p {
+        margin:7px 0;
+    }
+
+    #mainContent #list .bookZone {
+        text-align: right;
+        margin-top: 10px;
+    }
+
+    #mainContent #list .detailPrice {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    #mainContent #list .btnDetail {
+        font-size: 14px;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .pagination button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    #searchService #search-zone #btnSearch {
+        width: 20%;
+    }
+    #searchService h1 {
+        font-size: 36px;
+    }
+
+    #mainContent #list {
+        grid-template-columns: 1fr;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .pagination button {
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    #mainContent #filter {
+        display: none;
+        border: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+    #searchService h1 {
+        font-size: 28px;
+    }
+
+    #mainContent #filter h3 {
+        font-size: 18px;
+    }
+
+    #mainContent #list .service {
+        flex-direction: column;
+        height: 450px;
+    }
+
+    #mainContent #list img {
+        width: 100%;
+        height: 250px;
+    }
+
+    #searchService #search-zone .searchContainer {
+        padding: 10px;
+    }
+
+    #mainContent #list .content {
+        padding: 10px;
+    }
+
+    #mainContent #list .btnDetail {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #mainContent #list {
+        width: 100%;
+    }
+
+}
