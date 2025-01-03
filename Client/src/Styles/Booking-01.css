@@ -216,3 +216,9 @@
     font-size: 24px;
     font-weight: 500;
 }
+#notice-place{
+    margin: 20px;
+    font-size: 16px;
+    color: red;
+    font-weight: 300;
+}

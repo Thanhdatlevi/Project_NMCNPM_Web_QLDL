@@ -119,8 +119,14 @@ const ServicePage = () => {
         }
     }
     const handleBooking = () => {
+        if (service.status === 'available') {
         localStorage.setItem('selected', service.facilityId);
-        
+        // chuyển đến booking02
+        window.location.href = '/booking01';
+        }
+        else {
+            alert('This service is not available');
+        }
     }
 
     return (
@@ -161,9 +167,9 @@ const ServicePage = () => {
                                 <span className="icon">
                                     <i className='bx bx-share-alt'></i>
                                 </span>
-                                <Link to="/booking01">
+                                
                                     <button className="book-now" onClick={handleBooking} >Book Now</button>
-                                </Link>
+                                
                             </div>
                         </div>
                     </div>
