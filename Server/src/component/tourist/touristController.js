@@ -9,10 +9,18 @@ class TouristController {
             }
             for (let i = 0; i < detailReservation.length; i++) {
                 const { facilityId, facilityName, quantity, price, checkinTime, totalPrice, img } = detailReservation[i];
-                if (!facilityId || !facilityName || !quantity || !price || !checkinTime || !totalPrice || !img) {
+                let missingFields = [];
+                if (!facilityId) missingFields.push('facilityId');
+                if (!facilityName) missingFields.push('facilityName');
+                if (!quantity) missingFields.push('quantity');
+                if (!price) missingFields.push('price');
+                if (!checkinTime) missingFields.push('checkinTime');
+                if (!totalPrice) missingFields.push('totalPrice');
+                if (!img) missingFields.push('img');
+                if (missingFields.length > 0) {
                     return res.status(400).json({
                         success: false,
-                        message: `Thiếu trường dữ liệu trong sản phẩm thứ ${i + 1} của detailReservation`
+                        message: `Thiếu trường dữ liệu: ${missingFields.join(', ')} trong sản phẩm thứ ${i + 1} của detailReservation`
                     });
                 }
             }
