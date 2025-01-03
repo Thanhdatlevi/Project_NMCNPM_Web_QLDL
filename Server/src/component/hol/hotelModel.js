@@ -267,7 +267,7 @@ class HotelModel {
             `;
             const values = [rate, location, input];
             const res = await db.query(query, values);  // Truyền tham số hotelID vào câu truy vấn
-            return (result.rows.length > 0) ? result.rows : [];
+            return (res.rows.length > 0) ? res.rows : [];
         } catch (error) {
             console.error('Error fetching hotel details:', error);
             throw error;
