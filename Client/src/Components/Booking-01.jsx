@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Booking01 = ({ setBookingData }) => {
     const [fac, setFac] = useState({});
+    const [date, setDate] = useState('');
     const type = localStorage.getItem('type');
     useEffect(() => {
         console.log(type);
@@ -44,17 +45,23 @@ const Booking01 = ({ setBookingData }) => {
         setDuration(duration + 1);
     };
     const handleBooking = () => {
+        if (date === '') {
+            const notice = document.getElementById('notice-place');
+            notice.innerHTML = "Please choose a date.";
+            return;
+        }
+        console.log(date);
         const selections ={};
         selections[fac.facility_id]={
             ID: fac.facility_id,
             quantity: duration,
-            date: localStorage.getItem('date'),
+            date: date,
             price: fac.average_price,
         };
         var jsonSelections = JSON.stringify(selections);
         localStorage.setItem('selections', jsonSelections);
         localStorage.setItem('city', fac.location_id);
-
+        window.location.href = '/booking-02';
         // if (fac) {
         //     const data = {
         //         duration: duration,
@@ -77,8 +84,8 @@ const Booking01 = ({ setBookingData }) => {
         } else {
             const notice = document.getElementById('notice-place');
             notice.innerHTML = "";
-            console.log(event.target.value);
             localStorage.setItem('date', event.target.value);   
+            setDate(event.target.value);
         }
     }
 
@@ -139,7 +146,7 @@ const Booking01 = ({ setBookingData }) => {
                             <div id="notice-place"></div>
                             <div className="price-info">
                                 <p>
-                                    You will pay <strong> {duration * 200}$ USD</strong>
+                                    You will pay <strong> {duration * fac.average_price}$ USD</strong>
                                 </p>
                                 <p>per <strong>{duration} {type === 'hol' ? 'Days' : 'Tables'}</strong></p>
                             </div>
@@ -150,9 +157,9 @@ const Booking01 = ({ setBookingData }) => {
                 </div>
 
                 <div className="action-section">
-                    <Link to="/booking02">
+                    
                         <button onClick={handleBooking} className="book-now">Book Now</button>
-                    </Link>
+                    
                     <button className="cancel" onClick={() => { navigate(-1); }}
                     >Cancel</button>
                 </div>
