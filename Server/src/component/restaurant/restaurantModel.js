@@ -15,7 +15,7 @@ class RestaurantModel {
             `;
             const values = [rate, location, input];
             const res = await db.query(query, values);
-            return res.rows;
+            return (res.rows.length > 0) ? res.rows : [];
         } catch (error) {
             console.error('Error filtering restaurants:', error);
             throw error;
