@@ -2,6 +2,8 @@ import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/TourReservationResult.css';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 const TourReservationResult = () => {
     const [placesChosen, setPlacesChosen] = useState([]);
@@ -22,7 +24,6 @@ const TourReservationResult = () => {
                     ...element,
                     quantity: selections[element.attraction_id].quantity
                 }));
-            console.log(places);
             setPlacesChosen(places);
         } catch (error) {
             console.error('Error loading places:', error);
@@ -42,8 +43,8 @@ const TourReservationResult = () => {
                     ...element,
                     quantity: selections[element.facility_id].quantity,
                     date: selections[element.facility_id].date,
-                    price: selections[element.facility_id].price,
-                    totalPrice: selections[element.facility_id].price * selections[element.facility_id].quantity
+                    price: element.average_price ? element.average_price : 0,
+                    totalPrice: (element.average_price ? element.average_price : 0) * selections[element.facility_id].quantity
                 }));
             setHotelChosen(hotels);
         } catch (error) {
@@ -64,8 +65,8 @@ const TourReservationResult = () => {
                     ...element,
                     quantity: selections[element.facility_id].quantity,
                     date: selections[element.facility_id].date,
-                    price: selections[element.facility_id].price,
-                    totalPrice: selections[element.facility_id].price * selections[element.facility_id].quantity
+                    price: element.average_price ? element.average_price : 0,
+                    totalPrice: (element.average_price ? element.average_price : 0) * selections[element.facility_id].quantity
                 }));
             setRestaurantChosen(restaurants);
         } catch (error) {
@@ -118,6 +119,45 @@ const TourReservationResult = () => {
     }
 
     function confirmButton() {
+        const transformedPlaces = placesChosen.map(place => ({
+            Name: place.attraction_name,
+            quantity: place.quantity
+        }));
+    
+        const transformedHotels = hotelChosen.map(hotel => ({
+            Name: hotel.facility_name,
+            quantity: hotel.quantity,
+            price: hotel.average_price,
+            checkinTime: hotel.date,
+            totalPrice: hotel.totalPrice,
+        }));
+
+        const transformedRestaurants = restaurantChosen.map(restaurant => ({
+            Name: restaurant.facility_name,
+            quantity: restaurant.quantity,
+            price: restaurant.average_price,
+            checkinTime: restaurant.date,
+            totalPrice: restaurant.totalPrice,
+        }));
+
+        // Combine the data
+        const bookingData = [
+            ...transformedPlaces,
+            ...transformedHotels,
+            ...transformedRestaurants
+        ];
+    
+        // Create a worksheet
+        const worksheet = XLSX.utils.json_to_sheet(bookingData);
+    
+        // Create a workbook
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Booking Data');
+    
+        // Generate Excel file and save it
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+        saveAs(blob, 'TourSchedule.xlsx');
 
         alert("Your reservation has been confirmed.");
         window.location.href = "/booking02";
