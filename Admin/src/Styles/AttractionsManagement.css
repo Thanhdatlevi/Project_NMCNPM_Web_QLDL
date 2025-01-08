@@ -342,7 +342,7 @@
   border-color: #005b96;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1400px) {
   .attracManage main {
       grid-template-columns: repeat(2, 1fr);
       padding: 0;
@@ -363,7 +363,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 610px) {
   .attracManage main {
       grid-template-columns: 1fr;
   }
