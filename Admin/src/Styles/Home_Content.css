@@ -8,7 +8,7 @@
     flex-direction: column;
 }
 .container-dashboard .side-bar{
-    width: 20%;
+    /* width: 20%; */
     /* height: 100%; */
     background-color: #2434e9;
     color: #fff;
@@ -98,31 +98,46 @@
 }
 .toggle-sidebar-button {
     margin: 10px;
-    padding: 10px;
     background-color: #005b96;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+/* Sidebar chung */
+/* .side-bar {
+    width: 25%;
+    background-color: #2434e9;
+    color: white;
+    padding: 10px;
+    border-top-right-radius: 32px;
+    border-bottom-right-radius: 32px;
+    transition: transform 0.3s ease-in-out;
+    position: relative; /* Sidebar nằm bên trái ở màn hình lớn */
+  
+  
+  .side-bar:not(.hidden) {
+    transform: translateX(0); /* Hiện sidebar */
+  }
+  
+  /* Toggle Button */
+  .toggle-sidebar-button {
+    display: none; /* Mặc định ẩn */
+  }
 
-.side-bar.hidden {
-    display: none;
-}
 @media (max-width: 640px) {
     .container-dashboard {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
+        flex-direction: column;
     }
 
     .container-dashboard .side-bar {
         width: 20%; /* Điều chỉnh kích thước phù hợp cho sidebar */
         margin-bottom: 0;
+        background-color: rgba(28, 87, 196, 0.9);
     }
     
     .container-dashboard .contentDashboard {
-        width: 80%; /* Điều chỉnh kích thước phù hợp cho content */
+        width: 100%; /* Điều chỉnh kích thước phù hợp cho content */
     }
 
     .container-dashboard .side-bar .side-bar-item {
@@ -154,6 +169,34 @@
     .admin-info p {
         font-size: 0.6em; /* Thu nhỏ kích thước font của admin info */
     }
+    .side-bar {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 10;
+        transform: translateX(-100%); /* Ẩn sidebar ban đầu */
+    }
+
+    .contentDashboard {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .toggle-sidebar-button {
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: #077fcf;
+        color: white;
+        border: none;
+        /* border-radius: 50%; */
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 20;
+      }
 }
 
 @media (max-width: 480px) {
