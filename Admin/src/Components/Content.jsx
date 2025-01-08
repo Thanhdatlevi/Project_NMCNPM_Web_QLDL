@@ -101,8 +101,7 @@ const Content = () => {
   };
   return (
     <section className="container-dashboard">
-      {/* Nút toggle */}
-      {isSmallScreen && (
+        {isSmallScreen && (
         <button
           className="toggle-sidebar-button"
           onClick={toggleSidebar}
@@ -115,6 +114,7 @@ const Content = () => {
                 <div className="logo">
                     <img src="../Images/logoITISE.png" alt="logo" />
                 </div>
+                {/* Nút toggle */}
                 <div className="list-select">
                     <div className="dashboard-header list-select-content" onClick={() => setContentType('profile')}>
                         <div className="notification">

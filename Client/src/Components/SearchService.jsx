@@ -54,7 +54,7 @@ const SearchService = () => {
     const handleFilterChange = (key, value) => {
         setFilters((prevFilters) => ({
             ...prevFilters,
-            [key]: prevFilters[key] === value ? "" : value,
+            [key]: value,
         }));
     };
 
