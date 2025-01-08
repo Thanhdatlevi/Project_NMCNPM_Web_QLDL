@@ -1,0 +1,57 @@
+.list-user {
+    overflow-x: auto; /* Cho phép cuộn ngang */
+    
+}
+
+.list-user .user-card-header {
+    display: grid;
+    grid-template-columns: 1.5fr 2.5fr 1.5fr 1.5fr 2.5fr 1fr 0.5fr;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    font-weight: bold;
+}
+
+.list-user .user-card-item {
+    height: 600px;
+    overflow-y: auto;
+}
+
+.list-user .user-card-item::-webkit-scrollbar {
+    width: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 640px) {
+    .list-user .user-card-header {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .list-user .user-card-item {
+        height: 600px;
+    }
+
+    .list-user .user-card-header .optional-info {
+        display: none; /* Ẩn thông tin không cần thiết */
+    }
+}
+
+@media (max-width: 480px) {
+    .list-user .user-card-header {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .list-user .user-card-item {
+        height: 600px;
+    }
+
+    .list-user .user-card-header .optional-info {
+        display: none; /* Ẩn thông tin không cần thiết */
+    }
+}

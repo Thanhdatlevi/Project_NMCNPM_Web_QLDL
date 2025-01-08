@@ -1,0 +1,423 @@
+html{
+    font-size: 16px;
+}
+body{
+    overflow-x: hidden;
+}
+
+#main_content{
+    margin: 50px 150px;
+    border: 2px solid #000;
+}
+#itinar{
+    margin: 30px 50px;
+}
+
+section{
+    margin: 15px 0px;
+}
+/* header css */
+#form_place{
+    border-bottom: 2px dotted #000;
+    padding-bottom: 50px;
+}
+.header-container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: linear-gradient(rgb(140, 140, 140), rgb(154, 219, 233));
+    border: 2px solid #000;
+}
+
+#tour-name-container{
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+#tour_name{
+    border: 2px solid #000;
+    border-radius: 10px;
+    height: 30px;
+    width: 50%;
+}
+
+#city{
+    border: 2px solid #000;
+    border-radius: 10px;
+    height: 30px;
+    width: 100%;
+    font-size: 20px;
+}
+
+#city:hover{
+    cursor: pointer;
+}
+
+/* add place css */
+
+.add{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    gap: 10px;
+}
+
+#title-text{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px 0;
+    border-radius: 4px;
+    height: 100%;
+    white-space: nowrap;
+    font-size: 40px;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+}
+
+#add-place-button{
+    border-radius: 100px;
+    width: 6rem;
+    font-size: 30px;
+    border: 4px solid #000;
+}
+
+#add-place-button:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+/* display place css */
+
+#display-place{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 10px 5px;
+}
+
+#display-place #notice-place{
+    color: red;
+    font-size: 15px;
+}
+
+#display-place #place-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+#settime{
+    margin-left: 55px;
+}
+/* #display-place #place-header-container{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+} */
+
+#place-information #delete-place-button{
+    border-radius: 100px;
+    width: 100px;
+    font-size: 20px;
+    border: 4px solid #000;
+    height: 75%;
+}
+
+#place-information #delete-place-button:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+detail-button{
+    border-radius: 100px;
+    width: 100px;
+    font-size: 20px;
+    border: 4px solid #000;
+    height: 75%;
+}
+
+.detail-button:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+#display-place #time-place{
+    max-width: 30%;
+    height: 75%px;
+    font-size: 17px;
+    border: #000 solid 2px;
+    margin: 10px;
+    border: none;          /* Loại bỏ khung mặc định */
+    border-bottom: 1px dashed #000;
+    outline: none;
+}
+
+#display-place #place-information{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+#display-place #place-information .list{
+    font-size: 30px;
+    font-weight: bold;
+    max-width: 50%;
+    width: 50%;
+    border-radius: 2px;
+    border: none;          /* Loại bỏ khung mặc định */
+    border-bottom: 1px solid #000;
+    outline: none;
+}
+
+#display-place #place-information #place-infor{
+    font-size: 20px;
+    font-weight: bold;
+    max-width: 50%;
+    width: 40%;
+    margin: 10px 0;
+}
+#service{
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 10%;
+    padding-top: 50px;
+}
+.service-text{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px 0;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    font-size: 40px;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+}
+
+.add-res-hol{
+    border-radius: 100px;
+    width: 7rem;
+    font-size: 30px;
+    border: 4px solid #000;
+}
+
+.add-res-hol:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+#display-res{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 10px 5px;
+}
+
+#display-res #notice-res{
+    color: red;
+    font-size: 15px;
+}
+
+#display-res #res-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#display-res #res-header-container{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+}
+
+#display-res #res-information{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+#display-res #res-information .list{
+    font-size: 30px;
+    font-weight: bold;
+    width: 60%;
+    border-radius: 15px;
+}
+
+#display-res #res-information #res-infor{
+    font-size: 20px;
+    font-weight: bold;
+    max-width: 50%;
+    width: 40%;
+    margin: 10px 0;
+}
+
+#display-res #res-feature{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#display-res #res-feature #delete-res-button{
+    border-radius: 100px;
+    width: 100px;
+    font-size: 20px;
+    border: 4px solid #000;
+    height: 75%;
+}
+
+#display-res #res-feature #delete-res-button:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+#display-res #book-res-button{
+    border-radius: 100px;
+    width: 100px;
+    font-size: 20px;
+    border: 4px solid #000;
+    height: 75%;
+}
+
+#display-res #book-res-button:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+#form_res{
+    width: 45%;
+}
+#form_hol{
+    width: 45%;
+}
+
+#display-hol{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 10px 5px;
+}
+
+#display-hol #notice-hol{
+    color: red;
+    font-size: 15px;
+}
+
+#display-hol #hol-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#display-hol #hol-header-container{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+}
+
+#display-hol #hol-information{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+#display-hol #hol-information .list{
+    font-size: 30px;
+    font-weight: bold;
+    width: 50%;
+    border-radius: 15px;
+}
+
+#display-hol #hol-information #hol-infor{
+    font-size: 20px;
+    font-weight: bold;
+    max-width: 50%;
+    width: 40%;
+    margin: 10px 0;
+}
+
+#display-hol #hol-feature{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#display-hol #hol-feature #delete-hol-button{
+    border-radius: 100px;
+    width: 100px;
+    font-size: 20px;
+    border: 4px solid #000;
+    height: 75%;
+}
+
+#display-hol #hol-feature #delete-hol-button:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+#display-hol #book-hol-button{
+    border-radius: 100px;
+    width: 100px;
+    font-size: 20px;
+    border: 4px solid #000;
+    height: 75%;
+}
+
+#display-hol- #book-hol-button:hover{
+    cursor: pointer;
+    background: #a6a5a5;
+}
+
+@media (max-width: 640px) {
+    #main_content {
+        margin: 20px;
+    }
+
+    .header-container {
+        flex-direction: column;
+    }
+
+    .add {
+        flex-direction: column;
+    }
+
+    #display-place #place-information {
+        flex-direction: column;
+    }
+
+    #service {
+        flex-direction: column;
+    }
+
+    #display-res #res-information,
+    #display-hol #hol-information {
+        flex-direction: column;
+    }
+}

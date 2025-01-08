@@ -1,0 +1,224 @@
+* {
+    box-sizing: border-box;
+    font-family: poppins, sans-serif;
+   
+}
+
+
+.booking00-container .blank0{
+    flex-basis: 25%;
+}
+.booking00-container .blank{
+    flex-basis: 10%;
+}
+.booking00-container {
+    width: 1440px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.booking00-container .booking-header img {
+    margin-top: 21px;
+    margin-bottom: 30px;
+    width: 112px;
+    height: 40px;
+}
+.booking00-container .booking-header{
+    border-bottom: #E5E5E5;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+.booking00-container .booking-content h2 {
+    margin: 30px;
+    font-size: 36px;
+    font-weight: 600;
+    color: #152C5B;
+}
+
+.booking00-container .booking-content p {
+    font-size: 18px;
+    color: #B0B0B0;
+    font-weight: 300;
+}
+.booking00-container.progress-indicator .progress-line {
+    width: 50px;
+    height: 3px;
+    background-color: #e0e0e0;
+  }
+  .booking00-container .progress-indicator .progress-line .completed {
+    background-color: #1ABC9C;
+  }
+  .booking00-container.progress-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 51px;    
+}
+
+.booking00-container .progress-indicator .completed-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1ABC9C;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 32px;
+}
+
+.booking00-container .progress-indicator .inactive-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    color: #666;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.booking00-container .booking00-details {
+    display: flex;
+    justify-content: space-between; /* Ensure sections are on opposite sides */
+    margin-top: 80px;
+    position: relative; /* Position relative to place the border */
+}
+
+.booking00-container .info-section, .booking00-container .form-section {
+    flex-basis: 48%; /* Each section takes up 48% of the width */
+}
+
+.booking00-container .form-section{
+    text-align: left;
+}
+.booking00-container .form-section label {
+    font-size: 16px;
+    font-weight: 400;
+    color: #152C5B;
+}
+.booking00-container .form-section .duration-control{
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F5F6F8;
+
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+.booking00-container .form-section .duration-control button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #ff5757;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    outline: none;
+}
+.booking00-container  .duration-control button:nth-child(3) {
+    background-color: #17c671;
+}
+
+.date-picker {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    background-color: #F5F6F8;
+    border-radius: 8px;
+    margin-top:10px;
+    margin-bottom: 40px;
+}
+.date-picker .date-wrapper {
+    flex: 1; /* Chiếm toàn bộ không gian còn lại */
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    font-size: 16px;
+    color: #152C5B;
+    font-weight: 400;
+}
+.date-picker .calendar-icon {
+    font-size: 30px;
+    color: #1a1a7a;
+
+}
+.price-info{
+    font-size: 24px;
+    font-weight: 500;
+    color: #152C5B;
+}
+
+.booking00-container .info-section .image-section img{
+    width:421px;
+    height: 316px;
+    border-radius: 16px;
+}
+.location-section {
+    display: flex;
+    justify-content: space-between; /* Căn giữa các phần tử con theo chiều ngang */
+
+}
+.location-section h3 {
+    font-size: 20px;
+    color: #152C5B;
+    font-weight: 400;
+    text-align: start;
+    width:70%;
+}
+.location-section p {
+    text-align: end;
+    font-size: 16px;
+    color: #B0B0B0;
+    font-weight: 300;
+}
+.action-section{
+    margin-top: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.action-section button{
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.action-section button:hover{
+    border-color: #03396C;
+    box-shadow: 0 0 10px #03396C;
+}
+.action-section .book-now {
+    width: 323px;
+    padding: 10px;
+    background-color: #003DFC;
+    color: #FAFAFA;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: 500;
+}
+.action-section .cancel {
+    width: 300px;
+    padding: 10px;
+    background-color: #F5F6F8;
+    color: #B3B3B3;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 27px;
+    font-size: 24px;
+    font-weight: 500;
+}
+#notice-place{
+    margin: 20px;
+    font-size: 16px;
+    color: red;
+    font-weight: 300;
+}

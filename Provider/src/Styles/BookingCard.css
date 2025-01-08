@@ -1,0 +1,48 @@
+.booking-card {
+    display: flex;
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.booking-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+}
+
+.booking-info {
+    margin-left: 20px;
+    flex-grow: 1;
+}
+
+.booking-button {
+    background-color: #00f;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.booking-button:hover {
+    background-color: #0053ba;
+}
+
+.booking-card .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.booking-card .button-container .booking-button {
+    width: 100%;
+}
+
+.booking-card .button-container > :last-child {
+    background-color: red;
+}

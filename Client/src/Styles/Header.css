@@ -1,0 +1,414 @@
+body {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    /* Ngăn cuộn ngang toàn bộ trang */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica" sans-serif;
+    box-sizing: border-box;
+}
+
+/* nav bar */
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    /* Ngăn cuộn ngang toàn bộ trang */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica" sans-serif;
+    box-sizing: border-box;
+}
+
+
+.header-container {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Đảm bảo phủ toàn bộ chiều rộng màn hình */
+    /* Tương ứng với 128 x 0.25rem */
+    padding-left: 1rem;
+    /* Tương ứng với px-4 */
+    padding-right: 1rem;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: rgba(245, 245, 245, 0.8);
+    /* Xanh đen sáng hơn */
+    backdrop-filter: blur(12px);
+    /* Tương ứng với backdrop-blur-md */
+    box-sizing: border-box;
+    /* Đảm bảo padding không làm tăng chiều rộng */
+}
+
+#nav .logo-container {
+    width: 6rem;
+    /* Tương ứng với w-24 (24 x 0.25rem) */
+    margin-right: 0;
+    /* Tương ứng với mr-0 */
+    display: block;
+    /* Tương ứng với block */
+    padding: 0px;
+}
+
+#nav .logo-link {
+    width: 100%;
+    /* Tương ứng với w-full */
+    height: auto;
+    /* Tương ứng với h-auto */
+    display: inline-block;
+    /* Bảo đảm tính inline nếu cần */
+}
+
+#nav .logo-image {
+    width: 100%;
+    /* Tương ứng với w-full */
+    height: auto;
+    /* Tương ứng với h-auto */
+}
+
+#nav .nav-list {
+    display: flex;
+    padding-left: 0;
+    padding-right: 0;
+    /* Xóa margin mặc định của ul */
+    list-style-type: none;
+    font-size: 20px;
+    /* Tương ứng với text-xs */
+    gap: 0.75rem;
+    /* Tương ứng với space-x-3 */
+}
+
+#nav .nav-item {
+    margin-left: 16px;
+    text-decoration: none;
+    /* Loại bỏ gạch chân mặc định */
+    transition: transform 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
+    color: #03396c;
+}
+
+#nav .nav-item:hover {
+    transform: scale(1.1);
+    /* Tương ứng với hover:scale-110 */
+    font-weight: bold;
+    /* Tương ứng với hover:font-bold */
+    color: #005b96;
+    /* Tương ứng với hover:text-green-700 */
+}
+
+
+#nav .nav-button-list {
+    display: flex;
+    /* Dùng Flexbox để sắp xếp các phần tử li ngang */
+    margin-left: auto;
+    /* Đẩy phần tử sang bên phải */
+    padding: 0;
+    /* Xóa padding mặc định của ul */
+    list-style-type: none;
+    /* Xóa dấu chấm đầu dòng */
+    gap: 1rem;
+}
+
+#nav .button {
+    display: flex;
+    /* Dùng Flexbox để căn giữa các phần tử */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    width: 32px;
+    /* Tương ứng với w-3 */
+    height: 32px;
+    /* Tương ứng với h-3 */
+    background-size: cover;
+    /* Đảm bảo hình ảnh lấp đầy nút */
+    background-position: center;
+    /* Đặt hình ảnh ở giữa */
+}
+
+#nav .button.bg-user-icon {
+    background-image: url(../../public/Images/user-icon.png);
+    /* Đường dẫn đến hình ảnh người dùng */
+    background-size: cover;
+    background-position: center;
+}
+
+#nav .button.bg-user-icon:hover {
+    background-image: url(../../public/Images/user-icon-hover.png);
+    /* Đổi hình ảnh khi hover */
+}
+
+#nav .menu-button {
+    display: none;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.switch>span {
+    position: absolute;
+    top: 14px;
+    pointer-events: none;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+    width: 50%;
+    text-align: center;
+}
+
+input.check-toggle-round-flat:checked~.off {
+    color: #005b96;
+}
+
+input.check-toggle-round-flat:checked~.on {
+    color: #fff;
+}
+
+.switch>span.on,
+.switch>span.off {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+    width: 50%;
+    text-align: center;
+}
+
+.switch>span.on {
+    left: 0;
+    padding-left: 2px;
+    color: #005b96;
+}
+
+.switch>span.off {
+    right: 0;
+    padding-right: 4px;
+    color: #fff;
+}
+
+.check-toggle {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+}
+
+.check-toggle+label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input.check-toggle-round-flat+label {
+    padding: 2px;
+    width: 97px;
+    height: 32px;
+    background-color: #005b96;
+    border-radius: 60px;
+}
+
+input.check-toggle-round-flat+label:before,
+input.check-toggle-round-flat+label:after {
+    display: block;
+    position: absolute;
+    content: "";
+}
+
+input.check-toggle-round-flat+label:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: #005b96;
+    border-radius: 60px;
+}
+
+input.check-toggle-round-flat+label:after {
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    width: 48px;
+    background-color: #fff;
+    border-radius: 52px;
+    transition: margin 0.2s;
+}
+
+input.check-toggle-round-flat:checked+label:after {
+    margin-left: 44px;
+}
+
+* Style for the user dropdown container */ .user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style for the user info section (clickable area) */
+.user-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 5px 5px;
+    background-color: #f4f4f4;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.user-info:hover {
+    background-color: #91c1e1;
+}
+
+/* Style for the user name */
+.user-name {
+    margin-right: 8px;
+}
+
+/* Arrow icon next to the user name */
+.arrow {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.arrow.open {
+    transform: rotate(180deg);
+    /* Rotate arrow when dropdown is open */
+}
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 150px;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* When dropdown is visible, we change display to block */
+.user-dropdown .dropdown-menu.show {
+    display: block;
+}
+
+/* Style for each dropdown item */
+.dropdown-item {
+    padding: 12px 20px;
+    width: 100%;
+    background-color: #fff;
+    text-align: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #cddfeb;
+}
+
+/* Style for the profile and logout buttons inside the dropdown */
+.dropdown-item button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-item button:hover {
+    background-color: #f4f4f4;
+}
+
+#menu-toggle {
+    display: block;
+    /* Hiển thị button */
+    z-index: 20;
+    /* Đảm bảo nút nằm trên các phần tử khác */
+    position: relative;
+    /* Để dễ dàng thay đổi vị trí nếu cần */
+    padding: 0;
+    /* Xóa padding */
+}
+
+/* Thay đổi kích thước cho icon trong nút menu */
+#menu-toggle .menu-icon {
+    width: 24px;
+    /* Đặt kích thước cho icon */
+    height: 24px;
+    /* Đặt kích thước cho icon */
+    transition: transform 0.3s ease-in-out;
+    /* Thêm hiệu ứng chuyển động */
+}
+
+@media (max-width: 1024px) {
+
+    #nav .logo-container {
+        display: none;
+    }
+
+    #nav .nav-list {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: 280px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2rem 1rem;
+        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        z-index: 10;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    #nav .nav-list.show {
+        display: flex;
+        padding-top: 60px;
+        left: 0;
+    }
+
+    #nav #menu-toggle {
+        display: block;
+        padding: 0;
+        /* Loại bỏ khoảng cách bên trong */
+        background: none;
+        /* Loại bỏ nền mặc định */
+        border: none;
+        /* Xóa viền mặc định */
+        cursor: pointer;
+        /* Thêm con trỏ chỉ tay khi hover */
+    }
+
+
+}

@@ -1,0 +1,191 @@
+.facility-form{
+    width: 800px;
+    height: auto;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f5f6   ;
+    border-radius: 8px;
+    border: 2px solid #000;
+}
+.facility-form .facility-form-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px;
+}
+.facility-form .facility-form-content h2{
+    color: #007ae7;
+    margin-bottom: 10px;
+}
+.facility-form .facility-form-details{
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+    flex: 1;
+}
+.facility-form .image-preview img{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+.facility-form .image-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.facility-form-body {
+    display: flex;
+}
+#facility_location{
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #000;
+    background: none;
+    outline: none;
+}
+#facility_location_detail{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #000;
+    background: none;
+    outline: none;
+}
+#facility_name, #facility_price, #facility_type, #facility_description{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #000;
+    background: none;
+    outline: none;
+}
+#facility_type, #facility_price{
+    width: auto;
+    padding: 10px;
+    margin: 10px 0;
+}
+.facility-form-item-inline{
+    display: flex;
+    justify-content: space-between;
+}
+#facility_description{
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    margin: 10px 0;
+}
+#facility_image{
+    display: none;  
+}
+
+#facility_img { 
+    width: 100%;
+    padding: 30px;
+    margin: 10px 0;
+    border: dashed;
+    border-radius: 4px;
+}
+#facility_action{
+    padding: 10px;
+    width: 100%;
+    font-weight: 700;
+    color: white;
+    background-color: #00a8e8;
+    border-radius: 8px;
+}
+
+.new-room-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.facility-form-item-inline button{
+    border: none;
+    background-color: #00a8e8;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 60%;
+}
+.new-room-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #00a8e8;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.new-room-form button:hover {
+    background-color: #0056b3;
+}
+.facility-form-item .facility-images{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
+.facility-form-item .facility-images img{
+    max-width: 30%;
+    width: auto; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    margin-right: 10px; /* Optional: Add space between images */
+    border-radius: 8px;
+}
+.dialog {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.dialog-content {
+    justify-content: space-between;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.dialog-content h3 {
+    margin-top: 0;
+}
+
+.dialog-content button {
+    margin-top: 20px;
+}
+.capacity-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.capacity-item p {
+    margin: 0 10px;
+}
+
+.capacity-item button {
+    margin-left: 10px;
+}
+.capacity-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
