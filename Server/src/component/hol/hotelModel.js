@@ -222,12 +222,12 @@ class HotelModel {
                 f.facility_id as facility_id,
                 l.location_name AS location,
                 f.deal AS deal,
-                f.rating AS rating
-                --array_agg(f_i.img_url) AS images
+                f.rating AS rating,
+                array_agg(f_i.img_url) AS images
             FROM hotels h
             JOIN facilities f ON h.facility_id = f.facility_id
             JOIN locations l ON l.location_id = f.location_id
-            --JOIN facility_images f_i ON f.facility_id = f_i.facility_id
+            JOIN facility_images f_i ON f.facility_id = f_i.facility_id
             WHERE f.provider_id = $1
             GROUP BY
                 h.hotel_id, f.facility_name, f.facility_id,
@@ -255,19 +255,24 @@ class HotelModel {
 
     static async getFilterHotel(rate, location, input) {
         try {
-            // Truy vấn SQL lấy 3 nhà hàng có rating cao nhất
             const query = `
-                SELECT *, f.facility_name FROM public.hotels h
-                join facilities f on f.facility_id = h.facility_id
-                join locations l on l.location_id = f.location_id
-                join facility_images fi on fi.facility_id = f.facility_id and fi.img_id = 1
-                WHERE (($1 = -1) OR (f.rating >= $1 AND f.rating <= $1+1))
-                and (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
-                and (($3 = 'default') OR (f.facility_name LIKE '%' || $3 || '%') OR (f.description LIKE '%' || $3 || '%'))
+            WITH FirstImage AS (
+                SELECT DISTINCT ON (fi.facility_id) fi.facility_id, fi.img_url
+                FROM facility_images fi
+                ORDER BY fi.facility_id, fi.img_id ASC
+            )
+            SELECT *
+            FROM public.hotels h
+            JOIN facilities f ON f.facility_id = h.facility_id
+            JOIN locations l ON l.location_id = f.location_id
+            LEFT JOIN FirstImage fi ON fi.facility_id = f.facility_id
+            WHERE (($1 = -1) OR (f.rating >= $1 AND f.rating <= $1+1))
+            AND (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
+            AND (($3 = 'default') OR (f.facility_name LIKE '%' || $3 || '%') OR (f.description LIKE '%' || $3 || '%'));
             `;
             const values = [rate, location, input];
             const res = await db.query(query, values);  // Truyền tham số hotelID vào câu truy vấn
-            return res.rows;  // Trả về kết quả chi tiết của khách sạn
+            return (res.rows.length > 0) ? res.rows : [];
         } catch (error) {
             console.error('Error fetching hotel details:', error);
             throw error;

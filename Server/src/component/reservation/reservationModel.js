@@ -20,7 +20,6 @@ class ReservationModel {
     }
 
     static async #insertDetailReservations(reserveId, detailReservations, client) {
-        console.log(detailReservations)
         try {
             const query = `
             INSERT INTO detail_reservations(

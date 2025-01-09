@@ -88,12 +88,12 @@ const Booking02 = ({ bookingData }) => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + 100 * item.quantity, 0);
+            .reduce((acc, item) => acc + item.price * item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
     const calFinalTotal = useCallback(() => {
-        return total * 0.9;
+        return total;
     }, [total]);
 
     const finalTotal = useCallback(() => {
@@ -167,7 +167,14 @@ const Booking02 = ({ bookingData }) => {
                 // Kiểm tra nếu response không thành công
                 if (!response.ok) {
                     const errorMessage = await response.text(); // Hoặc response.json() nếu server trả về JSON
+                    if (response.status === 500) {
+                        // Nếu mã lỗi là 500, hiển thị thông báo và chuyển hướng
+                        alert(`One of yours booking is not available anymore. Please try again.`);
+                        window.location.href = '/HomePlace';
+                        return;
+                    }
                     throw new Error(`Error: ${errorMessage}`);
+                    
                 }
                 return response.json(); // Đọc nội dung JSON từ server
             })

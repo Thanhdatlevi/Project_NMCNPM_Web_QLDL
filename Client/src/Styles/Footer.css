@@ -132,7 +132,6 @@ footer {
     margin-top: 16px;
     justify-content: left;
     align-items: center;
-
 }
 
 .col-2 .social-icons .facebook-icon {
@@ -190,4 +189,144 @@ footer {
     border-radius: 10px;
     margin: 10px;
     transition: 0.3s;
+}
+
+.map-container {
+    display: flex;
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    width: 100%;
+    /* Đảm bảo container chiếm hết chiều rộng */
+    height: 300px;
+    /* Tùy chỉnh chiều cao theo ý muốn */
+    margin-top: 20px;
+    /* Khoảng cách giữa map và nội dung khác */
+}
+
+#map {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    /* Giữ tỷ lệ 16:9 */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
+    #map {
+        height: 250px;
+        /* Giảm chiều cao cho màn hình vừa */
+    }
+}
+
+@media (max-width: 768px) {
+    #map {
+        height: 200px;
+        /* Giảm chiều cao thêm cho màn hình nhỏ */
+    }
+}
+
+@media (max-width: 480px) {
+    #map {
+        height: 150px;
+        /* Đặt chiều cao tối ưu cho màn hình rất nhỏ */
+    }
+}
+
+@media (max-width: 1024px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px 0;
+    }
+
+    .footer div {
+        flex-basis: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .col-1,
+    .col-2,
+    .col-3 {
+        width: 100%;
+    }
+
+    .blank .footer-home a {
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
+    }
+
+    .col-2 .social-icons {
+        justify-content: center;
+    }
+
+    .col-2 .social-icons a {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+
+    .col-3 .gallery img {
+        width: calc(100% / 2 - 10px);
+        height: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 12px 0;
+    }
+
+    .footer div {
+        margin-bottom: 16px;
+    }
+
+    .col-3 .gallery img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .col-1 h3,
+    .col-2 h3 {
+        font-size: 1.2rem;
+    }
+
+    .col-1 p,
+    .col-2 span {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 8px 0;
+    }
+
+    .blank .footer-home a {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    .col-2 .social-icons a {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    .col-1 h3,
+    .col-2 h3 {
+        font-size: 1rem;
+    }
+
+    .col-1 p,
+    .col-2 span {
+        font-size: 0.9rem;
+    }
 }

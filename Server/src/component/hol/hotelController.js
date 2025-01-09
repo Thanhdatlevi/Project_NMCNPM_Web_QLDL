@@ -69,10 +69,7 @@ class HotelController {
                 input: req.query.input || 'default',
             };
             const hotels = await HotelModel.getFilterHotel(result.rate, result.location, result.input);
-            if (!hotels || hotels.length === 0) {
-                return res.status(404).json({ message: 'No hotels match the filter criteria' });
-            }
-            res.status(200).json(hotels);
+            return res.status(200).json(hotels);
         } catch (error) {
             console.error('Error retrieving hotels by filter:', error.message);
             res.status(500).json({ message: 'Failed to retrieve filtered hotels' });

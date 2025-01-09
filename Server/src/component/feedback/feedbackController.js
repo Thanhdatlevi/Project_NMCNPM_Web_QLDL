@@ -5,16 +5,11 @@ class FeedbackController {
     try {
       const { facilityId } = req.params;
       const result = await FeedbackService.getFeedbacksByFacilityId(facilityId);
-
-      if (result.success) {
-        return res.status(200).json(result.data);
-      }
-      return res.status(404).json({ message: result.message });
+      return res.status(200).json(result);
     } catch (error) {
       console.error("Error in FeedbackController.getFeedbacksByFacilityId:", error.message);
       return res.status(500).json({ message: "Có lỗi xảy ra. Vui lòng thử lại sau." });
     }
   }
 }
-
 module.exports = FeedbackController;

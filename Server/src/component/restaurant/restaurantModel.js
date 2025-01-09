@@ -5,17 +5,23 @@ class RestaurantModel {
     static async getFilterRes(rate, location, input) {
         try {
             const query = `
-                SELECT *, f.facility_name FROM public.restaurants r
-                JOIN facilities f ON f.facility_id = r.facility_id
-                JOIN locations l ON l.location_id = f.location_id
-                JOIN facility_images fi ON fi.facility_id = f.facility_id AND fi.img_id = 1
-                WHERE (($1 = -1) OR (f.rating >= $1 AND f.rating <= $1+1))
-                AND (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
-                AND (($3 = 'default') OR (f.facility_name LIKE '%' || $3 || '%') OR (f.description LIKE '%' || $3 || '%'));
+            WITH FirstImage AS (
+                SELECT DISTINCT ON (fi.facility_id) fi.facility_id, fi.img_url
+                FROM facility_images fi
+                ORDER BY fi.facility_id, fi.img_id ASC
+            )
+            SELECT *
+            FROM public.restaurants r
+            JOIN facilities f ON f.facility_id = r.facility_id
+            JOIN locations l ON l.location_id = f.location_id
+            LEFT JOIN FirstImage fi ON fi.facility_id = f.facility_id
+            WHERE (($1 = -1) OR (f.rating >= $1 AND f.rating <= $1+1))
+            AND (($2 = 'default') OR (l.location_name LIKE '%' || $2 || '%'))
+            AND (($3 = 'default') OR (f.facility_name LIKE '%' || $3 || '%') OR (f.description LIKE '%' || $3 || '%'));
             `;
             const values = [rate, location, input];
             const res = await db.query(query, values);
-            return res.rows;
+            return (res.rows.length > 0) ? res.rows : [];
         } catch (error) {
             console.error('Error filtering restaurants:', error);
             throw error;
