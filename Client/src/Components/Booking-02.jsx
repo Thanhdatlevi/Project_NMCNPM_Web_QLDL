@@ -43,11 +43,9 @@ const Booking02 = ({ bookingData }) => {
                     ...element,
                     quantity: selections[element.facility_id].quantity,
                     date: selections[element.facility_id].date,
-                    price: selections[element.facility_id].price,
-                    totalPrice: selections[element.facility_id].price * selections[element.facility_id].quantity,
+                    totalPrice: element.average_price * selections[element.facility_id].quantity,
                     img: selections[element.facility_id].img_url
                 }));
-
             setHotelChosen(hotels);
         } catch (error) {
             console.error('Error loading hotels:', error);
@@ -69,8 +67,7 @@ const Booking02 = ({ bookingData }) => {
                     ...element,
                     quantity: selections[element.facility_id].quantity,
                     date: selections[element.facility_id].date,
-                    price: selections[element.facility_id].price,
-                    totalPrice: selections[element.facility_id].price * selections[element.facility_id].quantity,
+                    totalPrice: element.average_price * selections[element.facility_id].quantity,
                     img: selections[element.facility_id].img_url
                 }));
             setRestaurantChosen(restaurants);
@@ -88,7 +85,7 @@ const Booking02 = ({ bookingData }) => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + item.price * item.quantity, 0);
+            .reduce((acc, item) => acc + (item.average_price ? item.average_price : 0) * item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -131,18 +128,17 @@ const Booking02 = ({ bookingData }) => {
             facilityId: hotel.facility_id,
             facilityName: hotel.facility_name,
             quantity: hotel.quantity,
-            price: hotel.price,
+            price: hotel.average_price,
             checkinTime: hotel.date,
             totalPrice: hotel.totalPrice,
             img: hotel.img_url
         }));
 
-
         const transformedRestaurants = restaurantChosen.map(restaurant => ({
             facilityId: restaurant.facility_id,
             facilityName: restaurant.facility_name,
             quantity: restaurant.quantity,
-            price: restaurant.price,
+            price: restaurant.average_price,
             checkinTime: restaurant.date,
             totalPrice: restaurant.totalPrice,
             img: restaurant.img_url
@@ -155,6 +151,7 @@ const Booking02 = ({ bookingData }) => {
             ],
             //final_total: finalTotal()
         };
+        console.log(restaurantChosen);
         console.log(bookingData);
         fetch('/tourist/createReservation', {
             method: 'POST',
@@ -187,6 +184,7 @@ const Booking02 = ({ bookingData }) => {
                 console.error('Error:', error.message); // In lỗi từ server hoặc từ client
                 alert(`There was an error: ${error.message}`);
             });
+    
     }
 
     function generateItem(item) {
@@ -234,12 +232,12 @@ const Booking02 = ({ bookingData }) => {
                             </div>
                             <div className="total-section">
                                 <h3>
-                                    Total: <strong>${finalTotal()} USD</strong>
+                                    Total: <strong>${finalTotal() * 0.9} USD</strong>
                                 </h3>
                             </div>
                             <div className="initial-section">
                                 <h3>
-                                    Initial Payment: <strong>${finalTotal()} USD</strong>
+                                    Initial Payment: <strong>${finalTotal() * 0.9} USD</strong>
                                 </h3>
                             </div>
                         </div>

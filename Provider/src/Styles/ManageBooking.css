@@ -154,7 +154,28 @@
 #history .dialog-details::-webkit-scrollbar-track {
     background-color: #f1f1f1;
 }
+#history .pagination{
+    display: flex;
+    margin-top: 20px;
+}
 
+#history .pagination button {
+    padding: 6px 10px;
+    margin: 0 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#history #pageNumbers button {
+    margin: 0 2px;
+}
+
+#history .pagination .active {
+    background-color: #007bff; /* Change this color as needed */
+    color: white;
+    font-weight: bold;
+    border-radius: 4px; /* Optional for rounded button appearance */
+}
 @media (max-width: 640px) {
     .type-booking {
         flex-direction: column;
@@ -174,5 +195,32 @@
 
     #history .booking-info {
         width: 100%;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    #history .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    #history .pagination button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #history .pagination {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #history .pagination button {
+        font-size: 14px;
+        padding: 6px 8px;
     }
 }

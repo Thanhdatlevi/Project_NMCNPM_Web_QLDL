@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "../Styles/ManageBooking.css";
 
 const BookingHistory = () => {
-    const itemsPerPage = 2;
+    const itemsPerPage = 3;
     const [currentPage, setCurrentPage] = useState(1);
     const [currentService, setCurrentService] = useState([]);
     const [activeTab, setActiveTab] = useState('res');
