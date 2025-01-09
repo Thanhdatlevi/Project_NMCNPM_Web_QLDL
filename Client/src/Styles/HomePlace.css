@@ -135,12 +135,13 @@
 #main_content_homePlaces #settime{
     margin-left: 55px;
 }
-/* #display-place #place-header-container{
+
+#main_content_homePlaces #form-container{
     display: flex;
-    justify-content: space-around;
     flex-direction: row;
-    align-items: center;
-} */
+    gap: 10px;
+    margin: 10px 5px;
+}
 
 #main_content_homePlaces #place-information #delete-place-button{
     border-radius: 100px;
@@ -471,4 +472,135 @@
 
 #main_content_homePlaces #tour-note #note::-webkit-scrollbar-thumb:hover {
     background: #555; /* Màu khi hover vào thanh kéo */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    /* Tablet styles */
+    #main_content_homePlaces {
+        margin: 20px;
+        border: 1px solid #000;
+    }
+
+    #main_content_homePlaces .header-container-form {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        width: 100%;
+    }
+
+    #main_content_homePlaces .header-container-form button {
+        width: 100%;
+    }
+
+    #main_content_homePlaces #city{
+        width: 60%;
+    }
+
+    #main_content_homePlaces .add {
+        flex-direction: column;
+    }
+
+    #main_content_homePlaces #form-container{
+        flex-direction: column;
+    }
+
+    #main_content_homePlaces #display-place {
+        flex-direction: column;
+    }
+
+    #main_content_homePlaces #display-res {
+        flex-direction: column;
+    }
+
+    #main_content_homePlaces #display-hol {
+        flex-direction: column;
+    }
+
+    #main_content_homePlaces #tour-note {
+        width: 100%;
+    }
+
+    /* Decrease text size for tablet */
+    #main_content_homePlaces,
+    #main_content_homePlaces * {
+        font-size: 80%;
+    }
+
+    #main_content_homePlaces #itinar #view-container{
+        margin:0;
+    }
+
+    #main_content_homePlaces #display-place #place-item{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobile styles */
+    #main_content_homePlaces {
+        margin: 10px;
+        border: 1px solid #000;
+    }
+
+    #main_content_homePlaces .header-container-form {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        width: 100%;
+    }
+
+    #main_content_homePlaces .header-container-form button {
+        width: 100%;
+    }
+
+    #main_content_homePlaces #city{
+        width: 60%;
+    }
+
+    #main_content_homePlaces .add {
+        flex-direction: row;
+    }
+
+    #main_content_homePlaces #form-container{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #main_content_homePlaces #display-place {
+        flex-direction: column;
+    }
+
+    #main_content_homePlaces #display-res {
+        flex-direction: column;
+    }
+
+    #main_content_homePlaces #display-hol {
+        flex-direction: column;
+    }
+
+    #main_content_homePlaces #tour-note {
+        width: 100%;
+    }
+
+    /* Decrease text size for mobile */
+    #main_content_homePlaces,
+    #main_content_homePlaces * {
+        font-size: 60%;
+    }
+
+    #main_content_homePlaces #itinar #view-container{
+        margin:0;
+    }
+
+    #main_content_homePlaces #display-place #place-item{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        gap: 10px;
+    }
 }

@@ -88,7 +88,7 @@ const Booking02 = ({ bookingData }) => {
 
     const displayTotal = useCallback(() => {
         const total = [...placesChosen, ...hotelChosen, ...restaurantChosen]
-            .reduce((acc, item) => acc + item.price * item.quantity, 0);
+            .reduce((acc, item) => acc + (item.average_price ? item.average_price : 0) * item.quantity, 0);
         setTotal(total);
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
@@ -187,6 +187,7 @@ const Booking02 = ({ bookingData }) => {
                 console.error('Error:', error.message); // In lỗi từ server hoặc từ client
                 alert(`There was an error: ${error.message}`);
             });
+    
     }
 
     function generateItem(item) {
