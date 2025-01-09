@@ -9,10 +9,15 @@ import React, { useEffect, useState } from 'react';
 
 
 const Content = () => {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 640);
   const [contentType, setContentType] = useState('home');
   const [user, setUser] = useState(null); // Lưu thông tin người dùng
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate(); // Sử dụng để chuyển hướng trang
+  const toggleSidebar = () => {
+    setIsSidebarVisible(prevState => !prevState); // Đổi trạng thái sidebar
+};
   const renderContent = () => {
         if (contentType === 'home') {
             return <HomeDashboard />;
@@ -50,7 +55,23 @@ const Content = () => {
 
       fetchAuthentication();
     }, []);
-  
+    useEffect(() => {
+            const handleResize = () => {
+              const isSmall = window.innerWidth <= 640;
+              setIsSmallScreen(isSmall);
+        
+              if (!isSmall) {
+                setIsSidebarVisible(true); // Khi màn hình lớn, luôn mở sidebar
+              }
+            };
+        
+            window.addEventListener("resize", handleResize);
+        
+            // Cleanup
+            return () => {
+              window.removeEventListener("resize", handleResize);
+            };
+          }, []);
     const handleLogout = async () => {
       try {
           const response = await fetch('/logout', {
@@ -75,7 +96,16 @@ const Content = () => {
   };
   return (
     <section className="container-dashboard">
-        <div className ="side-bar">
+      {isSmallScreen && (
+        <button
+          className="toggle-sidebar-button"
+          onClick={toggleSidebar}
+          aria-label="Toggle Sidebar"
+        >
+          ☰
+        </button>
+      )}
+        <div className={`side-bar ${!isSidebarVisible ? 'hidden' : ''}`}>
           <div className="logo">
                   <img src="../Images/logoITISE.png" alt="logo" />
           </div>

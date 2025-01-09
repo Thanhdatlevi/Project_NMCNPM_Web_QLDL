@@ -113,7 +113,7 @@
 }
 
 /* General styles for pagination buttons */
-#hisPost .page-button,
+#hisPost .page-button
 button {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
