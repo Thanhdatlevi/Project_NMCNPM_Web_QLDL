@@ -410,3 +410,161 @@ a{
     text-overflow: ellipsis; /* Thêm dấu ba chấm */
     -webkit-line-clamp: 2; /* Giới hạn số dòng */
   }
+
+/* Base styles remain the same */
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Responsive container */
+.detail-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Responsive grid layouts */
+.OverviewService .NameModel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .OverviewService .NameModel {
+        grid-template-columns: 1fr;
+    }
+    
+    .OverviewService .NameModel .rightside {
+        align-items: flex-start;
+    }
+}
+
+/* Gallery responsiveness */
+.OverviewService .Gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .OverviewService .Gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .OverviewService .Gallery .main-pic img {
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .OverviewService .Gallery .sub-pic .pic5 {
+        border-radius: 0 0 16px 16px;
+    }
+}
+
+/* Amenities grid responsiveness */
+.OverviewService .amenities .amenities-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+/* User ratings and reviews responsiveness */
+.OverviewService .userrating-reviews-overviewRate {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+    .OverviewService .userrating-reviews .userrating-reviews-Title {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Feedback items responsiveness */
+.Feedback-items {
+    grid-template-columns: 40px 1fr;
+}
+
+@media (max-width: 576px) {
+    .feedback-content .feedback-title {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .feedback-content .feedback-title .feedback-rating {
+        border-right: none;
+        border-bottom: 2px solid #767676;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+    }
+    
+    .feedback-content .feedback-title .feedback-name {
+        padding-left: 0;
+    }
+}
+
+/* Map responsiveness */
+.Detail-location .map {
+    width: 100%;
+    height: 300px;
+}
+
+/* Related items responsiveness */
+.detail-container #related #related_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+@media (max-width: 992px) {
+    .detail-container #related .related_item {
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+    }
+}
+
+/* Dialog responsiveness */
+.OverviewService .dialog-content {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px;
+}
+
+/* Button and interactive elements responsiveness */
+@media (max-width: 576px) {
+    .OverviewService .NameModel .rightside .button-function {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .OverviewService .NameModel .rightside .button-function .book-now {
+        padding: 10px;
+        width: 100%;
+    }
+}
+
+/* Typography responsiveness */
+@media (max-width: 576px) {
+    .OverviewService .NameModel .rightside .price-tag {
+        font-size: 20px;
+    }
+    
+    .detail-container #related h2 {
+        font-size: 24px;
+        padding: 0 15px;
+    }
+}
+
+/* Star rating responsiveness */
+@media (max-width: 576px) {
+    .OverviewService .star-wrapper span {
+        font-size: 1.5em;
+    }
+}
