@@ -316,3 +316,108 @@
     background-color: #005b96;
     cursor: pointer;
 }
+
+/* Existing styles... */
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    /* Tablet styles */
+    .TRR-container {
+        width: 90%;
+        height: auto;
+        margin: 20px 0;
+    }
+
+    .TRR-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .TRR-content-left,
+    .TRR-content-right {
+        width: 100%;
+    }
+
+    .TRR-content-left {
+        grid-template-rows: auto;
+    }
+
+    .TRR-content-right {
+        grid-template-rows: auto;
+    }
+
+    .TRR-content-right .Option_buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .TRR-content-right .Confirm-button {
+        grid-template-columns: 1fr;
+    }
+
+    .TRR-content-right .Confirm-button #Confirm-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Mobile styles */
+    .TRR-container {
+        width: 100%;
+        height: auto;
+        margin: 10px 0;
+    }
+
+    .TRR-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .TRR-content-left,
+    .TRR-content-right {
+        width: 100%;
+    }
+
+    .TRR-content-left {
+        grid-template-rows: auto;
+    }
+
+    .TRR-content-right {
+        grid-template-rows: auto;
+    }
+
+    .TRR-content-right .Option_buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .TRR-content-right .Confirm-button {
+        grid-template-columns: 1fr;
+    }
+
+    .TRR-content-right .Confirm-button #Confirm-button {
+        width: 100%;
+    }
+
+    .TRR-content-left .Tour-detail div {
+        grid-template-columns: 1fr;
+    }
+
+    .TRR-content-left .Tour-detail #header,
+    .TRR-content-left .Tour-detail #service-detail {
+        grid-template-columns: 3fr 1fr 1fr 1fr;
+    }
+
+    .TRR-content-left .Tour-detail #service-detail #service-quantity,
+    .TRR-content-left .Tour-detail #service-detail #service-price,
+    .TRR-content-left .Tour-detail #service-detail #service-total {
+        width: 100%;
+    }
+
+    .TRR-content-right #Must-pay-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .TRR-content-right #Must-pay-container #final-total {
+        font-size: 24px;
+    }
+}

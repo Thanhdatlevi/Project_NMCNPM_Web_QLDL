@@ -79,7 +79,6 @@ function HomePlace() {
 
     const [handleBookingFinished, setHandleBookingFinished] = useState(null);
 
-    let navigate = useNavigate();
     function bookBtn(event, type) {
         
         const parent = event.target.parentNode.parentNode.parentNode.parentNode;
@@ -229,7 +228,6 @@ function HomePlace() {
                     let quantity = "";
                     let date = "";
                     let price = "";
-                    price= localStorage.getItem('price');
                     if (element.parentNode.querySelector('p')) {
                         quantity = element.parentNode.querySelector('p').innerHTML.split(' ')[0];
                         date = element.parentNode.querySelector('p').innerHTML.split(' ')[3];
@@ -245,10 +243,8 @@ function HomePlace() {
                         ID: element.value,
                         quantity: quantity,
                         date: date,
-                        price: price,
                         
                     };
-                    console.log(selections);
                     count_selected++;
                 }
             });
@@ -261,8 +257,8 @@ function HomePlace() {
                 var jsonSelections = JSON.stringify(selections);
                 localStorage.setItem('selections', jsonSelections);
                 localStorage.setItem('city', city);
-                setCanNavigate(true);
-                submitBtnHandle();
+                console.log("navigate");
+                window.location.href = "/tourReservationResult";
             }
         }
     }
@@ -292,7 +288,7 @@ function HomePlace() {
                     <button id="resToggle" onClick={() => View_change('res')}>Restaurant</button>
                 </section>
 
-                <div style={{ display: "flex", flexDirection: "row" }}>
+                <div id="form-container">
                     <div id="view-container">
                         {/* <!-- Place --> */}
                         <section id="form_place" style={{ display: visibleSection === 'place' ? 'block' : 'none' }}>
