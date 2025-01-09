@@ -8,6 +8,7 @@ import TourReservationResult from './Components/TourReservationResult';
 import Profile from './Components/Profile';
 import {Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import BookingContainer from './Components/BookingContainer';
+import Booking02 from './Components/Booking-02';
 import HomePlace from './Components/HomePlace';
 import ServicePage from './Components/ServicePage';
 import LoginPage from './Components/Login';
@@ -71,6 +72,7 @@ function App() {
           <Route path="/manageBooking" element={<ProtectedUserRoute user={user}><ManageBooking /></ProtectedUserRoute>} />
           <Route path="/facilityForm" element={<ProtectedUserRoute user={user}><FacilityForm /></ProtectedUserRoute>} />
           <Route path="/bookingHistory" element={<ProtectedUserRoute user={user}><BookingHistory /></ProtectedUserRoute>} />
+          <Route path="/booking-02" element={<ProtectedUserRoute user={user}><Booking02 /></ProtectedUserRoute>} />
 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />

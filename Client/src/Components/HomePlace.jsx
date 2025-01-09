@@ -223,22 +223,35 @@ function HomePlace() {
             const selected = document.querySelectorAll('.list');
             const selections = {};
             let count_selected = 0;
-            Array.from(selected).some(element => {
+            const hasInvalidInput = Array.from(selected).some(element => {
                 if (element.selectedIndex !== 0) {
                     let quantity = "";
                     let date = "";
-                    let price = "";
                     if (element.parentNode.querySelector('p')) {
                         quantity = element.parentNode.querySelector('p').innerHTML.split(' ')[0];
                         date = element.parentNode.querySelector('p').innerHTML.split(' ')[3];
                         if (quantity === "0") {
-                            quantity = "1";
+                            alert('Please fill quantity of facility')
+                            return true;
+                        }
+                        if(date === ''){
+                            alert('Please fill date of facility')
+                            return true;
                         }
                     }
                     else {
-                        quantity = "1";
+                        const dateInput = element.parentNode.parentNode.querySelector(`#time-place`);
+                        const timeInput = element.parentNode.parentNode.querySelector('input[type="time"]'); // Tìm input time trong cùng cha
+                    
+                        const dateTime = dateInput ? dateInput.value : '';
+                        const time = timeInput ? timeInput.value : '';
+                        if (dateTime === '' || time === '') {
+                            alert('Please fill both date and time of attraction');
+                            return true;
+                        }
+                        date = `${dateTime}T${time}`;
+                        quantity = "0";
                     }
-
                     selections[element.value] = {
                         ID: element.value,
                         quantity: quantity,
@@ -248,6 +261,10 @@ function HomePlace() {
                     count_selected++;
                 }
             });
+
+            if (hasInvalidInput) {
+                return; // Ngừng hoàn toàn hàm submitBtnHandle
+            }
 
             if (count_selected === 0) {
                 alert("At least one field must be selected.");

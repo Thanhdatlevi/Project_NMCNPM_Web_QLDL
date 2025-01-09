@@ -167,7 +167,7 @@ const TourReservationResult = () => {
         return (
             <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
                 <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
-                <p id="service-quantity">{item.quantity}</p>
+                <p id="service-quantity">{item.quantity ? item.quantity : "--"}</p>
                 <p id="service-price">{item.average_price ? item.average_price : "--"}</p>
                 <p id="service-total-price">{item.average_price ? item.totalPrice : "--"}</p>
             </div>
@@ -270,7 +270,7 @@ const TourReservationResult = () => {
                         </div>
 
                         <div className="Option_buttons">
-                            <Link to="/" id="cancel-tour-button" > <span>Cancel</span></Link>
+                            <Link to="/HomePlace" id="cancel-tour-button"> <span>Cancel</span></Link>
                             <button id="Confirm-button" onClick={confirmButton}> <span>Confirm</span> </button>
                         </div>
                     </div>
