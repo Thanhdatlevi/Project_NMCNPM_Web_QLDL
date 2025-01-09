@@ -216,3 +216,79 @@
     font-size: 24px;
     font-weight: 500;
 }
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+    .booking00-container .blank0,
+    .booking00-container .blank {
+        display: none;
+    }
+    
+    .booking00-container .booking00-details {
+        flex-direction: column-reverse;
+    }
+    
+    .booking00-container .info-section,
+    .booking00-container .form-section {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .booking00-container {
+        padding: 0 15px;
+    }
+    
+    .location-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .location-section h3 {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .location-section p {
+        text-align: center;
+    }
+    
+    .date-picker .date-wrapper {
+        flex-direction: column;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .booking00-container .progress-indicator {
+        gap: 5px;
+    }
+    
+    .booking00-container .form-section .duration-control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    
+    .booking00-container .form-section .duration-control button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .booking00-container .info-section .image-section img{
+        width: 100%;
+        height: 316px;
+        border-radius: 16px;
+    }
+    
+    .price-info {
+        font-size: clamp(18px, 4vw, 24px);
+    }
+}
+#notice-place{
+    margin: 20px;
+    font-size: 16px;
+    color: red;
+    font-weight: 300;
+}

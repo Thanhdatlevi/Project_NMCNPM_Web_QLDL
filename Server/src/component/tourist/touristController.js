@@ -7,11 +7,28 @@ class TouristController {
             if (!detailReservation || !status) {
                 return res.status(400).json({ success: false, message: 'Thiếu dữ liệu' });
             }
+            for (let i = 0; i < detailReservation.length; i++) {
+                const { facilityId, facilityName, quantity, price, checkinTime, totalPrice, img } = detailReservation[i];
+                let missingFields = [];
+                if (!facilityId) missingFields.push('facilityId');
+                if (!facilityName) missingFields.push('facilityName');
+                if (!quantity) missingFields.push('quantity');
+                if (!price) missingFields.push('price');
+                if (!checkinTime) missingFields.push('checkinTime');
+                if (!totalPrice) missingFields.push('totalPrice');
+                if (!img) missingFields.push('img');
+                if (missingFields.length > 0) {
+                    return res.status(400).json({
+                        success: false,
+                        message: `Thiếu trường dữ liệu: ${missingFields.join(', ')} trong sản phẩm thứ ${i + 1} của detailReservation`
+                    });
+                }
+            }
             const result = await TouristService.createReservation(accountId, status, detailReservation);
             if (result.success) {
                 return res.status(201).json({
                     message: 'Reservation created successfully.',
-                    reserveId: result.result.reserveId
+                    reserveId: result.reserveId
                 });
             } else {
                 return res.status(400).json({ success: false, message: result.message });
@@ -40,13 +57,13 @@ class TouristController {
         try {
             const { accountId } = res.locals.account;
             const { facilityId } = req.params;
-            const { rate, detail } = req.body;
+            //console.log('ok2');
+            const { rate, detail } = req.body.data;
 
             if (!facilityId || !rate || !detail) {
                 return res.status(400).json({ message: 'Thiếu dữ liệu để gửi phản hồi.' });
             }
             const result = await TouristService.submitFeedback(accountId, facilityId, rate, detail);
-
             if (result.success) {
                 return res.status(201).json({ message: 'Feedback submitted successfully.' });
             } else {

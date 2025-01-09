@@ -54,7 +54,7 @@ const SearchService = () => {
     const handleFilterChange = (key, value) => {
         setFilters((prevFilters) => ({
             ...prevFilters,
-            [key]: prevFilters[key] === value ? "" : value,
+            [key]: value,
         }));
     };
 
@@ -210,7 +210,7 @@ const SearchService = () => {
                                     <div class="bookZone">
                                         <p class="detailPrice">$300 per night</p>
                                         <p>excl.tax</p>
-                                        <a href={`/servicepage/${item.attraction_id || item.restaurant_id || item.hotel_id}`} value="{item.contact}" class="btnDetail">Veiw Detail</a>
+                                        <a href={`/servicepage/${item.attraction_id || item.restaurant_id || item.hotel_id}`} value="{item.contact}" class="btnDetail">View Detail</a>
                                     </div>
                                 </div>
                             </div>

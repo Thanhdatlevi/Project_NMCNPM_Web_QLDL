@@ -44,6 +44,11 @@ const BookingDialog = ({isBookingVisible, handleBookingFinished }) => {
         setDuration(duration + 1);
     };
     const handleBooking = () => {
+        if (date === '') {
+            const notice = document.getElementById('notice-place');
+            notice.innerHTML = "Please choose a date.";
+            return;
+        }
         localStorage.setItem('price',fac.average_price);
         const booking = document.getElementById('dialog');
         booking.classList.toggle('hidden');
@@ -61,6 +66,7 @@ const BookingDialog = ({isBookingVisible, handleBookingFinished }) => {
             const notice = document.getElementById('notice-place');
             notice.innerHTML = "";
             console.log(event.target.value);
+            setDate(event.target.value);
             localStorage.setItem('date', event.target.value);   
         }
     }
@@ -101,6 +107,7 @@ const BookingDialog = ({isBookingVisible, handleBookingFinished }) => {
                                     <div className="date-picker">
                                         <input id="time-place" type="datetime-local" onChange={handleDateChange} />
                                     </div>
+                                    <p id="notice-place"></p>
                                     <div className="price-info">
                                         <p>
                                             You will pay <strong> {duration * fac.average_price}$ USD</strong>

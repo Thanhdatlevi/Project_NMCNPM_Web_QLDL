@@ -80,12 +80,18 @@ function HomePlace() {
     const [handleBookingFinished, setHandleBookingFinished] = useState(null);
 
     function bookBtn(event, type) {
+        
         const parent = event.target.parentNode.parentNode.parentNode.parentNode;
-        if (type === 'res' || type === 'hol') {
             const selected = parent.querySelector('.list').value;
+            const status = parent.querySelector('.list').selectedOptions[0].getAttribute('status');
+            console.log(status);
+            if(status ==='not_available'){
+                alert('This facility is not available');
+                return;
+            }
             localStorage.setItem('selected', selected);
             localStorage.setItem('type', type);
-        }
+        
 
         const quantity = parent.querySelector('p').innerHTML.toString().split(' ')[0];
         localStorage.setItem('quantity', quantity);
@@ -153,6 +159,7 @@ function HomePlace() {
                     option.textContent = element.attraction_name ? element.attraction_name
                         : element.facility_name;
                     option.value = element.attraction_id ? element.attraction_id : element.facility_id;
+                    option.setAttribute('status', element.status);
                     select.appendChild(option);
                 }
             });

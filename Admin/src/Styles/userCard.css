@@ -15,3 +15,21 @@
     height: 17px;
     border-radius: 50%;
 }
+@media (max-width: 640px) {
+    .user-card-content{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .user-card-content img{
+        width: 15px;
+        height: 15px;
+    }
+    .user-card-content .optional-info{
+        display: none;
+    }
+    .user-card-content .user-card-action{
+        justify-content: center;
+    }
+}

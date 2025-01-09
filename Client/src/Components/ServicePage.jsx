@@ -68,24 +68,39 @@ const ServicePage = () => {
 
         // send feedback to server
         console.log(rating, feedback_text);
+
+        //const facility_id = service.facilityId;
         // Gửi yêu cầu POST lên server để lưu dữ liệu
+        const data = {
+            rate: rating,
+            detail: feedback_text,
+        }
+
         try {
-            const response = await fetch('/feedback', {
+            console.log(`${service.facilityId}`);
+            const response = await fetch(`/tourist/submitFeedback/${service.facilityId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    rating,
-                    feedback_text,
-                    serviceId: idService, // Id của dịch vụ (có thể sử dụng idService từ useParams())
+                    data
                 }),
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error('Failed to submit feedback');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Phản hồi từ server:', data);
+            })
+            .catch(error => {
+                console.error('Lỗi khi gọi API:', error.message);
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to submit feedback');
-            }
-
+        
             // Xử lý thành công
             alert('Feedback submitted successfully');
 
@@ -104,8 +119,14 @@ const ServicePage = () => {
         }
     }
     const handleBooking = () => {
+        if (service.status === 'available') {
         localStorage.setItem('selected', service.facilityId);
-        
+        // chuyển đến booking02
+        window.location.href = '/booking01';
+        }
+        else {
+            alert('This service is not available');
+        }
     }
 
     return (
@@ -146,9 +167,9 @@ const ServicePage = () => {
                                 <span className="icon">
                                     <i className='bx bx-share-alt'></i>
                                 </span>
-                                <Link to="/booking01">
+                                
                                     <button className="book-now" onClick={handleBooking} >Book Now</button>
-                                </Link>
+                                
                             </div>
                         </div>
                     </div>

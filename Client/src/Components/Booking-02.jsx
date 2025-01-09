@@ -93,7 +93,7 @@ const Booking02 = ({ bookingData }) => {
     }, [placesChosen, hotelChosen, restaurantChosen]);
 
     const calFinalTotal = useCallback(() => {
-        return total * 0.9;
+        return total;
     }, [total]);
 
     const finalTotal = useCallback(() => {

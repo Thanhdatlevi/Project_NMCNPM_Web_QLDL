@@ -10,10 +10,15 @@ import React, { useEffect, useState } from 'react';
 
 
 const Content = () => {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 640);
   const [contentType, setContentType] = useState('home');
   const [user, setUser] = useState(null); // Lưu thông tin người dùng
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate(); // Sử dụng để chuyển hướng trang
+  const toggleSidebar = () => {
+    setIsSidebarVisible(prevState => !prevState); // Đổi trạng thái sidebar
+};
   const renderContent = () => {
         if (contentType === 'home') {
             return <HomeDashboard />;
@@ -53,7 +58,25 @@ const Content = () => {
 
       fetchAuthentication();
     }, []);
-  
+    
+    useEffect(() => {
+        const handleResize = () => {
+          const isSmall = window.innerWidth <= 640;
+          setIsSmallScreen(isSmall);
+    
+          if (!isSmall) {
+            setIsSidebarVisible(true); // Khi màn hình lớn, luôn mở sidebar
+          }
+        };
+    
+        window.addEventListener("resize", handleResize);
+    
+        // Cleanup
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+      }, []);
+
     const handleLogout = async () => {
       try {
           const response = await fetch('/logout', {
@@ -78,52 +101,61 @@ const Content = () => {
   };
   return (
     <section className="container-dashboard">
-        <div className ="side-bar">
-          <div className="logo">
-                  <img src="../Images/logoITISE.png" alt="logo" />
-          </div>
-          <div className="list-select">
-              <div className="dashboard-header list-select-content" onClick={() => setContentType('profile')}>
-                <div className ="notification">
-                  <i class='bx bx-bell'></i>
+        {isSmallScreen && (
+        <button
+          className="toggle-sidebar-button"
+          onClick={toggleSidebar}
+          aria-label="Toggle Sidebar"
+        >
+          ☰
+        </button>
+      )}
+            <div className={`side-bar ${!isSidebarVisible ? 'hidden' : ''}`}>
+                <div className="logo">
+                    <img src="../Images/logoITISE.png" alt="logo" />
                 </div>
-                <div className ="admin-info">
-                    <h4>Admin</h4>
-                    {isLoading ? (
-                      <p>Loading...</p>
-                    ) : (
-                      <p>{user ? user.accountName : 'Guest'}</p>
-                    )}
+                {/* Nút toggle */}
+                <div className="list-select">
+                    <div className="dashboard-header list-select-content" onClick={() => setContentType('profile')}>
+                        <div className="notification">
+                            <i className="bx bx-bell"></i>
+                        </div>
+                        <div className="admin-info">
+                            <h4>Admin</h4>
+                            {isLoading ? (
+                                <p>Loading...</p>
+                            ) : (
+                                <p>{user ? user.accountName : 'Guest'}</p>
+                            )}
+                        </div>
+                    </div>
+                    <div className="list-select-content" tabIndex="0" onClick={() => setContentType('home')}>
+                        <i className="bx bx-home-alt"></i>
+                        <p>Home</p>
+                    </div>
+                    <div className="list-select-content" tabIndex="0" onClick={() => setContentType('userManagement')}>
+                        <i className="bx bx-user"></i>
+                        <p>User Management</p>
+                    </div>
+                    <div className="list-select-content" tabIndex="0" onClick={() => setContentType('attractionsManagement')}>
+                        <i className="bx bx-current-location"></i>
+                        <p>Attractions Management</p>
+                    </div>
+                    <div className="list-select-content" tabIndex="0" onClick={() => setContentType('facilitiesManagement')}>
+                        <i className="bx bx-hotel"></i>
+                        <p>Facilities Management</p>
+                    </div>
+                    <div className="blank"></div>
+                    <div className="list-select-content" tabIndex="0" onClick={handleLogout}>
+                        <i className="bx bx-exit"></i>
+                        <p>Logout</p>
+                    </div>
                 </div>
-              </div>
-              <div className="list-select-content" tabIndex="0" onClick={() => setContentType('home')}>
-                <i class='bx bx-home-alt' ></i>
-                Home
-              </div>
-              <div className="list-select-content" tabIndex="0" onClick={() => setContentType('userManagement')}>
-                <i class='bx bx-user' ></i>
-                User Management
-              </div>
-              <div className="list-select-content" tabIndex="0" onClick={() => setContentType('attractionsManagement')}>
-                <i class='bx bx-current-location'></i>
-                Attractions Management
-              </div>
-              <div className="list-select-content" tabIndex="0" onClick={() => setContentType('facilitiesManagement')}>
-                <i class='bx bx-hotel' ></i>
-                Facilities Management
-              </div>
-              <div className ="blank">
-              </div> 
-              <div className="list-select-content" tabIndex="0" onClick={handleLogout}>
-                <i class='bx bx-exit' ></i>
-                Logout</div>
-          </div>
-        </div>
-        
-        <div className="contentDashboard">
-            {renderContent()}
-        </div>
-    </section>
+            </div>
+            <div className="contentDashboard">
+                {renderContent()}
+            </div>
+        </section>
   );
 };
 
