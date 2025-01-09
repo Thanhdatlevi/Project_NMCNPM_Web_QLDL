@@ -1,28 +1,16 @@
 #hisPost {
     margin-bottom: 10px;;
 }
-#hisPost .type-post {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+#hisPost .post-list-history {
     margin-top: 20px;
 }
-
-#hisPost .type-post h2 {
-    font-size: 1.5em;
-}
-.Add-facility {
+#hisPost .Add-facility {
     border: none;
-    border-radius: 5px;
-    margin-top: 20px;
+    border-radius: 999px;
+    padding: 7px 30px;
     background-color: #007bff;
     color: white;
-}
-
-#hisPost .type-post select {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    text-decoration: none;
 }
 
 #hisPost .tabs {
@@ -177,5 +165,32 @@ button:hover {
 
     #hisPost .post-info {
         width: 100%;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    #hisPost .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    #hisPost .pagination button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #hisPost .pagination {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    #hisPost .pagination button {
+        font-size: 14px;
+        padding: 6px 8px;
     }
 }

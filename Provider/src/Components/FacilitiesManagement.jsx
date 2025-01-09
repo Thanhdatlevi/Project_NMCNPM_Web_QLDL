@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import "../Styles/Profile.css";
 import "../Styles/MyFacility.css";
 const MyFacility = () => {
-    let provider = 'p002';
-    const itemsPerPage = 2;
+    const itemsPerPage = 3;
     const [currentPage, setCurrentPage] = useState(1);
     const [currentService, setCurrentService] = useState([]);
     const [activeTab, setActiveTab] = useState('res');
@@ -54,6 +53,7 @@ const MyFacility = () => {
 
     const fetchData = async (service) => {
         localStorage.setItem('selectedService', service);
+        setActiveTab(service);
         const response = await fetch(`/provider/${service == "res" ? "restaurant" : "hotel"}/by-provider`);
         if (!response.ok) {
             throw new Error("Failed to fetch data");
@@ -104,11 +104,6 @@ const MyFacility = () => {
 
             <section className="post-list-history">
                 <div className="post-header">
-                    <div className="type-post">
-                        <select>
-                            <option>Lastest Booking</option>
-                        </select>
-                    </div>
                     <Link to={"/addfacility"} className="Add-facility" onClick={()=>handleEditClick(null, "true")} >Add</Link>
                 </div>
                 

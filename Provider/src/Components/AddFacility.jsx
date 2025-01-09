@@ -1,13 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "../Styles/AddFacility.css";
 import ImageSelector from "./ImageSelector.jsx";
-import  supabase  from "../Scripts/supabase.js";
 const AddFacility = () => {
     const [type, setType] = useState("hotel");
     const [locations, setLocations] = useState([]);
-    const [detail, setDetail] = useState({});
     const [requestData, setrequestData] = useState({
         facilityName: "",
         description: "",
@@ -67,8 +64,13 @@ const AddFacility = () => {
                 console.error("Error:", error);
             });
     };
-    return (
+    return (    
         <div className="facility-form">
+            <div class="custom-button-wrapper">
+                <div class="link_wrapper">
+                    <a href="/home">Home</a>
+                </div>
+            </div>
             <div className="facility-form-content">
                 <h2>Facility Information</h2>
                 <p>Please fill up the blank fields below</p>

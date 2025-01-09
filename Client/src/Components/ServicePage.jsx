@@ -168,8 +168,7 @@ const ServicePage = () => {
                                     <i className='bx bx-share-alt'></i>
                                 </span>
                                 
-                                    <button className="book-now" onClick={handleBooking} >Book Now</button>
-                                
+                                {idService.charAt(0) !== 'a' && <button className="book-now" onClick={handleBooking} >Book Now</button>}
                             </div>
                         </div>
                     </div>
@@ -195,181 +194,102 @@ const ServicePage = () => {
                     </section>
                 </section>
             )}
-            <div className="userrating-reviews">
-                <div className="userrating-reviews-Title">
-                    <h3>User Ratings & Reviews</h3>
-                    <div className="feedback-button">
-                        <p className="feedback" onClick={() => {
-                            document.getElementById('dialog').classList.toggle('hidden');
-                        }
-                        }>Leave Feedback</p>
-                    </div>
-                </div>
-                <div className="userrating-reviews-overviewRate">
-                    <div className="total-rating">
-                        <div className="rating-point">
-                            <h2>4.5</h2>
-                        </div>
-                        <div className="rating-total">
-                            <strong className="Status">Very good</strong>
-                            <span className="rating-view"> 8386 reviews</span>
-                        </div>
-                    </div>
-                    <div className="feature-rating">
-                        <div className="progress-bar">
-                            <div className="filled"></div>
-                        </div>
-                        <div className="feature-info">
-                            <p>Child Friendliness</p>
-                            <p class="score">4.5</p>
-                        </div>
-                    </div>
-                    <div className="feature-rating">
-                        <div className="progress-bar">
-                            <div className="filled"></div>
-                        </div>
-                        <div className="feature-info">
-                            <span>Location</span>
-                            <span class="score">4.5</span>
-                        </div>
-                    </div>
-                    <div className="feature-rating">
-                        <div className="progress-bar">
-                            <div className="filled"></div>
-                        </div>
-                        <div className="feature-info">
-                            <span>Amenities</span>
-                            <span class="score">4.5</span>
-                        </div>
-                    </div>
-                    <div className="feature-rating">
-                        <div className="progress-bar">
-                            <div className="filled"></div>
-                        </div>
-                        <div className="feature-info">
-                            <span>Hospitality</span>
-                            <span class="score">4.5</span>
-                        </div>
-                    </div>
-                    <div className="feature-rating">
-                        <div className="progress-bar">
-                            <div className="filled"></div>
-                        </div>
-                        <div className="feature-info">
-                            <span>Food</span>
-                            <span class="score">4.5</span>
-                        </div>
-                    </div>
-                </div>
+            {
+               idService.charAt(0) !== 'a' &&  <div className="userrating-reviews">
+               <div className="userrating-reviews-Title">
+                   <h3>User Ratings & Reviews</h3>
+                   <div className="feedback-button">
+                       <p className="feedback" onClick={() => {
+                           document.getElementById('dialog').classList.toggle('hidden');
+                       }
+                       }>Leave Feedback</p>
+                   </div>
+               </div>
+               <div className="userrating-reviews-overviewRate">
+                   <div className="total-rating">
+                       <div className="rating-point">
+                           <h2>4.5</h2>
+                       </div>
+                       <div className="rating-total">
+                           <strong className="Status">Very good</strong>
+                           <span className="rating-view"> 8386 reviews</span>
+                       </div>
+                   </div>
+                   <div className="feature-rating">
+                       <div className="progress-bar">
+                           <div className="filled"></div>
+                       </div>
+                       <div className="feature-info">
+                           <p>Child Friendliness</p>
+                           <p class="score">4.5</p>
+                       </div>
+                   </div>
+                   <div className="feature-rating">
+                       <div className="progress-bar">
+                           <div className="filled"></div>
+                       </div>
+                       <div className="feature-info">
+                           <span>Location</span>
+                           <span class="score">4.5</span>
+                       </div>
+                   </div>
+                   <div className="feature-rating">
+                       <div className="progress-bar">
+                           <div className="filled"></div>
+                       </div>
+                       <div className="feature-info">
+                           <span>Amenities</span>
+                           <span class="score">4.5</span>
+                       </div>
+                   </div>
+                   <div className="feature-rating">
+                       <div className="progress-bar">
+                           <div className="filled"></div>
+                       </div>
+                       <div className="feature-info">
+                           <span>Hospitality</span>
+                           <span class="score">4.5</span>
+                       </div>
+                   </div>
+                   <div className="feature-rating">
+                       <div className="progress-bar">
+                           <div className="filled"></div>
+                       </div>
+                       <div className="feature-info">
+                           <span>Food</span>
+                           <span class="score">4.5</span>
+                       </div>
+                   </div>
+               </div>
 
 
-                <div id="dialog" className="dialog hidden">
-                    <div className="dialog-content">
-                        <div className='feedback-container'>
-                            <h3>Leave your feedback here</h3>
-                            <div className="star-wrapper">
-                                <span className="fas fa-star s1" value="1" onClick={(event) => starClick(event)}></span>
-                                <span className="fas fa-star s2" value="2" onClick={(event) => starClick(event)}></span>
-                                <span className="fas fa-star s3" value="3" onClick={(event) => starClick(event)}></span>
-                                <span className="fas fa-star s4" value="4" onClick={(event) => starClick(event)}></span>
-                                <span className="fas fa-star s5" value="5" onClick={(event) => starClick(event)}></span>
-                            </div>
+               <div id="dialog" className="dialog hidden">
+                   <div className="dialog-content">
+                       <div className='feedback-container'>
+                           <h3>Leave your feedback here</h3>
+                           <div className="star-wrapper">
+                               <span className="fas fa-star s1" value="1" onClick={(event) => starClick(event)}></span>
+                               <span className="fas fa-star s2" value="2" onClick={(event) => starClick(event)}></span>
+                               <span className="fas fa-star s3" value="3" onClick={(event) => starClick(event)}></span>
+                               <span className="fas fa-star s4" value="4" onClick={(event) => starClick(event)}></span>
+                               <span className="fas fa-star s5" value="5" onClick={(event) => starClick(event)}></span>
+                           </div>
 
-                            <textarea type="text" placeholder="Leave your feedback here" className='feedback-text' />
-                            <div className="submit-feedback-container">
-                                <p className="submit-feedback" onClick={() => SubmitFeedback()}>Submit</p>
-                                <p className="cancel-feedback" onClick={() => { document.getElementById('dialog').classList.add('hidden') }}>Cancel</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                           <textarea type="text" placeholder="Leave your feedback here" className='feedback-text' />
+                           <div className="submit-feedback-container">
+                               <p className="submit-feedback" onClick={() => SubmitFeedback()}>Submit</p>
+                               <p className="cancel-feedback" onClick={() => { document.getElementById('dialog').classList.add('hidden') }}>Cancel</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
 
-                <div className="userrating-reviews-Feedback">
-                    <FeedbackItem facilityId={service.facilityId} />
-
-                    {/* <div className="Feedback-items">
-                        <div className="feedback-avt">
-                            <img src={'/Images/voucher_tour2.jpg'} alt="pic1" />
-                        </div>
-                        <div className="feedback-content">
-                            <div className="feedback-title">
-                                <div className="feedback-rating">
-                                    <span className="rating-point">4.5 Amazing</span>
-                                </div>
-                                <div className="feedback-name">
-                                    <p>John Doe</p>
-                                </div>
-                            </div>
-                            <div className="feedback-comment">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="Feedback-items">
-                        <div className="feedback-avt">
-                            <img src={'/Images/voucher_tour2.jpg'} alt="pic1" />
-                        </div>
-                        <div className="feedback-content">
-                            <div className="feedback-title">
-                                <div className="feedback-rating">
-                                    <span className="rating-point">4.5 Amazing</span>
-                                </div>
-                                <div className="feedback-name">
-                                    <p>John Doe</p>
-                                </div>
-                            </div>
-                            <div className="feedback-comment">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="Feedback-items">
-                        <div className="feedback-avt">
-                            <img src={'/Images/voucher_tour2.jpg'} alt="pic1" />
-                        </div>
-                        <div className="feedback-content">
-                            <div className="feedback-title">
-                                <div className="feedback-rating">
-                                    <span className="rating-point">4.5 Amazing</span>
-                                </div>
-                                <div className="feedback-name">
-                                    <p>John Doe</p>
-                                </div>
-                            </div>
-                            <div className="feedback-comment">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="Feedback-items">
-                        <div className="feedback-avt">
-                            <img src={'/Images/voucher_tour2.jpg'} alt="pic1" />
-                        </div>
-                        <div className="feedback-content">
-                            <div className="feedback-title">
-                                <div className="feedback-rating">
-                                    <span className="rating-point">4.5 Amazing</span>
-                                </div>
-                                <div className="feedback-name">
-                                    <p>John Doe</p>
-                                </div>
-                            </div>
-                            <div className="feedback-comment">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                            </div>
-                        </div>
-                    </div> */}
-
-                </div>
-            </div>
+               <div className="userrating-reviews-Feedback">
+                   <FeedbackItem facilityId={service.facilityId} />
+               </div>
+           </div>
+            }
+            
             <div id="related">
                 <h2>Related Facility</h2>
                 <div id="related_container">
