@@ -1,6 +1,7 @@
 // File: App.js
 import React, { useState, useEffect } from 'react';
 import '../Styles/AttractionsManagement.css';
+import ImageSelector from './ImageSelector';
 
 const AttractionsManagement = () => {
   const [attractions, setAttractions] = useState([]);
@@ -23,7 +24,7 @@ const AttractionsManagement = () => {
       .then(data => setAttractions(data))
       .catch(err => console.error(err));
 
-      fetch('/location/allLocation')
+    fetch('/location/allLocation')
       .then(res => res.json())
       .then(data => setLocations(data))
       .catch(err => console.error(err));
@@ -37,8 +38,8 @@ const AttractionsManagement = () => {
       .catch(err => console.error(err));
   };
 
-  const handleEdit = (attraction, attraction_id ) => {
-    setEditingAttraction(attraction_id );
+  const handleEdit = (attraction, attraction_id) => {
+    setEditingAttraction(attraction_id);
     setFormData(attraction);
     setDialogOpen(true);
   };
@@ -101,14 +102,14 @@ const AttractionsManagement = () => {
             <p><b>Phone:</b> {attraction.contact}</p>
             <div className="action-buttons">
               <button onClick={() => handleEdit({
-                  name: attraction.attraction_name,
-                  description: attraction.description,
-                  location: attraction.location_name,
-                  phone: attraction.contact,
-                  openingHours: attraction.opening_hours,
-                  rating: attraction.rating,
-                  img_url: attraction.img_url
-              },attraction.attraction_id )}>Edit</button>
+                name: attraction.attraction_name,
+                description: attraction.description,
+                location: attraction.location_name,
+                phone: attraction.contact,
+                openingHours: attraction.opening_hours,
+                rating: attraction.rating,
+                img_url: attraction.img_url
+              }, attraction.attraction_id)}>Edit</button>
               <button onClick={() => handleDelete(attraction.attraction_id)}>Delete</button>
             </div>
           </div>
@@ -136,58 +137,58 @@ const AttractionsManagement = () => {
         >
           Next
         </button>
-</div>
+      </div>
       {dialogOpen && (
         <div className="dialog">
+          <h2>{editingAttraction ? 'Edit Attraction' : 'Add Attraction'}</h2>
           <div className="dialog-content">
-            <h2>{editingAttraction ? 'Edit Attraction' : 'Add Attraction'}</h2>
-            <input
-              type="text"
-              placeholder="Name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            />
-            <textarea
-              placeholder="Description"
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            />
+            <div className='information'>
+              
+              <input
+                type="text"
+                placeholder="Name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              />
+              <textarea
+                placeholder="Description"
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              />
 
-            <select
-              value={formData.location}
-              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            >
-              <option value="">Select Location</option>
-              {locations.map(location => (
-                <option key={location.locationId} value={location.locationName}>
-                  {location.locationName}
-                </option>
-              ))}
-            </select>
+              <select
+                value={formData.location}
+                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              >
+                <option value="">Select Location</option>
+                {locations.map(location => (
+                  <option key={location.locationId} value={location.locationName}>
+                    {location.locationName}
+                  </option>
+                ))}
+              </select>
 
-            <input
-              type="text"
-              placeholder="Phone"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="Opening Hours"
-              value={formData.openingHours}
-              onChange={(e) => setFormData({ ...formData, openingHours: e.target.value })}
-            />
-            <input
-              type="number"
-              placeholder="Rating"
-              value={formData.rating}
-              onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="Image URL"
-              value={formData.img_url}
-              onChange={(e) => setFormData({ ...formData, img_url: e.target.value })}
+              <input
+                type="text"
+                placeholder="Phone"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Opening Hours"
+                value={formData.openingHours}
+                onChange={(e) => setFormData({ ...formData, openingHours: e.target.value })}
+              />
+              <input
+                type="number"
+                placeholder="Rating"
+                value={formData.rating}
+                onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
+              />
+            </div>
+            <ImageSelector
+              onImageUpload={(img_url) => setFormData({ ...formData, img_url })}
             />
             <button onClick={handleSubmit}>{editingAttraction ? 'Save Changes' : 'Add Attraction'}</button>
             <button onClick={() => setDialogOpen(false)}>Cancel</button>
