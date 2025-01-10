@@ -21,7 +21,8 @@ const Booking02 = ({ bookingData }) => {
             const places = chosenPlaces.filter(element => selections[element.attraction_id])
                 .map(element => ({
                     ...element,
-                    quantity: selections[element.attraction_id].quantity
+                    quantity: selections[element.attraction_id].quantity,
+                    date: selections[element.attraction_id].date,
                 }));
             setPlacesChosen(places);
         } catch (error) {
@@ -121,7 +122,8 @@ const Booking02 = ({ bookingData }) => {
     function payNow() {
         const transformedPlaces = placesChosen.map(place => ({
             attraction_id: place.attraction_id,
-            quantity: place.quantity
+            quantity: place.quantity,
+            date: place.date,
         }));
 
         const transformedHotels = hotelChosen.map(hotel => ({
@@ -189,11 +191,13 @@ const Booking02 = ({ bookingData }) => {
 
     function generateItem(item) {
 
+        const formattedDate = " at "+ item.date.split('T')[1] + " on " + item.date.split('T')[0] ;
+
         return (
             <h3>
                 <strong> {item.quantity} {item.attraction_id ? "tickets" : (item.restaurant_id ? "tables" : "days")}
                 </strong> in <strong>{item.attraction_name ? item.attraction_name : item.facility_name} </strong>
-                ,<strong> {item.location_name} at {item.date}</strong>
+                ,<strong> {item.location_name}{formattedDate}</strong>
             </h3>
         );
     }
