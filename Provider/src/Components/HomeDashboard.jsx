@@ -94,7 +94,7 @@ const HomeDashboard = () => {
                         </div>
                         <div className="divider"></div>
                         <div className="specialty">
-                        Average Rating: {roundFacility(avgRatingHotel(hotels))}
+                        Average Rating: {roundFacility(avgRatingHotel(hotels))||0}
                         </div>
                     </div>
                     <div className ="topic">

@@ -22,7 +22,8 @@ const TourReservationResult = () => {
             const places = chosenPlaces.filter(element => selections[element.attraction_id])
                 .map(element => ({
                     ...element,
-                    quantity: selections[element.attraction_id].quantity
+                    quantity: selections[element.attraction_id].quantity,
+                    date: selections[element.attraction_id].date,
                 }));
             setPlacesChosen(places);
         } catch (error) {
@@ -118,26 +119,31 @@ const TourReservationResult = () => {
         window.location.href = "/HomePlace";
     }
 
+    function formattedDate(date) {
+        return date ? (`at ${date.split('T')[1]} on ${date.split("T")[0]}` ) : "--";
+    }
+
     function confirmButton() {
         const transformedPlaces = placesChosen.map(place => ({
             Name: place.attraction_name,
-            quantity: place.quantity
+            Quantity: place.quantity,
+            "Checkin time": formattedDate(place.date),
         }));
     
         const transformedHotels = hotelChosen.map(hotel => ({
             Name: hotel.facility_name,
-            quantity: hotel.quantity,
-            price: hotel.average_price,
-            checkinTime: hotel.date,
-            totalPrice: hotel.totalPrice,
+            Quantity: hotel.quantity,
+            Price: hotel.average_price,
+            "Checkin time": formattedDate(hotel.date),
+            "Total price": hotel.totalPrice,
         }));
 
         const transformedRestaurants = restaurantChosen.map(restaurant => ({
             Name: restaurant.facility_name,
-            quantity: restaurant.quantity,
-            price: restaurant.average_price,
-            checkinTime: restaurant.date,
-            totalPrice: restaurant.totalPrice,
+            Quantity: restaurant.quantity,
+            Price: restaurant.average_price,
+            "Checkin time": formattedDate(restaurant.date),
+            "Total price": restaurant.totalPrice,
         }));
 
         // Combine the data
@@ -164,10 +170,17 @@ const TourReservationResult = () => {
     }
 
     function generateItem(item) {
+        const formattedDate = item.date ? (
+            <>
+                {item.date.split('T')[0]}<br />at {item.date.split('T')[1]}
+            </>
+        ) : "--";
+
         return (
             <div id="service-detail" key={item.facility_name ? item.facility_name : item.attraction_name}>
                 <p id="service-name">{item.facility_name ? item.facility_name : item.attraction_name}</p>
-                <p id="service-quantity">{item.quantity ? item.quantity : "--"}</p>
+                <p id="service-quantity">{(item.quantity != 0) ? item.quantity : "--"}</p>
+                <p id="checkin-time">{formattedDate}</p>
                 <p id="service-price">{item.average_price ? item.average_price : "--"}</p>
                 <p id="service-total-price">{item.average_price ? item.totalPrice : "--"}</p>
             </div>
@@ -211,6 +224,7 @@ const TourReservationResult = () => {
                             <div id="header">
                                 <p id="service-name"> Service name </p>
                                 <p id="service-qunatity"> Quantity </p>
+                                <p id="checkin-time"> Checkin time </p>
                                 <p id="service-price"> Price </p>
                                 <p id="service-total-price"> Total </p>
                             </div>

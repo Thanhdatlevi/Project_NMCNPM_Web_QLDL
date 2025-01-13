@@ -44,7 +44,6 @@ const UserCard = ({ user}) => {
 
     return (
         <div className="user-card">
-            <div className="user-card-content">
                 <p>{user.userFullName}</p>
                 <p>{user.accountEmail}</p>
                 <p>{user.userContact}</p>
@@ -53,7 +52,6 @@ const UserCard = ({ user}) => {
                 <div className="user-card-action">
                     <span><img src='/Images/delete.png' onClick={handleDeleteUser}/></span>
                 </div>
-            </div>
         </div>
     );
 }

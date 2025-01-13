@@ -390,11 +390,76 @@ detail-button{
     height: 75%;
 }
 
-#display-hol- #book-hol-button:hover{
+#display-hol #book-hol-button:hover{
     cursor: pointer;
     background: #a6a5a5;
 }
+/* Cấu hình cho link */
+#display-hol .custom-button-wrapper .link_wrapper {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
 
+/* Cấu hình cho button (link) */
+#display-hol .custom-button-wrapper .link_wrapper a {
+    display: block;
+    width: 80px;
+    height: 25px;
+    /* line-height: 10px; */
+    font-weight: bold;
+    text-decoration: none;
+    background: #03396c;
+    /* Màu xanh đậm */
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 3px solid #03396c;
+    /* Màu xanh đậm */
+    transition: all .35s;
+    border-radius: 5px;
+    /* Để có góc bo tròn */
+}
+
+
+
+/* Hiệu ứng hover cho link */
+#display-hol .custom-button-wrapper a:hover {
+    border: 3px solid #03396c;
+    /* Màu xanh đậm hơn */
+    background: transparent;
+    color: #03396c;
+    /* Màu xanh đậm hơn */
+}
+
+/* Hiệu ứng hover cho icon */
+#display-hol .custom-button-wrapper a:hover+.icon {
+    border: 3px solid #03396c;
+    /* Màu xanh đậm hơn */
+    right: -25%;
+}
+
+@media (max-width: 768px) {
+
+    #display-hol .custom-button-wrapper .link_wrapper a {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        text-transform: none;
+        font-size: 0;
+        /* Ẩn text */
+    }
+
+    /* Chuyển mũi tên về trái */
+    #display-hol .custom-button-wrapper .link_wrapper a:before {
+        content: '\2190';
+        /* Mã ký tự Unicode cho mũi tên trái */
+        font-size: 30px;
+        text-align: center;
+        display: block;
+    }
+}
 @media (max-width: 640px) {
     #main_content {
         margin: 20px;

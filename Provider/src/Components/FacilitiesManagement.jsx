@@ -145,7 +145,6 @@ const MyFacility = () => {
                                     </div>
                                 </div>
                                 <div className="zone_btn">
-                                    <button className="btn_detail">View detail</button>
                                     <div className="btn_main">
                                         <Link to="/facilityForm">
                                         {/* ,ser.name,ser.location, ser.des */}

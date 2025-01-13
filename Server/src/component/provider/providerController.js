@@ -15,7 +15,7 @@ class ProviderController {
 
             const result = await ProviderService.updateHotel(hotelId, accountId, updateData);
             if (result.success) {
-                return res.status(204).send();
+                return res.status(200).json({ message: "success"});
             } else {
                 return res.status(400).json({ message: result.message });
             }
@@ -41,7 +41,7 @@ class ProviderController {
             const result = await ProviderService.updateRestaurant(restaurantId, accountId, updateData);
 
             if (result.success) {
-                return res.status(204).send();
+                return res.status(200).json({ message: "success"});
             } else {
                 return res.status(400).json({ message: result.message });
             }

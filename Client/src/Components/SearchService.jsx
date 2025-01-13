@@ -196,26 +196,34 @@ const SearchService = () => {
                     </div>
                 </div>
                 <div id="list">
-                    {paginateData().map((item, index) => {
+                {paginateData().length === 0 ? (
+                    <p>Nothing can found</p>  // Hiển thị thông báo khi không có dữ liệu
+                ) : (
+                    paginateData().map((item, index) => {
                         return (
-                            <div key={index} class="service">
-                                <a href={`/servicepage/${item.attraction_id || item.restaurant_id || item.hotel_id}`}><img src={item.img_url} alt="" /></a>
-                                <div class="content">
-                                    <div class="inf">
+                            <div key={index} className="service">
+                                <a href={`/servicepage/${item.attraction_id || item.restaurant_id || item.hotel_id}`}>
+                                    <img src={item.img_url} alt="" />
+                                </a>
+                                <div className="content">
+                                    <div className="inf">
                                         <h2>{item.attraction_name || item.facility_name}</h2>
-                                        <p class="location"><i class="fa-solid fa-location-dot"></i> Location: {item.location_name}</p>
-                                        <p><i class="fa-solid fa-star"></i> {item.rating} Star</p>
+                                        <p className="location">
+                                            <i className="fa-solid fa-location-dot"></i> Location: {item.location_name}
+                                        </p>
+                                        <p><i className="fa-solid fa-star"></i> {item.rating} Star</p>
                                         <p>Contact: {item.contact}</p>
                                     </div>
-                                    <div class="bookZone">
-                                        <p class="detailPrice">$300 per night</p>
+                                    <div className="bookZone">
+                                        <p className="detailPrice">$300 per night</p>
                                         <p>excl.tax</p>
-                                        <a href={`/servicepage/${item.attraction_id || item.restaurant_id || item.hotel_id}`} value="{item.contact}" class="btnDetail">View Detail</a>
+                                        <a href={`/servicepage/${item.attraction_id || item.restaurant_id || item.hotel_id}`} className="btnDetail">View Detail</a>
                                     </div>
                                 </div>
                             </div>
-                        )
-                    })}
+                        );
+                    })
+                )}
                     {/* Phân trang */}
                     <div className="pagination">
                         <button

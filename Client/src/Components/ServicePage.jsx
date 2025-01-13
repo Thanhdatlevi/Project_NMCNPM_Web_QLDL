@@ -113,6 +113,7 @@ const ServicePage = () => {
 
             // Đóng dialog feedback
             document.getElementById('dialog').classList.toggle('hidden');
+            window.location.reload();
         } catch (error) {
             console.error("Error submitting feedback:", error);
             alert('Error submitting feedback, please try again later.');

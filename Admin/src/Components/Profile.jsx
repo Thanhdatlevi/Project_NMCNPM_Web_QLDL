@@ -38,6 +38,28 @@ const Profile = () => {
     // Gửi dữ liệu cập nhật đến server
     const handleSave = async () => {
         try {
+                // Kiểm tra ngày sinh có hợp lệ không (phải là ngày trong quá khứ và ít nhất 18 tuổi)
+            const currentDate = new Date();
+            const birthday = new Date(formData.userBirthday);
+            console.log(currentDate,birthday)
+            // Kiểm tra ngày sinh phải là ngày trong quá khứ
+            if (birthday > currentDate) {
+                alert('Ngày sinh phải là một ngày trong quá khứ!');
+                return;
+            }
+
+            // Kiểm tra người dùng có ít nhất 18 tuổi
+            let age = currentDate.getFullYear() - birthday.getFullYear();
+            const month = currentDate.getMonth() - birthday.getMonth();
+            if (month < 0 || (month === 0 && currentDate.getDate() < birthday.getDate())) {
+                age--;
+            }
+            
+            if (age < 18) {
+                alert('Bạn phải ít nhất 18 tuổi để cập nhật thông tin!');
+                return;
+            }
+
             // Format ngày sinh trước khi gửi
             const formattedBirthday = new Date(formData.userBirthday).toISOString().split("T")[0]; // YYYY-MM-DD
             const updatedData = {
