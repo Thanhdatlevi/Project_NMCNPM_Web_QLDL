@@ -61,7 +61,7 @@ const AttractionsManagement = () => {
   const handleSubmit = () => {
     const method = 'POST';
     const url = editingAttraction ? `/admin/updateAttractions/${editingAttraction}` : '/admin/addAttractions';
-
+    console.log(formData)
     fetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
@@ -188,7 +188,7 @@ const AttractionsManagement = () => {
               />
             </div>
             <ImageSelector
-              onImageUpload={(img_url) => setFormData({ ...formData, img_url })}
+              onImageUpload={(img_url) => setFormData({ ...formData, img_url: img_url[0]})}
             />
             <button onClick={handleSubmit}>{editingAttraction ? 'Save Changes' : 'Add Attraction'}</button>
             <button onClick={() => setDialogOpen(false)}>Cancel</button>
