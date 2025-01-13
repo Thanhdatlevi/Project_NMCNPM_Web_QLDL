@@ -1,5 +1,5 @@
-/* File: AttractionsManagement.css */
-
+/* File: App.css */
+  
 .attracManage {
   text-align: center;
   padding: 20px;
@@ -56,7 +56,6 @@
   object-fit: cover;
   border-radius: 8px;
 }
-
 .attracManage .attraction-description {
   display: -webkit-box;
   -webkit-line-clamp: 2; /* Giới hạn chỉ hiển thị 2 dòng */
@@ -65,7 +64,6 @@
   text-overflow: ellipsis; /* Thêm dấu ... khi văn bản vượt quá */
   white-space: normal; /* Cho phép văn bản xuống dòng nếu cần */
 }
-
 .attracManage .action-buttons {
   display: flex;
   justify-content: end;
@@ -94,28 +92,51 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.attracManage .dialog h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #fff;
+}
+
 .attracManage .dialog-content {
   background-color: white;
-  padding: 25px;
+  padding: 20px;
   border-radius: 10px;
-  width: 400px;
+  width: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 0fr;
+}
+
+.attracManage .dialog-content .information{
+  padding:0 20px 0 0 !important;
+  border-right: 1px solid #ccc;
 }
 
 .attracManage .dialog-content input,
 .attracManage .dialog-content textarea,
 .attracManage .dialog-content select,
 .attracManage .dialog-content option {
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  width: 95% !important;
+  padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.attracManage .dialog-content textarea{
+  resize: none;
+}
+
+.attracManage .dialog-content .image-selector {
+  align-self: start;
 }
 
 .attracManage .dialog-content button {
@@ -169,67 +190,4 @@
 
 .attracManage select:focus {
   border-color: #005b96;
-}
-
-/* Pagination */
-.attracManage .pagination {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-}
-
-.attracManage .pagination button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: lightgray;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.attracManage .pagination button.active {
-  background-color: #007bff;
-  color: white;
-}
-
-.attracManage .pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-@media (max-width: 1400px) {
-  .attracManage main {
-      grid-template-columns: repeat(2, 1fr);
-      padding: 0;
-  }
-
-  .attracManage {
-      padding: 0;
-  }
-
-  .attracManage .attraction-card {
-      width: 100%;
-      padding: 6px; /* Điều chỉnh padding cho phù hợp với màn hình nhỏ */
-  }
-
-  .attracManage .add-button {
-      padding: 8px 16px;
-      font-size: 0.9em;
-  }
-}
-
-@media (max-width: 610px) {
-  .attracManage main {
-      grid-template-columns: 1fr;
-  }
-
-  .attracManage .attraction-card {
-      width: 100%;
-      padding: 2px; /* Điều chỉnh padding cho phù hợp với màn hình nhỏ */
-  }
-
-  .attracManage .add-button {
-      padding: 6px 12px;
-      font-size: 0.8em;
-  }
 }

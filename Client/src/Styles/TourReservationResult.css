@@ -148,6 +148,7 @@
 
 .TRR-content-left .Tour-detail div p{
     padding: 7px;
+    align-content: center;
 }
 
 .TRR-content-left .Tour-detail #service-container{
@@ -176,12 +177,12 @@
 
 .TRR-content-left .Tour-detail #header{
     display: grid;
-    grid-template-columns: 5fr 1fr 1fr 1fr;
+    grid-template-columns: 5fr 1fr 1.5fr 1fr 1fr;
 }
 
 .TRR-content-left .Tour-detail #service-detail{
     display: grid;
-    grid-template-columns: 5fr 1fr 1fr 1fr;
+    grid-template-columns: 5fr 1fr 1.5fr 1fr 1fr;
     border-bottom: #000 0.5px solid;
     padding: 0 10px;
 }
