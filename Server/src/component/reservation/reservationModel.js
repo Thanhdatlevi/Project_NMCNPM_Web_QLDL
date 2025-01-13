@@ -92,7 +92,6 @@ class ReservationModel {
             ORDER BY r.reservation_date DESC;
         `;
             const result = await db.query(query, [touristId]);
-
             if (result.rows.length > 0) {
                 const reservations = result.rows.map(reservation => {
                     const detailReservations = Array.isArray(reservation.detail_reservations) && reservation.detail_reservations.length > 0

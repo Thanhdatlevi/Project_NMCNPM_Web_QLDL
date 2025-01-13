@@ -27,7 +27,7 @@ async function authenticateToken(req, res, next) {
             res.clearCookie(process.env.ACCESS_TOKEN_NAME, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Strict',
+                sameSite: 'Lax',
             });
         }
     }
