@@ -1,4 +1,4 @@
-// File: App.js
+// File: App.jsx-width: 1024px)
 import React, { useState, useEffect } from 'react';
 import '../Styles/AttractionsManagement.css';
 import ImageSelector from './ImageSelector';
@@ -7,6 +7,7 @@ const AttractionsManagement = () => {
   const [attractions, setAttractions] = useState([]);
   const [locations, setLocations] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [showImageDialog, setShowImageDialog] = useState(false);
   const [editingAttraction, setEditingAttraction] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -187,13 +188,28 @@ const AttractionsManagement = () => {
                 onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
               />
             </div>
-            <ImageSelector
-              onImageUpload={(img_url) => setFormData({ ...formData, img_url: img_url[0]})}
-            />
+            {/* Nút Add Image */}
+            <button
+                onClick={() => setShowImageDialog(true)} // Mở dialog upload ảnh
+                className="add-image-button"
+            >
+                Add Image
+            </button>
             <button onClick={handleSubmit}>{editingAttraction ? 'Save Changes' : 'Add Attraction'}</button>
             <button onClick={() => setDialogOpen(false)}>Cancel</button>
           </div>
         </div>
+      )}
+      {showImageDialog && (
+          <div className="dialog">
+              <h2>Add Image</h2>
+              <div className="dialog-content">
+                  <ImageSelector
+                      onImageUpload={(img_url) => setFormData({ ...formData, img_url: img_url[0] })}
+                  />
+                  <button onClick={() => setShowImageDialog(false)}>Close</button>
+              </div>
+          </div>
       )}
     </div>
   );

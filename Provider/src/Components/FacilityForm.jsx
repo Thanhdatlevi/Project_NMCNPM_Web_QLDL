@@ -151,6 +151,7 @@ const FacilityForm = () => {
                 return response.json();
             })
             .then((data) => {
+                alert("Update facility successful!")
                 console.log("Success:", data);
             })
             .catch((error) => {
@@ -159,6 +160,11 @@ const FacilityForm = () => {
     };
     return (
         <div className="facility-form">
+            <div class="custom-button-wrapper">
+                <div class="link_wrapper">
+                    <a href="/home">Home</a>
+                </div>
+            </div>
             <div className="facility-form-content">
                 <h2>Facility Information</h2>
                 <p>Please fill up the blank fields below</p>

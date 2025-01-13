@@ -1,20 +1,31 @@
-.user-card-content{
+.user-card{
     display: grid;
     grid-template-columns:1.5fr 2.5fr 1.5fr 1.5fr 2.5fr 1fr 0.5fr;
     padding: 10px;
 }
 
-.user-card-content .user-card-action{
+.user-card .user-card-action{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.user-card-content img{
+.user-card img{
     width: 17px;
     height: 17px;
     border-radius: 50%;
 }
+@media (max-width: 1024px) {
+    .user-card{
+        grid-template-columns: 1.5fr 2fr 1.5fr 1fr;
+        padding: 5px;
+        /* font-size: 12px; */
+    }
+    .user-card .optional-info {
+        display: none;
+    }
+}
+
 @media (max-width: 640px) {
     .user-card-content{
         grid-template-columns: 1fr 1fr 1fr 1fr;

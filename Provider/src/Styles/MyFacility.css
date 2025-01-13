@@ -1,5 +1,5 @@
 #hisPost {
-    margin-bottom: 10px;;
+    margin-bottom: 10px;
 }
 #hisPost .post-list-history {
     margin-top: 20px;
@@ -89,7 +89,7 @@
 
 #hisPost .zone_btn .btn_main{
     display: flex;
-    justify-content: space-between;
+    gap:50px;
     margin-top: 10px;
 }
 
@@ -154,12 +154,11 @@ button:hover {
 
     #hisPost .post-card {
         flex-direction: column;
-        align-items: flex-start;
     }
 
     #hisPost .post-card img {
         width: 100%;
-        height: auto;
+        height: 300px;
         margin-bottom: 10px;
     }
 
