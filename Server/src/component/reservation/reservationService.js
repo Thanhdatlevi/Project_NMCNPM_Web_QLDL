@@ -20,7 +20,16 @@ class ReservationService {
     static async getReservationHistory(touristId) {
         try {
             const result = await ReservationModel.getReservationHistory(touristId);
-            return result || [];
+            if (!result) return [];
+            const formattedResult = result.map(reservation => {
+                const date = new Date(reservation.reservationDate); // Tạo đối tượng Date từ UTC
+                const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000); // Điều chỉnh về local time
+                return {
+                    ...reservation,
+                    reservationDate: localDate.toISOString().split('T')[0], // Chuyển về định dạng YYYY-MM-DD
+                };
+            });
+            return formattedResult;
         } catch (error) {
             console.error("Error in ReservationService.createReservation:", error.message);
             throw error;
@@ -30,7 +39,16 @@ class ReservationService {
     static async getReserveHotelsByTouristId(touristId) {
         try {
             const result = await ReservationModel.getReserveHotelsByTouristId(touristId);
-            return result || [];
+            if (!result) return [];
+            const formattedResult = result.map(reservation => {
+                const date = new Date(reservation.reservationDate); // Tạo đối tượng Date từ UTC
+                const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000); // Điều chỉnh về local time
+                return {
+                    ...reservation,
+                    reservationDate: localDate.toISOString().split('T')[0], // Chuyển về định dạng YYYY-MM-DD
+                };
+            });
+            return formattedResult;
         } catch (error) {
             console.error("Error in ReservationService.createReservation:", error.message);
             throw error;
@@ -40,7 +58,16 @@ class ReservationService {
     static async getReserveRestaurantByTouristId(touristId) {
         try {
             const result = await ReservationModel.getReserveRestaurantByTouristId(touristId);
-            return result || [];
+            if (!result) return [];
+            const formattedResult = result.map(reservation => {
+                const date = new Date(reservation.reservationDate); // Tạo đối tượng Date từ UTC
+                const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000); // Điều chỉnh về local time
+                return {
+                    ...reservation,
+                    reservationDate: localDate.toISOString().split('T')[0], // Chuyển về định dạng YYYY-MM-DD
+                };
+            });
+            return formattedResult;
         } catch (error) {
             console.error("Error in ReservationService.createReservation:", error.message);
             throw error;

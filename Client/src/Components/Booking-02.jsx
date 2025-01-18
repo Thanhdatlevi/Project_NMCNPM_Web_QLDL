@@ -38,7 +38,7 @@ const Booking02 = ({ bookingData }) => {
             }
             const data = await response.json();
             const chosenHotels = data.filter(element => element.location_id === city)
-            
+
             const hotels = chosenHotels.filter(element => selections[element.facility_id])
                 .map(element => ({
                     ...element,
@@ -168,12 +168,12 @@ const Booking02 = ({ bookingData }) => {
                     const errorMessage = await response.text(); // Hoặc response.json() nếu server trả về JSON
                     if (response.status === 500) {
                         // Nếu mã lỗi là 500, hiển thị thông báo và chuyển hướng
-                        alert(`One of yours booking is not available anymore. Please try again.`);
+                        alert(`Dịch vụ không còn tồn tại.`);
                         window.location.href = '/HomePlace';
                         return;
                     }
                     throw new Error(`Error: ${errorMessage}`);
-                    
+
                 }
                 return response.json(); // Đọc nội dung JSON từ server
             })
@@ -186,12 +186,12 @@ const Booking02 = ({ bookingData }) => {
                 console.error('Error:', error.message); // In lỗi từ server hoặc từ client
                 alert(`There was an error: ${error.message}`);
             });
-    
+
     }
 
     function generateItem(item) {
 
-        const formattedDate = " at "+ item.date.split('T')[1] + " on " + item.date.split('T')[0] ;
+        const formattedDate = " at " + item.date.split('T')[1] + " on " + item.date.split('T')[0];
 
         return (
             <h3>

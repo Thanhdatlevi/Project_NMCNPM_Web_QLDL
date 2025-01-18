@@ -25,6 +25,7 @@ class TouristController {
                 }
             }
             const result = await TouristService.createReservation(accountId, status, detailReservation);
+            console.log("result: ", result);
             if (result.success) {
                 return res.status(201).json({
                     message: 'Reservation created successfully.',

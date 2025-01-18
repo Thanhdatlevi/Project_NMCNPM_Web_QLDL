@@ -30,6 +30,13 @@ async function refreshAccessToken(req, res, next) {
 
         } else {
             res.locals.account = null;
+            res.clearCookie(process.env.REFRESH_TOKEN_NAME,
+                {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === 'production',
+                    sameSite: 'Lax',
+                    path: '/'
+                });
         }
 
     } catch (err) {
